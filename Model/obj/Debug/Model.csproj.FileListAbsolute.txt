@@ -18,3 +18,5 @@ C:\Users\DucTam\source\repos\Model\obj\Debug\Model.csproj.CoreCompileInputs.cach
 C:\Users\DucTam\source\repos\Model\obj\Debug\Model.csproj.CopyComplete
 C:\Users\DucTam\source\repos\Model\obj\Debug\Model.exe
 C:\Users\DucTam\source\repos\Model\obj\Debug\Model.pdb
+D:\Human Resource\Model\obj\Debug\Model.exe
+D:\Human Resource\Model\obj\Debug\Model.pdb
