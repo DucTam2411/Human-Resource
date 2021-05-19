@@ -1,8 +1,14 @@
-﻿
-
-FC:\Users\DucTam\source\repos\HRMS\Accouting\uCon\Accouting_EmployeeWindow.xaml;;
-FC:\Users\DucTam\source\repos\HRMS\Accouting\uCon\uConDashboardAccouting.xaml;;
-FC:\Users\DucTam\source\repos\HRMS\Accouting\uCon\uConEmployeeSalary.xaml;;
-FC:\Users\DucTam\source\repos\HRMS\Accouting\uCon\uConSideBarAccouting.xaml;;
-FC:\Users\DucTam\source\repos\HRMS\HR\uCon\uConSideBar.xaml;;
+﻿D:\Human Resource\View\obj\Debug\GeneratedInternalTypeHelper.g.i.cs
+FD:\Human Resource\View\App.xaml;;
+FD:\Human Resource\View\Accouting\uCon\Accouting_EmployeeWindow.xaml;;
+FD:\Human Resource\View\Accouting\uCon\uConDashboardAccouting.xaml;;
+FD:\Human Resource\View\Accouting\uCon\uConEmployeeSalary.xaml;;
+FD:\Human Resource\View\Accouting\uCon\uConListEmployeeAccounting.xaml;;
+FD:\Human Resource\View\Accouting\uCon\uConSideBarAccouting.xaml;;
+FD:\Human Resource\View\HR\uCon\HR_EmployeeWindow.xaml;;
+FD:\Human Resource\View\HR\uCon\uConAddEmployee.xaml;;
+FD:\Human Resource\View\HR\uCon\uConDashboard.xaml;;
+FD:\Human Resource\View\HR\uCon\uConListEmployee.xaml;;
+FD:\Human Resource\View\HR\uCon\uConModifyEmployee.xaml;;
+FD:\Human Resource\View\HR\uCon\uConSideBar.xaml;;
 
