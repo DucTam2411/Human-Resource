@@ -1,4 +1,5 @@
 ﻿using Model;
+using Model.Database;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -31,8 +32,11 @@ namespace HRMS.HR.uCon
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            
-            dtgvA.ItemsSource = employees;
+            var customers = (from customer in HRMSEnities.hrmsEntity.EMPLOYEEs
+                             select customer);
+
+
+            dtgvA.ItemsSource = customers.ToArray();
         }
 
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)

@@ -78,6 +78,7 @@
     <Compile Include="Database\EMPLOYEE.cs">
       <DependentUpon>HRSMEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\HRMSEnities.cs" />
     <Compile Include="Database\HRSMEntity.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

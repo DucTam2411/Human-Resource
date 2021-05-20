@@ -92,3 +92,5 @@ D:\Human Resource\View\obj\Debug\HRMS.exe
 D:\Human Resource\View\obj\Debug\HRMS.pdb
 D:\Human Resource\View\bin\Debug\EntityFramework.dll
 D:\Human Resource\View\bin\Debug\EntityFramework.xml
+D:\Human Resource\View\bin\Debug\EntityFramework.SqlServer.dll
+D:\Human Resource\View\bin\Debug\EntityFramework.SqlServer.xml

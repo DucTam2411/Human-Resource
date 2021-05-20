@@ -24,7 +24,6 @@ namespace Model
         public MainWindow()
         {
             InitializeComponent();
-        
         }
     }
 }
