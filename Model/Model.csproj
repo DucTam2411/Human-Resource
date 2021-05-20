@@ -103,6 +103,12 @@
     <Compile Include="Database\SALARY.cs">
       <DependentUpon>HRSMEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>HRSMEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\sp_helpdiagrams_Result.cs">
+      <DependentUpon>HRSMEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\sysdiagram.cs">
       <DependentUpon>HRSMEntity.tt</DependentUpon>
     </Compile>
@@ -112,7 +118,6 @@
     <Compile Include="Database\TIMEKEEPING_DETAIL.cs">
       <DependentUpon>HRSMEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Employee.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

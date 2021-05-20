@@ -4,13 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d96de780a3ac4bc084bccea37f3b0efe" Name="Diagram1" ZoomLevel="112">
+      <Diagram DiagramId="d96de780a3ac4bc084bccea37f3b0efe" Name="Diagram1" ZoomLevel="84">
         <EntityTypeShape EntityType="hrmsModel.DEPARTMENT" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmsModel.EMPLOYEE" Width="1.5" PointX="7.5" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmsModel.ROLE" Width="1.5" PointX="5.25" PointY="14" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmsModel.ROOM" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmsModel.SALARY" Width="1.5" PointX="9.75" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmsModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmsModel.sysdiagram" Width="1.5" PointX="5.625" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmsModel.TIMEKEEPING" Width="1.5" PointX="9.75" PointY="12.375" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmsModel.TIMEKEEPING_DETAIL" Width="1.5" PointX="12" PointY="11" IsExpanded="true" />
         <AssociationConnector Association="hrmsModel.FK__DEPARTMEN__ROOM___38996AB5" ManuallyRouted="false" />

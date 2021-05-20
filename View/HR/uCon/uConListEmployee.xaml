@@ -12,8 +12,6 @@
 
 
 
-
-
     <UserControl.Resources>
         <Style x:Key="WrapText" TargetType="{x:Type TextBlock}">
             <Setter Property="TextWrapping" Value="Wrap" />
@@ -93,7 +91,8 @@
                     CanUserReorderColumns="False"
                     CanUserResizeColumns="True"
                     IsReadOnly="True"
-                    ItemsSource="{Binding Source=employess}">
+                    ItemsSource="{Binding Source=employess}"
+                    SelectionChanged="dtgvA_SelectionChanged">
                     <DataGrid.Resources>
                         <Style TargetType="{x:Type DataGridRow}">
                             <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick" />
@@ -101,10 +100,7 @@
                     </DataGrid.Resources>
 
 
-
-
                     <DataGrid.Columns>
-
 
 
                         <DataGridTextColumn
@@ -126,7 +122,7 @@
 
                         <materialDesign:DataGridTextColumn
                             Width="120"
-                            Binding="{Binding DEPARTMENT_ID}"
+                            Binding="{Binding DEPARTMENT.DEPT_NAME}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Department" />
@@ -134,17 +130,16 @@
 
                         <materialDesign:DataGridTextColumn
                             Width="100"
-                            Binding="{Binding Gender}"
+                            Binding="{Binding GENDER}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Gender" />
 
 
 
-
                         <DataGridTextColumn
                             Width="130"
-                            Binding="{Binding Citizenship}"
+                            Binding="{Binding CITIZENSHIP}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Citizenship" />
@@ -152,7 +147,7 @@
 
                         <DataGridTextColumn
                             Width="200"
-                            Binding="{Binding ROLE}"
+                            Binding="{Binding ROLE.ROLE_NAME}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Role" />

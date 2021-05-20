@@ -18,12 +18,9 @@ using System.Windows.Shapes;
 
 namespace HRMS.HR.uCon
 {
-    /// <summary>
-    /// Interaction logic for uConListEmployee.xaml
-    /// </summary>
     public partial class uConListEmployee : UserControl
     {
-        private ObservableCollection<Employee> employees = new ObservableCollection<Employee>();
+        private ObservableCollection<EMPLOYEE> employees = new ObservableCollection<EMPLOYEE>();
 
         public uConListEmployee()
         {
@@ -35,7 +32,6 @@ namespace HRMS.HR.uCon
             var customers = (from customer in HRMSEnities.hrmsEntity.EMPLOYEEs
                              select customer);
 
-
             dtgvA.ItemsSource = customers.ToArray();
         }
 
@@ -45,6 +41,11 @@ namespace HRMS.HR.uCon
         }
 
         private void btnNewEmployee_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void dtgvA_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

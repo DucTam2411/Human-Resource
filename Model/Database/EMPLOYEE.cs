@@ -32,6 +32,8 @@ namespace Model.Database
         public Nullable<int> DEPT_ID { get; set; }
         public Nullable<int> ROLE_ID { get; set; }
         public Nullable<System.DateTime> BIRTH_DATE { get; set; }
+        public string GENDER { get; set; }
+        public string CITIZENSHIP { get; set; }
     
         public virtual DEPARTMENT DEPARTMENT { get; set; }
         public virtual ROLE ROLE { get; set; }
