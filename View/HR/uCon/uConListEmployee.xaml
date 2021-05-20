@@ -152,7 +152,7 @@
 
                         <DataGridTextColumn
                             Width="200"
-                            Binding="{Binding Role}"
+                            Binding="{Binding ROLE}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Role" />
