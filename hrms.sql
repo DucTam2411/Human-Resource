@@ -1,4 +1,4 @@
-
+﻿
 -- setting for database 
 create database hrms;
 use  hrms ;
@@ -272,5 +272,18 @@ end;
 
 
 
+--add employee gender
+ALTER TABLE EMPLOYEE 
+ADD GENDER NVARCHAR(10
+);
 
-drop database hrms
+
+UPDATE EMPLOYEE
+SET GENDER ='Male';
+
+-- add employee citizenship
+ALTER TABLE EMPLOYEE 
+ADD CITIZENSHIP NVARCHAR(100);
+
+UPDATE EMPLOYEE
+SET CITIZENSHIP = 'Korean';
