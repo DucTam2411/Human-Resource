@@ -129,7 +129,7 @@
                             Binding="{Binding Department}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
-                            Header="Salary" />
+                            Header="Department" />
 
 
                         <materialDesign:DataGridTextColumn
@@ -137,7 +137,7 @@
                             Binding="{Binding Gender}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
-                            Header="Bonus" />
+                            Header="Gender" />
 
 
 

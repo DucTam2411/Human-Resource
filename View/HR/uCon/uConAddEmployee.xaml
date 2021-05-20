@@ -12,7 +12,6 @@
     mc:Ignorable="d">
     <Grid Margin="0,20,0,0">
 
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />

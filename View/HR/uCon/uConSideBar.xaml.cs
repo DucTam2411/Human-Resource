@@ -48,7 +48,6 @@ namespace HRMS.HR.uCon
 
         private void btnHome_Click(object sender, RoutedEventArgs e)
         {
-
             int rowIndex = Grid.GetRow((sender as Button));
             MoveCursor(rowIndex);
 
@@ -77,8 +76,6 @@ namespace HRMS.HR.uCon
             {
                 RoutedUserControlClicked(this, e);
             }
-
-
 
         }
 
@@ -118,6 +115,7 @@ namespace HRMS.HR.uCon
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             buttonPackages.Add(getChildren(btnHome));
+            buttonPackages.Add(getChildren(btnReport));
         }
     }
 }

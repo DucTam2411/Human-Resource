@@ -16,7 +16,6 @@
     WindowStyle="None"
     mc:Ignorable="d">
 
-
     <Grid MouseDown="Grid_MouseDown">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
