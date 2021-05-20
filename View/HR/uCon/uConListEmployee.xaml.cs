@@ -31,17 +31,7 @@ namespace HRMS.HR.uCon
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            employees.Add(new Employee() { Role = "Quán lý", Citizenship = "Ấn Độ", Department = "Tổ 1", Gender = "Neutral", ID = "11121", Name = "Trần Quân Hoàng" });
-            employees.Add(new Employee() { Role = "Nhân viên văn phòng", Citizenship = "Italy", Department = "Tổ 2", Gender = "Nữ", ID = "11121", Name = "Siêu nhân điện quang" });
-            employees.Add(new Employee() { Role = "Nhân viên công vụ", Citizenship = "sds", Department = "Tổ 3", Gender = "Nam", ID = "11121", Name = "Siêu nhân cuồng phong" });
-            employees.Add(new Employee() { Role = "Nhân viên công vụ", Citizenship = "sds", Department = "Tổ 3", Gender = "Nam", ID = "11121", Name = "Siêu nhân cuồng phong" });
-            employees.Add(new Employee() { Role = "Nhân viên công vụ", Citizenship = "sds", Department = "Tổ 3", Gender = "Nam", ID = "11121", Name = "Siêu nhân cuồng phong" });
-            employees.Add(new Employee() { Role = "Giám đốc kỹ thuật", Citizenship = "sds", Department = "dsd", Gender = "Tổ 1", ID = "Nữ", Name = "Gao ồ GAO Ồ" });
-            employees.Add(new Employee() { Role = "Giám đốc kỹ thuật", Citizenship = "sds", Department = "dsd", Gender = "Tổ 1", ID = "Nữ", Name = "Gao ồ GAO Ồ" });
-            employees.Add(new Employee() { Role = "Giám đốc kỹ thuật", Citizenship = "sds", Department = "dsd", Gender = "Tổ 1", ID = "Nữ", Name = "Gao ồ GAO Ồ" });
-            employees.Add(new Employee() { Role = "Giám đốc kỹ thuật", Citizenship = "sds", Department = "dsd", Gender = "Tổ 1", ID = "Nữ", Name = "Gao ồ GAO Ồ" });
-            employees.Add(new Employee() { Role = "Giám đốc kỹ thuật", Citizenship = "sds", Department = "dsd", Gender = "Tổ 1", ID = "Nữ", Name = "Gao ồ GAO Ồ" });
-
+            
             dtgvA.ItemsSource = employees;
         }
 
