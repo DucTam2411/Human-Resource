@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HRMS.Accouting.ViewModel;
+using Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +20,27 @@ namespace HRMS.Accouting.uCon
     /// <summary>
     /// Interaction logic for uConEmployeeSalary.xaml
     /// </summary>
+    /// 
     public partial class uConEmployeeSalary : UserControl
     {
+        private SalaryData _SelectedItem;
+        public SalaryData SelectedItem { get => _SelectedItem ; set { _SelectedItem = value; } }
         public uConEmployeeSalary()
         {
             InitializeComponent();
+        }
+
+        public uConEmployeeSalary(SalaryData selectedItem)
+        {
+            SelectedItem = new SalaryData();
+            this.SelectedItem = selectedItem;
+            DetailedSalaryViewModel.data = selectedItem; 
+            InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            contentControlMain.Content = new uConListEmployeeAccounting();
         }
     }
 }

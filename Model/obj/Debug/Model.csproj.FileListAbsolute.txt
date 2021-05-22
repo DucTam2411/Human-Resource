@@ -13,3 +13,24 @@ D:\Human Resource\Model\obj\Debug\Model.csproj.GenerateResource.cache
 D:\Human Resource\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
 D:\Human Resource\Model\obj\Debug\Model.exe
 D:\Human Resource\Model\obj\Debug\Model.pdb
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\Model\bin\Debug\Model.exe.config
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\Model\bin\Debug\Model.exe
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\Model\bin\Debug\Model.pdb
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\Model\bin\Debug\EntityFramework.dll
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\Model\bin\Debug\EntityFramework.SqlServer.dll
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\Model\bin\Debug\EntityFramework.xml
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\Model\bin\Debug\EntityFramework.SqlServer.xml
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\Model\obj\Debug\Model.csprojAssemblyReference.cache
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\Model\obj\Debug\MainWindow.g.cs
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\Model\obj\Debug\App.g.cs
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\Model\obj\Debug\Model_Content.g.cs
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\Model\obj\Debug\Model_MarkupCompile.cache
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\Model\obj\Debug\Model_MarkupCompile.lref
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\Model\obj\Debug\MainWindow.baml
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\Model\obj\Debug\Model.g.resources
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\Model\obj\Debug\Model.Properties.Resources.resources
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\Model\obj\Debug\Model.csproj.GenerateResource.cache
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\Model\obj\Debug\Model.csproj.CopyComplete
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\Model\obj\Debug\Model.exe
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\Model\obj\Debug\Model.pdb

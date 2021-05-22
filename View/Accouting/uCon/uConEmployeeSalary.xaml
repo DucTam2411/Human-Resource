@@ -6,418 +6,435 @@
     xmlns:local="clr-namespace:HRMS.Accouting.uCon"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="ucEmployeeDetailed"
     Width="740"
     Height="auto"
     Background="Transparent"
+    DataContext="{StaticResource vmAccountingList}"
     mc:Ignorable="d">
 
 
-    <Grid Margin="0,20,0,0">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-        </Grid.ColumnDefinitions>
+    <ContentControl x:Name="contentControlMain" Height="600">
+        <Grid Margin="0,20,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
-
-
-
-
-
-        <Button
-            Grid.RowSpan="3"
-            Height="95"
-            Margin="0,0,49.4,217.8"
-            VerticalAlignment="Bottom"
-            Background="Transparent"
-            BorderThickness="0">
-
-            <materialDesign:PackIcon
-                Width="40"
-                Height="40"
-                Foreground="DimGray"
-                Kind="ArrowBack" />
-
-
-        </Button>
-        <DockPanel
-            Grid.Row="0"
-            Grid.Column="1"
-            Margin="0,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
 
 
 
-            <StackPanel Margin="20" DockPanel.Dock="Left">
 
-                <StackPanel Orientation="Horizontal">
 
-                    <materialDesign:PackIcon
-                        Width="30"
-                        Height="30"
-                        VerticalAlignment="Center"
-                        Foreground="DimGray"
-                        Kind="User" />
-                    <TextBox
-                        x:Name="tbName"
-                        Width="200"
-                        Margin="8,0,0,0"
-                        materialDesign:HintAssist.HelperText="Employee full name."
-                        materialDesign:HintAssist.Hint="Name"
-                        FontSize="18"
-                        IsReadOnly="True">
-                        <TextBox.Text>
+            <Button
+                Grid.RowSpan="3"
+                Height="95"
+                Margin="0,0,49.4,217.8"
+                VerticalAlignment="Bottom"
+                Background="Transparent"
+                BorderThickness="0"
+                Click="Button_Click">
+
+                <materialDesign:PackIcon
+                    Width="40"
+                    Height="40"
+                    Foreground="DimGray"
+                    Kind="ArrowBack" />
+
+
+            </Button>
+            <DockPanel
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="0,0,0,0">
+
+
+
+                <StackPanel Margin="20" DockPanel.Dock="Left">
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <materialDesign:PackIcon
+                            Width="30"
+                            Height="30"
+                            VerticalAlignment="Center"
+                            Foreground="DimGray"
+                            Kind="User" />
+                        <TextBox
+                            x:Name="tbName"
+                            Width="200"
+                            Margin="8,0,0,0"
+                            materialDesign:HintAssist.HelperText="Employee full name."
+                            materialDesign:HintAssist.Hint="Name"
+                            FontSize="18"
+                            IsReadOnly="True"
+                            Text="{Binding SelectedItem.EMPLOYEE.NAME, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
+                            <!--<TextBox.Text>
                             <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules />
                             </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+                        </TextBox.Text>-->
+                        </TextBox>
+
+                    </StackPanel>
+
+
+
+                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                        <materialDesign:PackIcon
+                            Width="30"
+                            Height="30"
+                            VerticalAlignment="Center"
+                            Foreground="DimGray"
+                            Kind="IdCard" />
+                        <TextBox
+                            x:Name="tbId"
+                            Width="200"
+                            Margin="8,0,0,0"
+                            materialDesign:HintAssist.HelperText="ID Card number"
+                            materialDesign:HintAssist.Hint="ID"
+                            FontSize="18"
+                            IsReadOnly="True"
+                            Text="{Binding SelectedItem.ID, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+
+                    </StackPanel>
+
+
+                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                        <materialDesign:PackIcon
+                            Width="30"
+                            Height="30"
+                            VerticalAlignment="Center"
+                            Foreground="DimGray"
+                            Kind="DateRange" />
+                        <TextBox
+                            x:Name="tb1Id"
+                            Width="200"
+                            Margin="8,0,0,0"
+                            materialDesign:HintAssist.HelperText="ID Card number"
+                            materialDesign:HintAssist.Hint="Date birth"
+                            FontSize="18"
+                            IsReadOnly="True"
+                            Text="{Binding SelectedItem.EMPLOYEE.BIRTH_DATE, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+
+                    </StackPanel>
+
+
 
                 </StackPanel>
 
 
 
-                <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                <Button
+                    Grid.Column="1"
+                    Width="200"
+                    Height="200"
+                    Margin="20,10,0,0"
+                    DockPanel.Dock="Right">
+
+
                     <materialDesign:PackIcon
-                        Width="30"
-                        Height="30"
-                        VerticalAlignment="Center"
-                        Foreground="DimGray"
-                        Kind="IdCard" />
-                    <TextBox
-                        x:Name="tbId"
-                        Width="200"
-                        Margin="8,0,0,0"
-                        materialDesign:HintAssist.HelperText="ID Card number"
-                        materialDesign:HintAssist.Hint="ID"
-                        FontSize="18"
-                        IsReadOnly="True" />
+                        Width="50"
+                        Height="50"
+                        Kind="ImageAdd" />
 
-                </StackPanel>
+                </Button>
 
 
-                <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-                    <materialDesign:PackIcon
-                        Width="30"
-                        Height="30"
-                        VerticalAlignment="Center"
-                        Foreground="DimGray"
-                        Kind="DateRange" />
-                    <TextBox
-                        x:Name="tb1Id"
-                        Width="200"
-                        Margin="8,0,0,0"
-                        materialDesign:HintAssist.HelperText="ID Card number"
-                        materialDesign:HintAssist.Hint="Date birth"
-                        FontSize="18"
-                        IsReadOnly="True" />
+            </DockPanel>
 
-                </StackPanel>
+
+
+            <Separator
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="0,10,0,0"
+                BorderBrush="Black"
+                BorderThickness="10"
+                Opacity="0.8" />
+
+
+            <DockPanel
+                Grid.Row="2"
+                Grid.Column="1"
+                Margin="0,0,0,0.2">
+
+
+
+                <DockPanel Margin="20" HorizontalAlignment="Left">
+
+
+                    <StackPanel DockPanel.Dock="Left">
+
+
+                        <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="Globe" />
+                            <TextBox
+                                Width="200"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="In ID Card"
+                                materialDesign:HintAssist.Hint="Social Insurance"
+                                FontSize="18"
+                                Text="{Binding SOCIAL_INSURANCE, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                <!--<TextBox.Text>
+                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>-->
+                            </TextBox>
+
+                        </StackPanel>
+
+
+
+
+                        <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="HealthPotion" />
+                            <TextBox
+                                Width="200"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.Hint="Health Insurance"
+                                FontSize="18"
+                                Text="{Binding HEALTH_INSURANCE, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                <!--<TextBox.Text>
+                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>-->
+                            </TextBox>
+
+                        </StackPanel>
+
+
+
+                        <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="Add" />
+                            <TextBox
+                                Width="200"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.Hint="Welfare"
+                                FontSize="18"
+                                Text="{Binding WELFARE, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                <!--<TextBox.Text>
+                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>-->
+                            </TextBox>
+
+
+
+
+                        </StackPanel>
+
+
+                        <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="Numbers" />
+                            <TextBox
+                                Width="200"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.Hint="Coefficient"
+                                FontSize="18"
+                                Text="{Binding COEFFICIENT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                <!--<TextBox.Text>
+                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>-->
+                            </TextBox>
+
+
+                        </StackPanel>
+
+                    </StackPanel>
+
+                </DockPanel>
+
+
+                <DockPanel Margin="20,20,30,20" HorizontalAlignment="Right">
+
+
+                    <StackPanel DockPanel.Dock="Left">
+
+                        <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="DecimalIncrease" />
+                            <TextBox
+                                Width="200"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.Hint="Basic Wage"
+                                FontSize="18"
+                                Text="{Binding WAGE, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                <!--<TextBox.Text>
+                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>-->
+                            </TextBox>
+
+                        </StackPanel>
+
+
+                        <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="Overboard" />
+                            <TextBox
+                                Width="200"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Department in company"
+                                materialDesign:HintAssist.Hint="Overtime salary"
+                                FontSize="18"
+                                Text="{Binding OVERTIME_SALARY, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                <!--<TextBox.Text>
+                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>-->
+                            </TextBox>
+
+                        </StackPanel>
+
+
+
+                        <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+
+
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="Present" />
+                            <TextBox
+                                Width="200"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Department in company"
+                                materialDesign:HintAssist.Hint="Bonus"
+                                FontSize="18"
+                                Text="{Binding BONUS, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                <!--<TextBox.Text>
+                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>-->
+                            </TextBox>
+
+
+                        </StackPanel>
+
+
+
+                        <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="MoneyOff" />
+                            <TextBox
+                                Width="200"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Department in company"
+                                materialDesign:HintAssist.Hint="Tax"
+                                FontSize="18"
+                                Text="{Binding TAX, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                <!--<TextBox.Text>
+                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>-->
+                            </TextBox>
+
+
+                        </StackPanel>
+
+
+
+                    </StackPanel>
+
+                </DockPanel>
+
+            </DockPanel>
+
+
+
+            <StackPanel
+                Grid.Row="3"
+                Grid.Column="1"
+                Orientation="Horizontal">
+
+                <Button
+                    Width="100"
+                    Height="50"
+                    Margin="10,10,50,0"
+                    HorizontalAlignment="Right"
+                    Content="Save"
+                    FontSize="18"
+                    FontWeight="Light"
+                    Command="{Binding EditCommand}"/>
+
+
+                <Button
+                    Width="100"
+                    Height="50"
+                    Margin="250,10,-0,0"
+                    HorizontalAlignment="Right"
+                    Background="#FFFF745C"
+                    BorderThickness="0"
+                    Content="Cancel"
+                    FontSize="18"
+                    FontWeight="Light"
+                    Click="Button_Click"/>
 
 
 
             </StackPanel>
 
 
+        </Grid>
 
-            <Button
-                Grid.Column="1"
-                Width="200"
-                Height="200"
-                Margin="20,10,0,0"
-                DockPanel.Dock="Right">
-
-
-                <materialDesign:PackIcon
-                    Width="50"
-                    Height="50"
-                    Kind="ImageAdd" />
-
-            </Button>
-
-
-        </DockPanel>
-
-
-
-        <Separator
-            Grid.Row="1"
-            Grid.Column="1"
-            Margin="0,10,0,0"
-            BorderBrush="Black"
-            BorderThickness="10"
-            Opacity="0.8" />
-
-
-        <DockPanel
-            Grid.Row="2"
-            Grid.Column="1"
-            Margin="0,0,0,0.2">
-
-
-
-            <DockPanel Margin="20" HorizontalAlignment="Left">
-
-
-                <StackPanel DockPanel.Dock="Left">
-
-
-                    <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
-
-                        <materialDesign:PackIcon
-                            Width="30"
-                            Height="30"
-                            VerticalAlignment="Center"
-                            Foreground="DimGray"
-                            Kind="Globe" />
-                        <TextBox
-                            Width="200"
-                            Margin="8,0,0,0"
-                            materialDesign:HintAssist.HelperText="In ID Card"
-                            materialDesign:HintAssist.Hint="Social Insurance"
-                            FontSize="18">
-                            <TextBox.Text>
-                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules />
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
-
-                    </StackPanel>
-
-
-
-
-                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-
-                        <materialDesign:PackIcon
-                            Width="30"
-                            Height="30"
-                            VerticalAlignment="Center"
-                            Foreground="DimGray"
-                            Kind="HealthPotion" />
-                        <TextBox
-                            Width="200"
-                            Margin="8,0,0,0"
-                            materialDesign:HintAssist.Hint="Health Insurance"
-                            FontSize="18">
-                            <TextBox.Text>
-                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules />
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
-
-                    </StackPanel>
-
-
-
-                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-
-                        <materialDesign:PackIcon
-                            Width="30"
-                            Height="30"
-                            VerticalAlignment="Center"
-                            Foreground="DimGray"
-                            Kind="Add" />
-                        <TextBox
-                            Width="200"
-                            Margin="8,0,0,0"
-                            materialDesign:HintAssist.Hint="Welfare"
-                            FontSize="18">
-                            <TextBox.Text>
-                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules />
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
-
-
-
-
-                    </StackPanel>
-
-
-                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-
-                        <materialDesign:PackIcon
-                            Width="30"
-                            Height="30"
-                            VerticalAlignment="Center"
-                            Foreground="DimGray"
-                            Kind="Numbers" />
-                        <TextBox
-                            Width="200"
-                            Margin="8,0,0,0"
-                            materialDesign:HintAssist.Hint="Coefficient"
-                            FontSize="18">
-                            <TextBox.Text>
-                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules />
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
-
-
-                    </StackPanel>
-
-                </StackPanel>
-
-            </DockPanel>
-
-
-            <DockPanel Margin="20,20,30,20" HorizontalAlignment="Right">
-
-
-                <StackPanel DockPanel.Dock="Left">
-
-                    <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
-
-                        <materialDesign:PackIcon
-                            Width="30"
-                            Height="30"
-                            VerticalAlignment="Center"
-                            Foreground="DimGray"
-                            Kind="DecimalIncrease" />
-                        <TextBox
-                            Width="200"
-                            Margin="8,0,0,0"
-                            materialDesign:HintAssist.Hint="Basic Wage"
-                            FontSize="18">
-                            <TextBox.Text>
-                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules />
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
-
-                    </StackPanel>
-
-
-                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-
-                        <materialDesign:PackIcon
-                            Width="30"
-                            Height="30"
-                            VerticalAlignment="Center"
-                            Foreground="DimGray"
-                            Kind="Overboard" />
-                        <TextBox
-                            Width="200"
-                            Margin="8,0,0,0"
-                            materialDesign:HintAssist.HelperText="Department in company"
-                            materialDesign:HintAssist.Hint="Overtime salary"
-                            FontSize="18">
-                            <TextBox.Text>
-                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules />
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
-
-                    </StackPanel>
-
-
-
-                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-
-
-                        <materialDesign:PackIcon
-                            Width="30"
-                            Height="30"
-                            VerticalAlignment="Center"
-                            Foreground="DimGray"
-                            Kind="Present" />
-                        <TextBox
-                            Width="200"
-                            Margin="8,0,0,0"
-                            materialDesign:HintAssist.HelperText="Department in company"
-                            materialDesign:HintAssist.Hint="Bonus"
-                            FontSize="18">
-                            <TextBox.Text>
-                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules />
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
-
-
-                    </StackPanel>
-
-
-
-                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-
-                        <materialDesign:PackIcon
-                            Width="30"
-                            Height="30"
-                            VerticalAlignment="Center"
-                            Foreground="DimGray"
-                            Kind="MoneyOff" />
-                        <TextBox
-                            Width="200"
-                            Margin="8,0,0,0"
-                            materialDesign:HintAssist.HelperText="Department in company"
-                            materialDesign:HintAssist.Hint="Tax"
-                            FontSize="18">
-                            <TextBox.Text>
-                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules />
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
-
-
-                    </StackPanel>
-
-
-
-                </StackPanel>
-
-            </DockPanel>
-
-        </DockPanel>
-
-
-
-        <StackPanel
-            Grid.Row="3"
-            Grid.Column="1"
-            Orientation="Horizontal">
-
-            <Button
-                Width="100"
-                Height="50"
-                Margin="10,10,50,0"
-                HorizontalAlignment="Right"
-                Content="Save"
-                FontSize="18"
-                FontWeight="Light" />
-
-
-            <Button
-                Width="100"
-                Height="50"
-                Margin="250,10,-0,0"
-                HorizontalAlignment="Right"
-                Background="#FFFF745C"
-                BorderThickness="0"
-                Content="Cancel"
-                FontSize="18"
-                FontWeight="Light" />
-
-
-
-        </StackPanel>
-
-
-    </Grid>
-
-
+    </ContentControl>
 </UserControl>
 
 

@@ -8,8 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="880"
     Height="600"
+    DataContext= "{StaticResource vmAccountingList}"
     mc:Ignorable="d">
-
 
     <UserControl.Resources>
         <Style x:Key="WrapText" TargetType="{x:Type TextBlock}">
@@ -90,81 +90,79 @@
                     CanUserReorderColumns="False"
                     CanUserResizeColumns="True"
                     IsReadOnly="True"
-                    ItemsSource="{Binding Source=employess}">
+                    ItemsSource="{Binding SalaryList}"
+                    SelectedItem="{Binding SelectedItem}">
+
                     <DataGrid.Resources>
                         <Style TargetType="{x:Type DataGridRow}">
                             <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick" />
                         </Style>
                     </DataGrid.Resources>
 
-
-
-
                     <DataGrid.Columns>
-
-
 
                         <DataGridTextColumn
                             Width="90"
-                            Binding="{Binding ID}"
+                            Binding="{Binding EMPLOYEE.ID}"
                             ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                             Foreground="DarkSlateGray"
                             Header="ID" />
 
-
                         <DataGridTextColumn
                             Width="220"
-                            Binding="{Binding Name}"
+                            Binding="{Binding EMPLOYEE.NAME}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Name" />
 
-
-
                         <materialDesign:DataGridTextColumn
                             Width="120"
-                            Binding="{Binding Department}"
+                            Binding="{Binding EMPLOYEE.DEPARTMENT.DEPT_NAME}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
-                            Header="Salary" />
-
+                            Header="Department" />
 
                         <materialDesign:DataGridTextColumn
                             Width="100"
-                            Binding="{Binding Gender}"
-                            ElementStyle="{StaticResource WrapText}"
-                            Foreground="DarkSlateGray"
-                            Header="Bonus" />
-
-
-
-
-                        <DataGridTextColumn
-                            Width="130"
-                            Binding="{Binding Citizenship}"
-                            ElementStyle="{StaticResource WrapText}"
-                            Foreground="DarkSlateGray"
-                            Header="Citizenship" />
-
-
-                        <DataGridTextColumn
-                            Width="200"
-                            Binding="{Binding Role}"
+                            Binding="{Binding EMPLOYEE.ROLE.ROLE_NAME}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Role" />
 
+                        <DataGridTextColumn
+                            Width="100"
+                            Binding="{Binding SALARY.DATE_START}"
+                            ElementStyle="{StaticResource WrapText}"
+                            Foreground="DarkSlateGray"
+                            Header="Date Start" />
 
+
+                        <DataGridTextColumn
+                            Width="100"
+                            Binding="{Binding SALARY.DATE_END}"
+                            ElementStyle="{StaticResource WrapText}"
+                            Foreground="DarkSlateGray"
+                            Header="Date End" />
+
+                        <DataGridTextColumn
+                            Width="150"
+                            Binding="{Binding TIMEKEEPING.NUMBER_OF_WORK_DAY}"
+                            ElementStyle="{StaticResource WrapText}"
+                            Foreground="DarkSlateGray"
+                            Header="Number Of Work" />
+
+                        <DataGridTextColumn
+                            Width="100"
+                            Binding="{Binding SALARY.TOTAL_SALARY}"
+                            ElementStyle="{StaticResource WrapText}"
+                            Foreground="DarkSlateGray"
+                            Header="Salary" />
 
                     </DataGrid.Columns>
 
 
                 </DataGrid>
             </Grid>
-
-
-
-
         </Grid>
     </ContentControl>
 </UserControl>
