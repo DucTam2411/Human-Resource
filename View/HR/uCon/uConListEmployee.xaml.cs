@@ -31,7 +31,6 @@ namespace HRMS.HR.uCon
         {
             var customers = (from customer in HRMSEnities.hrmsEntity.EMPLOYEEs
                              select customer);
-
             dtgvEmployees.ItemsSource = customers.ToArray();
         }
 
@@ -40,8 +39,6 @@ namespace HRMS.HR.uCon
 
             EMPLOYEE employee = (dtgvEmployees.SelectedItem as EMPLOYEE);
             contentControlMain.Content = new uConModifyEmployee(employee);
-        
-
         }
 
         private void btnNewEmployee_Click(object sender, RoutedEventArgs e)
