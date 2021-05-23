@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-namespace Model.Database
+namespace HRMS.Accouting
 {
-    public static class HRMSEnities
+    public class Class1
     {
-        public static hrmsEntities hrmsEntity = new hrmsEntities();
     }
 }

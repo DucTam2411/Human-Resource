@@ -5,32 +5,174 @@
     xmlns:Chart="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:HRMS.HR.uCon"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
     mc:Ignorable="d">
-    <Grid x:Name="ss">
-        <Chart:PieChart>
-            <Chart:PieChart.Series>
 
-                <Chart:PieSeries
-                    Title="Sieu "
-                    DataLabels="True"
-                    Values="24" />
-                <Chart:PieSeries
-                    Title="Nhan"
-                    DataLabels="True"
-                    Values="23" />
-                <Chart:PieSeries
-                    Title="Dien"
-                    DataLabels="True"
-                    Values="42" />
+    <Grid Margin="0,20,0,0">
 
-            </Chart:PieChart.Series>
+        <TabControl
+            materialDesign:ColorZoneAssist.Mode="Standard"
+            materialDesign:ShadowAssist.ShadowDepth="Depth0"
+            Background="Transparent"
+            Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+            TabStripPlacement="Right">
 
 
-        </Chart:PieChart>
 
+            <TabItem
+                Background="Transparent"
+                Header="{materialDesign:PackIcon Kind=FolderInformation,
+                                                 Size=24}"
+                Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                <Grid x:Name="ss">
+
+                    <Grid.Resources>
+                        <Style x:Key="WrapText" TargetType="{x:Type TextBlock}">
+                            <Setter Property="TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Left" />
+                        </Style>
+
+
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+
+
+                    <StackPanel Margin="10,20,0,20" Orientation="Horizontal">
+
+                        <materialDesign:PackIcon
+                            Width="30"
+                            Height="30"
+                            VerticalAlignment="Center"
+                            Foreground="DimGray"
+                            Kind="Search" />
+                        <TextBox
+                            Width="370"
+                            Margin="5,0,0,0"
+                            materialDesign:HintAssist.Hint="Search "
+                            FontSize="18">
+                            <TextBox.Text>
+                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+
+                        <ComboBox
+                            Margin="8,0,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            Foreground="DimGray">
+
+
+                            <ComboBoxItem Content="by ID" IsSelected="True" />
+                            <ComboBoxItem Content="by Name" />
+                            <ComboBoxItem Content="by Role" />
+                        </ComboBox>
+
+
+
+                    </StackPanel>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="103*" />
+                            <ColumnDefinition Width="77*" />
+                        </Grid.ColumnDefinitions>
+                        <DataGrid
+                            x:Name="dtgvEmployees"
+                            Grid.ColumnSpan="2"
+                            Height="400"
+                            Margin="0,0,40,0"
+                            VerticalAlignment="Top"
+                            AllowDrop="True"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            CanUserDeleteRows="False"
+                            CanUserReorderColumns="False"
+                            CanUserResizeColumns="True"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding Source=employess}">
+
+                            <DataGrid.Resources>
+                                <Style TargetType="{x:Type DataGridRow}">
+                                    <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick" />
+                                </Style>
+                            </DataGrid.Resources>
+
+                            <DataGrid.Columns>
+
+                                <DataGridTextColumn
+                                    Width="90"
+                                    Binding="{Binding ID}"
+                                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                                    Foreground="DarkSlateGray"
+                                    Header="ID" />
+
+
+                                <DataGridTextColumn
+                                    Width="220"
+                                    Binding="{Binding NAME}"
+                                    Foreground="DarkSlateGray"
+                                    Header="Name" />
+
+
+
+                                <materialDesign:DataGridTextColumn
+                                    Width="100"
+                                    Binding="{Binding DEPARTMENT.DEPT_NAME}"
+                                    Foreground="DarkSlateGray"
+                                    Header="Workday" />
+
+
+                                <materialDesign:DataGridTextColumn
+                                    Width="100"
+                                    Binding="{Binding GENDER}"
+                                    Foreground="DarkSlateGray"
+                                    Header="Day-off" />
+
+
+                                <DataGridTextColumn
+                                    Width="100"
+                                    Binding="{Binding CITIZENSHIP}"
+                                    Foreground="DarkSlateGray"
+                                    Header="Overtime" />
+
+
+                                <DataGridTextColumn
+                                    Width="100"
+                                    Binding="{Binding ROLE.ROLE_NAME}"
+                                    Foreground="DarkSlateGray"
+                                    Header="Total" />
+
+
+
+                            </DataGrid.Columns>
+
+
+                        </DataGrid>
+                    </Grid>
+
+
+                    <Button
+                        Grid.Row="2"
+                        Width="100"
+                        Height="50"
+                        Margin="10,10,50,0"
+                        HorizontalAlignment="Right"
+                        Content="Export"
+                        FontSize="18"
+                        FontWeight="Light" />
+                </Grid>
+
+            </TabItem>
+        </TabControl>
 
     </Grid>
 </UserControl>

@@ -106,3 +106,7 @@ D:\Human Resource\View\bin\Debug\LiveCharts.Wpf.pdb
 D:\Human Resource\View\bin\Debug\LiveCharts.Wpf.xml
 D:\Human Resource\View\obj\Debug\HR\uCon\uConReport.g.cs
 D:\Human Resource\View\obj\Debug\HR\uCon\uConReport.baml
+D:\Human Resource\View\obj\Debug\Accouting\uCon\uConRequestBoard.g.cs
+D:\Human Resource\View\obj\Debug\Accouting\uCon\uConRequestBoard.baml
+D:\Human Resource\View\obj\Debug\HR\uCon\uConDetailTimeKeeping.g.cs
+D:\Human Resource\View\obj\Debug\HR\uCon\uConDetailTimeKeeping.baml

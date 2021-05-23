@@ -12,24 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using LiveCharts;
-using LiveCharts.Wpf;
 
-namespace HRMS.HR.uCon
+namespace HRMS.Accouting.uCon
 {
     /// <summary>
-    /// Interaction logic for uConReport.xaml
+    /// Interaction logic for uConRequestBoard.xaml
     /// </summary>
-    public partial class uConReport : UserControl
+    public partial class uConRequestBoard : UserControl
     {
-        public uConReport()
+        public uConRequestBoard()
         {
             InitializeComponent();
-        }
-
-        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            this.Content = new uConDetailTimeKeeping();
         }
     }
 }

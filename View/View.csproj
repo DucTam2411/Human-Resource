@@ -98,6 +98,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Accouting\uCon\uConRequestBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Accouting\uCon\uConSideBarAccouting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -111,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="HR\uCon\uConDashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HR\uCon\uConDetailTimeKeeping.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -130,6 +138,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="Accouting\Class1.cs" />
     <Compile Include="Accouting\uCon\Accouting_EmployeeWindow.xaml.cs">
       <DependentUpon>Accouting_EmployeeWindow.xaml</DependentUpon>
     </Compile>
@@ -141,6 +150,9 @@
     </Compile>
     <Compile Include="Accouting\uCon\uConListEmployeeAccounting.xaml.cs">
       <DependentUpon>uConListEmployeeAccounting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Accouting\uCon\uConRequestBoard.xaml.cs">
+      <DependentUpon>uConRequestBoard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Accouting\uCon\uConSideBarAccouting.xaml.cs">
       <DependentUpon>uConSideBarAccouting.xaml</DependentUpon>
@@ -157,6 +169,9 @@
     </Compile>
     <Compile Include="HR\uCon\uConDashboard.xaml.cs">
       <DependentUpon>uConDashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HR\uCon\uConDetailTimeKeeping.xaml.cs">
+      <DependentUpon>uConDetailTimeKeeping.xaml</DependentUpon>
     </Compile>
     <Compile Include="HR\uCon\uConListEmployee.xaml.cs">
       <DependentUpon>uConListEmployee.xaml</DependentUpon>

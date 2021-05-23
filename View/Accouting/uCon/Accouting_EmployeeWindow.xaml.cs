@@ -39,10 +39,7 @@ namespace HRMS.Accouting.uCon
 
             ButtonContent btn = getChildren(e.Source as Button);
 
-
-
             string str = btn.Item1.Text;
-
 
 
             if (str == uConSideBarAccouting.EMPLOYEE)
