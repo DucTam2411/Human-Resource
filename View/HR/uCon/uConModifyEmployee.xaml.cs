@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,18 @@ namespace HRMS.HR.uCon
         public uConModifyEmployee()
         {
             InitializeComponent();
+        }
+
+        public uConModifyEmployee(EMPLOYEE e)
+        {
+            InitializeComponent();
+            this.DataContext = e;
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Content = new uConListEmployee();
         }
     }
 }

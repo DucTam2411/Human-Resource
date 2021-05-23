@@ -68,8 +68,6 @@ namespace HRMS.Accouting.uCon
             pack.Foreground = new SolidColorBrush(Colors.White);
 
 
-            //MessageBox.Show(buttonPackages.Count.ToString());
-
 
             ChangeColorInButtonList(content);
 

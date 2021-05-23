@@ -12,6 +12,7 @@
 
 
 
+
     <Grid Width="190" Margin="0,0,0,0">
 
         <!--  BackGround  -->
@@ -56,24 +57,24 @@
                 Click="btnHome_Click">
 
                 <StackPanel
-                    Margin="-20,0,0,0"
+                    Margin="0,0,0,0"
                     HorizontalAlignment="Left"
                     Orientation="Horizontal">
                     <materialDesign:PackIcon Foreground="White" Kind="ViewDashboard" />
                     <TextBlock
+                        Width="150"
                         Margin="8,-4,0,0"
                         FontFamily="Tw Cen MT"
                         FontSize="22"
                         FontWeight="SemiBold"
                         Foreground="White"
-                        Text="Home           " />
+                        Text="Home" />
                 </StackPanel>
 
             </Button>
 
-
             <Button
-                x:Name="btnInformation"
+                x:Name="btnReport"
                 Grid.Row="1"
                 Width="190"
                 Height="50"
@@ -84,17 +85,18 @@
                 Click="btnHome_Click">
 
                 <StackPanel
-                    Margin="-20,0,0,0"
+                    Margin="0,0,0,0"
                     HorizontalAlignment="Left"
                     Orientation="Horizontal">
                     <materialDesign:PackIcon Foreground="Black" Kind="Worker" />
                     <TextBlock
+                        Width="150"
                         Margin="8,-4,0,0"
                         FontFamily="Tw Cen MT"
                         FontSize="22"
                         FontWeight="SemiBold"
                         Foreground="Black"
-                        Text="Report          " />
+                        Text="Report" />
                 </StackPanel>
             </Button>
         </Grid>

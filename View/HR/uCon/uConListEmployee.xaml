@@ -10,16 +10,11 @@
     Height="620"
     mc:Ignorable="d">
 
-
-
-
-
     <UserControl.Resources>
         <Style x:Key="WrapText" TargetType="{x:Type TextBlock}">
             <Setter Property="TextWrapping" Value="Wrap" />
             <Setter Property="TextBlock.TextAlignment" Value="Left" />
         </Style>
-
     </UserControl.Resources>
 
 
@@ -83,7 +78,7 @@
 
             <Grid Grid.Row="1">
                 <DataGrid
-                    x:Name="dtgvA"
+                    x:Name="dtgvEmployees"
                     Margin="0,0,-0.4,0"
                     VerticalAlignment="Top"
                     AllowDrop="True"
@@ -93,7 +88,8 @@
                     CanUserReorderColumns="False"
                     CanUserResizeColumns="True"
                     IsReadOnly="True"
-                    ItemsSource="{Binding Source=employess}">
+                    ItemsSource="{Binding Source=employess}"
+                    SelectionChanged="dtgvA_SelectionChanged">
                     <DataGrid.Resources>
                         <Style TargetType="{x:Type DataGridRow}">
                             <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick" />
@@ -101,10 +97,7 @@
                     </DataGrid.Resources>
 
 
-
-
                     <DataGrid.Columns>
-
 
 
                         <DataGridTextColumn
@@ -117,7 +110,7 @@
 
                         <DataGridTextColumn
                             Width="220"
-                            Binding="{Binding Name}"
+                            Binding="{Binding NAME}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Name" />
@@ -126,25 +119,23 @@
 
                         <materialDesign:DataGridTextColumn
                             Width="120"
-                            Binding="{Binding Department}"
+                            Binding="{Binding DEPARTMENT.DEPT_NAME}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
-                            Header="Salary" />
+                            Header="Department" />
 
 
                         <materialDesign:DataGridTextColumn
                             Width="100"
-                            Binding="{Binding Gender}"
+                            Binding="{Binding GENDER}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
-                            Header="Bonus" />
-
-
+                            Header="Gender" />
 
 
                         <DataGridTextColumn
                             Width="130"
-                            Binding="{Binding Citizenship}"
+                            Binding="{Binding CITIZENSHIP}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Citizenship" />
@@ -152,7 +143,7 @@
 
                         <DataGridTextColumn
                             Width="200"
-                            Binding="{Binding Role}"
+                            Binding="{Binding ROLE.ROLE_NAME}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Role" />
@@ -175,7 +166,7 @@
                 Margin="10,30,0,0"
                 HorizontalAlignment="Left"
                 Click="btnNewEmployee_Click"
-                Command="{Binding testCommand}">
+                Command="{Binding tryCommand}">
 
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon VerticalAlignment="Center" Kind="AccountsAdd" />
