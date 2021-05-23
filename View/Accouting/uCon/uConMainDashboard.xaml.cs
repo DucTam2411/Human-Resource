@@ -24,5 +24,17 @@ namespace HRMS.Accouting.uCon
         {
             InitializeComponent();
         }
+
+        private void uConRequestBoard_RoutedUserControlClicked(object sender, RoutedEventArgs e)
+        {
+            StackNewemployee.Children.Remove(sender as UserControl);
+            this.Content = new uConEmployeeSalary(sender as UserControl);
+        }
+
+        private void uConChangeInSalary_RoutedUserControlClicked(object sender, RoutedEventArgs e)
+        {
+            StackEmployeeChanges.Children.Remove(sender as UserControl);
+            this.Content = new uConEmployeeSalary(sender as UserControl);
+        }
     }
 }

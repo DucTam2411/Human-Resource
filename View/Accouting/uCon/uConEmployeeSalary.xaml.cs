@@ -25,6 +25,13 @@ namespace HRMS.Accouting.uCon
             InitializeComponent();
         }
 
+        public uConEmployeeSalary(UserControl uCon)
+        {
+            InitializeComponent();
+            uCon.Width = 300;
+            uConRequest.Content = uCon;
+
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Content = new uConListEmployeeAccounting();

@@ -6,13 +6,12 @@
     xmlns:local="clr-namespace:HRMS.Accouting.uCon"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="400"
     Height="auto"
     Margin="10"
     mc:Ignorable="d">
     <Grid>
         <materialDesign:Card
-            MaxWidth="500"
+            MaxWidth="400"
             MaxHeight="350"
             Padding="0,0,0,0"
             Background="#03a9f4"
@@ -130,6 +129,7 @@
                 </StackPanel>
 
                 <Button
+                    x:Name="btnHandle"
                     Grid.Row="3"
                     Width="100"
                     Margin="5"
@@ -137,6 +137,7 @@
                     Background="Transparent"
                     BorderBrush="White"
                     BorderThickness="0"
+                    Click="btnHandle_Click"
                     Content="Handle"
                     FontSize="18"
                     FontWeight="SemiBold"

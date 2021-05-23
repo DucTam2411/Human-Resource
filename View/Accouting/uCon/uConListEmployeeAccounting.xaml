@@ -16,7 +16,6 @@
             <Setter Property="TextWrapping" Value="Wrap" />
             <Setter Property="TextBlock.TextAlignment" Value="Left" />
         </Style>
-
     </UserControl.Resources>
 
 

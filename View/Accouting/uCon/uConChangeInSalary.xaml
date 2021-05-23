@@ -109,6 +109,7 @@
                 </StackPanel>
 
                 <Button
+                    x:Name="btnHandle"
                     Grid.Row="3"
                     Width="100"
                     Margin="5"
@@ -116,6 +117,7 @@
                     Background="Transparent"
                     BorderBrush="White"
                     BorderThickness="0"
+                    Click="btnHandle_Click"
                     Content="Handle"
                     FontSize="18"
                     FontWeight="SemiBold"

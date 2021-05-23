@@ -24,5 +24,15 @@ namespace HRMS.Accouting.uCon
         {
             InitializeComponent();
         }
+
+        public event RoutedEventHandler RoutedUserControlClicked;
+
+        private void btnHandle_Click(object sender, RoutedEventArgs e)
+        {
+            if (RoutedUserControlClicked != null)
+            {
+                RoutedUserControlClicked(this, e);
+            }
+        }
     }
 }

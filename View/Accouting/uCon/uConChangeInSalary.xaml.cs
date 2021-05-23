@@ -20,9 +20,20 @@ namespace HRMS.Accouting.uCon
     /// </summary>
     public partial class uConChangeInSalary : UserControl
     {
+
+        public event RoutedEventHandler RoutedUserControlClicked;
+
         public uConChangeInSalary()
         {
             InitializeComponent();
+        }
+
+        private void btnHandle_Click(object sender, RoutedEventArgs e)
+        {
+            if(RoutedUserControlClicked != null)
+            {
+                RoutedUserControlClicked(this, e);
+            }
         }
     }
 }
