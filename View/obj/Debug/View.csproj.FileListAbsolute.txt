@@ -94,3 +94,15 @@ D:\Human Resource\View\bin\Debug\EntityFramework.dll
 D:\Human Resource\View\bin\Debug\EntityFramework.xml
 D:\Human Resource\View\bin\Debug\EntityFramework.SqlServer.dll
 D:\Human Resource\View\bin\Debug\EntityFramework.SqlServer.xml
+D:\Human Resource\View\bin\Debug\Microsoft.Expression.Interactions.dll
+D:\Human Resource\View\bin\Debug\System.Windows.Interactivity.dll
+D:\Human Resource\View\bin\Debug\Microsoft.Expression.Interactions.xml
+D:\Human Resource\View\bin\Debug\System.Windows.Interactivity.xml
+D:\Human Resource\View\bin\Debug\LiveCharts.dll
+D:\Human Resource\View\bin\Debug\LiveCharts.Wpf.dll
+D:\Human Resource\View\bin\Debug\LiveCharts.pdb
+D:\Human Resource\View\bin\Debug\LiveCharts.xml
+D:\Human Resource\View\bin\Debug\LiveCharts.Wpf.pdb
+D:\Human Resource\View\bin\Debug\LiveCharts.Wpf.xml
+D:\Human Resource\View\obj\Debug\HR\uCon\uConReport.g.cs
+D:\Human Resource\View\obj\Debug\HR\uCon\uConReport.baml

@@ -39,6 +39,7 @@
                 Width="240"
                 Height="180"
                 Margin="-22,150,0,150"
+                RoutedUserControlClicked="uConSideBar_RoutedUserControlClicked"
                 HorizontalAlignment="Left"
                 DockPanel.Dock="Left" />
 

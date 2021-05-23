@@ -10,14 +10,11 @@
     Height="620"
     mc:Ignorable="d">
 
-
-
     <UserControl.Resources>
         <Style x:Key="WrapText" TargetType="{x:Type TextBlock}">
             <Setter Property="TextWrapping" Value="Wrap" />
             <Setter Property="TextBlock.TextAlignment" Value="Left" />
         </Style>
-
     </UserControl.Resources>
 
 
@@ -81,7 +78,7 @@
 
             <Grid Grid.Row="1">
                 <DataGrid
-                    x:Name="dtgvA"
+                    x:Name="dtgvEmployees"
                     Margin="0,0,-0.4,0"
                     VerticalAlignment="Top"
                     AllowDrop="True"
@@ -136,7 +133,6 @@
                             Header="Gender" />
 
 
-
                         <DataGridTextColumn
                             Width="130"
                             Binding="{Binding CITIZENSHIP}"
@@ -170,7 +166,7 @@
                 Margin="10,30,0,0"
                 HorizontalAlignment="Left"
                 Click="btnNewEmployee_Click"
-                Command="{Binding testCommand}">
+                Command="{Binding tryCommand}">
 
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon VerticalAlignment="Center" Kind="AccountsAdd" />

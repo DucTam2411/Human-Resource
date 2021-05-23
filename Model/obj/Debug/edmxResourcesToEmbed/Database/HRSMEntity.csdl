@@ -32,6 +32,8 @@
     <NavigationProperty Name="TIMEKEEPINGs" Relationship="Self.FK__TIMEKEEPI__NUMBE__4316F928" FromRole="EMPLOYEE" ToRole="TIMEKEEPING" />
     <Property Name="GENDER" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="CITIZENSHIP" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="BIRTH_PLACE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ACADEMIC_LEVEL" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="ROLE">
     <Key>

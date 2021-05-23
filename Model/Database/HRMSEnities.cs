@@ -8,6 +8,6 @@ namespace Model.Database
 {
     public static class HRMSEnities
     {
-        public static  hrmsEntities hrmsEntity= new hrmsEntities();
+        public static hrmsEntities hrmsEntity = new hrmsEntities();
     }
 }

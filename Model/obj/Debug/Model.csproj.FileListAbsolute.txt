@@ -19,3 +19,9 @@ D:\Human Resource\Model\bin\Debug\EntityFramework.xml
 D:\Human Resource\Model\bin\Debug\EntityFramework.SqlServer.xml
 D:\Human Resource\Model\obj\Debug\Model_Content.g.cs
 D:\Human Resource\Model\obj\Debug\Model.csproj.CopyComplete
+D:\Human Resource\Model\bin\Debug\LiveCharts.dll
+D:\Human Resource\Model\bin\Debug\LiveCharts.Wpf.dll
+D:\Human Resource\Model\bin\Debug\LiveCharts.pdb
+D:\Human Resource\Model\bin\Debug\LiveCharts.xml
+D:\Human Resource\Model\bin\Debug\LiveCharts.Wpf.pdb
+D:\Human Resource\Model\bin\Debug\LiveCharts.Wpf.xml

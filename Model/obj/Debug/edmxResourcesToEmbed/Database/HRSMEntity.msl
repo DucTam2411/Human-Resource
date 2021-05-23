@@ -13,6 +13,8 @@
     <EntitySetMapping Name="EMPLOYEEs">
       <EntityTypeMapping TypeName="hrmsModel.EMPLOYEE">
         <MappingFragment StoreEntitySet="EMPLOYEE">
+          <ScalarProperty Name="ACADEMIC_LEVEL" ColumnName="ACADEMIC_LEVEL" />
+          <ScalarProperty Name="BIRTH_PLACE" ColumnName="BIRTH_PLACE" />
           <ScalarProperty Name="CITIZENSHIP" ColumnName="CITIZENSHIP" />
           <ScalarProperty Name="GENDER" ColumnName="GENDER" />
           <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />

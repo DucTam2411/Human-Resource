@@ -29,6 +29,8 @@
           <Property Name="BIRTH_DATE" Type="date" />
           <Property Name="GENDER" Type="nvarchar" MaxLength="10" />
           <Property Name="CITIZENSHIP" Type="nvarchar" MaxLength="100" />
+          <Property Name="BIRTH_PLACE" Type="nvarchar" MaxLength="100" />
+          <Property Name="ACADEMIC_LEVEL" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="ROLE">
           <Key>
@@ -296,6 +298,8 @@
           <NavigationProperty Name="TIMEKEEPINGs" Relationship="Self.FK__TIMEKEEPI__NUMBE__4316F928" FromRole="EMPLOYEE" ToRole="TIMEKEEPING" />
           <Property Name="GENDER" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="CITIZENSHIP" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BIRTH_PLACE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ACADEMIC_LEVEL" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ROLE">
           <Key>
@@ -563,6 +567,8 @@
           <EntitySetMapping Name="EMPLOYEEs">
             <EntityTypeMapping TypeName="hrmsModel.EMPLOYEE">
               <MappingFragment StoreEntitySet="EMPLOYEE">
+                <ScalarProperty Name="ACADEMIC_LEVEL" ColumnName="ACADEMIC_LEVEL" />
+                <ScalarProperty Name="BIRTH_PLACE" ColumnName="BIRTH_PLACE" />
                 <ScalarProperty Name="CITIZENSHIP" ColumnName="CITIZENSHIP" />
                 <ScalarProperty Name="GENDER" ColumnName="GENDER" />
                 <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />

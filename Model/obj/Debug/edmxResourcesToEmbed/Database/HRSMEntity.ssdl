@@ -24,6 +24,8 @@
     <Property Name="BIRTH_DATE" Type="date" />
     <Property Name="GENDER" Type="nvarchar" MaxLength="10" />
     <Property Name="CITIZENSHIP" Type="nvarchar" MaxLength="100" />
+    <Property Name="BIRTH_PLACE" Type="nvarchar" MaxLength="100" />
+    <Property Name="ACADEMIC_LEVEL" Type="nvarchar" MaxLength="150" />
   </EntityType>
   <EntityType Name="ROLE">
     <Key>

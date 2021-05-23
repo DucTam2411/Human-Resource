@@ -32,17 +32,21 @@ namespace HRMS.HR.uCon
             var customers = (from customer in HRMSEnities.hrmsEntity.EMPLOYEEs
                              select customer);
 
-            dtgvA.ItemsSource = customers.ToArray();
+            dtgvEmployees.ItemsSource = customers.ToArray();
         }
 
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
+            EMPLOYEE employee = (dtgvEmployees.SelectedItem as EMPLOYEE);
+            contentControlMain.Content = new uConModifyEmployee(employee);
+        
+
         }
 
         private void btnNewEmployee_Click(object sender, RoutedEventArgs e)
         {
-
+            contentControlMain.Content = new uConAddEmployee();
         }
 
         private void dtgvA_SelectionChanged(object sender, SelectionChangedEventArgs e)

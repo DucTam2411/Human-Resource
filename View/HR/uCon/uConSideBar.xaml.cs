@@ -27,12 +27,10 @@ namespace HRMS.HR.uCon
     {
 
 
-        public const string EMPLOYEE = "Employee   ";
-        public const string HOME = "Home         ";
-        public const string INFORMATION = "Information";
+        public const string HOME = "Home";
+        public const string REPORT = "Report";
 
 
-        public event EventHandler UserControlClicked;
         public event RoutedEventHandler RoutedUserControlClicked;
 
 
@@ -65,13 +63,10 @@ namespace HRMS.HR.uCon
 
             ChangeColorInButtonList(content);
 
+       
+
+
             // raise event
-            if (UserControlClicked != null)
-            {
-                UserControlClicked(this, EventArgs.Empty);
-            }
-
-
             if (RoutedUserControlClicked != null)
             {
                 RoutedUserControlClicked(this, e);

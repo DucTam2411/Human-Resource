@@ -34,6 +34,8 @@ namespace Model.Database
         public Nullable<System.DateTime> BIRTH_DATE { get; set; }
         public string GENDER { get; set; }
         public string CITIZENSHIP { get; set; }
+        public string BIRTH_PLACE { get; set; }
+        public string ACADEMIC_LEVEL { get; set; }
     
         public virtual DEPARTMENT DEPARTMENT { get; set; }
         public virtual ROLE ROLE { get; set; }
