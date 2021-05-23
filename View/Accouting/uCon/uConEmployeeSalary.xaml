@@ -28,10 +28,6 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-
-
-
-
             <Button
                 Grid.RowSpan="3"
                 Height="95"
@@ -46,15 +42,12 @@
                     Height="40"
                     Foreground="DimGray"
                     Kind="ArrowBack" />
-
-
             </Button>
+            
             <DockPanel
                 Grid.Row="0"
                 Grid.Column="1"
                 Margin="0,0,0,0">
-
-
 
                 <StackPanel Margin="20" DockPanel.Dock="Left">
 

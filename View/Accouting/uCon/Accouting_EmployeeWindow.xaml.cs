@@ -48,7 +48,6 @@ namespace HRMS.Accouting.uCon
             {
                 uConMain.Content = new uConListEmployeeAccounting();
                 uConMain.Margin = new Thickness(0, 10, 0, 0);
-
             }
             else if (str == uConSideBarAccouting.HOME)
             {

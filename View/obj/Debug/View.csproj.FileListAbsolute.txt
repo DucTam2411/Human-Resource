@@ -141,3 +141,17 @@ D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\View.csproj.CoreCompileInputs.cache
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\View.csproj.CopyComplete
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Resource\ResourceXAML.baml
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Employee\uCon\EmployeeWindow.g.cs
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Employee\uCon\uConDashboardEmployee.g.cs
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Employee\uCon\uConEmployeeInformation.g.cs
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Employee\uCon\uConSideBarEmployee.g.cs
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Employee\uCon\EmployeeWindow.baml
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Employee\uCon\uConDashboardEmployee.baml
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Employee\uCon\uConEmployeeInformation.baml
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Employee\uCon\uConSideBarEmployee.baml
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Employee\uCon\uConEmployeeTimekeeping.g.cs
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Employee\uCon\uConEmployeeTimekeeping.baml
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Employee\uCon\uConEmployeeSalary1.g.cs
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Employee\uCon\uConEmployeeSalary1.baml
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Employee\uCon\uConEmployeeSalary.g.cs
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Employee\uCon\uConEmployeeSalary.baml

@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:HRMS.Accouting.uCon"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:userCon="clr-namespace:HRMS.HR.uCon"
+    xmlns:userCon="clr-namespace:HRMS.Accouting.uCon"
     Title="Accouting_EmployeeWindow"
     Width="1124"
     Height="600"
@@ -48,7 +48,7 @@
         <DockPanel Grid.Column="2" Margin="0,-6,26,6">
 
             <ContentControl x:Name="uConMain">
-                <userCon:uConDashboard />
+                <userCon:uConDashboardAccouting />
             </ContentControl>
         </DockPanel>
 
