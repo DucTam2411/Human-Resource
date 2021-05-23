@@ -33,13 +33,15 @@ namespace HRMS.Accouting.uCon
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
 
-            dtgvA.ItemsSource = employees;
+            var customers = (from customer in HRMSEnities.hrmsEntity.EMPLOYEEs
+                             select customer);
+
+            dtgvEmployess.ItemsSource = customers.ToArray();
         }
 
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             contentControlMain.Content = new uConEmployeeSalary();
-            contentControlMain.Margin = new Thickness(0, -20, 0, 0);
         }
 
         private void btnNewEmployee_Click(object sender, RoutedEventArgs e)

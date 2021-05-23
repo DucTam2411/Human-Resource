@@ -96,7 +96,7 @@
                         FontSize="22"
                         FontWeight="SemiBold"
                         Foreground="Black"
-                        Text="Report" />
+                        Text="TimeKeeping" />
                 </StackPanel>
             </Button>
         </Grid>

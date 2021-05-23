@@ -1,13 +1,11 @@
 ﻿<UserControl
-    x:Class="HRMS.Accouting.uCon.uConRequestBoard"
+    x:Class="HRMS.Accouting.uCon.uConChangeInSalary"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:HRMS.Accouting.uCon"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="400"
-    Height="auto"
     Margin="10"
     mc:Ignorable="d">
     <Grid>
@@ -17,9 +15,8 @@
             Padding="0,0,0,0"
             Background="#03a9f4"
             Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+
             <Grid>
-
-
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
@@ -31,7 +28,7 @@
                     Grid.Row="0"
                     Margin="16,16,16,4"
                     Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                    Text="Jame Poast" />
+                    Text="Tikiala Shope" />
 
                 <Separator Grid.Row="1" Style="{StaticResource MaterialDesignLightSeparator}" />
 
@@ -42,7 +39,7 @@
                             HorizontalAlignment="Center"
                             DockPanel.Dock="Left"
                             FontSize="18"
-                            Text="Basic salary" />
+                            Text="Property" />
 
                         <TextBlock
                             Margin="0,2,5,0"
@@ -50,7 +47,7 @@
                             DockPanel.Dock="Left"
                             FontSize="15"
                             FontWeight="Light"
-                            Text="1000 USD" />
+                            Text="Bonus" />
 
                     </DockPanel>
 
@@ -60,7 +57,7 @@
                             HorizontalAlignment="Center"
                             DockPanel.Dock="Left"
                             FontSize="18"
-                            Text="Overtime salary" />
+                            Text="Amount" />
 
                         <TextBlock
                             Margin="0,2,5,0"
@@ -69,24 +66,6 @@
                             FontSize="15"
                             FontWeight="Light"
                             Text="1000 USD" />
-
-                    </DockPanel>
-
-
-                    <DockPanel Width="250" Margin="10,10,0,0">
-                        <TextBlock
-                            HorizontalAlignment="Center"
-                            DockPanel.Dock="Left"
-                            FontSize="18"
-                            Text="Coefficient" />
-
-                        <TextBlock
-                            Margin="0,2,5,0"
-                            HorizontalAlignment="Right"
-                            DockPanel.Dock="Left"
-                            FontSize="15"
-                            FontWeight="Light"
-                            Text="0.4" />
 
                     </DockPanel>
 
@@ -104,7 +83,7 @@
                             DockPanel.Dock="Left"
                             FontSize="15"
                             FontWeight="Light"
-                            Text="Director Kavalnara" />
+                            Text="Technical Director Vukakala" />
                     </DockPanel>
 
 
@@ -123,7 +102,7 @@
                             DockPanel.Dock="Left"
                             FontSize="14"
                             FontWeight="Light"
-                            Text="Add new employee for Entrance Exam Month 11"
+                            Text="Promotion in jobs. From office employee to Head of the Department A1"
                             TextWrapping="Wrap" />
                     </StackPanel>
 
@@ -143,5 +122,8 @@
                     Foreground="White" />
             </Grid>
         </materialDesign:Card>
+
+
+
     </Grid>
 </UserControl>

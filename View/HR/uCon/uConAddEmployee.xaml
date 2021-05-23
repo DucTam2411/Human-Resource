@@ -20,6 +20,7 @@
         </Grid.ColumnDefinitions>
 
         <TabControl
+            x:Name="TabConAddEmployee"
             Grid.ColumnSpan="2"
             Margin="0,0,0.4,-0.2"
             materialDesign:ColorZoneAssist.Mode="Standard"
@@ -412,13 +413,15 @@
 
 
                     <Button
+                        x:Name="btnName"
                         Grid.Row="3"
                         Grid.Column="1"
                         Width="150"
                         Height="50"
                         Margin="0,0,50,0"
                         HorizontalAlignment="Right"
-                        Content="Confirm"
+                        Click="btnName_Click"
+                        Content="Next"
                         FontSize="28"
                         FontWeight="Light" />
 

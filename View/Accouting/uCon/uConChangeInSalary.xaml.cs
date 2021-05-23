@@ -13,26 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HRMS.HR.uCon
+namespace HRMS.Accouting.uCon
 {
     /// <summary>
-    /// Interaction logic for uConAddEmployee.xaml
+    /// Interaction logic for uConChangeInSalary.xaml
     /// </summary>
-    public partial class uConAddEmployee : UserControl
+    public partial class uConChangeInSalary : UserControl
     {
-        public uConAddEmployee()
+        public uConChangeInSalary()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Content = new uConListEmployee();
-        }
-
-        private void btnName_Click(object sender, RoutedEventArgs e)
-        {
-            TabConAddEmployee.SelectedIndex = 1;
         }
     }
 }

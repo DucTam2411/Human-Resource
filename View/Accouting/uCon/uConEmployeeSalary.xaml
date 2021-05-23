@@ -6,13 +6,14 @@
     xmlns:local="clr-namespace:HRMS.Accouting.uCon"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="740"
+    Width="auto"
     Height="auto"
     Background="Transparent"
     mc:Ignorable="d">
 
 
-    <Grid Margin="0,20,0,0">
+
+    <Grid Margin="0,0,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
@@ -35,7 +36,8 @@
             Margin="0,0,49.4,217.8"
             VerticalAlignment="Bottom"
             Background="Transparent"
-            BorderThickness="0">
+            BorderThickness="0"
+            Click="Button_Click">
 
             <materialDesign:PackIcon
                 Width="40"
@@ -48,7 +50,7 @@
         <DockPanel
             Grid.Row="0"
             Grid.Column="1"
-            Margin="0,0,0,0">
+            Margin="0,20,0,0">
 
 
 

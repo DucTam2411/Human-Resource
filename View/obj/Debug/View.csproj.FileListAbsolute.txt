@@ -110,3 +110,7 @@ D:\Human Resource\View\obj\Debug\Accouting\uCon\uConRequestBoard.g.cs
 D:\Human Resource\View\obj\Debug\Accouting\uCon\uConRequestBoard.baml
 D:\Human Resource\View\obj\Debug\HR\uCon\uConDetailTimeKeeping.g.cs
 D:\Human Resource\View\obj\Debug\HR\uCon\uConDetailTimeKeeping.baml
+D:\Human Resource\View\obj\Debug\Accouting\uCon\uConChangeInSalary.g.cs
+D:\Human Resource\View\obj\Debug\Accouting\uCon\uConChangeInSalary.baml
+D:\Human Resource\View\obj\Debug\Accouting\uCon\uConMainDashboard.g.cs
+D:\Human Resource\View\obj\Debug\Accouting\uCon\uConMainDashboard.baml

@@ -22,7 +22,7 @@
 
     <ContentControl x:Name="contentControlMain" Height="600">
         <Grid
-            Margin="0,20,0,0"
+            Margin="0,0,0,0"
             Background="Transparent"
             Loaded="Grid_Loaded">
 
@@ -31,7 +31,6 @@
                 <RowDefinition Height="350" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
-
 
 
 
@@ -80,7 +79,7 @@
 
             <Grid Grid.Row="1">
                 <DataGrid
-                    x:Name="dtgvA"
+                    x:Name="dtgvEmployess"
                     Margin="0,0,-0.4,0"
                     VerticalAlignment="Top"
                     AllowDrop="True"
@@ -114,7 +113,7 @@
 
                         <DataGridTextColumn
                             Width="220"
-                            Binding="{Binding Name}"
+                            Binding="{Binding NAME}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Name" />
@@ -123,7 +122,7 @@
 
                         <materialDesign:DataGridTextColumn
                             Width="120"
-                            Binding="{Binding Department}"
+                            Binding="{Binding DEPARTMENT.DEPT_NAME}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Department" />
@@ -131,7 +130,7 @@
 
                         <materialDesign:DataGridTextColumn
                             Width="100"
-                            Binding="{Binding Gender}"
+                            Binding="{Binding GENDER}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Gender" />
@@ -141,7 +140,7 @@
 
                         <DataGridTextColumn
                             Width="130"
-                            Binding="{Binding Citizenship}"
+                            Binding="{Binding CITIZENSHIP}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Citizenship" />
@@ -149,11 +148,10 @@
 
                         <DataGridTextColumn
                             Width="200"
-                            Binding="{Binding Role}"
+                            Binding="{Binding ROLE.ROLE_NAME}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Role" />
-
 
 
                     </DataGrid.Columns>

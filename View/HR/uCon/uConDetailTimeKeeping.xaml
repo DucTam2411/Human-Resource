@@ -22,7 +22,6 @@
         </Grid.RowDefinitions>
 
 
-
         <Button
             Grid.RowSpan="3"
             Height="95"
