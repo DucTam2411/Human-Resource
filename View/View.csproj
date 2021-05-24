@@ -114,6 +114,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Employee\uCon\uConEmployeeTimekeepingDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Employee\uCon\uConSideBarEmployee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -181,6 +185,9 @@
     </Compile>
     <Compile Include="Employee\uCon\uConEmployeeTimekeeping.xaml.cs">
       <DependentUpon>uConEmployeeTimekeeping.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\uCon\uConEmployeeTimekeepingDetail.xaml.cs">
+      <DependentUpon>uConEmployeeTimekeepingDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="Employee\uCon\uConSideBarEmployee.xaml.cs">
       <DependentUpon>uConSideBarEmployee.xaml</DependentUpon>

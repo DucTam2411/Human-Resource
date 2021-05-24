@@ -6,122 +6,124 @@
     xmlns:local="clr-namespace:HRMS.Employee.uCon"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="880"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="WrapText" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
     <ContentControl x:Name="contentControlMain" Height="600">
         <Grid Margin="0,20,0,0">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="60" />
-                <RowDefinition Height="520" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <ComboBox
-                Grid.Row="0"
-                Grid.Column="1"
-                Width="300"
-                FontSize="24" />
+            <StackPanel Margin="60,0,0,0" Orientation="Horizontal">
 
-            <TabControl
-                Grid.Row="3"
-                Grid.Column="1"
-                Margin="10,0,0,0"
-                materialDesign:ColorZoneAssist.Mode="Standard"
-                materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                Background="Transparent"
-                Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
-                TabStripPlacement="Right">
+                <materialDesign:PackIcon
+                    Width="30"
+                    Height="30"
+                    VerticalAlignment="Center"
+                    Foreground="DimGray"
+                    Kind="Search" />
+                <TextBox
+                    Width="370"
+                    Margin="5,0,0,0"
+                    materialDesign:HintAssist.Hint="Search "
+                    FontSize="18">
+                    <TextBox.Text>
+                        <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules />
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
-                <TabItem
-                    Background="Transparent"
-                    Header="{materialDesign:PackIcon Kind=WorkOutline,
-                                                     Size=24}"
-                    Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                <ComboBox
+                    Name="cbSearch"
+                    Margin="8,0,80,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="DimGray">
+                    <ComboBoxItem Content="ID" />
+                    <ComboBoxItem Content="Month" IsSelected="True" />
+                    <ComboBoxItem Content="Day Start" />
+                    <ComboBoxItem Content="Day End" />
+                    <ComboBoxItem Content="Total Work Day" />
+                    <ComboBoxItem Content="Total Overtime Day" />
+                    <ComboBoxItem Content="Total Absent Day" />
+                </ComboBox>
+            </StackPanel>
 
-                    <StackPanel>
-                        <TextBlock
-                            Foreground="DimGray"
-                            Style="{StaticResource MaterialDesignButtonTextBlock}"
-                            Text="Workdays" />
-                        <ListBox
-                            Width="500"
-                            Height="502"
-                            Margin="10,0,0,0"
-                            BorderBrush="DimGray"
-                            BorderThickness="1"
-                            IsEnabled="{Binding IsChecked, ElementName=EnableListBox}">
-                            <TextBlock Text="1/1/2020" />
-                            <TextBlock Text="2/1/2020" />
-                            <TextBlock Text="3/1/2020" />
-                            <TextBlock Text="3/1/2020" />
-                            <TextBlock Text="3/1/2020" />
-                            <TextBlock Text="3/1/2020" />
-                            <TextBlock Text="3/1/2020" />
-                            <TextBlock Text="4/1/2020" />
-                            <TextBlock Text="5/1/2020" />
-                            <TextBlock Text="8/1/2020" />
-                            <TextBlock Text="15/1/2020" />
-                            <TextBlock Text="15/1/2020" />
-                            <TextBlock Text="15/1/2020" />
-                            <TextBlock Text="15/1/2020" />
-                            <TextBlock Text="15/1/2020" />
-                        </ListBox>
-                    </StackPanel>
-                </TabItem>
-
-                <TabItem
-                    Background="Transparent"
-                    Header="{materialDesign:PackIcon Kind=UmbrellaOutline,
-                                                     Size=24}"
-                    Style="{StaticResource MaterialDesignNavigationRailTabItem}">
-                    <StackPanel>
-                        <TextBlock                            
-                            Foreground="DimGray"
-                            Style="{StaticResource MaterialDesignButtonTextBlock}"
-                            Text="Absent days" />
-                        <ListBox
-                            Height="502"
-                            Width="500"
-                            Margin="10,0,0,0"
-                            BorderBrush="DimGray"
-                            BorderThickness="1"
-                            IsEnabled="{Binding IsChecked, ElementName=EnableListBox}">
-                            <TextBlock Text="8/1/2020" />
-                            <TextBlock Text="15/1/2020" />
-                            <TextBlock Text="15/1/2020" />
-                            <TextBlock Text="15/1/2020" />
-                            <TextBlock Text="15/1/2020" />
-                            <TextBlock Text="15/1/2020" />
-                        </ListBox>
-                    </StackPanel>
-                </TabItem>
-
-                <TabItem
-                    Background="Transparent"
-                    Header="{materialDesign:PackIcon Kind=Table,
-                                                     Size=24}"
-                    Style="{StaticResource MaterialDesignNavigationRailTabItem}">
-                    <StackPanel>
-                        <TextBlock                     
-                            Foreground="DimGray"
-                            Style="{StaticResource MaterialDesignButtonTextBlock}"
-                            Text="Overtime days" />
-                        <ListBox
-                            Width="500"
-                            Height="502"
-                            Margin="10,0,0,0"
-                            BorderBrush="DimGray"
-                            BorderThickness="1"
-                            IsEnabled="{Binding IsChecked, ElementName=EnableListBox}">
-                            <TextBlock Text="8/1/2020" />
-                            <TextBlock Text="15/1/2020" />
-                            <TextBlock Text="15/1/2020" />
-                            <TextBlock Text="15/1/2020" />
-                            <TextBlock Text="15/1/2020" />
-                            <TextBlock Text="15/1/2020" />
-                        </ListBox>
-                    </StackPanel>
-                </TabItem>
-            </TabControl>
+            <DataGrid
+                x:Name="dgTimekeeping"
+                Grid.Row="1"
+                Margin="0,0,-0.4,0"
+                VerticalAlignment="Top"
+                AllowDrop="True"
+                AutoGenerateColumns="False"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                CanUserReorderColumns="False"
+                CanUserResizeColumns="True"
+                IsReadOnly="True"
+                ItemsSource="{Binding TimekeepingList}"
+                SelectedItem="{Binding SelectedItem}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="70"
+                        Binding="{Binding ID}"
+                        ElementStyle="{StaticResource WrapText}"
+                        Foreground="DarkSlateGray"
+                        Header="ID" />
+                    <DataGridTextColumn
+                        Width="100"
+                        Binding="{Binding MONTH}"
+                        ElementStyle="{StaticResource WrapText}"
+                        Foreground="DarkSlateGray"
+                        Header="Month" />
+                    <DataGridTextColumn
+                        Width="100"
+                        Binding="{Binding DAY_START}"
+                        ElementStyle="{StaticResource WrapText}"
+                        Foreground="DarkSlateGray"
+                        Header="Day Start" />
+                    <DataGridTextColumn
+                        Width="100"
+                        Binding="{Binding DAY_END}"
+                        ElementStyle="{StaticResource WrapText}"
+                        Foreground="DarkSlateGray"
+                        Header="Day End" />
+                    <DataGridTextColumn
+                        Width="150"
+                        Binding="{Binding TOTAL_WORK_DAY}"
+                        ElementStyle="{StaticResource WrapText}"
+                        Foreground="DarkSlateGray"
+                        Header="Total Work Day" />
+                    <DataGridTextColumn
+                        Width="150"
+                        Binding="{Binding TOTAL_OVERTIME_DAY}"
+                        ElementStyle="{StaticResource WrapText}"
+                        Foreground="DarkSlateGray"
+                        Header="Total Overtime Day" />
+                    <DataGridTextColumn
+                        Width="150"
+                        Binding="{Binding TOTAL_ABSENT_DAY}"
+                        ElementStyle="{StaticResource WrapText}"
+                        Foreground="DarkSlateGray"
+                        Header="Total Absent Day" />
+                    <DataGridTextColumn
+                        Width="100"
+                        Binding="{Binding IS_NOTE}"
+                        ElementStyle="{StaticResource WrapText}"
+                        Foreground="DarkSlateGray"
+                        Header="Note" />
+                </DataGrid.Columns>
+            </DataGrid>
 
         </Grid>
     </ContentControl>

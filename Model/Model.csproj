@@ -103,6 +103,7 @@
     <Compile Include="TIMEKEEPING.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="TimekeepingData.cs" />
     <Compile Include="TIMEKEEPING_DETAIL.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

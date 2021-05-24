@@ -27,85 +27,169 @@
                 Width="300"
                 FontSize="24" />
 
-            <DockPanel
-                Grid.Row="1"
-                Margin="80,0,80,0">
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <DockPanel
+                    Grid.Column="0"
+                    Margin="20"
+                    HorizontalAlignment="Center">
+                    <StackPanel DockPanel.Dock="Left">
+                        <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="CalendarDay" />
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Total work day in a month"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Number Of Work Day"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding NUMBER_OF_WORK_DAY, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        </StackPanel>
 
-                <StackPanel Margin="10" DockPanel.Dock="Left">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon
-                            Width="30"
-                            Height="30"
-                            VerticalAlignment="Center"
-                            Foreground="DimGray"
-                            Kind="User" />
-                        <TextBox
-                            x:Name="tbName"
-                            Width="200"
-                            Margin="8,0,0,0"
-                            materialDesign:HintAssist.HelperText="Employee full name."
-                            materialDesign:HintAssist.Hint="Name"
-                            FontSize="18"
-                            IsReadOnly="True"
-                            Text="{Binding SelectedItem.EMPLOYEE.NAME, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
-                            <!--<TextBox.Text>
-                            <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
-                                <Binding.ValidationRules />
-                            </Binding>
-                        </TextBox.Text>-->
-                        </TextBox>
+                        <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="Calendar" />
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Total overtime day in a month"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Number of Overtime Day"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding NUMBER_OF_OVERTIME_DAY, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        </StackPanel>
+
+                        <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="Overboard" />
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Overtime salary in a day"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Overtime salary"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding OVERTIME_SALARY, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        </StackPanel>
+
+                        <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="MoneyOff" />
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Total absent day in a month"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Number Of Absent Day"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding NUMBER_OF_ABSENT_DAY, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        </StackPanel>
                     </StackPanel>
+                </DockPanel>
 
-                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-                        <materialDesign:PackIcon
-                            Width="30"
-                            Height="30"
-                            VerticalAlignment="Center"
-                            Foreground="DimGray"
-                            Kind="IdCard" />
-                        <TextBox
-                            x:Name="tbId"
-                            Width="200"
-                            Margin="8,0,0,0"
-                            materialDesign:HintAssist.HelperText="ID Card number"
-                            materialDesign:HintAssist.Hint="ID"
-                            FontSize="18"
-                            IsReadOnly="True"
-                            Text="{Binding SelectedItem.ID, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
-                    </StackPanel>
-
-                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-                        <materialDesign:PackIcon
-                            Width="30"
-                            Height="30"
-                            VerticalAlignment="Center"
-                            Foreground="DimGray"
-                            Kind="DateRange" />
-                        <TextBox
-                            x:Name="tb1Id"
-                            Width="200"
-                            Margin="8,0,0,0"
-                            materialDesign:HintAssist.HelperText="ID Card number"
-                            materialDesign:HintAssist.Hint="Date birth"
-                            FontSize="18"
-                            IsReadOnly="True"
-                            Text="{Binding SelectedItem.EMPLOYEE.BIRTH_DATE, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
-                    </StackPanel>
-                </StackPanel>
-
-                <Button
+                <DockPanel
                     Grid.Column="1"
-                    Width="180"
-                    Height="180"
-                    Margin="20,10,40,0"
-                    DockPanel.Dock="Right">
-                    <materialDesign:PackIcon
-                        Width="50"
-                        Height="50"
-                        Kind="ImageAdd" />
-                </Button>
+                    Margin="20"
+                    HorizontalAlignment="Center">
+                    <StackPanel DockPanel.Dock="Left">
+                        <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="Numbers" />
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Coefficient"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Coefficient"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding COEFFICIENT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        </StackPanel>
 
-            </DockPanel>
+                        <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="DecimalIncrease" />
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Basic Wage in day"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Basic Wage"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding WAGE, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        </StackPanel>
+
+                        <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="Add" />
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Welfare"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Welfare"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding WELFARE, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        </StackPanel>
+
+                        <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="Present" />
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Bonus"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Bonus"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding BONUS, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        </StackPanel>
+                    </StackPanel>
+                </DockPanel>
+            </Grid>
 
             <Separator
                 Grid.Row="2"
@@ -114,272 +198,100 @@
                 BorderThickness="15"
                 Opacity="1" />
 
-            <TabControl
-                Grid.Row="3"
-                Margin="10,10,0,-5"
-                materialDesign:ColorZoneAssist.Mode="Standard"
-                materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                Background="Transparent"
-                Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
-                TabStripPlacement="Right">
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <DockPanel
+                    Grid.Column="0"
+                    Margin="20"
+                    HorizontalAlignment="Center">
+                    <StackPanel DockPanel.Dock="Left">
+                        <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="Globe" />
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Health Insurance Tax"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Health Insurance"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding HEALTH_INSURANCE, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        </StackPanel>
 
-                <TabItem
-                    Background="Transparent"
-                    Header="{materialDesign:PackIcon Kind=CoinsMinusOutline,
-                                                     Size=24}"
-                    Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                        <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="HealthPotion" />
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Social Insurance Tax"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Social Insurance"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding SOCIAL_INSURANCE, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        </StackPanel>
+                    </StackPanel>
+                </DockPanel>
 
-                    <Grid>
-                        <DockPanel Margin="20" HorizontalAlignment="Center">
-                            <StackPanel DockPanel.Dock="Left">
-                                <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
-                                    <materialDesign:PackIcon
-                                        Width="30"
-                                        Height="30"
-                                        VerticalAlignment="Center"
-                                        Foreground="DimGray"
-                                        Kind="Globe" />
-                                    <TextBox
-                                        Width="250"
-                                        Margin="8,0,0,0"
-                                        materialDesign:HintAssist.HelperText="Health Insurance Tax"
-                                        materialDesign:HintAssist.HelperTextFontSize="12"
-                                        materialDesign:HintAssist.Hint="Health Insurance"
-                                        FontSize="18"
-                                        IsReadOnly="True"
-                                        Text="{Binding HEALTH_INSURANCE, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                                </StackPanel>
+                <DockPanel Grid.Column="1" Margin="20"  HorizontalAlignment="Center">
+                    <StackPanel DockPanel.Dock="Left">
+                        <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="MoneyOff" />
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Income Tax"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Income Tax"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding TAX, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        </StackPanel>
 
-                                <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-                                    <materialDesign:PackIcon
-                                        Width="30"
-                                        Height="30"
-                                        VerticalAlignment="Center"
-                                        Foreground="DimGray"
-                                        Kind="HealthPotion" />
-                                    <TextBox
-                                        Width="250"
-                                        Margin="8,0,0,0"
-                                        materialDesign:HintAssist.HelperText="Social Insurance Tax"
-                                        materialDesign:HintAssist.HelperTextFontSize="12"
-                                        materialDesign:HintAssist.Hint="Social Insurance"
-                                        FontSize="18"
-                                        IsReadOnly="True"
-                                        Text="{Binding SOCIAL_INSURANCE, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                                </StackPanel>
-
-                                <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-                                    <materialDesign:PackIcon
-                                        Width="30"
-                                        Height="30"
-                                        VerticalAlignment="Center"
-                                        Foreground="DimGray"
-                                        Kind="MoneyOff" />
-                                    <TextBox
-                                        Width="250"
-                                        Margin="8,0,0,0"
-                                        materialDesign:HintAssist.HelperText="Income Tax"
-                                        materialDesign:HintAssist.HelperTextFontSize="12"
-                                        materialDesign:HintAssist.Hint="Income Tax"
-                                        FontSize="18"
-                                        IsReadOnly="True"
-                                        Text="{Binding TAX, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                                </StackPanel>
-
-                                <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-                                    <materialDesign:PackIcon
-                                        Width="30"
-                                        Height="30"
-                                        VerticalAlignment="Center"
-                                        Foreground="DimGray"
-                                        Kind="MoneyOff" />
-                                    <TextBox
-                                        Width="250"
-                                        Margin="8,0,0,0"
-                                        materialDesign:HintAssist.HelperText="Total tax in a month"
-                                        materialDesign:HintAssist.HelperTextFontSize="12"
-                                        materialDesign:HintAssist.Hint="Total Tax"
-                                        FontSize="18"
-                                        IsReadOnly="True"
-                                        Text="{Binding TOTAL_TAX, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                                </StackPanel>
-                            </StackPanel>
-                        </DockPanel>
-                    </Grid>
-                </TabItem>
-
-
-                <TabItem
-                    Background="Transparent"
-                    Header="{materialDesign:PackIcon Kind=CoinsPlusOutline,
-                                                     Size=24}"
-                    Style="{StaticResource MaterialDesignNavigationRailTabItem}">
-                    <Grid>
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <DockPanel Grid.Column="0" Margin="20" HorizontalAlignment="Center">
-                            <StackPanel DockPanel.Dock="Left">
-                                <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
-                                    <materialDesign:PackIcon
-                                        Width="30"
-                                        Height="30"
-                                        VerticalAlignment="Center"
-                                        Foreground="DimGray"
-                                        Kind="CalendarDay" />
-                                    <TextBox
-                                        Width="250"
-                                        Margin="8,0,0,0"
-                                        materialDesign:HintAssist.HelperText="Total work day in a month"
-                                        materialDesign:HintAssist.HelperTextFontSize="12"
-                                        materialDesign:HintAssist.Hint="Number Of Work Day"
-                                        FontSize="18"
-                                        IsReadOnly="True"
-                                        Text="{Binding NUMBER_OF_WORK_DAY, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                                </StackPanel>
-
-                                <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-                                    <materialDesign:PackIcon
-                                        Width="30"
-                                        Height="30"
-                                        VerticalAlignment="Center"
-                                        Foreground="DimGray"
-                                        Kind="Calendar" />
-                                    <TextBox
-                                        Width="250"
-                                        Margin="8,0,0,0"
-                                        materialDesign:HintAssist.HelperText="Total overtime day in a month"
-                                        materialDesign:HintAssist.HelperTextFontSize="12"
-                                        materialDesign:HintAssist.Hint="Number of Overtime Day"
-                                        FontSize="18"
-                                        IsReadOnly="True"
-                                        Text="{Binding NUMBER_OF_OVERTIME_DAY, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                                </StackPanel>
-
-                                <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-                                    <materialDesign:PackIcon
-                                        Width="30"
-                                        Height="30"
-                                        VerticalAlignment="Center"
-                                        Foreground="DimGray"
-                                        Kind="Overboard" />
-                                    <TextBox
-                                        Width="250"
-                                        Margin="8,0,0,0"
-                                        materialDesign:HintAssist.HelperText="Overtime salary in a day"
-                                        materialDesign:HintAssist.HelperTextFontSize="12"
-                                        materialDesign:HintAssist.Hint="Overtime salary"
-                                        FontSize="18"
-                                        IsReadOnly="True"
-                                        Text="{Binding OVERTIME_SALARY, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                                </StackPanel>
-
-                                <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-                                    <materialDesign:PackIcon
-                                        Width="30"
-                                        Height="30"
-                                        VerticalAlignment="Center"
-                                        Foreground="DimGray"
-                                        Kind="MoneyOff" />
-                                    <TextBox
-                                        Width="250"
-                                        Margin="8,0,0,0"
-                                        materialDesign:HintAssist.HelperText="Total absent day in a month"
-                                        materialDesign:HintAssist.HelperTextFontSize="12"
-                                        materialDesign:HintAssist.Hint="Number Of Absent Day"
-                                        FontSize="18"
-                                        IsReadOnly="True"
-                                        Text="{Binding NUMBER_OF_ABSENT_DAY, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                                </StackPanel>
-                            </StackPanel>
-                        </DockPanel>
-
-                        <DockPanel Grid.Column="1" Margin="20" HorizontalAlignment="Center">
-                            <StackPanel DockPanel.Dock="Left">
-                                <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
-                                    <materialDesign:PackIcon
-                                        Width="30"
-                                        Height="30"
-                                        VerticalAlignment="Center"
-                                        Foreground="DimGray"
-                                        Kind="Numbers" />
-                                    <TextBox
-                                        Width="250"
-                                        Margin="8,0,0,0"
-                                        materialDesign:HintAssist.HelperText="Coefficient"
-                                        materialDesign:HintAssist.HelperTextFontSize="12"
-                                        materialDesign:HintAssist.Hint="Coefficient"
-                                        FontSize="18"
-                                        IsReadOnly="True"
-                                        Text="{Binding COEFFICIENT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                                </StackPanel>
-
-                                <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-                                    <materialDesign:PackIcon
-                                        Width="30"
-                                        Height="30"
-                                        VerticalAlignment="Center"
-                                        Foreground="DimGray"
-                                        Kind="DecimalIncrease" />
-                                    <TextBox
-                                        Width="250"
-                                        Margin="8,0,0,0"
-                                        materialDesign:HintAssist.HelperText="Basic Wage in day"
-                                        materialDesign:HintAssist.HelperTextFontSize="12"
-                                        materialDesign:HintAssist.Hint="Basic Wage"
-                                        FontSize="18"
-                                        IsReadOnly="True"
-                                        Text="{Binding WAGE, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                                </StackPanel>
-
-                                <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-                                    <materialDesign:PackIcon
-                                        Width="30"
-                                        Height="30"
-                                        VerticalAlignment="Center"
-                                        Foreground="DimGray"
-                                        Kind="Add" />
-                                    <TextBox
-                                        Width="250"
-                                        Margin="8,0,0,0"
-                                        materialDesign:HintAssist.HelperText="Welfare"
-                                        materialDesign:HintAssist.HelperTextFontSize="12"
-                                        materialDesign:HintAssist.Hint="Welfare"
-                                        FontSize="18"
-                                        IsReadOnly="True"
-                                        Text="{Binding WELFARE, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                                </StackPanel>
-
-                                <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-                                    <materialDesign:PackIcon
-                                        Width="30"
-                                        Height="30"
-                                        VerticalAlignment="Center"
-                                        Foreground="DimGray"
-                                        Kind="Present" />
-                                    <TextBox
-                                        Width="250"
-                                        Margin="8,0,0,0"
-                                        materialDesign:HintAssist.HelperText="Bonus"
-                                        materialDesign:HintAssist.HelperTextFontSize="12"
-                                        materialDesign:HintAssist.Hint="Bonus"
-                                        FontSize="18"
-                                        IsReadOnly="True"
-                                        Text="{Binding BONUS, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                                </StackPanel>
-                            </StackPanel>
-                        </DockPanel>
-                    </Grid>
-                </TabItem>
-            </TabControl>
+                        <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="MoneyOff" />
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Total tax in a month"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Total Tax"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding TOTAL_TAX, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        </StackPanel>
+                    </StackPanel>
+                </DockPanel>
+            </Grid>
 
             <StackPanel
                 Grid.Row="5"
                 Grid.Column="1"
-                Margin="0,0,0,0"
-                HorizontalAlignment="Right"
+                Margin="0,40,20,0"
+                HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
                 Orientation="Horizontal">
                 <materialDesign:PackIcon

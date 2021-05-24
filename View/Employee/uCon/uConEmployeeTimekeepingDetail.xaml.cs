@@ -1,8 +1,5 @@
-﻿using MaterialDesignThemes.Wpf;
-using Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,17 +16,12 @@ using System.Windows.Shapes;
 namespace HRMS.Employee.uCon
 {
     /// <summary>
-    /// Interaction logic for uConEmployeeTimekeeping.xaml
+    /// Interaction logic for uConEmployeeTimekeepingDetail.xaml
     /// </summary>
-    /// 
-    
-    public partial class uConEmployeeTimekeeping : UserControl
+    public partial class uConEmployeeTimekeepingDetail : UserControl
     {
-        private ObservableCollection<TimekeepingData> TimekeepingList;
-
-        public uConEmployeeTimekeeping()
+        public uConEmployeeTimekeepingDetail()
         {
-            TimekeepingList = new ObservableCollection<TimekeepingData>();
             InitializeComponent();
         }
     }
