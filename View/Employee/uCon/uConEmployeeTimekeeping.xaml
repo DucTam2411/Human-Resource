@@ -10,11 +10,6 @@
     <ContentControl x:Name="contentControlMain" Height="600">
         <Grid Margin="0,20,0,0">
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="570" />
-            </Grid.ColumnDefinitions>
-
             <Grid.RowDefinitions>
                 <RowDefinition Height="60" />
                 <RowDefinition Height="520" />
@@ -25,20 +20,6 @@
                 Grid.Column="1"
                 Width="300"
                 FontSize="24" />
-
-            <Button
-                Grid.Row="1"
-                Height="95"
-                Margin="21,0,29,252"
-                VerticalAlignment="Bottom"
-                Background="Transparent"
-                BorderThickness="0">
-                <materialDesign:PackIcon
-                    Width="40"
-                    Height="40"
-                    Foreground="DimGray"
-                    Kind="ArrowBack" />
-            </Button>
 
             <TabControl
                 Grid.Row="3"
@@ -62,6 +43,7 @@
                             Style="{StaticResource MaterialDesignButtonTextBlock}"
                             Text="Workdays" />
                         <ListBox
+                            Width="500"
                             Height="502"
                             Margin="10,0,0,0"
                             BorderBrush="DimGray"
@@ -98,6 +80,7 @@
                             Text="Absent days" />
                         <ListBox
                             Height="502"
+                            Width="500"
                             Margin="10,0,0,0"
                             BorderBrush="DimGray"
                             BorderThickness="1"
@@ -123,6 +106,7 @@
                             Style="{StaticResource MaterialDesignButtonTextBlock}"
                             Text="Overtime days" />
                         <ListBox
+                            Width="500"
                             Height="502"
                             Margin="10,0,0,0"
                             BorderBrush="DimGray"

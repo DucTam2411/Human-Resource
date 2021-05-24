@@ -6,45 +6,23 @@
     xmlns:local="clr-namespace:HRMS.Employee.uCon"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="740"
+    Width="620"
     Height="auto"
     Background="Transparent"
     mc:Ignorable="d">
 
     <Grid Margin="0,20,0,0">
 
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-        </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <Button
-            Grid.Row="2"
-            Height="Auto"
-            Margin="0,-50,49.6,217.8"
-            Background="Transparent"
-            BorderThickness="0">
-
-            <materialDesign:PackIcon
-                Width="40"
-                Height="40"
-                Foreground="DimGray"
-                Kind="ArrowBack" />
-
-        </Button>
 
         <DockPanel
             Grid.Row="0"
-            Grid.Column="1"
-            Margin="0,0,0,0">
+            Margin="0,0,0,10" >
 
             <StackPanel Margin="20" DockPanel.Dock="Left">
 
@@ -250,7 +228,7 @@
 
             </DockPanel>
 
-            <DockPanel Margin="20,20,30,20" HorizontalAlignment="Right">
+            <DockPanel Margin="40,20,30,20" HorizontalAlignment="Left">
 
                 <StackPanel DockPanel.Dock="Left">
 
