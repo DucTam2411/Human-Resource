@@ -16,7 +16,6 @@
     WindowStyle="None"
     mc:Ignorable="d">
 
-
     <Grid MouseDown="Grid_MouseDown">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
@@ -44,13 +43,10 @@
             DockPanel.Dock="Left"
             RoutedUserControlClicked="uConSideBarAccouting_RoutedUserControlClicked" />
 
-
-        <DockPanel Grid.Column="2" Margin="0,-6,26,6">
-
+        <DockPanel Grid.Column="2" Margin="0,0,10,0">
             <ContentControl x:Name="uConMain">
-                <userCon:uConDashboardAccouting />
+                <userCon:uConMainDashBoard />
             </ContentControl>
         </DockPanel>
-
     </Grid>
 </Window>

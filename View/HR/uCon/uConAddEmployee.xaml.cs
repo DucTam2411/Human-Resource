@@ -24,5 +24,15 @@ namespace HRMS.HR.uCon
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Content = new uConListEmployee();
+        }
+
+        private void btnName_Click(object sender, RoutedEventArgs e)
+        {
+            TabConAddEmployee.SelectedIndex = 1;
+        }
     }
 }

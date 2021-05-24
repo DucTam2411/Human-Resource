@@ -157,3 +157,9 @@ D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Employee\uCon\uConEmployeeSalary.baml
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Employee\uCon\uConEmployeeTimekeepingDetail.g.cs
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Employee\uCon\uConEmployeeTimekeepingDetail.baml
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\uCon\uConChangeInSalary.g.cs
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\uCon\uConMainDashBoard.g.cs
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\uCon\uConRequestBoard.g.cs
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\HR\uCon\uConDetailTimeKeeping.g.cs
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\HR\uCon\uConReport.g.cs
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\uCon\uConDashBoard.g.cs

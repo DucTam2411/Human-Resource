@@ -74,7 +74,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Accouting\uCon\uConDashboardAccouting.xaml">
+    <Page Include="Accouting\uCon\uConChangeInSalary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Accouting\uCon\uConDashBoard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -83,6 +87,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Accouting\uCon\uConListEmployeeAccounting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Accouting\uCon\uConRequestBoard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -134,11 +142,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="HR\uCon\uConDetailTimeKeeping.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="HR\uCon\uConListEmployee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="HR\uCon\uConModifyEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HR\uCon\uConReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -149,14 +165,20 @@
     <Compile Include="Accouting\uCon\Accouting_EmployeeWindow.xaml.cs">
       <DependentUpon>Accouting_EmployeeWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Accouting\uCon\uConDashboardAccouting.xaml.cs">
-      <DependentUpon>uConDashboardAccouting.xaml</DependentUpon>
+    <Compile Include="Accouting\uCon\uConChangeInSalary.xaml.cs">
+      <DependentUpon>uConChangeInSalary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Accouting\uCon\uConDashBoard.xaml.cs">
+      <DependentUpon>uConDashBoard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Accouting\uCon\uConEmployeeSalary.xaml.cs">
       <DependentUpon>uConEmployeeSalary.xaml</DependentUpon>
     </Compile>
     <Compile Include="Accouting\uCon\uConListEmployeeAccounting.xaml.cs">
       <DependentUpon>uConListEmployeeAccounting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Accouting\uCon\uConRequestBoard.xaml.cs">
+      <DependentUpon>uConRequestBoard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Accouting\uCon\uConSideBarAccouting.xaml.cs">
       <DependentUpon>uConSideBarAccouting.xaml</DependentUpon>
@@ -201,11 +223,17 @@
     <Compile Include="HR\uCon\uConDashboard.xaml.cs">
       <DependentUpon>uConDashboard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HR\uCon\uConDetailTimeKeeping.xaml.cs">
+      <DependentUpon>uConDetailTimeKeeping.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HR\uCon\uConListEmployee.xaml.cs">
       <DependentUpon>uConListEmployee.xaml</DependentUpon>
     </Compile>
     <Compile Include="HR\uCon\uConModifyEmployee.xaml.cs">
       <DependentUpon>uConModifyEmployee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HR\uCon\uConReport.xaml.cs">
+      <DependentUpon>uConReport.xaml</DependentUpon>
     </Compile>
     <Compile Include="HR\uCon\uConSideBar.xaml.cs">
       <DependentUpon>uConSideBar.xaml</DependentUpon>
