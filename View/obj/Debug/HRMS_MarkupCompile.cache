@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Human Resource\View\obj\Debug\
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\
 HRMS
 none
 false
 DEBUG;TRACE
-D:\Human Resource\View\App.xaml
-111620885328
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\App.xaml
+1924839943
 
-15755279940
-1644635223
-Accouting\uCon\Accouting_EmployeeWindow.xaml;Accouting\uCon\uConDashboardAccouting.xaml;Accouting\uCon\uConEmployeeSalary.xaml;Accouting\uCon\uConListEmployeeAccounting.xaml;Accouting\uCon\uConSideBarAccouting.xaml;HR\uCon\HR_EmployeeWindow.xaml;HR\uCon\uConAddEmployee.xaml;HR\uCon\uConDashboard.xaml;HR\uCon\uConListEmployee.xaml;HR\uCon\uConModifyEmployee.xaml;HR\uCon\uConSideBar.xaml;
+251935908287
+19-68659180
+Accouting\uCon\Accouting_EmployeeWindow.xaml;Accouting\uCon\uConDashboardAccouting.xaml;Accouting\uCon\uConEmployeeSalary.xaml;Accouting\uCon\uConListEmployeeAccounting.xaml;Accouting\uCon\uConSideBarAccouting.xaml;Employee\uCon\EmployeeWindow.xaml;Employee\uCon\uConDashboardEmployee.xaml;Employee\uCon\uConEmployeeInformation.xaml;Employee\uCon\uConEmployeeSalary.xaml;Employee\uCon\uConEmployeeSalary1.xaml;Employee\uCon\uConEmployeeTimekeeping.xaml;Employee\uCon\uConSideBarEmployee.xaml;HR\uCon\HR_EmployeeWindow.xaml;HR\uCon\uConAddEmployee.xaml;HR\uCon\uConDashboard.xaml;HR\uCon\uConListEmployee.xaml;HR\uCon\uConModifyEmployee.xaml;HR\uCon\uConSideBar.xaml;Resource\ResourceXAML.xaml;
 
 False
 

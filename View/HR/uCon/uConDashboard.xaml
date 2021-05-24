@@ -30,12 +30,11 @@
                 Background="DimGray"
                 Opacity="0.3" />
 
-
             <materialDesign:MaterialDateDisplay Focusable="False" Opacity="0.6" />
 
         </StackPanel>
 
-
     </StackPanel>
+
 </UserControl>
 

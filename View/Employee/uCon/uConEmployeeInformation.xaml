@@ -1,0 +1,329 @@
+﻿<UserControl
+    x:Class="HRMS.Employee.uCon.uConEmployeeInformation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:HRMS.Employee.uCon"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="620"
+    Height="auto"
+    Background="Transparent"
+    mc:Ignorable="d">
+
+    <Grid Margin="0,20,0,0">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+
+        <DockPanel
+            Grid.Row="0"
+            Margin="0,0,0,10" >
+
+            <StackPanel Margin="20" DockPanel.Dock="Left">
+
+                <StackPanel Orientation="Horizontal">
+
+                    <materialDesign:PackIcon
+                        Width="30"
+                        Height="30"
+                        VerticalAlignment="Center"
+                        Foreground="DimGray"
+                        Kind="User" />
+                    <TextBox
+                        Width="200"
+                        Margin="8,0,0,0"
+                        materialDesign:HintAssist.HelperText="Employee full name."
+                        materialDesign:HintAssist.Hint="Name"
+                        FontSize="18"
+                        IsReadOnly="True">
+                        <TextBox.Text>
+                            <Binding Path="NAME" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules />
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                </StackPanel>
+
+                <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                        Width="30"
+                        Height="30"
+                        VerticalAlignment="Center"
+                        Foreground="DimGray"
+                        Kind="IdCard" />
+                    <TextBox
+                        Width="200"
+                        Margin="8,0,0,0"
+                        materialDesign:HintAssist.HelperText="ID Card number"
+                        materialDesign:HintAssist.Hint="ID"
+                        FontSize="18"
+                        IsReadOnly="True">
+                        <TextBox.Text>
+                            <Binding Path="EMPLOYEE_ID" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules />
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                </StackPanel>
+
+                <StackPanel Margin="0,40,0,0" Orientation="Horizontal">
+
+                    <materialDesign:PackIcon
+                        Width="30"
+                        Height="30"
+                        VerticalAlignment="Center"
+                        Foreground="DimGray"
+                        Kind="Calendar" />
+                    <TextBox
+                        Width="200"
+                        Margin="8,0,0,0"
+                        materialDesign:HintAssist.Hint="Birthday"
+                        FontSize="18"
+                        IsReadOnly="True">
+                        <TextBox.Text>
+                            <Binding Path="BIRTHDAY" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules />
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+
+            </StackPanel>
+
+            <Button
+                Grid.Column="1"
+                Width="200"
+                Height="200"
+                Margin="20,10,0,0"
+                DockPanel.Dock="Right">
+
+                <materialDesign:PackIcon
+                    Width="50"
+                    Height="50"
+                    Kind="ImageAdd" />
+
+            </Button>
+
+        </DockPanel>
+
+        <Separator
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="0,10,0,0"
+            BorderBrush="Black"
+            BorderThickness="10"
+            Opacity="0.8" />
+
+        <DockPanel
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="0,0,0,0.2">
+
+            <DockPanel Margin="20" HorizontalAlignment="Left">
+
+                <StackPanel DockPanel.Dock="Left">
+
+                    <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+
+                        <materialDesign:PackIcon
+                            Width="30"
+                            Height="30"
+                            VerticalAlignment="Center"
+                            Foreground="DimGray"
+                            Kind="Place" />
+                        <TextBox
+                            Width="200"
+                            Margin="8,0,0,0"
+                            materialDesign:HintAssist.HelperText="In ID Card"
+                            materialDesign:HintAssist.Hint="Birthplace"
+                            FontSize="18"
+                            IsReadOnly="True">
+                            <TextBox.Text>
+                                <Binding Path="BIRTPLACE" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+
+                    </StackPanel>
+
+                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+
+                        <materialDesign:PackIcon
+                            Width="30"
+                            Height="30"
+                            VerticalAlignment="Center"
+                            Foreground="DimGray"
+                            Kind="Globe" />
+                        <TextBox
+                            Width="200"
+                            Margin="8,0,0,0"
+                            materialDesign:HintAssist.Hint="Citizenship"
+                            FontSize="18"
+                            IsReadOnly="true">
+                            <TextBox.Text>
+                                <Binding Path="CITIZENSHIP" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+
+                    </StackPanel>
+
+                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+
+                        <materialDesign:PackIcon
+                            Width="30"
+                            Height="30"
+                            VerticalAlignment="Center"
+                            Foreground="DimGray"
+                            Kind="GenderMaleFemaleVariant" />
+
+                        <TextBox
+                            Width="200"
+                            Margin="8,0,0,0"
+                            materialDesign:HintAssist.Hint="Gender"
+                            FontSize="18"
+                            IsReadOnly="true">
+                            <TextBox.Text>
+                                <Binding Path="GENDER" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+
+                    </StackPanel>
+
+                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+
+                        <materialDesign:PackIcon
+                            Width="30"
+                            Height="30"
+                            VerticalAlignment="Center"
+                            Foreground="DimGray"
+                            Kind="Phone" />
+                        <TextBox
+                            Width="200"
+                            Margin="8,0,0,0"
+                            materialDesign:HintAssist.Hint="Phone Number"
+                            FontSize="18"
+                            IsReadOnly="True">
+                            <TextBox.Text>
+                                <Binding Path="PHONE" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+
+                    </StackPanel>
+
+                </StackPanel>
+
+            </DockPanel>
+
+            <DockPanel Margin="40,20,30,20" HorizontalAlignment="Left">
+
+                <StackPanel DockPanel.Dock="Left">
+
+                    <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+
+                        <materialDesign:PackIcon
+                            Width="30"
+                            Height="30"
+                            VerticalAlignment="Center"
+                            Foreground="DimGray"
+                            Kind="CardAccountDetailsStar" />
+                        <TextBox
+                            Width="200"
+                            Margin="8,0,0,0"
+                            materialDesign:HintAssist.Hint="Position"
+                            FontSize="18"
+                            IsReadOnly="True">
+                            <TextBox.Text>
+                                <Binding Path="POSITION" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+
+                    </StackPanel>
+
+                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+
+                        <materialDesign:PackIcon
+                            Width="30"
+                            Height="30"
+                            VerticalAlignment="Center"
+                            Foreground="DimGray"
+                            Kind="House" />
+                        <TextBox
+                            Width="200"
+                            Margin="8,0,0,0"
+                            materialDesign:HintAssist.HelperText="Department in company"
+                            materialDesign:HintAssist.Hint="Department"
+                            FontSize="18"
+                            IsReadOnly="True">
+                            <TextBox.Text>
+                                <Binding Path="DEPARTMENT" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+
+                    </StackPanel>
+
+                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+
+                        <materialDesign:PackIcon
+                            Width="30"
+                            Height="30"
+                            VerticalAlignment="Center"
+                            Foreground="DimGray"
+                            Kind="Equalizer" />
+                        <TextBox
+                            Width="200"
+                            Margin="8,0,0,0"
+                            materialDesign:HintAssist.Hint="Academic Level"
+                            FontSize="18"
+                            IsReadOnly="true">
+                            <TextBox.Text>
+                                <Binding Path="ACADEMIC_LEVEL" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+
+                        <materialDesign:PackIcon
+                            Width="30"
+                            Height="30"
+                            VerticalAlignment="Center"
+                            Foreground="DimGray"
+                            Kind="Email" />
+
+                        <TextBox
+                            Width="200"
+                            Margin="8,0,0,0"
+                            materialDesign:HintAssist.Hint="Email"
+                            FontSize="18"
+                            IsReadOnly="true">
+                            <TextBox.Text>
+                                <Binding Path="EMAIL" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                </StackPanel>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>

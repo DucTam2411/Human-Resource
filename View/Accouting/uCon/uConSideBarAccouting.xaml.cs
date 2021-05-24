@@ -118,7 +118,5 @@ namespace HRMS.Accouting.uCon
                 }
             }
         }
-
-
     }
 }

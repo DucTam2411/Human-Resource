@@ -4,11 +4,16 @@
 winexe
 C#
 .cs
+<<<<<<< HEAD
 D:\Human Resource\ViewModel\obj\Debug\
+=======
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\ViewModel\obj\Debug\
+>>>>>>> d9e2c2f80125f38959506ab228bff1945b99810c
 ViewModel
 none
 false
 DEBUG;TRACE
+<<<<<<< HEAD
 D:\Human Resource\ViewModel\App.xaml
 11151548125
 
@@ -17,4 +22,14 @@ D:\Human Resource\ViewModel\App.xaml
 MainWindow.xaml;
 
 True
+=======
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\ViewModel\App.xaml
+11151548125
+
+7-1332360795
+17-597776306
+MainWindow.xaml;
+
+False
+>>>>>>> d9e2c2f80125f38959506ab228bff1945b99810c
 

@@ -22,7 +22,27 @@ namespace HRMS.Accouting.uCon
     /// </summary>
     public partial class uConListEmployeeAccounting : UserControl
     {
-        private ObservableCollection<Employee> employees = new ObservableCollection<Employee>();
+        private SalaryData _SelectedItem;
+        public SalaryData SelectedItem
+        {
+            get => _SelectedItem;
+            set
+            {
+                _SelectedItem = value;
+                OnPropertyChanged();
+                if (_SelectedItem != null)
+                {
+                    Index = SelectedItem;
+                }
+            }
+        }
+
+        public SalaryData Index { get; set; }
+
+        private void OnPropertyChanged()
+        {
+            throw new NotImplementedException();
+        }
 
         public uConListEmployeeAccounting()
         {
@@ -31,23 +51,13 @@ namespace HRMS.Accouting.uCon
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            employees.Add(new Employee() { Role = "Quán lý", Citizenship = "Ấn Độ", Department = "Tổ 1", Gender = "Neutral", ID = "11121", Name = "Trần Quân Hoàng" });
-            employees.Add(new Employee() { Role = "Nhân viên văn phòng", Citizenship = "Italy", Department = "Tổ 2", Gender = "Nữ", ID = "11121", Name = "Siêu nhân điện quang" });
-            employees.Add(new Employee() { Role = "Nhân viên công vụ", Citizenship = "sds", Department = "Tổ 3", Gender = "Nam", ID = "11121", Name = "Siêu nhân cuồng phong" });
-            employees.Add(new Employee() { Role = "Giám đốc kỹ thuật", Citizenship = "sds", Department = "dsd", Gender = "Tổ 1", ID = "Nữ", Name = "Gao ồ GAO Ồ" });
-            employees.Add(new Employee() { Role = "ds", Citizenship = "sds", Department = "dsd", Gender = "Tổ 4", ID = "Nam", Name = "Lalaland" });
-            employees.Add(new Employee() { Role = "ds", Citizenship = "sds", Department = "dsd", Gender = "Name", ID = "Nữ", Name = "Tân Phong" });
-            employees.Add(new Employee() { Role = "ds", Citizenship = "sds", Department = "dsd", Gender = "SSDSDS", ID = "Nam", Name = "Gió Lớn" });
-            employees.Add(new Employee() { Role = "ds", Citizenship = "sds", Department = "dsd", Gender = "SSDSDS", ID = "Nam", Name = "Bạch Hổ" });
-            employees.Add(new Employee() { Role = "ds", Citizenship = "sds", Department = "dsd", Gender = "SSDSDS", ID = "Nam", Name = "Thanh Long" });
-            employees.Add(new Employee() { Role = "ds", Citizenship = "sds", Department = "dsd", Gender = "SSDSDS", ID = "Nam", Name = "Huyền Vũ" });
 
-            dtgvA.ItemsSource = employees;
+     
         }
 
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            contentControlMain.Content = new uConEmployeeSalary();
+            contentControlMain.Content = new uConEmployeeSalary(Index);
             contentControlMain.Margin = new Thickness(0, -20, 0, 0);
         }
 
