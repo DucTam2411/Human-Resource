@@ -22,27 +22,9 @@ namespace HRMS.Accouting.uCon
     /// </summary>
     public partial class uConListEmployeeAccounting : UserControl
     {
-        private SalaryData _SelectedItem;
-        public SalaryData SelectedItem
-        {
-            get => _SelectedItem;
-            set
-            {
-                _SelectedItem = value;
-                OnPropertyChanged();
-                if (_SelectedItem != null)
-                {
-                    Index = SelectedItem;
-                }
-            }
-        }
 
         public SalaryData Index { get; set; }
 
-        private void OnPropertyChanged()
-        {
-            throw new NotImplementedException();
-        }
 
         public uConListEmployeeAccounting()
         {
@@ -57,8 +39,7 @@ namespace HRMS.Accouting.uCon
 
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            contentControlMain.Content = new uConEmployeeSalary(Index);
-            contentControlMain.Margin = new Thickness(0, -20, 0, 0);
+            contentControlMain.Content = new uConEmployeeSalary();
         }
 
         private void btnNewEmployee_Click(object sender, RoutedEventArgs e)

@@ -18,7 +18,6 @@
         </Style>
     </UserControl.Resources>
 
-
     <ContentControl x:Name="contentControlMain" Height="600">
         <Grid
             Margin="0,20,0,0"
@@ -31,13 +30,12 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-
-
-
             <Grid Grid.Row="0" Margin="20">
-
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
                 <StackPanel Margin="-20,0,0,0" Orientation="Horizontal">
-
                     <materialDesign:PackIcon
                         Width="30"
                         Height="30"
@@ -45,30 +43,35 @@
                         Foreground="DimGray"
                         Kind="Search" />
                     <TextBox
-                        Width="370"
+                        Width="350"
                         Margin="5,0,0,0"
                         materialDesign:HintAssist.Hint="Search "
-                        FontSize="18">
-                        <TextBox.Text>
-                            <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
-                                <Binding.ValidationRules />
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+                        FontSize="18"
+                        Text="{Binding SEARCH_TEXT, UpdateSourceTrigger=PropertyChanged}" />
 
                     <ComboBox
-                        Margin="8,0,80,0"
+                        Width="140"
+                        Margin="8,0,0,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
+                        DisplayMemberPath="NAME"
                         FontSize="18"
-                        Foreground="DimGray">
-
-
-                        <ComboBoxItem Content="by ID" IsSelected="True" />
-                        <ComboBoxItem Content="by Name" />
-                        <ComboBoxItem Content="by Role" />
+                        Foreground="DimGray"
+                        ItemsSource="{Binding ListType, Mode=TwoWay}"
+                        SelectedValue="{Binding SELECTEDTYPE}">
+                        <ComboBox.ItemContainerStyle>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="IsSelected" Value="{Binding ISSELECTED}" />
+                            </Style>
+                        </ComboBox.ItemContainerStyle>
                     </ComboBox>
+                </StackPanel>
 
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="30,0,0,-0.4"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
                     <materialDesign:PackIcon
                         Width="30"
                         Height="30"
@@ -86,9 +89,9 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontSize="18"
-                        Foreground="DimGray">
-
-
+                        Foreground="DimGray"
+                        ItemsSource="{Binding MONTHLIST, Mode=TwoWay}"
+                        SelectedValue="{Binding SELECTEDMONTH}">
                         <ComboBoxItem Content="5/2021" IsSelected="True" />
                         <ComboBoxItem Content="3/2021" />
                         <ComboBoxItem Content="4/2021" />
@@ -100,7 +103,8 @@
 
             <Grid Grid.Row="1">
                 <DataGrid
-                    x:Name="dtgvA"
+                    x:Name="SalaryDataGrid"
+                    Width="auto"
                     Height="400"
                     Margin="0,0,-0.4,0"
                     VerticalAlignment="Top"
@@ -114,17 +118,17 @@
                     ItemsSource="{Binding SalaryList}"
                     SelectedItem="{Binding SelectedItem}">
 
-                    <DataGrid.Resources>
-                        <Style TargetType="{x:Type DataGridRow}">
-                            <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick" />
-                        </Style>
-                    </DataGrid.Resources>
+                    <DataGrid.InputBindings>
+                        <MouseBinding
+                            Command="{Binding showEmployeeCommand}"
+                            CommandParameter="{Binding ElementName=contentControlMain}"
+                            Gesture="LeftDoubleClick" />
+                    </DataGrid.InputBindings>
 
                     <DataGrid.Columns>
-
                         <DataGridTextColumn
                             Width="90"
-                            Binding="{Binding EMPLOYEE.ID}"
+                            Binding="{Binding EMPLOYEE.EMPLOYEE_ID}"
                             ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                             Foreground="DarkSlateGray"
                             Header="ID" />
@@ -178,10 +182,7 @@
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Salary" />
-
                     </DataGrid.Columns>
-
-
                 </DataGrid>
             </Grid>
         </Grid>
