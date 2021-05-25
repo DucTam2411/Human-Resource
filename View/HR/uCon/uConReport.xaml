@@ -9,7 +9,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Margin="0,20,0,0">
+    <Grid Margin="0,20,0,0" Loaded="Grid_Loaded">
 
         <TabControl
             materialDesign:ColorZoneAssist.Mode="Standard"
@@ -88,7 +88,6 @@
                         <DataGrid
                             x:Name="dtgvEmployees"
                             Grid.ColumnSpan="2"
-                            Height="400"
                             Margin="0,0,40,0"
                             VerticalAlignment="Top"
                             AllowDrop="True"
@@ -97,8 +96,7 @@
                             CanUserDeleteRows="False"
                             CanUserReorderColumns="False"
                             CanUserResizeColumns="True"
-                            IsReadOnly="True"
-                            ItemsSource="{Binding Source=employess}">
+                            IsReadOnly="True">
 
                             <DataGrid.Resources>
                                 <Style TargetType="{x:Type DataGridRow}">
@@ -119,6 +117,7 @@
                                 <DataGridTextColumn
                                     Width="220"
                                     Binding="{Binding NAME}"
+                                    ElementStyle="{StaticResource WrapText}"
                                     Foreground="DarkSlateGray"
                                     Header="Name" />
 
@@ -126,28 +125,32 @@
 
                                 <materialDesign:DataGridTextColumn
                                     Width="100"
-                                    Binding="{Binding DEPARTMENT.DEPT_NAME}"
+                                    Binding="{Binding ROLE.ROLE_ID}"
+                                    ElementStyle="{StaticResource WrapText}"
                                     Foreground="DarkSlateGray"
                                     Header="Workday" />
 
 
                                 <materialDesign:DataGridTextColumn
                                     Width="100"
-                                    Binding="{Binding GENDER}"
+                                    Binding="{Binding ROLE.ROLE_ID}"
+                                    ElementStyle="{StaticResource WrapText}"
                                     Foreground="DarkSlateGray"
                                     Header="Day-off" />
 
 
                                 <DataGridTextColumn
                                     Width="100"
-                                    Binding="{Binding CITIZENSHIP}"
+                                    Binding="{Binding ROLE.ROLE_ID}"
+                                    ElementStyle="{StaticResource WrapText}"
                                     Foreground="DarkSlateGray"
                                     Header="Overtime" />
 
 
                                 <DataGridTextColumn
                                     Width="100"
-                                    Binding="{Binding ROLE.ROLE_NAME}"
+                                    Binding="{Binding ROLE.ROLE_ID}"
+                                    ElementStyle="{StaticResource WrapText}"
                                     Foreground="DarkSlateGray"
                                     Header="Total" />
 

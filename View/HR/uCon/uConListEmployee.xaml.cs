@@ -32,7 +32,7 @@ namespace HRMS.HR.uCon
             var customers = (from customer in HRMSEnities.hrmsEntity.EMPLOYEEs
                              select customer);
 
-            dtgvEmployees.ItemsSource = customers.ToArray();
+            dtgvEmployees.ItemsSource = customers.ToArray();    
         }
 
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)

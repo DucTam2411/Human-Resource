@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using LiveCharts;
 using LiveCharts.Wpf;
+using Model.Database;
 
 namespace HRMS.HR.uCon
 {
@@ -30,6 +31,14 @@ namespace HRMS.HR.uCon
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.Content = new uConDetailTimeKeeping();
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            var customers = (from customer in HRMSEnities.hrmsEntity.EMPLOYEEs
+                             select customer);
+
+            dtgvEmployees.ItemsSource = customers.ToArray();
         }
     }
 }
