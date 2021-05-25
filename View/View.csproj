@@ -114,6 +114,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Director\uConDirector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Director\uConListEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Director\uConSideBarDirector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="HR\uCon\HR_EmployeeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -175,6 +187,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Director\uConDirector.xaml.cs">
+      <DependentUpon>uConDirector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Director\uConListEmployee.xaml.cs">
+      <DependentUpon>uConListEmployee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Director\uConSideBarDirector.xaml.cs">
+      <DependentUpon>uConSideBarDirector.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HR\uCon\HR_EmployeeWindow.xaml.cs">
       <DependentUpon>HR_EmployeeWindow.xaml</DependentUpon>
     </Compile>
@@ -227,9 +248,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Director\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{d5153713-e858-4957-a52e-27d9fa23fa97}</Project>

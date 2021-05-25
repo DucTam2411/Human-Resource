@@ -115,7 +115,7 @@
             <ListBox
                 Width="700"
                 Height="180"
-                Margin="10,0,0,0"
+                Margin="10,0,-0.4,0"
                 BorderBrush="DimGray"
                 BorderThickness="1">
                 <TextBlock Text="1/1/2020" />
