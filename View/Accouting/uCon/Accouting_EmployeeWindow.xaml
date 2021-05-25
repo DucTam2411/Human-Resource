@@ -45,7 +45,7 @@
 
         <DockPanel Grid.Column="2" Margin="0,0,10,0">
             <ContentControl x:Name="uConMain">
-                <userCon:uConMainDashBoard />
+                <userCon:uConDashBoard />
             </ContentControl>
         </DockPanel>
     </Grid>

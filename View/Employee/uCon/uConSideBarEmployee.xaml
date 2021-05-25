@@ -12,13 +12,8 @@
 
         <!--  BackGround  -->
         <Border Background="Transparent" BorderBrush="Black" />
-
-
         <Grid HorizontalAlignment="Left">
-
-
             <Grid.RowDefinitions>
-                <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
@@ -32,11 +27,10 @@
                 HorizontalAlignment="Left"
                 Background="Transparent">
                 <Border Background="Black" CornerRadius="5" />
-
             </Grid>
 
             <Button
-                x:Name="btnHome"
+                x:Name="btnInformation"
                 Grid.Row="0"
                 Width="190"
                 Height="50"
@@ -44,28 +38,24 @@
                 HorizontalAlignment="Left"
                 Background="Transparent"
                 BorderThickness="0"
-                Click="btnHome_Click">
-
+                Click="btn_Click">
                 <StackPanel
                     Margin="-20,0,0,0"
                     HorizontalAlignment="Left"
                     Orientation="Horizontal">
-                    <materialDesign:PackIcon Foreground="White" Kind="ViewDashboard" />
-
+                    <materialDesign:PackIcon Foreground="White" Kind="FolderAccountOutline" />
                     <TextBlock
-                        x:Name="tbHome"
                         Margin="8,-4,0,0"
                         FontFamily="Tw Cen MT"
                         FontSize="22"
                         FontWeight="SemiBold"
                         Foreground="White"
-                        Text="Home         " />
+                        Text="Information" />
                 </StackPanel>
-
             </Button>
 
             <Button
-                x:Name="btnInformation"
+                x:Name="btnTimekeeping"
                 Grid.Row="1"
                 Width="190"
                 Height="50"
@@ -73,41 +63,12 @@
                 HorizontalAlignment="Left"
                 Background="Transparent"
                 BorderThickness="0"
-                Click="btnHome_Click">
-
-                <StackPanel
-                    Margin="-20,0,0,0"
-                    HorizontalAlignment="Left"
-                    Orientation="Horizontal">
-                    <materialDesign:PackIcon Foreground="Black" Kind="FolderAccountOutline" />
-
-                    <TextBlock
-                        Margin="8,-4,0,0"
-                        FontFamily="Tw Cen MT"
-                        FontSize="22"
-                        FontWeight="SemiBold"
-                        Foreground="Black"
-                        Text="Information" />
-                </StackPanel>
-            </Button>
-
-            <Button
-                x:Name="btnTimekeeping"
-                Grid.Row="2"
-                Width="190"
-                Height="50"
-                Margin="0,5,0,0"
-                HorizontalAlignment="Left"
-                Background="Transparent"
-                BorderThickness="0"
-                Click="btnHome_Click">
-
+                Click="btn_Click">
                 <StackPanel
                     Margin="-20,0,0,0"
                     HorizontalAlignment="Left"
                     Orientation="Horizontal">
                     <materialDesign:PackIcon Foreground="Black" Kind="ClockOutline" />
-
                     <TextBlock
                         Margin="8,-4,0,0"
                         FontFamily="Tw Cen MT"
@@ -120,21 +81,19 @@
 
             <Button
                 x:Name="btnSalary"
-                Grid.Row="3"
+                Grid.Row="2"
                 Width="190"
                 Height="50"
                 Margin="0,5,0,0"
                 HorizontalAlignment="Left"
                 Background="Transparent"
                 BorderThickness="0"
-                Click="btnHome_Click">
-
+                Click="btn_Click">
                 <StackPanel
                     Margin="-20,0,0,0"
                     HorizontalAlignment="Left"
                     Orientation="Horizontal">
                     <materialDesign:PackIcon Foreground="Black" Kind="Money" />
-
                     <TextBlock
                         Margin="8,-4,0,0"
                         FontFamily="Tw Cen MT"

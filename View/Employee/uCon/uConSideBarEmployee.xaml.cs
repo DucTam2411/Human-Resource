@@ -23,7 +23,6 @@ namespace HRMS.Employee.uCon
     using ButtonContent = Tuple<TextBlock, PackIcon>;
     public partial class uConSideBarEmployee : UserControl
     {
-        public const string        HOME = "Home         ";
         public const string INFORMATION = "Information";
         public const string TIMEKEEPING = "TimeKeeping";
         public const string      SALARY = "Salary          ";
@@ -40,13 +39,12 @@ namespace HRMS.Employee.uCon
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            buttonPackages.Add(getChildren(btnHome));
             buttonPackages.Add(getChildren(btnInformation));
             buttonPackages.Add(getChildren(btnTimekeeping));
             buttonPackages.Add(getChildren(btnSalary));
         }
 
-        private void btnHome_Click(object sender, RoutedEventArgs e)
+        private void btn_Click(object sender, RoutedEventArgs e)
         {
             int rowIndex = Grid.GetRow((sender as Button));
             MoveCursor(rowIndex);

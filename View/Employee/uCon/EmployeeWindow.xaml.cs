@@ -57,11 +57,6 @@ namespace HRMS.Employee.uCon
                 uConMain.Content = new uConEmployeeSalary();
                 uConMain.Margin = new Thickness(0, 10, 0, 0);
             }
-            else if (str == uConSideBarEmployee.HOME)
-            {
-                uConMain.Content = new uConDashboardEmployee();
-                uConMain.Margin = new Thickness(20, 20, 20, 20);
-            }
         }
 
         private void SideBar_RoutedUserControlClicked(object sender, RoutedEventArgs e)
@@ -90,11 +85,6 @@ namespace HRMS.Employee.uCon
             {
                 uConMain.Content = new uConEmployeeSalary();
                 uConMain.Margin = new Thickness(0, 10, 0, 0);
-            }
-            else if (str == uConSideBarEmployee.HOME)
-            {
-                uConMain.Content = new uConDashboardEmployee();
-                uConMain.Margin = new Thickness(20, 20, 20, 20);
             }
         }
 

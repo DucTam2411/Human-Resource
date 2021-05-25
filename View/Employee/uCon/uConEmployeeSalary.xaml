@@ -19,15 +19,64 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <ComboBox
-                Grid.Row="0"
-                Width="300"
-                FontSize="24" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <DockPanel
+                    Grid.Column="0"
+                    Margin="20"
+                    HorizontalAlignment="Center">
+                    <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+                        <materialDesign:PackIcon
+                            Width="30"
+                            Height="30"
+                            VerticalAlignment="Center"
+                            Foreground="DimGray"
+                            Kind="CalendarAlert" />
+                        <ComboBox
+                            Width="250"
+                            materialDesign:HintAssist.HelperText="The Month Payroll"
+                            materialDesign:HintAssist.HelperTextFontSize="12"
+                            materialDesign:HintAssist.Hint="Month"
+                            FontSize="24"
+                            ItemsSource="{Binding MonthList}" />
+                    </StackPanel>
+                </DockPanel>
 
-            <Grid Grid.Row="1">
+                <DockPanel
+                    Grid.Column="1"
+                    Margin="20"
+                    HorizontalAlignment="Center">
+                    <StackPanel
+                        Margin="0,0,0,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Orientation="Horizontal">
+                        <materialDesign:PackIcon
+                            Width="30"
+                            Height="30"
+                            VerticalAlignment="Center"
+                            Foreground="DimGray"
+                            Kind="Money" />
+                        <TextBox
+                            Width="250"
+                            Margin="8,0,0,0"
+                            materialDesign:HintAssist.HelperText="Total salary in a month"
+                            materialDesign:HintAssist.HelperTextFontSize="12"
+                            materialDesign:HintAssist.Hint="Total Salary"
+                            FontSize="24"
+                            IsReadOnly="True"
+                            Text="{Binding TOTAL_SALARY, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    </StackPanel>
+                </DockPanel>
+            </Grid>
+
+
+            <Grid Grid.Row="1" Margin="0,20,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -193,12 +242,13 @@
 
             <Separator
                 Grid.Row="2"
-                Margin="0,10,0,0"
+                Margin="50,20,0,10"
+                Width="500"
                 BorderBrush="Black"
                 BorderThickness="15"
                 Opacity="1" />
 
-            <Grid Grid.Row="3">
+            <Grid Grid.Row="3" Margin ="0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -246,7 +296,10 @@
                     </StackPanel>
                 </DockPanel>
 
-                <DockPanel Grid.Column="1" Margin="20"  HorizontalAlignment="Center">
+                <DockPanel
+                    Grid.Column="1"
+                    Margin="20"
+                    HorizontalAlignment="Center">
                     <StackPanel DockPanel.Dock="Left">
                         <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
                             <materialDesign:PackIcon
@@ -286,30 +339,6 @@
                     </StackPanel>
                 </DockPanel>
             </Grid>
-
-            <StackPanel
-                Grid.Row="5"
-                Grid.Column="1"
-                Margin="0,40,20,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Bottom"
-                Orientation="Horizontal">
-                <materialDesign:PackIcon
-                    Width="30"
-                    Height="30"
-                    VerticalAlignment="Center"
-                    Foreground="DimGray"
-                    Kind="Money" />
-                <TextBox
-                    Width="300"
-                    Margin="8,0,0,0"
-                    materialDesign:HintAssist.HelperText="Total salary in a month"
-                    materialDesign:HintAssist.HelperTextFontSize="12"
-                    materialDesign:HintAssist.Hint="Total Salary"
-                    FontSize="18"
-                    IsReadOnly="True"
-                    Text="{Binding TOTAL_SALARY, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-            </StackPanel>
         </Grid>
     </ContentControl>
 </UserControl>

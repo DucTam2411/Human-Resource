@@ -28,16 +28,16 @@ namespace HRMS.HR.uCon
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            var customers = (from customer in HRMSEnities.hrmsEntity.EMPLOYEEs
+            var customers = (from customer in HRMSEntity.Ins.DB.EMPLOYEEs
                              select customer);
 
-            dtgvEmployees.ItemsSource = customers.ToArray();
+            dtgvA.ItemsSource = customers.ToArray();
         }
 
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
-            EMPLOYEE employee = (dtgvEmployees.SelectedItem as EMPLOYEE);
+            EMPLOYEE employee = (dtgvA.SelectedItem as EMPLOYEE);
             contentControlMain.Content = new uConModifyEmployee(employee);
         
 

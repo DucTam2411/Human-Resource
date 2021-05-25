@@ -22,7 +22,7 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <StackPanel Margin="60,0,0,0" Orientation="Horizontal">
+            <StackPanel Margin="60,10,0,10" Orientation="Horizontal">
 
                 <materialDesign:PackIcon
                     Width="30"
@@ -44,7 +44,7 @@
 
                 <ComboBox
                     Name="cbSearch"
-                    Margin="8,0,80,0"
+                    Margin="30,0,80,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="18"
@@ -62,7 +62,7 @@
             <DataGrid
                 x:Name="dgTimekeeping"
                 Grid.Row="1"
-                Margin="0,0,-0.4,0"
+                Margin="0,20.4,0,0"
                 VerticalAlignment="Top"
                 AllowDrop="True"
                 AutoGenerateColumns="False"
@@ -75,53 +75,53 @@
                 SelectedItem="{Binding SelectedItem}">
                 <DataGrid.Columns>
                     <DataGridTextColumn
-                        Width="70"
+                        Width="100"
                         Binding="{Binding ID}"
                         ElementStyle="{StaticResource WrapText}"
                         Foreground="DarkSlateGray"
-                        Header="ID" />
+                        Header="ID"/>
                     <DataGridTextColumn
-                        Width="100"
+                        Width="150"
                         Binding="{Binding MONTH}"
                         ElementStyle="{StaticResource WrapText}"
                         Foreground="DarkSlateGray"
-                        Header="Month" />
+                        Header="Month"/>
                     <DataGridTextColumn
-                        Width="100"
+                        Width="120"
                         Binding="{Binding DAY_START}"
                         ElementStyle="{StaticResource WrapText}"
                         Foreground="DarkSlateGray"
-                        Header="Day Start" />
+                        Header="Day Start"/>
                     <DataGridTextColumn
-                        Width="100"
+                        Width="120"
                         Binding="{Binding DAY_END}"
                         ElementStyle="{StaticResource WrapText}"
                         Foreground="DarkSlateGray"
-                        Header="Day End" />
+                        Header="Day End"/>
                     <DataGridTextColumn
-                        Width="150"
+                        Width="180"
                         Binding="{Binding TOTAL_WORK_DAY}"
                         ElementStyle="{StaticResource WrapText}"
                         Foreground="DarkSlateGray"
-                        Header="Total Work Day" />
+                        Header="Total Work Day"/>
                     <DataGridTextColumn
-                        Width="150"
+                        Width="180"
                         Binding="{Binding TOTAL_OVERTIME_DAY}"
                         ElementStyle="{StaticResource WrapText}"
                         Foreground="DarkSlateGray"
-                        Header="Total Overtime Day" />
+                        Header="Total Overtime Day"/>
                     <DataGridTextColumn
-                        Width="150"
+                        Width="180"
                         Binding="{Binding TOTAL_ABSENT_DAY}"
                         ElementStyle="{StaticResource WrapText}"
                         Foreground="DarkSlateGray"
-                        Header="Total Absent Day" />
+                        Header="Total Absent Day"/>
                     <DataGridTextColumn
-                        Width="100"
+                        Width="200"
                         Binding="{Binding IS_NOTE}"
                         ElementStyle="{StaticResource WrapText}"
                         Foreground="DarkSlateGray"
-                        Header="Note" />
+                        Header="Note"/>
                 </DataGrid.Columns>
             </DataGrid>
 

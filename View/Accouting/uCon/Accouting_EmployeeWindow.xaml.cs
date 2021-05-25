@@ -51,7 +51,7 @@ namespace HRMS.Accouting.uCon
             }
             else if (str == uConSideBarAccouting.HOME)
             {
-                uConMain.Content = new uConDashboardAccouting();
+                uConMain.Content = new uConDashBoard();
                 uConMain.Margin = new Thickness(20, 20, 20, 20);
             }
         }

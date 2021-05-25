@@ -32,18 +32,15 @@
                 Height="500"
                 Style="{StaticResource MaterialDesignScrollViewer}">
                 <StackPanel x:Name="StackNewemployee">
-                    <local:uConRequestBoard RoutedUserControlClicked="uConRequestBoard_RoutedUserControlClicked" />
-                    <local:uConRequestBoard RoutedUserControlClicked="uConRequestBoard_RoutedUserControlClicked" />
-                    <local:uConRequestBoard RoutedUserControlClicked="uConRequestBoard_RoutedUserControlClicked" />
-                    <local:uConRequestBoard RoutedUserControlClicked="uConRequestBoard_RoutedUserControlClicked" />
-                    <local:uConRequestBoard RoutedUserControlClicked="uConRequestBoard_RoutedUserControlClicked" />
-                    <local:uConRequestBoard RoutedUserControlClicked="uConRequestBoard_RoutedUserControlClicked" />
-                    <local:uConRequestBoard RoutedUserControlClicked="uConRequestBoard_RoutedUserControlClicked" />
-                    <local:uConRequestBoard RoutedUserControlClicked="uConRequestBoard_RoutedUserControlClicked" />
-                    <local:uConRequestBoard RoutedUserControlClicked="uConRequestBoard_RoutedUserControlClicked" />
-                    <local:uConRequestBoard RoutedUserControlClicked="uConRequestBoard_RoutedUserControlClicked" />
-                    <local:uConRequestBoard RoutedUserControlClicked="uConRequestBoard_RoutedUserControlClicked" />
-                    <local:uConRequestBoard RoutedUserControlClicked="uConRequestBoard_RoutedUserControlClicked" />
+                    <local:uConRequestBoard />
+                    <local:uConRequestBoard />
+                    <local:uConRequestBoard />
+                    <local:uConRequestBoard />
+                    <local:uConRequestBoard />
+                    <local:uConRequestBoard />
+                    <local:uConRequestBoard />
+                    <local:uConRequestBoard />
+                    <local:uConRequestBoard />
                 </StackPanel>
             </ScrollViewer>
 
@@ -62,16 +59,15 @@
                 Height="500"
                 ScrollViewer.CanContentScroll="True">
                 <StackPanel x:Name="StackEmployeeChanges">
-                    <local:uConChangeInSalary RoutedUserControlClicked="uConChangeInSalary_RoutedUserControlClicked" />
-                    <local:uConChangeInSalary RoutedUserControlClicked="uConChangeInSalary_RoutedUserControlClicked" />
-                    <local:uConChangeInSalary RoutedUserControlClicked="uConChangeInSalary_RoutedUserControlClicked" />
-                    <local:uConChangeInSalary RoutedUserControlClicked="uConChangeInSalary_RoutedUserControlClicked" />
-                    <local:uConChangeInSalary RoutedUserControlClicked="uConChangeInSalary_RoutedUserControlClicked" />
-                    <local:uConChangeInSalary RoutedUserControlClicked="uConChangeInSalary_RoutedUserControlClicked" />
-                    <local:uConChangeInSalary RoutedUserControlClicked="uConChangeInSalary_RoutedUserControlClicked" />
-                    <local:uConChangeInSalary RoutedUserControlClicked="uConChangeInSalary_RoutedUserControlClicked" />
-                    <local:uConChangeInSalary RoutedUserControlClicked="uConChangeInSalary_RoutedUserControlClicked" />
-                    <local:uConChangeInSalary RoutedUserControlClicked="uConChangeInSalary_RoutedUserControlClicked" />
+                    <local:uConChangeInSalary />
+                    <local:uConChangeInSalary />
+                    <local:uConChangeInSalary />
+                    <local:uConChangeInSalary />
+                    <local:uConChangeInSalary />
+                    <local:uConChangeInSalary />
+                    <local:uConChangeInSalary />
+                    <local:uConChangeInSalary />
+                    <local:uConChangeInSalary />
                 </StackPanel>
             </ScrollViewer>
         </Grid>

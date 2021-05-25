@@ -73,7 +73,7 @@
 
 
             <Button
-                x:Name="btnInformation"
+                x:Name="btnReport"
                 Grid.Row="1"
                 Width="190"
                 Height="50"

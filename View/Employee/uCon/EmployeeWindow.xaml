@@ -45,7 +45,7 @@
         <DockPanel Grid.Column="2" Margin="0,-6,26,6">
 
             <ContentControl x:Name="uConMain">
-                <userCon:uConDashboardEmployee />
+                <userCon:uConEmployeeInformation />
             </ContentControl>
         </DockPanel>
 

@@ -102,19 +102,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Employee\uCon\uConDashboardEmployee.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Employee\uCon\uConEmployeeInformation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Employee\uCon\uConEmployeeSalary.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Employee\uCon\uConEmployeeSalary1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -193,17 +185,11 @@
     <Compile Include="Employee\uCon\EmployeeWindow.xaml.cs">
       <DependentUpon>EmployeeWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Employee\uCon\uConDashboardEmployee.xaml.cs">
-      <DependentUpon>uConDashboardEmployee.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Employee\uCon\uConEmployeeInformation.xaml.cs">
       <DependentUpon>uConEmployeeInformation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Employee\uCon\uConEmployeeSalary.xaml.cs">
       <DependentUpon>uConEmployeeSalary.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Employee\uCon\uConEmployeeSalary1.xaml.cs">
-      <DependentUpon>uConEmployeeSalary1.xaml</DependentUpon>
     </Compile>
     <Compile Include="Employee\uCon\uConEmployeeTimekeeping.xaml.cs">
       <DependentUpon>uConEmployeeTimekeeping.xaml</DependentUpon>
