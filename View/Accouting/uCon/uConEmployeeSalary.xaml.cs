@@ -23,18 +23,8 @@ namespace HRMS.Accouting.uCon
     /// 
     public partial class uConEmployeeSalary : UserControl
     {
-        private SalaryData _SelectedItem;
-        public SalaryData SelectedItem { get => _SelectedItem ; set { _SelectedItem = value; } }
         public uConEmployeeSalary()
         {
-            InitializeComponent();
-        }
-
-        public uConEmployeeSalary(SalaryData selectedItem)
-        {
-            SelectedItem = new SalaryData();
-            this.SelectedItem = selectedItem;
-            DetailedSalaryViewModel.data = selectedItem; 
             InitializeComponent();
         }
 
@@ -43,10 +33,5 @@ namespace HRMS.Accouting.uCon
             InitializeComponent();
 
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Content = new uConListEmployeeAccounting();
-        }
-
     }
 }

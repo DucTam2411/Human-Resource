@@ -50,17 +50,17 @@
     </Key>
     <Property Name="SALARY_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="EMPLOYEE_ID" Type="int" />
-    <Property Name="BASIC_WAGE" Type="bigint" />
-    <Property Name="OVERTIME_SALARY" Type="bigint" />
+    <Property Name="BASIC_WAGE" Type="money" />
+    <Property Name="OVERTIME_SALARY" Type="money" />
     <Property Name="COEFFICIENT" Type="float" />
-    <Property Name="BONUS" Type="bigint" />
-    <Property Name="WELFARE" Type="bigint" />
+    <Property Name="BONUS" Type="money" />
+    <Property Name="WELFARE" Type="money" />
     <Property Name="TAX" Type="bigint" />
-    <Property Name="SOCIAL_INSURANCE" Type="bigint" />
-    <Property Name="HEALTH_INSURANCE" Type="int" />
+    <Property Name="SOCIAL_INSURANCE" Type="money" />
+    <Property Name="HEALTH_INSURANCE" Type="money" />
     <Property Name="DATE_START" Type="date" />
     <Property Name="DATE_END" Type="date" />
-    <Property Name="TOTAL_SALARY" Type="bigint" />
+    <Property Name="TOTAL_SALARY" Type="money" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -81,6 +81,8 @@
     <Property Name="NUMBER_OF_WORK_DAY" Type="int" />
     <Property Name="NUMBER_OF_ABSENT_DAY" Type="int" />
     <Property Name="NUMBER_OF_OVERTIME_DAY" Type="int" />
+    <Property Name="DATE_START" Type="date" />
+    <Property Name="DATE_END" Type="date" />
   </EntityType>
   <EntityType Name="TIMEKEEPING_DETAIL">
     <Key>
@@ -188,6 +190,37 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="hrmsModelStoreContainer">
     <EntitySet Name="DEPARTMENT" EntityType="Self.DEPARTMENT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EMPLOYEE" EntityType="Self.EMPLOYEE" Schema="dbo" store:Type="Tables" />

@@ -19,10 +19,7 @@
     </UserControl.Resources>
 
     <ContentControl x:Name="contentControlMain" Height="600">
-        <Grid
-            Margin="0,20,0,0"
-            Background="Transparent"
-            Loaded="Grid_Loaded">
+        <Grid Margin="0,20,0,0" Background="Transparent">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
@@ -91,10 +88,21 @@
                         FontSize="18"
                         Foreground="DimGray"
                         ItemsSource="{Binding MONTHLIST, Mode=TwoWay}"
-                        SelectedValue="{Binding SELECTEDMONTH}">
-                        <ComboBoxItem Content="5/2021" IsSelected="True" />
-                        <ComboBoxItem Content="3/2021" />
-                        <ComboBoxItem Content="4/2021" />
+                        SelectedValue="{Binding SELECTMONTHTYPE}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding MONTH}" />
+                                    <TextBlock Text=" / " />
+                                    <TextBlock Text="{Binding YEAR}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                        <ComboBox.ItemContainerStyle>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="IsSelected" Value="{Binding ISSELECTED}" />
+                            </Style>
+                        </ComboBox.ItemContainerStyle>
                     </ComboBox>
                 </StackPanel>
             </Grid>
@@ -104,7 +112,6 @@
             <Grid Grid.Row="1">
                 <DataGrid
                     x:Name="SalaryDataGrid"
-                    Width="auto"
                     Height="400"
                     Margin="0,0,-0.4,0"
                     VerticalAlignment="Top"
@@ -169,12 +176,7 @@
                             Foreground="DarkSlateGray"
                             Header="Date End" />
 
-                        <DataGridTextColumn
-                            Width="150"
-                            Binding="{Binding TIMEKEEPING.NUMBER_OF_WORK_DAY}"
-                            ElementStyle="{StaticResource WrapText}"
-                            Foreground="DarkSlateGray"
-                            Header="Number Of Work" />
+                       
 
                         <DataGridTextColumn
                             Width="100"

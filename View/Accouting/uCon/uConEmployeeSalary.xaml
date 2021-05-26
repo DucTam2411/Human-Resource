@@ -197,7 +197,7 @@
                                 materialDesign:HintAssist.Hint="Coefficient"
                                 FontSize="18"
                                 IsReadOnly="True"
-                                Text="{Binding COFFICIENT, UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding COEFFICIENT, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                     </StackPanel>
                 </DockPanel>

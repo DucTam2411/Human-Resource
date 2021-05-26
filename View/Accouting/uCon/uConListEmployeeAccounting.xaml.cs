@@ -31,20 +31,5 @@ namespace HRMS.Accouting.uCon
             InitializeComponent();
         }
 
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
-        {
-
-     
-        }
-
-        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            contentControlMain.Content = new uConEmployeeSalary();
-        }
-
-        private void btnNewEmployee_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

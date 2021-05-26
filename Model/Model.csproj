@@ -64,8 +64,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BaseViewModel.cs" />
-    <Compile Include="ComboboxModel.cs" />
+    <Compile Include="Database\Accounting\BaseViewModel.cs" />
+    <Compile Include="Database\Accounting\ComboboxModel.cs" />
     <Compile Include="Database\DEPARTMENT.cs">
       <DependentUpon>HRMSEntitiesModel.tt</DependentUpon>
     </Compile>
@@ -96,6 +96,12 @@
     <Compile Include="Database\SALARY.cs">
       <DependentUpon>HRMSEntitiesModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>HRMSEntitiesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\sp_helpdiagrams_Result.cs">
+      <DependentUpon>HRMSEntitiesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\sysdiagram.cs">
       <DependentUpon>HRMSEntitiesModel.tt</DependentUpon>
     </Compile>
@@ -105,9 +111,9 @@
     <Compile Include="Database\TIMEKEEPING_DETAIL.cs">
       <DependentUpon>HRMSEntitiesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="HRMSEntity.cs" />
-    <Compile Include="SalaryData.cs" />
-    <Compile Include="TimekeepingData.cs" />
+    <Compile Include="Database\HRMSEntity.cs" />
+    <Compile Include="Database\Accounting\SalaryData.cs" />
+    <Compile Include="Database\TimekeepingData.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

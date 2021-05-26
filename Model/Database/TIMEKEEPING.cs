@@ -25,6 +25,8 @@ namespace Model.Database
         public Nullable<int> NUMBER_OF_WORK_DAY { get; set; }
         public Nullable<int> NUMBER_OF_ABSENT_DAY { get; set; }
         public Nullable<int> NUMBER_OF_OVERTIME_DAY { get; set; }
+        public Nullable<System.DateTime> DATE_START { get; set; }
+        public Nullable<System.DateTime> DATE_END { get; set; }
     
         public virtual EMPLOYEE EMPLOYEE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

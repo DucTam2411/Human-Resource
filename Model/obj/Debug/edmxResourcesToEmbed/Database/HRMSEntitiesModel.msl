@@ -82,6 +82,8 @@
     <EntitySetMapping Name="TIMEKEEPINGs">
       <EntityTypeMapping TypeName="hrmsModel.TIMEKEEPING">
         <MappingFragment StoreEntitySet="TIMEKEEPING">
+          <ScalarProperty Name="DATE_END" ColumnName="DATE_END" />
+          <ScalarProperty Name="DATE_START" ColumnName="DATE_START" />
           <ScalarProperty Name="TIMEKEEPING_ID" ColumnName="TIMEKEEPING_ID" />
           <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
           <ScalarProperty Name="NUMBER_OF_WORK_DAY" ColumnName="NUMBER_OF_WORK_DAY" />
@@ -101,5 +103,29 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="hrmsModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="hrmsModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="hrmsModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="hrmsModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="hrmsModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="hrmsModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="hrmsModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="hrmsModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="hrmsModel.Store.sp_upgraddiagrams" />
   </EntityContainerMapping>
 </Mapping>
