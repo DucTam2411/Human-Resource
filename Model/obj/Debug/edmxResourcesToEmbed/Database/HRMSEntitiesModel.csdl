@@ -10,13 +10,14 @@
     <NavigationProperty Name="ROOM" Relationship="Self.FK__DEPARTMEN__ROOM___38996AB5" FromRole="DEPARTMENT" ToRole="ROOM" />
     <NavigationProperty Name="EMPLOYEEs" Relationship="Self.FK__EMPLOYEE__DEPT_I__3F466844" FromRole="DEPARTMENT" ToRole="EMPLOYEE" />
     <NavigationProperty Name="ROLEs" Relationship="Self.FK__ROLE__DEPT_ID__3B75D760" FromRole="DEPARTMENT" ToRole="ROLE" />
+    <NavigationProperty Name="ROOMs" Relationship="hrmsModel.FK__ROOM__DEPT_ID__2739D489" FromRole="DEPARTMENT" ToRole="ROOM" />
   </EntityType>
   <EntityType Name="EMPLOYEE">
     <Key>
       <PropertyRef Name="EMPLOYEE_ID" />
     </Key>
     <Property Name="EMPLOYEE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ID" Type="Int32" />
+    <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="AGE" Type="Int32" />
     <Property Name="GENDER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
@@ -54,6 +55,9 @@
     <Property Name="ROOM_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ROOM_NUMBER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="DEPARTMENTs" Relationship="Self.FK__DEPARTMEN__ROOM___38996AB5" FromRole="ROOM" ToRole="DEPARTMENT" />
+    <Property Name="ROOM_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DEPT_ID" Type="Int32" />
+    <NavigationProperty Name="DEPARTMENT" Relationship="hrmsModel.FK__ROOM__DEPT_ID__2739D489" FromRole="ROOM" ToRole="DEPARTMENT" />
   </EntityType>
   <EntityType Name="SALARY">
     <Key>
@@ -277,6 +281,10 @@
       <Parameter Name="new_diagramname" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
+    <AssociationSet Name="FK__ROOM__DEPT_ID__2739D489" Association="hrmsModel.FK__ROOM__DEPT_ID__2739D489">
+      <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
+      <End Role="ROOM" EntitySet="ROOMs" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -289,4 +297,16 @@
     <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
     <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
+  <Association Name="FK__ROOM__DEPT_ID__2739D489">
+    <End Type="hrmsModel.DEPARTMENT" Role="DEPARTMENT" Multiplicity="0..1" />
+    <End Type="hrmsModel.ROOM" Role="ROOM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DEPARTMENT">
+        <PropertyRef Name="DEPT_ID" />
+      </Principal>
+      <Dependent Role="ROOM">
+        <PropertyRef Name="DEPT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

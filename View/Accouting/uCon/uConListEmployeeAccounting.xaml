@@ -134,14 +134,14 @@
 
                     <DataGrid.Columns>
                         <DataGridTextColumn
-                            Width="90"
+                            Width="70"
                             Binding="{Binding EMPLOYEE.EMPLOYEE_ID}"
                             ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                             Foreground="DarkSlateGray"
                             Header="ID" />
 
                         <DataGridTextColumn
-                            Width="220"
+                            Width="180"
                             Binding="{Binding EMPLOYEE.NAME}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
@@ -155,28 +155,25 @@
                             Header="Department" />
 
                         <materialDesign:DataGridTextColumn
-                            Width="100"
+                            Width="120"
                             Binding="{Binding EMPLOYEE.ROLE.ROLE_NAME}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Role" />
 
                         <DataGridTextColumn
-                            Width="100"
-                            Binding="{Binding SALARY.DATE_START}"
+                            Width="120"
+                            Binding="{Binding TIMEKEEPING.NUMBER_OF_WORK_DAY}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
-                            Header="Date Start" />
-
+                            Header="Work day" />
 
                         <DataGridTextColumn
-                            Width="100"
-                            Binding="{Binding SALARY.DATE_END}"
+                            Width="120"
+                            Binding="{Binding TIMEKEEPING.NUMBER_OF_OVERTIME_DAY}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
-                            Header="Date End" />
-
-                       
+                            Header="Overtime day" />
 
                         <DataGridTextColumn
                             Width="100"

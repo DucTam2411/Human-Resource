@@ -6,7 +6,6 @@
         <MappingFragment StoreEntitySet="DEPARTMENT">
           <ScalarProperty Name="DEPT_ID" ColumnName="DEPT_ID" />
           <ScalarProperty Name="DEPT_NAME" ColumnName="DEPT_NAME" />
-          <ScalarProperty Name="ROOM_ID" ColumnName="ROOM_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -44,8 +43,9 @@
     <EntitySetMapping Name="ROOMs">
       <EntityTypeMapping TypeName="hrmsModel.ROOM">
         <MappingFragment StoreEntitySet="ROOM">
+          <ScalarProperty Name="DEPT_ID" ColumnName="DEPT_ID" />
+          <ScalarProperty Name="ROOM_NAME" ColumnName="ROOM_NAME" />
           <ScalarProperty Name="ROOM_ID" ColumnName="ROOM_ID" />
-          <ScalarProperty Name="ROOM_NUMBER" ColumnName="ROOM_NUMBER" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

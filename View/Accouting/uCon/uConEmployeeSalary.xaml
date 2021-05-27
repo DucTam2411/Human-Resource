@@ -14,7 +14,7 @@
     mc:Ignorable="d">
 
     <ContentControl x:Name="contentControlDetail" Height="600">
-        <Grid Margin="0,0,0,0">
+        <Grid Margin="100,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
@@ -27,7 +27,7 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <Button
+            <!--<Button
                 Grid.RowSpan="3"
                 Height="95"
                 Margin="0,0,49.4,217.8"
@@ -42,7 +42,7 @@
                     Height="40"
                     Foreground="DimGray"
                     Kind="ArrowBack" />
-            </Button>
+            </Button>-->
 
             <DockPanel
                 Grid.Row="0"
@@ -111,11 +111,18 @@
                     Width="200"
                     Height="200"
                     Margin="20,10,0,0"
-                    DockPanel.Dock="Right">
-                    <materialDesign:PackIcon
-                        Width="50"
-                        Height="50"
-                        Kind="ImageAdd" />
+                    Command="{Binding AddImageCommand}"
+                    CommandParameter="{Binding ElementName=spBtn}"
+                    DockPanel.Dock="Right"
+                    Background="{Binding BRUSH}">
+                    <StackPanel x:Name="spBtn" Margin="-20,-5,-20,-5">
+                        
+                        <Image
+                            x:Name="img"
+                            Width="200"
+                            Height="200"
+                            Source="{Binding IMAGE_SOURCE}" />
+                    </StackPanel>
                 </Button>
             </DockPanel>
 
@@ -277,6 +284,7 @@
             <StackPanel
                 Grid.Row="3"
                 Grid.Column="1"
+                Margin="0,20"
                 Orientation="Horizontal">
 
                 <Button

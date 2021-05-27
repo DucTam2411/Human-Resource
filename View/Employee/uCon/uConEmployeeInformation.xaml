@@ -101,12 +101,10 @@
                 Height="200"
                 Margin="20,10,0,0"
                 DockPanel.Dock="Right">
-
                 <materialDesign:PackIcon
                     Width="50"
                     Height="50"
                     Kind="ImageAdd" />
-
             </Button>
 
         </DockPanel>

@@ -19,16 +19,17 @@ namespace Model.Database
         {
             this.EMPLOYEEs = new HashSet<EMPLOYEE>();
             this.ROLEs = new HashSet<ROLE>();
+            this.ROOMs = new HashSet<ROOM>();
         }
     
         public int DEPT_ID { get; set; }
         public string DEPT_NAME { get; set; }
-        public Nullable<int> ROOM_ID { get; set; }
     
-        public virtual ROOM ROOM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EMPLOYEE> EMPLOYEEs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ROLE> ROLEs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ROOM> ROOMs { get; set; }
     }
 }

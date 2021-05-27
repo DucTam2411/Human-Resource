@@ -23,7 +23,7 @@ namespace Model.Database
         }
     
         public int EMPLOYEE_ID { get; set; }
-        public Nullable<int> ID { get; set; }
+        public Nullable<int> ID_CARD { get; set; }
         public string NAME { get; set; }
         public Nullable<int> AGE { get; set; }
         public string GENDER { get; set; }
@@ -36,6 +36,7 @@ namespace Model.Database
         public string CITIZENSHIP { get; set; }
         public Nullable<int> DEPT_ID { get; set; }
         public Nullable<int> ROLE_ID { get; set; }
+        public byte[] IMAGE { get; set; }
     
         public virtual DEPARTMENT DEPARTMENT { get; set; }
         public virtual ROLE ROLE { get; set; }

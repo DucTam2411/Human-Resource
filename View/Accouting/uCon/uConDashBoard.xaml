@@ -57,7 +57,7 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Height="500"
-                ScrollViewer.CanContentScroll="True">
+                Style="{StaticResource MaterialDesignScrollViewer}">
                 <StackPanel x:Name="StackEmployeeChanges">
                     <local:uConChangeInSalary />
                     <local:uConChangeInSalary />

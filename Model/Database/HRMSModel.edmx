@@ -11,14 +11,13 @@
           </Key>
           <Property Name="DEPT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DEPT_NAME" Type="varchar" MaxLength="200" />
-          <Property Name="ROOM_ID" Type="int" />
         </EntityType>
         <EntityType Name="EMPLOYEE">
           <Key>
             <PropertyRef Name="EMPLOYEE_ID" />
           </Key>
           <Property Name="EMPLOYEE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ID" Type="int" />
+          <Property Name="ID_CARD" Type="int" />
           <Property Name="NAME" Type="varchar" MaxLength="100" />
           <Property Name="AGE" Type="int" />
           <Property Name="GENDER" Type="varchar" MaxLength="20" />
@@ -31,6 +30,7 @@
           <Property Name="CITIZENSHIP" Type="varchar" MaxLength="200" />
           <Property Name="DEPT_ID" Type="int" />
           <Property Name="ROLE_ID" Type="int" />
+          <Property Name="IMAGE" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="ROLE">
           <Key>
@@ -47,7 +47,8 @@
             <PropertyRef Name="ROOM_ID" />
           </Key>
           <Property Name="ROOM_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ROOM_NUMBER" Type="varchar" MaxLength="20" />
+          <Property Name="ROOM_NAME" Type="varchar" MaxLength="20" />
+          <Property Name="DEPT_ID" Type="int" />
         </EntityType>
         <EntityType Name="SALARY">
           <Key>
@@ -55,17 +56,17 @@
           </Key>
           <Property Name="SALARY_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EMPLOYEE_ID" Type="int" />
-          <Property Name="BASIC_WAGE" Type="money" />
-          <Property Name="OVERTIME_SALARY" Type="money" />
+          <Property Name="BASIC_WAGE" Type="bigint" />
+          <Property Name="OVERTIME_SALARY" Type="bigint" />
           <Property Name="COEFFICIENT" Type="float" />
-          <Property Name="BONUS" Type="money" />
-          <Property Name="WELFARE" Type="money" />
+          <Property Name="BONUS" Type="bigint" />
+          <Property Name="WELFARE" Type="bigint" />
           <Property Name="TAX" Type="bigint" />
-          <Property Name="SOCIAL_INSURANCE" Type="money" />
-          <Property Name="HEALTH_INSURANCE" Type="money" />
+          <Property Name="SOCIAL_INSURANCE" Type="bigint" />
+          <Property Name="HEALTH_INSURANCE" Type="bigint" />
           <Property Name="DATE_START" Type="date" />
           <Property Name="DATE_END" Type="date" />
-          <Property Name="TOTAL_SALARY" Type="money" />
+          <Property Name="TOTAL_SALARY" Type="bigint" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -99,18 +100,6 @@
           <Property Name="CHECK_TIME" Type="time" Precision="7" />
           <Property Name="EMPLOYEE_ID" Type="int" />
         </EntityType>
-        <Association Name="FK__DEPARTMEN__ROOM___38996AB5">
-          <End Role="ROOM" Type="Self.ROOM" Multiplicity="0..1" />
-          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ROOM">
-              <PropertyRef Name="ROOM_ID" />
-            </Principal>
-            <Dependent Role="DEPARTMENT">
-              <PropertyRef Name="ROOM_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__EMPLOYEE__DEPT_I__3F466844">
           <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1" />
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
@@ -147,7 +136,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SALARY__EMPLOYEE__49C3F6B7">
+        <Association Name="FK__ROOM__DEPT_ID__2739D489">
+          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1" />
+          <End Role="ROOM" Type="Self.ROOM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTMENT">
+              <PropertyRef Name="DEPT_ID" />
+            </Principal>
+            <Dependent Role="ROOM">
+              <PropertyRef Name="DEPT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SALARY__EMPLOYEE__339FAB6E">
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="0..1" />
           <End Role="SALARY" Type="Self.SALARY" Multiplicity="*" />
           <ReferentialConstraint>
@@ -195,37 +196,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="hrmsModelStoreContainer">
           <EntitySet Name="DEPARTMENT" EntityType="Self.DEPARTMENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EMPLOYEE" EntityType="Self.EMPLOYEE" Schema="dbo" store:Type="Tables" />
@@ -235,10 +205,6 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TIMEKEEPING" EntityType="Self.TIMEKEEPING" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TIMEKEEPING_DETAIL" EntityType="Self.TIMEKEEPING_DETAIL" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__DEPARTMEN__ROOM___38996AB5" Association="Self.FK__DEPARTMEN__ROOM___38996AB5">
-            <End Role="ROOM" EntitySet="ROOM" />
-            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
-          </AssociationSet>
           <AssociationSet Name="FK__EMPLOYEE__DEPT_I__3F466844" Association="Self.FK__EMPLOYEE__DEPT_I__3F466844">
             <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
@@ -251,7 +217,11 @@
             <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
             <End Role="ROLE" EntitySet="ROLE" />
           </AssociationSet>
-          <AssociationSet Name="FK__SALARY__EMPLOYEE__49C3F6B7" Association="Self.FK__SALARY__EMPLOYEE__49C3F6B7">
+          <AssociationSet Name="FK__ROOM__DEPT_ID__2739D489" Association="Self.FK__ROOM__DEPT_ID__2739D489">
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
+            <End Role="ROOM" EntitySet="ROOM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALARY__EMPLOYEE__339FAB6E" Association="Self.FK__SALARY__EMPLOYEE__339FAB6E">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="SALARY" EntitySet="SALARY" />
           </AssociationSet>
@@ -278,17 +248,16 @@
           </Key>
           <Property Name="DEPT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DEPT_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="ROOM_ID" Type="Int32" />
-          <NavigationProperty Name="ROOM" Relationship="Self.FK__DEPARTMEN__ROOM___38996AB5" FromRole="DEPARTMENT" ToRole="ROOM" />
           <NavigationProperty Name="EMPLOYEEs" Relationship="Self.FK__EMPLOYEE__DEPT_I__3F466844" FromRole="DEPARTMENT" ToRole="EMPLOYEE" />
           <NavigationProperty Name="ROLEs" Relationship="Self.FK__ROLE__DEPT_ID__3B75D760" FromRole="DEPARTMENT" ToRole="ROLE" />
+          <NavigationProperty Name="ROOMs" Relationship="Self.FK__ROOM__DEPT_ID__2739D489" FromRole="DEPARTMENT" ToRole="ROOM" />
         </EntityType>
         <EntityType Name="EMPLOYEE">
           <Key>
             <PropertyRef Name="EMPLOYEE_ID" />
           </Key>
           <Property Name="EMPLOYEE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ID" Type="Int32" />
+          <Property Name="ID_CARD" Type="Int32" />
           <Property Name="NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="AGE" Type="Int32" />
           <Property Name="GENDER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
@@ -303,9 +272,10 @@
           <Property Name="ROLE_ID" Type="Int32" />
           <NavigationProperty Name="DEPARTMENT" Relationship="Self.FK__EMPLOYEE__DEPT_I__3F466844" FromRole="EMPLOYEE" ToRole="DEPARTMENT" />
           <NavigationProperty Name="ROLE" Relationship="Self.FK__EMPLOYEE__ROLE_I__403A8C7D" FromRole="EMPLOYEE" ToRole="ROLE" />
-          <NavigationProperty Name="SALARies" Relationship="Self.FK__SALARY__EMPLOYEE__49C3F6B7" FromRole="EMPLOYEE" ToRole="SALARY" />
+          <NavigationProperty Name="SALARies" Relationship="Self.FK__SALARY__EMPLOYEE__339FAB6E" FromRole="EMPLOYEE" ToRole="SALARY" />
           <NavigationProperty Name="TIMEKEEPING_DETAIL" Relationship="Self.FK__TIMEKEEPI__EMPLO__45F365D3" FromRole="EMPLOYEE" ToRole="TIMEKEEPING_DETAIL" />
           <NavigationProperty Name="TIMEKEEPINGs" Relationship="Self.FK__TIMEKEEPI__NUMBE__4316F928" FromRole="EMPLOYEE" ToRole="TIMEKEEPING" />
+          <Property Name="IMAGE" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="ROLE">
           <Key>
@@ -324,8 +294,9 @@
             <PropertyRef Name="ROOM_ID" />
           </Key>
           <Property Name="ROOM_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ROOM_NUMBER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DEPARTMENTs" Relationship="Self.FK__DEPARTMEN__ROOM___38996AB5" FromRole="ROOM" ToRole="DEPARTMENT" />
+          <Property Name="ROOM_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DEPT_ID" Type="Int32" />
+          <NavigationProperty Name="DEPARTMENT" Relationship="Self.FK__ROOM__DEPT_ID__2739D489" FromRole="ROOM" ToRole="DEPARTMENT" />
         </EntityType>
         <EntityType Name="SALARY">
           <Key>
@@ -340,11 +311,11 @@
           <Property Name="WELFARE" Type="Int64" />
           <Property Name="TAX" Type="Int64" />
           <Property Name="SOCIAL_INSURANCE" Type="Int64" />
-          <Property Name="HEALTH_INSURANCE" Type="Int32" />
+          <Property Name="HEALTH_INSURANCE" Type="Int64" />
           <Property Name="DATE_START" Type="DateTime" Precision="0" />
           <Property Name="DATE_END" Type="DateTime" Precision="0" />
           <Property Name="TOTAL_SALARY" Type="Int64" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__SALARY__EMPLOYEE__49C3F6B7" FromRole="SALARY" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__SALARY__EMPLOYEE__339FAB6E" FromRole="SALARY" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -365,10 +336,10 @@
           <Property Name="NUMBER_OF_WORK_DAY" Type="Int32" />
           <Property Name="NUMBER_OF_ABSENT_DAY" Type="Int32" />
           <Property Name="NUMBER_OF_OVERTIME_DAY" Type="Int32" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__TIMEKEEPI__NUMBE__4316F928" FromRole="TIMEKEEPING" ToRole="EMPLOYEE" />
-          <NavigationProperty Name="TIMEKEEPING_DETAIL" Relationship="Self.FK__TIMEKEEPI__TIMEK__46E78A0C" FromRole="TIMEKEEPING" ToRole="TIMEKEEPING_DETAIL" />
           <Property Name="DATE_START" Type="DateTime" Precision="0" />
           <Property Name="DATE_END" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__TIMEKEEPI__NUMBE__4316F928" FromRole="TIMEKEEPING" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="TIMEKEEPING_DETAIL" Relationship="Self.FK__TIMEKEEPI__TIMEK__46E78A0C" FromRole="TIMEKEEPING" ToRole="TIMEKEEPING_DETAIL" />
         </EntityType>
         <EntityType Name="TIMEKEEPING_DETAIL">
           <Key>
@@ -382,18 +353,6 @@
           <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__TIMEKEEPI__EMPLO__45F365D3" FromRole="TIMEKEEPING_DETAIL" ToRole="EMPLOYEE" />
           <NavigationProperty Name="TIMEKEEPING" Relationship="Self.FK__TIMEKEEPI__TIMEK__46E78A0C" FromRole="TIMEKEEPING_DETAIL" ToRole="TIMEKEEPING" />
         </EntityType>
-        <Association Name="FK__DEPARTMEN__ROOM___38996AB5">
-          <End Role="ROOM" Type="Self.ROOM" Multiplicity="0..1" />
-          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ROOM">
-              <PropertyRef Name="ROOM_ID" />
-            </Principal>
-            <Dependent Role="DEPARTMENT">
-              <PropertyRef Name="ROOM_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__EMPLOYEE__DEPT_I__3F466844">
           <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1" />
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
@@ -418,6 +377,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ROOM__DEPT_ID__2739D489">
+          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1" />
+          <End Role="ROOM" Type="Self.ROOM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTMENT">
+              <PropertyRef Name="DEPT_ID" />
+            </Principal>
+            <Dependent Role="ROOM">
+              <PropertyRef Name="DEPT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__EMPLOYEE__ROLE_I__403A8C7D">
           <End Role="ROLE" Type="Self.ROLE" Multiplicity="0..1" />
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
@@ -430,7 +401,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SALARY__EMPLOYEE__49C3F6B7">
+        <Association Name="FK__SALARY__EMPLOYEE__339FAB6E">
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="0..1" />
           <End Role="SALARY" Type="Self.SALARY" Multiplicity="*" />
           <ReferentialConstraint>
@@ -487,10 +458,6 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="TIMEKEEPINGs" EntityType="Self.TIMEKEEPING" />
           <EntitySet Name="TIMEKEEPING_DETAIL" EntityType="Self.TIMEKEEPING_DETAIL" />
-          <AssociationSet Name="FK__DEPARTMEN__ROOM___38996AB5" Association="Self.FK__DEPARTMEN__ROOM___38996AB5">
-            <End Role="ROOM" EntitySet="ROOMs" />
-            <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
-          </AssociationSet>
           <AssociationSet Name="FK__EMPLOYEE__DEPT_I__3F466844" Association="Self.FK__EMPLOYEE__DEPT_I__3F466844">
             <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
@@ -499,11 +466,15 @@
             <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
             <End Role="ROLE" EntitySet="ROLEs" />
           </AssociationSet>
+          <AssociationSet Name="FK__ROOM__DEPT_ID__2739D489" Association="Self.FK__ROOM__DEPT_ID__2739D489">
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
+            <End Role="ROOM" EntitySet="ROOMs" />
+          </AssociationSet>
           <AssociationSet Name="FK__EMPLOYEE__ROLE_I__403A8C7D" Association="Self.FK__EMPLOYEE__ROLE_I__403A8C7D">
             <End Role="ROLE" EntitySet="ROLEs" />
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
           </AssociationSet>
-          <AssociationSet Name="FK__SALARY__EMPLOYEE__49C3F6B7" Association="Self.FK__SALARY__EMPLOYEE__49C3F6B7">
+          <AssociationSet Name="FK__SALARY__EMPLOYEE__339FAB6E" Association="Self.FK__SALARY__EMPLOYEE__339FAB6E">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
             <End Role="SALARY" EntitySet="SALARies" />
           </AssociationSet>
@@ -519,48 +490,7 @@
             <End Role="TIMEKEEPING" EntitySet="TIMEKEEPINGs" />
             <End Role="TIMEKEEPING_DETAIL" EntitySet="TIMEKEEPING_DETAIL" />
           </AssociationSet>
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(hrmsModel.sp_helpdiagramdefinition_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(hrmsModel.sp_helpdiagrams_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -572,15 +502,15 @@
               <MappingFragment StoreEntitySet="DEPARTMENT">
                 <ScalarProperty Name="DEPT_ID" ColumnName="DEPT_ID" />
                 <ScalarProperty Name="DEPT_NAME" ColumnName="DEPT_NAME" />
-                <ScalarProperty Name="ROOM_ID" ColumnName="ROOM_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EMPLOYEEs">
             <EntityTypeMapping TypeName="hrmsModel.EMPLOYEE">
               <MappingFragment StoreEntitySet="EMPLOYEE">
+                <ScalarProperty Name="IMAGE" ColumnName="IMAGE" />
                 <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_CARD" ColumnName="ID_CARD" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
                 <ScalarProperty Name="AGE" ColumnName="AGE" />
                 <ScalarProperty Name="GENDER" ColumnName="GENDER" />
@@ -611,7 +541,8 @@
             <EntityTypeMapping TypeName="hrmsModel.ROOM">
               <MappingFragment StoreEntitySet="ROOM">
                 <ScalarProperty Name="ROOM_ID" ColumnName="ROOM_ID" />
-                <ScalarProperty Name="ROOM_NUMBER" ColumnName="ROOM_NUMBER" />
+                <ScalarProperty Name="ROOM_NAME" ColumnName="ROOM_NAME" />
+                <ScalarProperty Name="DEPT_ID" ColumnName="DEPT_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -648,13 +579,13 @@
           <EntitySetMapping Name="TIMEKEEPINGs">
             <EntityTypeMapping TypeName="hrmsModel.TIMEKEEPING">
               <MappingFragment StoreEntitySet="TIMEKEEPING">
-                <ScalarProperty Name="DATE_END" ColumnName="DATE_END" />
-                <ScalarProperty Name="DATE_START" ColumnName="DATE_START" />
                 <ScalarProperty Name="TIMEKEEPING_ID" ColumnName="TIMEKEEPING_ID" />
                 <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
                 <ScalarProperty Name="NUMBER_OF_WORK_DAY" ColumnName="NUMBER_OF_WORK_DAY" />
                 <ScalarProperty Name="NUMBER_OF_ABSENT_DAY" ColumnName="NUMBER_OF_ABSENT_DAY" />
                 <ScalarProperty Name="NUMBER_OF_OVERTIME_DAY" ColumnName="NUMBER_OF_OVERTIME_DAY" />
+                <ScalarProperty Name="DATE_START" ColumnName="DATE_START" />
+                <ScalarProperty Name="DATE_END" ColumnName="DATE_END" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -669,30 +600,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="hrmsModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="hrmsModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="hrmsModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="hrmsModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="hrmsModel.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="hrmsModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="hrmsModel.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="hrmsModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="hrmsModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

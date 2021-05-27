@@ -161,3 +161,6 @@ D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\uCon\uConRequestBoard.baml
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\HR\uCon\uConDetailTimeKeeping.baml
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\HR\uCon\uConReport.baml
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\bin\Debug\Augustine.VietnameseCalendar.Core.dll
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\bin\Debug\Augustine.VietnameseCalendar.Core.pdb
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\bin\Debug\Augustine.VietnameseCalendar.Core.dll.config

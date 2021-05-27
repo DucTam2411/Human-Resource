@@ -9,10 +9,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Augustine.VietnameseCalendar.Core.LuniSolarCalendar;
+using Microsoft.Win32;
+using System.Windows.Media.Imaging;
+using System.IO;
+using System.Windows;
+using System.Windows.Media;
 
-namespace HRMS.Accouting.ViewModel
+namespace HRMS.Accouting.ViewModel 
 {
-    public class AccountingListViewModel : BaseViewModel
+    public class AccountingViewModel : BaseViewModel
     {
 
         #region Command
@@ -22,6 +28,8 @@ namespace HRMS.Accouting.ViewModel
         public ICommand EditCommand { get; set; }
         //Để thực chức năng back trong DetailSalaryEmployee
         public ICommand BackCommand { get; set; }
+        //Để thêm hình ảnh
+        public ICommand AddImageCommand { get; set; }
         #endregion
 
         private BaseViewModel _AccountingVM;
@@ -60,6 +68,11 @@ namespace HRMS.Accouting.ViewModel
                     DEPARTMENT_NAME = SelectedItem.EMPLOYEE.DEPARTMENT.DEPT_NAME;
                     BASIC_WAGE = (long)SelectedItem.SALARY.BASIC_WAGE;
                     COEFFICIENT = (double)SelectedItem.SALARY.COEFFICIENT;
+                    IMAGESOURCE = SelectedItem.EMPLOYEE.IMAGE;
+                    if (IMAGESOURCE == null)
+                        BRUSH = Brushes.AliceBlue;
+                    else
+                        BRUSH = Brushes.Transparent;
                 }
             } 
         }
@@ -157,8 +170,8 @@ namespace HRMS.Accouting.ViewModel
         private long _OVERTIME_SALARY;
         public long OVERTIME_SALARY { get => _OVERTIME_SALARY; set { _OVERTIME_SALARY = value; OnPropertyChanged(); } }
 
-        private int _HEALTH_INSURANCE;
-        public int HEALTH_INSURANCE { get => _HEALTH_INSURANCE; set { _HEALTH_INSURANCE = value; OnPropertyChanged(); } }
+        private long _HEALTH_INSURANCE;
+        public long HEALTH_INSURANCE { get => _HEALTH_INSURANCE; set { _HEALTH_INSURANCE = value; OnPropertyChanged(); } }
 
         private long _BONUS;
         public long BONUS { get => _BONUS; set { _BONUS = value; OnPropertyChanged(); } }
@@ -185,10 +198,26 @@ namespace HRMS.Accouting.ViewModel
         public string DEPARTMENT_NAME { get => _DEPARTMENT_NAME; set { _DEPARTMENT_NAME = value; OnPropertyChanged(); } }
 
         private long _TOTAL_SALARY;
-        public long TOTAL_SALARY { get => _TOTAL_SALARY; set { _TOTAL_SALARY = value; OnPropertyChanged(); } }        
+        public long TOTAL_SALARY { get => _TOTAL_SALARY; set { _TOTAL_SALARY = value; OnPropertyChanged(); } }
+
+        private byte[] _IMAGESOURCE;
+        public byte[] IMAGESOURCE { get => _IMAGESOURCE; set { _IMAGESOURCE = value; OnPropertyChanged(); } }
+
+        private BitmapImage _IMAGE_SOURCE;
+        public BitmapImage IMAGE_SOURCE { get => _IMAGE_SOURCE; set { _IMAGE_SOURCE = value; OnPropertyChanged(); } }
+
+        private Brush _BRUSH;
+        public Brush BRUSH { get => _BRUSH; set { _BRUSH = value; OnPropertyChanged(); } }
         #endregion
-        public AccountingListViewModel()
+        public AccountingViewModel()
         {
+
+            #region Load Data khi mỗi khi truy cập tới view
+            LoadMonth();
+            LoadComboboxTypeList();
+            LoadSalaryData();                     
+            #endregion
+
             //Chức năng của showEmployeeCommand
             showEmployeeCommand = new RelayCommand<ContentControl>(p => { 
                 if (SelectedItem != null) 
@@ -198,38 +227,21 @@ namespace HRMS.Accouting.ViewModel
             },
                 p => 
                 { p.Content = new uConEmployeeSalary(); });
-
-            #region Load Data khi mỗi khi truy cập tới view
-            LoadSalaryData();
-            LoadComboboxTypeList();
-            LoadMonth();
-            #endregion
-
+           
             //Chức năng của EditCommand
-            EditCommand = new RelayCommand<object>((p) =>
-            {
-                var salaryList = HRMSEntity.Ins.DB.SALARies.Where(x => x.EMPLOYEE_ID == SelectedItem.SALARY.EMPLOYEE_ID && x.DATE_START == SelectedItem.SALARY.DATE_START);
-                if (salaryList != null && salaryList.Count() != 0)
-                    return true;
-                return false;
-            }, p => {
-                var Salary = HRMSEntity.Ins.DB.SALARies.Where(x => x.EMPLOYEE_ID == SelectedItem.SALARY.EMPLOYEE_ID && x.DATE_START == SelectedItem.SALARY.DATE_START).SingleOrDefault();                
-                Salary.HEALTH_INSURANCE = HEALTH_INSURANCE;
-                Salary.SOCIAL_INSURANCE = SOCIAL_INSURANCE;
-                Salary.WELFARE = WELFARE;
-                Salary.BONUS = BONUS;
-                Salary.TAX = TAX;
-                Salary.TOTAL_SALARY = CalculateSalary(SelectedItem.SALARY, SelectedItem.TIMEKEEPING);
-                HRMSEntity.Ins.DB.SaveChanges();
-            });
+            EditCommand = new RelayCommand<object>(p => IsEditSalaryData(),p => EditSalaryData());
 
             //Chức năng của BackCommand
-            BackCommand = new RelayCommand<ContentControl>(p => { return true; }, p => { p.Content = new uConListEmployeeAccounting(); });
+            BackCommand = new RelayCommand<ContentControl>(p => { return true; }, 
+                p => { p.Content = new uConListEmployeeAccounting(); });
+
+            //Chức năng add ảnh
+            AddImageCommand = new RelayCommand<StackPanel>(p => IsAddImageData(), p => AddImageData(p));
 
         }
 
         //Load data từ database vào datagrid trong EmployeeList
-        public void LoadSalaryData()
+        private void LoadSalaryData()
         {
             //Kiểm tra selected comboBox chọn tháng có khác null không 
             if (SELECTMONTHTYPE == null)
@@ -255,8 +267,8 @@ namespace HRMS.Accouting.ViewModel
 
             //lưu dữ liệu từ list vào 2 cái biến vừa khởi tạo
             foreach (var item in list)
-            {           
-                item.SALARY.TOTAL_SALARY = CalculateSalary(item.SALARY, item.TIMEKEEPING);
+            {                       
+                item.SALARY.TOTAL_SALARY = AccountingClass.CalculateSalary(item.SALARY, item.TIMEKEEPING);
             }
             HRMSEntity.Ins.DB.SaveChanges();
 
@@ -279,40 +291,18 @@ namespace HRMS.Accouting.ViewModel
         }
 
         //Load dữ liệu chọn loại vào comboBox chọn loại để lọc (có thể thêm chọn loại mới vào đây)        
-        public void LoadComboboxTypeList()
+        private void LoadComboboxTypeList()
         {
             ListType = new ObservableCollection<ComboboxModel>();
             ListType.Add(new ComboboxModel("ID", true));
             ListType.Add(new ComboboxModel("NAME", false));
             ListType.Add(new ComboboxModel("DEPARTMENT", false));
             ListType.Add(new ComboboxModel("ROLE", false));
-        }
-
-        //Lấy ngày trong tháng
-        private static int GetDaybyMonth(int month, int year)
-        {
-            switch(month)
-            {
-                case 1:
-                case 3:
-                case 5:
-                case 7:
-                case 8:
-                case 10:
-                case 12:
-                    return 31;
-                case 4:
-                case 6:
-                case 9:
-                case 11:
-                    return 30;
-                default:
-                    return ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) ? 29 : 28;
-            }    
+            SELECTEDTYPE = ListType.Where(x => x.ISSELECTED == true).FirstOrDefault();
         }
 
         //Load dữ liệu tháng vào comboBox Month
-        public void LoadMonth()
+        private void LoadMonth()
         {
             //Chọn tháng từ database KHÔNG TRÙNG LẶP (chọn DATE_START và DATE_END để kiểm tra tháng bắt đầu và tháng kết thúc có hợp lệ không (nếu cách nhau không quá 31 ngày hợp lệ)
             var listmonth = (from month in HRMSEntity.Ins.DB.SALARies
@@ -336,7 +326,7 @@ namespace HRMS.Accouting.ViewModel
                     //Kiểm tra tháng kết thúc có lớn hơn tháng bắt đầu không
                     if(end.Month - start.Month == 1)
                     {
-                        day_end = end.Day + GetDaybyMonth((end.Month == 1) ? 12 : end.Month, (end.Month == 1) ? end.Year - 1 : end.Year);
+                        day_end = end.Day + AccountingClass.GetDaybyMonth((end.Month == 1) ? 12 : end.Month, (end.Month == 1) ? end.Year - 1 : end.Year);
                         day_start = start.Day;                      
                     }
 
@@ -348,26 +338,85 @@ namespace HRMS.Accouting.ViewModel
 
                 }
             }
+            SELECTMONTHTYPE = MONTHLIST.Where(x => x.ISSELECTED == true).FirstOrDefault();
+            if(SELECTMONTHTYPE == null)
+            {
+                SELECTMONTHTYPE = MONTHLIST.FirstOrDefault();
+            }
         }
 
-        //Hàm tính lương tổng cộng
-        private long CalculateSalary(SALARY salary, TIMEKEEPING timekeeping)
+        //Thực hiện lệnh trong Edit Command
+        private void EditSalaryData()
         {
-            double total_salary = 0;
+            var Employee = HRMSEntity.Ins.DB.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == SelectedItem.EMPLOYEE.EMPLOYEE_ID).SingleOrDefault();
+            var Salary = HRMSEntity.Ins.DB.SALARies.Where(x => x.EMPLOYEE_ID == SelectedItem.SALARY.EMPLOYEE_ID && x.DATE_START == SelectedItem.SALARY.DATE_START).SingleOrDefault();
+            Salary.HEALTH_INSURANCE = HEALTH_INSURANCE;
+            Salary.SOCIAL_INSURANCE = SOCIAL_INSURANCE;
+            Salary.WELFARE = WELFARE;
+            Salary.BONUS = BONUS;
+            Salary.TAX = TAX;
+            Salary.TOTAL_SALARY = AccountingClass.CalculateSalary(SelectedItem.SALARY, SelectedItem.TIMEKEEPING);
+            if(IMAGESOURCE != null)
+            {
+                Employee.IMAGE = IMAGESOURCE;
+            }
+            HRMSEntity.Ins.DB.SaveChanges();
+        }
 
-            //Lương cơ bản = lương cơ bản * số ngày làm việc / số ngày làm việc mặc định + lương làm thêm * số ngày làm thêm
-            double basic_salary = (double)(salary.BASIC_WAGE * salary.COEFFICIENT * timekeeping.NUMBER_OF_WORK_DAY / 24 +
-                                            salary.OVERTIME_SALARY * timekeeping.NUMBER_OF_OVERTIME_DAY);
+        //Điều kiện thực hiện command
+        private bool IsEditSalaryData()
+        {
+            //Chỉ được sửa tháng hiện tại ko cho sửa tháng trước
+            if (SelectedItem.SALARY.DATE_START.Value.Month >= DateTime.Now.Month - 1)
+                return true;
+            else return false;
 
-            //Lương thêm = bonus + phụ cấp
-            double bonus_salary = (double)(salary.BONUS + salary.WELFARE);
+            var salaryList = HRMSEntity.Ins.DB.SALARies.Where(x => x.EMPLOYEE_ID == SelectedItem.SALARY.EMPLOYEE_ID && x.DATE_START == SelectedItem.SALARY.DATE_START);
+            if (salaryList != null && salaryList.Count() != 0)
+                return true;
+            return false;
+        }
 
-            //Thuế = thuế BHXH + thuế BHYT + thuế cá nhân * Lương cơ bản / 100
-            double tax_income = (double)(salary.HEALTH_INSURANCE + salary.SOCIAL_INSURANCE + basic_salary * salary.TAX / 100);
+        //Điều kiện add ảnh
+        private bool IsAddImageData()
+        {
+            if (IMAGESOURCE == null)
+                return true;
+            return false;
+        }
+        
+        //Command add ảnh
+        private void AddImageData(StackPanel spBtn)
+        {
+            OpenFileDialog ofd = new OpenFileDialog() { Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png", ValidateNames = true, Multiselect = false };
+            
+            if(ofd.ShowDialog() == true)
+            {
+                string FILENAME = ofd.FileName;
+                BitmapImage image = new BitmapImage(new Uri(FILENAME));
+                IMAGESOURCE = File.ReadAllBytes(FILENAME);
+                //if (spBtn.Children.Count != 1)
+                //{ 
+                //    spBtn.Children.RemoveAt(0);
+                //    BRUSH = Brushes.Transparent;
+                //}
+                IMAGE_SOURCE = image;
+            }
+        }
 
-            total_salary = basic_salary + bonus_salary - tax_income;
-
-            return (long)total_salary;
+        //Convert bitmap to byte[] Error
+        public Byte[] ImageToByte(BitmapImage imageSource)
+        {
+            Stream stream = imageSource.StreamSource;
+            Byte[] buffer = null;
+            if (stream != null && stream.Length > 0)
+            {
+                using (BinaryReader br = new BinaryReader(stream))
+                {
+                    buffer = br.ReadBytes((Int32)stream.Length);
+                }
+            }
+            return buffer;
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Model.Database
         public Nullable<long> WELFARE { get; set; }
         public Nullable<long> TAX { get; set; }
         public Nullable<long> SOCIAL_INSURANCE { get; set; }
-        public Nullable<int> HEALTH_INSURANCE { get; set; }
+        public Nullable<long> HEALTH_INSURANCE { get; set; }
         public Nullable<System.DateTime> DATE_START { get; set; }
         public Nullable<System.DateTime> DATE_END { get; set; }
         public Nullable<long> TOTAL_SALARY { get; set; }
