@@ -70,9 +70,14 @@ namespace HRMS.Accouting.ViewModel
                     COEFFICIENT = (double)SelectedItem.SALARY.COEFFICIENT;
                     IMAGESOURCE = SelectedItem.EMPLOYEE.IMAGE;
                     if (IMAGESOURCE == null)
-                        BRUSH = Brushes.AliceBlue;
+                    {
+                        BRUSH = Brushes.AliceBlue; 
+                    }
                     else
+                    {
+                        IMAGE_SOURCE = ToImage(IMAGESOURCE);
                         BRUSH = Brushes.Transparent;
+                    }
                 }
             } 
         }
@@ -417,6 +422,19 @@ namespace HRMS.Accouting.ViewModel
                 }
             }
             return buffer;
+        }
+
+        public BitmapImage ToImage(byte[] array)
+        {
+            using (var ms = new System.IO.MemoryStream(array))
+            {
+                var image = new BitmapImage();
+                image.BeginInit();
+                image.CacheOption = BitmapCacheOption.OnLoad; // here
+                image.StreamSource = ms;
+                image.EndInit();
+                return image;
+            }
         }
     }
 }
