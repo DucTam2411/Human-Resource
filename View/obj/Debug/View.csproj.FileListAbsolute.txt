@@ -188,3 +188,6 @@ D:\cnpm\Human-Resource\View\obj\Debug\Director\Page2.g.cs
 D:\cnpm\Human-Resource\View\obj\Debug\Director\uConDiretor.g.cs
 D:\cnpm\Human-Resource\View\obj\Debug\Director\Page2.baml
 D:\cnpm\Human-Resource\View\obj\Debug\Director\uConDiretor.baml
+D:\Human Resource\View\obj\Debug\Director\uConDirector.g.cs
+D:\Human Resource\View\obj\Debug\Director\uConListEmployee.g.cs
+D:\Human Resource\View\obj\Debug\Director\uConSideBarDirector.g.cs
