@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 using Augustine.VietnameseCalendar.Core.LuniSolarCalendar;
 using Model.Database;
 
@@ -204,6 +205,20 @@ namespace HRMS.Accouting.ViewModel
             total_salary = (long)Math.Round((double)(total_salary / 1000)) * 1000;
 
             return total_salary;
+        }
+
+        //Convert byte[] sang bitmap
+        public static BitmapImage ToImage(byte[] array)
+        {
+            using (var ms = new System.IO.MemoryStream(array))
+            {
+                var image = new BitmapImage();
+                image.BeginInit();
+                image.CacheOption = BitmapCacheOption.OnLoad; // here
+                image.StreamSource = ms;
+                image.EndInit();
+                return image;
+            }
         }
     }
 }

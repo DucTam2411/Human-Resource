@@ -71,11 +71,14 @@ namespace HRMS.Accouting.ViewModel
                     IMAGESOURCE = SelectedItem.EMPLOYEE.IMAGE;
                     if (IMAGESOURCE == null)
                     {
+                        BUTTONTHICKNESS = 1;
+                        IMAGE_SOURCE = null;
                         BRUSH = Brushes.AliceBlue; 
                     }
                     else
                     {
-                        IMAGE_SOURCE = ToImage(IMAGESOURCE);
+                        BUTTONTHICKNESS = 0;
+                        IMAGE_SOURCE = AccountingClass.ToImage(IMAGESOURCE);
                         BRUSH = Brushes.Transparent;
                     }
                 }
@@ -213,6 +216,9 @@ namespace HRMS.Accouting.ViewModel
 
         private Brush _BRUSH;
         public Brush BRUSH { get => _BRUSH; set { _BRUSH = value; OnPropertyChanged(); } }
+
+        private int _BUTTONTHICKNESS;
+        public int BUTTONTHICKNESS { get => _BUTTONTHICKNESS; set { _BUTTONTHICKNESS = value; OnPropertyChanged(); } }
         #endregion
         public AccountingViewModel()
         {
@@ -241,7 +247,7 @@ namespace HRMS.Accouting.ViewModel
                 p => { p.Content = new uConListEmployeeAccounting(); });
 
             //Chức năng add ảnh
-            AddImageCommand = new RelayCommand<StackPanel>(p => IsAddImageData(), p => AddImageData(p));
+            AddImageCommand = new RelayCommand<object>(p => IsAddImageData(), p => AddImageData());
 
         }
 
@@ -391,7 +397,7 @@ namespace HRMS.Accouting.ViewModel
         }
         
         //Command add ảnh
-        private void AddImageData(StackPanel spBtn)
+        private void AddImageData()
         {
             OpenFileDialog ofd = new OpenFileDialog() { Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png", ValidateNames = true, Multiselect = false };
             
@@ -400,41 +406,12 @@ namespace HRMS.Accouting.ViewModel
                 string FILENAME = ofd.FileName;
                 BitmapImage image = new BitmapImage(new Uri(FILENAME));
                 IMAGESOURCE = File.ReadAllBytes(FILENAME);
-                //if (spBtn.Children.Count != 1)
-                //{ 
-                //    spBtn.Children.RemoveAt(0);
-                //    BRUSH = Brushes.Transparent;
-                //}
                 IMAGE_SOURCE = image;
+                BUTTONTHICKNESS = 0;
+                BRUSH = Brushes.Transparent;
             }
         }
 
-        //Convert bitmap to byte[] Error
-        public Byte[] ImageToByte(BitmapImage imageSource)
-        {
-            Stream stream = imageSource.StreamSource;
-            Byte[] buffer = null;
-            if (stream != null && stream.Length > 0)
-            {
-                using (BinaryReader br = new BinaryReader(stream))
-                {
-                    buffer = br.ReadBytes((Int32)stream.Length);
-                }
-            }
-            return buffer;
-        }
-
-        public BitmapImage ToImage(byte[] array)
-        {
-            using (var ms = new System.IO.MemoryStream(array))
-            {
-                var image = new BitmapImage();
-                image.BeginInit();
-                image.CacheOption = BitmapCacheOption.OnLoad; // here
-                image.StreamSource = ms;
-                image.EndInit();
-                return image;
-            }
-        }
+        
     }
 }

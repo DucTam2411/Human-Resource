@@ -14,7 +14,7 @@
     mc:Ignorable="d">
 
     <ContentControl x:Name="contentControlDetail" Height="600">
-        <Grid Margin="100,0,0,0">
+        <Grid Margin="100,0,100,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
@@ -26,23 +26,6 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
-
-            <!--<Button
-                Grid.RowSpan="3"
-                Height="95"
-                Margin="0,0,49.4,217.8"
-                VerticalAlignment="Bottom"
-                Background="Transparent"
-                BorderThickness="0"
-                Command="{Binding BackCommand}"
-                CommandParameter="{Binding ElementName=contentControlDetail}">
-
-                <materialDesign:PackIcon
-                    Width="40"
-                    Height="40"
-                    Foreground="DimGray"
-                    Kind="ArrowBack" />
-            </Button>-->
 
             <DockPanel
                 Grid.Row="0"
@@ -110,19 +93,16 @@
                     Grid.Column="1"
                     Width="200"
                     Height="200"
-                    Margin="20,10,0,0"
+                    Margin="20,10,20,0"
+                    Background="{Binding BRUSH}"
                     Command="{Binding AddImageCommand}"
-                    CommandParameter="{Binding ElementName=spBtn}"
                     DockPanel.Dock="Right"
-                    Background="{Binding BRUSH}">
-                    <StackPanel x:Name="spBtn" Margin="-20,-5,-20,-5">
-                        
-                        <Image
-                            x:Name="img"
-                            Width="200"
-                            Height="200"
-                            Source="{Binding IMAGE_SOURCE}" />
-                    </StackPanel>
+                    Opacity="100"
+                    BorderThickness="{Binding BUTTONTHICKNESS}">
+                    <Image                        
+                        x:Name="img"
+                        Source="{Binding IMAGE_SOURCE}"
+                        Stretch="Fill" />
                 </Button>
             </DockPanel>
 
