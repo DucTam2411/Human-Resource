@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Augustine.VietnameseCalendar.Core.LuniSolarCalendar;
-using Model.Database;
+using HRMS.Accouting.Model;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 
 namespace HRMS.Accouting.ViewModel
 {
@@ -218,6 +223,25 @@ namespace HRMS.Accouting.ViewModel
                 image.StreamSource = ms;
                 image.EndInit();
                 return image;
+            }
+        }
+
+        //Kiểm tra tháng trước đó
+        public static bool IsMonthBefore(int month, int year)
+        {
+            if (DateTime.Now.Month == 1)
+            {
+                if (month == 12 && year == DateTime.Now.Year - 1)
+                    return true;
+                else
+                    return false;
+            }
+            else
+            {
+                if (month == DateTime.Now.Month - 1 && year == DateTime.Now.Year)
+                    return true;
+                else
+                    return false;
             }
         }
     }

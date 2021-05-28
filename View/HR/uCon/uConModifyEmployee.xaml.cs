@@ -1,5 +1,4 @@
-﻿using Model;
-using Model.Database;
+﻿using HRMS.Accouting.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

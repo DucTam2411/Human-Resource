@@ -4,4 +4,8 @@
     xmlns:local="clr-namespace:HRMS.Resource"
     xmlns:modelview="clr-namespace:HRMS.Accouting.ViewModel">
     <modelview:AccountingViewModel x:Key="vmAccountingList" />
+    <modelview:InterfaceViewModel x:Key="vmInterface" />
+    <modelview:InformationViewModel x:Key="vmInformation" />
+    <modelview:SalaryInformationViewModel x:Key="vmSalaryInformation" />
+    <modelview:TimekeepingInformationViewModel x:Key="vmTimekeepingInformation" />
 </ResourceDictionary>

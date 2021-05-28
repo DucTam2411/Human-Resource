@@ -40,11 +40,17 @@
     <Reference Include="Augustine.VietnameseCalendar.Core">
       <HintPath>.\Augustine.VietnameseCalendar.Core.dll</HintPath>
     </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\iTextSharp.5.5.13.2\lib\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="MaterialDesignColors, Version=2.0.0.2422, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>packages\MaterialDesignColors.2.0.0\lib\net452\MaterialDesignColors.dll</HintPath>
@@ -52,9 +58,35 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=4.0.0.2422, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>packages\MaterialDesignThemes.4.0.0\lib\net452\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Syncfusion.Compression.Base, Version=19.1460.0.65, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Compression.Base.19.1.0.65\lib\net46\Syncfusion.Compression.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Data.WPF, Version=19.1460.0.65, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Data.WPF.19.1.0.65\lib\net46\Syncfusion.Data.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=19.1460.0.65, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Licensing.19.1.0.65\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Pdf.Base, Version=19.1460.0.65, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Pdf.Wpf.19.1.0.65\lib\net46\Syncfusion.Pdf.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfGrid.WPF, Version=19.1460.0.65, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.SfGrid.WPF.19.1.0.65\lib\net46\Syncfusion.SfGrid.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfGridConverter.WPF, Version=19.1460.0.65, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.DataGridExcelExport.Wpf.19.1.0.65\lib\net46\Syncfusion.SfGridConverter.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Shared.WPF, Version=19.1460.0.65, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Shared.WPF.19.1.0.65\lib\net46\Syncfusion.Shared.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.XlsIO.Base, Version=19.1460.0.65, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.XlsIO.Wpf.19.1.0.65\lib\net46\Syncfusion.XlsIO.Base.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -73,31 +105,47 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Accouting\uCon\Accouting_EmployeeWindow.xaml">
+    <Page Include="Accouting\View\Accouting_EmployeeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Accouting\uCon\uConChangeInSalary.xaml">
+    <Page Include="Accouting\View\uConAccountingEmployeeInformation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Accouting\uCon\uConDashBoard.xaml">
+    <Page Include="Accouting\View\uConAccountingSalaryInformation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Accouting\uCon\uConEmployeeSalary.xaml">
+    <Page Include="Accouting\View\uConAccountingTimekeepingDetailInformation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Accouting\uCon\uConListEmployeeAccounting.xaml">
+    <Page Include="Accouting\View\uConAccountingTimekeepingInformation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Accouting\uCon\uConRequestBoard.xaml">
+    <Page Include="Accouting\View\uConChangeInSalary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Accouting\uCon\uConSideBarAccouting.xaml">
+    <Page Include="Accouting\View\uConDashBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Accouting\View\uConEmployeeSalary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Accouting\View\uConListEmployeeAccounting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Accouting\View\uConRequestBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Accouting\View\uConSideBarAccouting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -157,30 +205,90 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Compile Include="Accouting\uCon\Accouting_EmployeeWindow.xaml.cs">
+    <Compile Include="Accouting\Model\ComboboxModel.cs" />
+    <Compile Include="Accouting\Model\DEPARTMENT.cs">
+      <DependentUpon>HRMSEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Accouting\Model\EMPLOYEE.cs">
+      <DependentUpon>HRMSEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Accouting\Model\HRMSEntities.cs" />
+    <Compile Include="Accouting\Model\HRMSEntity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HRMSEntity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Accouting\Model\HRMSEntity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HRMSEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Accouting\Model\HRMSEntity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HRMSEntity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Accouting\Model\ROLE.cs">
+      <DependentUpon>HRMSEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Accouting\Model\ROOM.cs">
+      <DependentUpon>HRMSEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Accouting\Model\SALARY.cs">
+      <DependentUpon>HRMSEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Accouting\Model\SalaryData.cs" />
+    <Compile Include="Accouting\Model\SideBarDatabase.cs" />
+    <Compile Include="Accouting\Model\sysdiagram.cs">
+      <DependentUpon>HRMSEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Accouting\Model\TIMEKEEPING.cs">
+      <DependentUpon>HRMSEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Accouting\Model\TimekeepingData.cs" />
+    <Compile Include="Accouting\Model\TIMEKEEPING_DETAIL.cs">
+      <DependentUpon>HRMSEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Accouting\View\Accouting_EmployeeWindow.xaml.cs">
       <DependentUpon>Accouting_EmployeeWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Accouting\uCon\uConChangeInSalary.xaml.cs">
+    <Compile Include="Accouting\View\uConAccountingEmployeeInformation.xaml.cs">
+      <DependentUpon>uConAccountingEmployeeInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Accouting\View\uConAccountingSalaryInformation.xaml.cs">
+      <DependentUpon>uConAccountingSalaryInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Accouting\View\uConAccountingTimekeepingDetailInformation.xaml.cs">
+      <DependentUpon>uConAccountingTimekeepingDetailInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Accouting\View\uConAccountingTimekeepingInformation.xaml.cs">
+      <DependentUpon>uConAccountingTimekeepingInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Accouting\View\uConChangeInSalary.xaml.cs">
       <DependentUpon>uConChangeInSalary.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Accouting\uCon\uConDashBoard.xaml.cs">
+    <Compile Include="Accouting\View\uConDashBoard.xaml.cs">
       <DependentUpon>uConDashBoard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Accouting\uCon\uConEmployeeSalary.xaml.cs">
+    <Compile Include="Accouting\View\uConEmployeeSalary.xaml.cs">
       <DependentUpon>uConEmployeeSalary.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Accouting\uCon\uConListEmployeeAccounting.xaml.cs">
+    <Compile Include="Accouting\View\uConListEmployeeAccounting.xaml.cs">
       <DependentUpon>uConListEmployeeAccounting.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Accouting\uCon\uConRequestBoard.xaml.cs">
+    <Compile Include="Accouting\View\uConRequestBoard.xaml.cs">
       <DependentUpon>uConRequestBoard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Accouting\uCon\uConSideBarAccouting.xaml.cs">
+    <Compile Include="Accouting\View\uConSideBarAccouting.xaml.cs">
       <DependentUpon>uConSideBarAccouting.xaml</DependentUpon>
     </Compile>
     <Compile Include="Accouting\ViewModel\AccountingClass.cs" />
     <Compile Include="Accouting\ViewModel\AccountingViewModel.cs" />
     <Compile Include="Accouting\ViewModel\BaseViewModel.cs" />
+    <Compile Include="Accouting\ViewModel\InformationViewModel.cs" />
+    <Compile Include="Accouting\ViewModel\InterfaceViewModel.cs" />
+    <Compile Include="Accouting\ViewModel\SalaryInformationViewModel.cs" />
+    <Compile Include="Accouting\ViewModel\TimekeepingInformationViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -250,6 +358,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Accouting\Model\HRMSEntity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HRMSEntity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Accouting\Model\HRMSEntity.edmx.diagram">
+      <DependentUpon>HRMSEntity.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -263,10 +378,19 @@
     <Folder Include="Director\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Model\Model.csproj">
-      <Project>{d5153713-e858-4957-a52e-27d9fa23fa97}</Project>
-      <Name>Model</Name>
-    </ProjectReference>
+    <Content Include="Accouting\Model\HRMSEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HRMSEntity.edmx</DependentUpon>
+      <LastGenOutput>HRMSEntity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Accouting\Model\HRMSEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HRMSEntity.edmx</DependentUpon>
+      <LastGenOutput>HRMSEntity.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />

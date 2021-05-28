@@ -1,6 +1,4 @@
 ﻿using HRMS.Accouting.uCon;
-using Model;
-using Model.Database;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,9 +13,16 @@ using System.Windows.Media.Imaging;
 using System.IO;
 using System.Windows;
 using System.Windows.Media;
+using MaterialDesignThemes.Wpf;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using System.Collections;
+using System.Windows.Controls.Primitives;
+using HRMS.Accouting.Model;
 
 namespace HRMS.Accouting.ViewModel 
 {
+    using ButtonContent = Tuple<TextBlock, PackIcon>;
     public class AccountingViewModel : BaseViewModel
     {
 
@@ -30,6 +35,8 @@ namespace HRMS.Accouting.ViewModel
         public ICommand BackCommand { get; set; }
         //Để thêm hình ảnh
         public ICommand AddImageCommand { get; set; }
+        //Export to PDF
+        public ICommand ExportPDFCommand { get; set; }
         #endregion
 
         private BaseViewModel _AccountingVM;
@@ -249,6 +256,9 @@ namespace HRMS.Accouting.ViewModel
             //Chức năng add ảnh
             AddImageCommand = new RelayCommand<object>(p => IsAddImageData(), p => AddImageData());
 
+            //Chức năng export to pdf
+            ExportPDFCommand = new RelayCommand<DataGrid>(p => IsExportCommand(), p => ExportCommand(p));
+
         }
 
         //Load data từ database vào datagrid trong EmployeeList
@@ -261,10 +271,11 @@ namespace HRMS.Accouting.ViewModel
             }
 
             //Tạo list chứa dữ liệu có lọc theo tháng
-            var list = (from emp in HRMSEntity.Ins.DB.EMPLOYEEs
-                       join tk in HRMSEntity.Ins.DB.TIMEKEEPINGs on emp.EMPLOYEE_ID equals tk.EMPLOYEE_ID into temp1
+            hrmsEntities DB = new hrmsEntities();
+            var list = (from emp in DB.EMPLOYEEs
+                       join tk in DB.TIMEKEEPINGs on emp.EMPLOYEE_ID equals tk.EMPLOYEE_ID into temp1
                        from tk in temp1.DefaultIfEmpty()
-                       join sl in HRMSEntity.Ins.DB.SALARies on emp.EMPLOYEE_ID equals sl.EMPLOYEE_ID into temp2
+                       join sl in DB.SALARies on emp.EMPLOYEE_ID equals sl.EMPLOYEE_ID into temp2
                        from sl in temp2.DefaultIfEmpty()
                        where sl.DATE_START.Value.Month == SELECTMONTHTYPE.MONTH && sl.DATE_START.Value.Year == SELECTMONTHTYPE.YEAR && 
                             tk.DATE_START.Value.Month == SELECTMONTHTYPE.MONTH && tk.DATE_START.Value.Year == SELECTMONTHTYPE.YEAR
@@ -281,7 +292,7 @@ namespace HRMS.Accouting.ViewModel
             {                       
                 item.SALARY.TOTAL_SALARY = AccountingClass.CalculateSalary(item.SALARY, item.TIMEKEEPING);
             }
-            HRMSEntity.Ins.DB.SaveChanges();
+            HRMSEntities.Ins.DB.SaveChanges();
 
             //Khởi tạo 2 biến lưu dữ liệu từ list ở trên (1 cái binding tới datagrid và 1 cái bản sao)
             SalaryList = new ObservableCollection<SalaryData>();
@@ -316,7 +327,7 @@ namespace HRMS.Accouting.ViewModel
         private void LoadMonth()
         {
             //Chọn tháng từ database KHÔNG TRÙNG LẶP (chọn DATE_START và DATE_END để kiểm tra tháng bắt đầu và tháng kết thúc có hợp lệ không (nếu cách nhau không quá 31 ngày hợp lệ)
-            var listmonth = (from month in HRMSEntity.Ins.DB.SALARies
+            var listmonth = (from month in HRMSEntities.Ins.DB.SALARies
                             select new {Date_Start = month.DATE_START, Date_End = month.DATE_END }).Distinct();
 
             //Khởi tạo biến MONTHLIST để chứa tháng
@@ -359,8 +370,8 @@ namespace HRMS.Accouting.ViewModel
         //Thực hiện lệnh trong Edit Command
         private void EditSalaryData()
         {
-            var Employee = HRMSEntity.Ins.DB.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == SelectedItem.EMPLOYEE.EMPLOYEE_ID).SingleOrDefault();
-            var Salary = HRMSEntity.Ins.DB.SALARies.Where(x => x.EMPLOYEE_ID == SelectedItem.SALARY.EMPLOYEE_ID && x.DATE_START == SelectedItem.SALARY.DATE_START).SingleOrDefault();
+            var Employee = HRMSEntities.Ins.DB.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == SelectedItem.EMPLOYEE.EMPLOYEE_ID).SingleOrDefault();
+            var Salary = HRMSEntities.Ins.DB.SALARies.Where(x => x.EMPLOYEE_ID == SelectedItem.SALARY.EMPLOYEE_ID && x.DATE_START == SelectedItem.SALARY.DATE_START).SingleOrDefault();
             Salary.HEALTH_INSURANCE = HEALTH_INSURANCE;
             Salary.SOCIAL_INSURANCE = SOCIAL_INSURANCE;
             Salary.WELFARE = WELFARE;
@@ -371,7 +382,7 @@ namespace HRMS.Accouting.ViewModel
             {
                 Employee.IMAGE = IMAGESOURCE;
             }
-            HRMSEntity.Ins.DB.SaveChanges();
+            HRMSEntities.Ins.DB.SaveChanges();
         }
 
         //Điều kiện thực hiện command
@@ -382,7 +393,7 @@ namespace HRMS.Accouting.ViewModel
                 return true;
             else return false;
 
-            var salaryList = HRMSEntity.Ins.DB.SALARies.Where(x => x.EMPLOYEE_ID == SelectedItem.SALARY.EMPLOYEE_ID && x.DATE_START == SelectedItem.SALARY.DATE_START);
+            var salaryList = HRMSEntities.Ins.DB.SALARies.Where(x => x.EMPLOYEE_ID == SelectedItem.SALARY.EMPLOYEE_ID && x.DATE_START == SelectedItem.SALARY.DATE_START);
             if (salaryList != null && salaryList.Count() != 0)
                 return true;
             return false;
@@ -410,8 +421,86 @@ namespace HRMS.Accouting.ViewModel
                 BUTTONTHICKNESS = 0;
                 BRUSH = Brushes.Transparent;
             }
+        }  
+        
+        private bool IsExportCommand()
+        {
+            if ((SELECTMONTHTYPE.MONTH < DateTime.Now.Month && SELECTMONTHTYPE.YEAR == DateTime.Now.Year) || (SELECTMONTHTYPE.YEAR < DateTime.Now.Year))
+                return true;
+            return false;
         }
 
-        
+        //Lưu datagrid thàng pdf
+        private void ExportCommand(DataGrid dtgrid)
+        {
+            PdfPTable table = new PdfPTable(dtgrid.Columns.Count);
+
+            Document doc = new Document(iTextSharp.text.PageSize.LETTER, 10, 10, 42, 35);
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Pdf Files|*.pdf";
+            saveFileDialog.Title = "Save Pdf file";
+            saveFileDialog.ShowDialog();
+
+            if (saveFileDialog.FileName != "")
+            {
+                System.IO.FileStream fs =
+                    (System.IO.FileStream)saveFileDialog.OpenFile();
+
+                PdfWriter writer = PdfWriter.GetInstance(doc, fs);
+
+                doc.Open();
+
+                for (int j = 0; j < dtgrid.Columns.Count; j++)
+                {
+                    table.AddCell(new Phrase(dtgrid.Columns[j].Header.ToString()));
+                }
+                table.HeaderRows = 1;
+                IEnumerable itemsSource = dtgrid.ItemsSource as IEnumerable;
+                if (itemsSource != null)
+                {
+                    foreach (var item in itemsSource)
+                    {
+                        DataGridRow row = dtgrid.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
+                        if (row != null)
+                        {
+                            DataGridCellsPresenter presenter = FindVisualChild<DataGridCellsPresenter>(row);
+                            for (int i = 0; i < dtgrid.Columns.Count; i++)
+                            {
+                                DataGridCell cell = (DataGridCell)presenter.ItemContainerGenerator.ContainerFromIndex(i);
+                                TextBlock txt = cell.Content as TextBlock;
+                                if (txt != null)
+                                {
+                                    table.AddCell(new Phrase(txt.Text));
+                                }
+                            }
+                        }
+                    }
+                    doc.Add(table);
+                    doc.Close();
+                }
+                MessageBox.Show("Export data to " + saveFileDialog.FileName + " successful");
+                fs.Close();
+            }            
+        }
+
+        private T FindVisualChild<T>(DependencyObject obj) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                if (child != null && child is T)
+                    return (T)child;
+                else
+                {
+                    T childOfChild = FindVisualChild<T>(child);
+                    if (childOfChild != null)
+                        return childOfChild;
+                }
+            }
+            return null;
+        }
+
+
     }
 }

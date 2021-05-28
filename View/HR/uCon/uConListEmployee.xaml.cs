@@ -1,5 +1,4 @@
-﻿using Model;
-using Model.Database;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,8 +19,6 @@ namespace HRMS.HR.uCon
 {
     public partial class uConListEmployee : UserControl
     {
-        private ObservableCollection<EMPLOYEE> employees = new ObservableCollection<EMPLOYEE>();
-
         public uConListEmployee()
         {
             InitializeComponent();
@@ -29,17 +26,10 @@ namespace HRMS.HR.uCon
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            var customers = (from customer in HRMSEntity.Ins.DB.EMPLOYEEs
-                             select customer);
-
-            dtgvA.ItemsSource = customers.ToArray();
         }
 
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
-            EMPLOYEE employee = (dtgvA.SelectedItem as EMPLOYEE);
-            contentControlMain.Content = new uConModifyEmployee(employee);
         
 
         }

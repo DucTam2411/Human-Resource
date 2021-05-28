@@ -1,0 +1,175 @@
+﻿<UserControl
+    x:Class="HRMS.Accouting.uCon.uConSideBarAccouting"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:HRMS.Accouting.uCon"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="Transparent"
+    DataContext="{StaticResource vmInterface}"
+    mc:Ignorable="d">
+
+    <Grid Width="200" Margin="0,0,0,0">
+
+        <!--  BackGround  -->
+        <Border Background="Transparent" BorderBrush="Black" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <!--<Grid
+                x:Name="GridCursor"
+                DataContext="{Binding GRIDCURSOR}"
+                Width="200"
+                Height="50"
+                Margin="0,0,0,0"
+                HorizontalAlignment="Left"
+                Background="Transparent">
+                <Border Background="Black" CornerRadius="5" />
+            </Grid>-->
+
+            <Button
+                x:Name="btnHome"
+                Grid.Row="0"
+                Width="200"
+                Height="50"
+                Margin="0,5,0,0"
+                HorizontalContentAlignment="Left"
+                Background="{Binding BACKGROUNDHOME}"
+                BorderThickness="0"
+                Command="{Binding HomeCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Foreground="{Binding FOREGROUNDHOME}" Kind="{Binding HOMETAB.ICONKIND}" />
+                    <TextBlock
+                        Margin="8,-4,0,0"
+                        FontFamily="Tw Cen MT"
+                        FontSize="22"
+                        FontWeight="SemiBold"
+                        Foreground="{Binding FOREGROUNDHOME}"
+                        Text="{Binding HOMETAB.TEXTBLOCKNAME}" />
+                </StackPanel>
+            </Button>
+
+            <Button
+                x:Name="btnTableSalary"
+                Grid.Row="1"
+                Width="200"
+                Height="50"
+                Margin="0,5,0,0"
+                HorizontalContentAlignment="Left"
+                Background="{Binding BACKGROUNDSALARYTABLE}"
+                BorderThickness="0"
+                Command="{Binding SalaryTableCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Foreground="{Binding FOREGROUNDSALARYTABLE}" Kind="{Binding SALARYTABLETAB.ICONKIND}" />
+                    <TextBlock
+                        Margin="8,-4,0,0"
+                        HorizontalAlignment="Left"
+                        FontFamily="Tw Cen MT"
+                        FontSize="22"
+                        FontWeight="SemiBold"
+                        Foreground="{Binding FOREGROUNDSALARYTABLE}"
+                        Text="{Binding SALARYTABLETAB.TEXTBLOCKNAME}" />
+                </StackPanel>
+            </Button>
+
+            <Button
+                x:Name="btnReport"
+                Grid.Row="2"
+                Width="200"
+                Height="50"
+                Margin="0,5,0,0"
+                HorizontalContentAlignment="Left"
+                Background="{Binding BACKGROUNDREPORT}"
+                BorderThickness="0"
+                Command="{Binding ReportCommand}"
+                CommandParameter="{Binding ElementName=btnReport}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Foreground="{Binding FOREGROUNDREPORT}" Kind="{Binding REPORTTAB.ICONKIND}" />
+                    <TextBlock
+                        Margin="8,-4,0,0"
+                        FontFamily="Tw Cen MT"
+                        FontSize="22"
+                        FontWeight="SemiBold"
+                        Foreground="{Binding FOREGROUNDREPORT}"
+                        Text="{Binding REPORTTAB.TEXTBLOCKNAME}" />
+                </StackPanel>
+            </Button>
+
+            <Button
+                x:Name="btnInformation"
+                Grid.Row="3"
+                Width="200"
+                Height="50"
+                Margin="0,5,0,0"
+                HorizontalContentAlignment="Left"
+                Background="{Binding BACKGROUNDINFORMATION}"
+                BorderThickness="0"
+                Command="{Binding InformationCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Foreground="{Binding FOREGROUNDINFORMATION}" Kind="{Binding INFORMATIONTAB.ICONKIND}" />
+                    <TextBlock
+                        Margin="8,-4,0,0"
+                        FontFamily="Tw Cen MT"
+                        FontSize="22"
+                        FontWeight="SemiBold"
+                        Foreground="{Binding FOREGROUNDINFORMATION}"
+                        Text="{Binding INFORMATIONTAB.TEXTBLOCKNAME}" />
+                </StackPanel>
+            </Button>
+
+            <Button
+                x:Name="btnTimekeeping"
+                Grid.Row="4"
+                Width="200"
+                Height="50"
+                Margin="0,5,0,0"
+                HorizontalContentAlignment="Left"
+                Background="{Binding BACKGROUNDTIMEKEEPING}"
+                BorderThickness="0"
+                Command="{Binding TimekeepingCommand}"
+                CommandParameter="{Binding ElementName=btnTimekeeping}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Foreground="{Binding FOREGROUNDTIMEKEEPING}" Kind="{Binding TIMEKEEPINGTAB.ICONKIND}" />
+                    <TextBlock
+                        Margin="8,-4,0,0"
+                        FontFamily="Tw Cen MT"
+                        FontSize="22"
+                        FontWeight="SemiBold"
+                        Foreground="{Binding FOREGROUNDTIMEKEEPING}"
+                        Text="{Binding TIMEKEEPINGTAB.TEXTBLOCKNAME}" />
+                </StackPanel>
+            </Button>
+
+            <Button
+                x:Name="btnSalary"
+                Grid.Row="5"
+                Width="200"
+                Height="50"
+                Margin="0,5,0,0"
+                HorizontalContentAlignment="Left"
+                Background="{Binding BACKGROUNDSALARY}"
+                BorderThickness="0"
+                Command="{Binding SalaryCommand}"
+                CommandParameter="{Binding ElementName=btnSalary}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Foreground="{Binding FOREGROUNDSALARY}" Kind="{Binding SALARYINFOTAB.ICONKIND}" />
+                    <TextBlock
+                        Margin="8,-4,0,0"
+                        FontFamily="Tw Cen MT"
+                        FontSize="22"
+                        FontWeight="SemiBold"
+                        Foreground="{Binding FOREGROUNDSALARY}"
+                        Text="{Binding SALARYINFOTAB.TEXTBLOCKNAME}" />
+                </StackPanel>
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>

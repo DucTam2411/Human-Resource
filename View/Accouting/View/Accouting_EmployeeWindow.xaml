@@ -1,0 +1,46 @@
+﻿<Window
+    x:Class="HRMS.Accouting.uCon.Accouting_EmployeeWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:HRMS.Accouting.uCon"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:userCon="clr-namespace:HRMS.Accouting.uCon"
+    Title="Accouting_EmployeeWindow"
+    Width="1150"
+    Height="600"
+    AllowsTransparency="True"
+    Background="Transparent"
+    DataContext="{StaticResource vmInterface}"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+
+    <Grid MouseDown="Grid_MouseDown">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Border
+            Grid.ColumnSpan="2"
+            BorderBrush="Black"
+            BorderThickness="8"
+            CornerRadius="30">
+            <Border.Background>
+                <SolidColorBrush Color="White" />
+            </Border.Background>
+        </Border>
+
+        <local:uConSideBarAccouting
+            Width="200"
+            Height="400"
+            Margin="15,100,10,100"
+            HorizontalAlignment="Left"
+            DockPanel.Dock="Left" />
+
+        <DockPanel Grid.Column="2" Margin="0,0,20,0">
+            <ContentControl Content="{Binding CONTENTCONTROL}" />
+        </DockPanel>
+    </Grid>
+</Window>
