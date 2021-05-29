@@ -68,7 +68,7 @@ namespace HRMS.Accouting.ViewModel
                 //Nếu selected khác null, nghĩa là tháng đã chọn thì show data theo select dó
                 if (SELECTMONTHTYPE != null)
                 {
-                    LoadSalaryData(1);
+                    LoadSalaryData(EMPLOYEE_ID);
                 }
             }
         }
@@ -103,7 +103,12 @@ namespace HRMS.Accouting.ViewModel
         #endregion
         public SalaryInformationViewModel()
         {
+            LoadMonth();
+        }
 
+        public SalaryInformationViewModel(int ID)
+        {
+            EMPLOYEE_ID = ID;
             LoadMonth();
         }
 

@@ -1,4 +1,5 @@
-﻿using HRMS.Accouting.ViewModel;
+﻿using HRMS.Accouting.Model;
+using HRMS.Accouting.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HRMS.Accouting.uCon
+namespace HRMS.Accouting.View
 {
     /// <summary>
     /// Interaction logic for uConEmployeeSalary.xaml
@@ -22,13 +23,15 @@ namespace HRMS.Accouting.uCon
     /// 
     public partial class uConEmployeeSalary : UserControl
     {
-        public uConEmployeeSalary()
+        public uConEmployeeSalary(int ID)
         {
             InitializeComponent();
+            DataContext = new AccountingViewModel(ID);
         }
 
-        public uConEmployeeSalary(UserControl uCon)
+        public uConEmployeeSalary(SalaryInformationData data,int ID)
         {
+            DataContext = new AccountingViewModel(data,ID);
             InitializeComponent();
 
         }

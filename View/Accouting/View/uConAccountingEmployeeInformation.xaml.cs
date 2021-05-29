@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HRMS.Accouting.uCon
+namespace HRMS.Accouting.View
 {
     /// <summary>
     /// Interaction logic for uConAccountingEmployeeInformation.xaml
@@ -23,11 +23,13 @@ namespace HRMS.Accouting.uCon
     {
         public uConAccountingEmployeeInformation()
         {
+            DataContext = new InformationViewModel();
             InitializeComponent();
         }
 
         public uConAccountingEmployeeInformation(int id)
         {
+            DataContext = new InformationViewModel(id);
             InitializeComponent();            
         }
     }

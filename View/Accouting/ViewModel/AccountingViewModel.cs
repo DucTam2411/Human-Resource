@@ -1,4 +1,4 @@
-﻿using HRMS.Accouting.uCon;
+﻿using HRMS.Accouting.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,6 +19,8 @@ using iTextSharp.text;
 using System.Collections;
 using System.Windows.Controls.Primitives;
 using HRMS.Accouting.Model;
+using ClosedXML.Excel;
+using System.Data;
 
 namespace HRMS.Accouting.ViewModel 
 {
@@ -37,6 +39,8 @@ namespace HRMS.Accouting.ViewModel
         public ICommand AddImageCommand { get; set; }
         //Export to PDF
         public ICommand ExportPDFCommand { get; set; }
+        //Export to Excel
+        public ICommand ExportExcelCommand { get; set; }
         #endregion
 
         private BaseViewModel _AccountingVM;
@@ -46,17 +50,27 @@ namespace HRMS.Accouting.ViewModel
         public BaseViewModel AccountingDetailVM { get => _AccountingDetailVM; set { _AccountingDetailVM = value; OnPropertyChanged(); } }
 
         #region Data Binding Salary List 
+        //Binding tới tài khoản hiện tại
+        private int _USER_ID;
+        public int USER_ID { get =>_USER_ID ; set { _USER_ID = value; OnPropertyChanged(); } }
+
+        private string _USER_NAME;
+        public string USER_NAME { get => _USER_NAME; set { _USER_NAME = value; OnPropertyChanged(); } }
+
+        private int _USER_ROLE;
+        public int USER_ROLE { get => _USER_ROLE; set { _USER_ROLE = value; OnPropertyChanged(); } }
+
         //Binding tới datagrid của Salary List
-        private ObservableCollection<SalaryData> _SalaryList;
-        public ObservableCollection<SalaryData> SalaryList { get => _SalaryList; set { _SalaryList = value; OnPropertyChanged(); } }
+        private ObservableCollection<SalaryInformationData> _SalaryList;
+        public ObservableCollection<SalaryInformationData> SalaryList { get => _SalaryList; set { _SalaryList = value; OnPropertyChanged(); } }
 
         //Để lưu trữ bản sao để có thể sao chép khi cần thiết
-        private ObservableCollection<SalaryData> _SalaryTest;
-        public ObservableCollection<SalaryData> SalaryTest { get => _SalaryTest; set { _SalaryTest = value; OnPropertyChanged(); } }
+        private ObservableCollection<SalaryInformationData> _SalaryTest;
+        public ObservableCollection<SalaryInformationData> SalaryTest { get => _SalaryTest; set { _SalaryTest = value; OnPropertyChanged(); } }
 
         //Binding tới datagrid selected trong Salary list
-        private SalaryData _SelectedItem;
-        public SalaryData SelectedItem { 
+        private SalaryInformationData _SelectedItem;
+        public SalaryInformationData SelectedItem { 
             get => _SelectedItem; 
             set { 
                 _SelectedItem = value; 
@@ -64,18 +78,20 @@ namespace HRMS.Accouting.ViewModel
                 //Đưa dữ liệu khi double-left vào 1 row bất kì trong SalaryDetailEmployee
                 if(SelectedItem != null)
                 {
-                    SOCIAL_INSURANCE = (long)SelectedItem.SALARY.SOCIAL_INSURANCE;
-                    HEALTH_INSURANCE = (int)SelectedItem.SALARY.HEALTH_INSURANCE;
-                    OVERTIME_SALARY = (long)SelectedItem.SALARY.OVERTIME_SALARY;
-                    BONUS = (long)SelectedItem.SALARY.BONUS;
-                    WELFARE = (long)SelectedItem.SALARY.WELFARE;
-                    TAX = (long)SelectedItem.SALARY.TAX;
-                    EMPLOYEE_ID = SelectedItem.EMPLOYEE.EMPLOYEE_ID;
-                    EMPLOYEE_NAME = SelectedItem.EMPLOYEE.NAME;
-                    DEPARTMENT_NAME = SelectedItem.EMPLOYEE.DEPARTMENT.DEPT_NAME;
-                    BASIC_WAGE = (long)SelectedItem.SALARY.BASIC_WAGE;
-                    COEFFICIENT = (double)SelectedItem.SALARY.COEFFICIENT;
-                    IMAGESOURCE = SelectedItem.EMPLOYEE.IMAGE;
+                    SOCIAL_INSURANCE = (long)SelectedItem.SOCIAL_INSURANCE;
+                    HEALTH_INSURANCE = (int)SelectedItem.HEALTH_INSURANCE;
+                    OVERTIME_SALARY = (long)SelectedItem.OVERTIME_SALARY;
+                    BONUS = (long)SelectedItem.BONUS;
+                    WELFARE = (long)SelectedItem.WELFARE;
+                    TAX = (long)SelectedItem.TAX;
+                    EMPLOYEE_ID = SelectedItem.EMPLOYEE_ID;
+                    EMPLOYEE_NAME = SelectedItem.NAME;
+                    DEPARTMENT_NAME = SelectedItem.DEPARTMENT;
+                    ROLE_NAME = SelectedItem.ROLE;
+                    BASIC_WAGE = (long)SelectedItem.BASIC_WAGE;
+                    COEFFICIENT = (double)SelectedItem.COEFFICIENT;
+                    EMPLOYEE emp = HRMSEntities.Ins.DB.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == SelectedItem.EMPLOYEE_ID).FirstOrDefault();
+                    IMAGESOURCE = emp.IMAGE;
                     if (IMAGESOURCE == null)
                     {
                         BUTTONTHICKNESS = 1;
@@ -123,28 +139,28 @@ namespace HRMS.Accouting.ViewModel
                         {
                             //Lọc theo ID
                             case "ID":
-                                SalaryList = new ObservableCollection<SalaryData>(SalaryList.Where(x => x.EMPLOYEE.EMPLOYEE_ID.ToString().Contains(SEARCH_TEXT)));
+                                SalaryList = new ObservableCollection<SalaryInformationData>(SalaryList.Where(x => x.EMPLOYEE_ID.ToString().Contains(SEARCH_TEXT)));
                                 break;
 
                             //Lọc theo tên
                             case "NAME":
-                                SalaryList = new ObservableCollection<SalaryData>(SalaryList.Where(x => x.EMPLOYEE.NAME.Contains(SEARCH_TEXT) ||
-                                                                                                        x.EMPLOYEE.NAME.ToLower().Contains(SEARCH_TEXT) ||
-                                                                                                        x.EMPLOYEE.NAME.ToUpper().Contains(SEARCH_TEXT)));
+                                SalaryList = new ObservableCollection<SalaryInformationData>(SalaryList.Where(x => x.NAME.Contains(SEARCH_TEXT) ||
+                                                                                                        x.NAME.ToLower().Contains(SEARCH_TEXT) ||
+                                                                                                        x.NAME.ToUpper().Contains(SEARCH_TEXT)));
                                 break;
 
                             //Lọc theo Department
                             case "DEPARTMENT":
-                                SalaryList = new ObservableCollection<SalaryData>(SalaryList.Where(x => x.EMPLOYEE.DEPARTMENT.DEPT_NAME.Contains(SEARCH_TEXT) ||
-                                                                                                        x.EMPLOYEE.DEPARTMENT.DEPT_NAME.ToLower().Contains(SEARCH_TEXT) ||
-                                                                                                        x.EMPLOYEE.DEPARTMENT.DEPT_NAME.ToUpper().Contains(SEARCH_TEXT)));
+                                SalaryList = new ObservableCollection<SalaryInformationData>(SalaryList.Where(x => x.DEPARTMENT.Contains(SEARCH_TEXT) ||
+                                                                                                        x.DEPARTMENT.ToLower().Contains(SEARCH_TEXT) ||
+                                                                                                        x.DEPARTMENT.ToUpper().Contains(SEARCH_TEXT)));
                                 break;
 
                             //Lọc theo role
                             case "ROLE":
-                                SalaryList = new ObservableCollection<SalaryData>(SalaryList.Where(x => x.EMPLOYEE.ROLE.ROLE_NAME.Contains(SEARCH_TEXT) ||
-                                                                                                        x.EMPLOYEE.ROLE.ROLE_NAME.ToLower().Contains(SEARCH_TEXT) ||
-                                                                                                        x.EMPLOYEE.ROLE.ROLE_NAME.ToUpper().Contains(SEARCH_TEXT)));
+                                SalaryList = new ObservableCollection<SalaryInformationData>(SalaryList.Where(x => x.ROLE.Contains(SEARCH_TEXT) ||
+                                                                                                        x.ROLE.ToLower().Contains(SEARCH_TEXT) ||
+                                                                                                        x.ROLE.ToUpper().Contains(SEARCH_TEXT)));
                                 break;
                             default:
                                 break;
@@ -212,6 +228,9 @@ namespace HRMS.Accouting.ViewModel
         private string _DEPARTMENT_NAME;
         public string DEPARTMENT_NAME { get => _DEPARTMENT_NAME; set { _DEPARTMENT_NAME = value; OnPropertyChanged(); } }
 
+        private string _ROLE_NAME;
+        public string ROLE_NAME { get => _ROLE_NAME; set { _ROLE_NAME = value; OnPropertyChanged(); } }
+
         private long _TOTAL_SALARY;
         public long TOTAL_SALARY { get => _TOTAL_SALARY; set { _TOTAL_SALARY = value; OnPropertyChanged(); } }
 
@@ -227,38 +246,62 @@ namespace HRMS.Accouting.ViewModel
         private int _BUTTONTHICKNESS;
         public int BUTTONTHICKNESS { get => _BUTTONTHICKNESS; set { _BUTTONTHICKNESS = value; OnPropertyChanged(); } }
         #endregion
-        public AccountingViewModel()
+        public AccountingViewModel(int ID)
         {
+            LoadCommandList(ID);
+        }
 
-            #region Load Data khi mỗi khi truy cập tới view
-            LoadMonth();
-            LoadComboboxTypeList();
-            LoadSalaryData();                     
-            #endregion
+        public AccountingViewModel(SalaryInformationData data, int ID)
+        {
+            SelectedItem = data;
+            LoadCommandDetail(ID);
+        }
 
-            //Chức năng của showEmployeeCommand
-            showEmployeeCommand = new RelayCommand<ContentControl>(p => { 
-                if (SelectedItem != null) 
-                    { return true; } 
-                else 
-                    { return false; } 
-            },
-                p => 
-                { p.Content = new uConEmployeeSalary(); });
-           
+        private void LoadCommandDetail(int ID)
+        {
+            LoadUser(ID);
             //Chức năng của EditCommand
-            EditCommand = new RelayCommand<object>(p => IsEditSalaryData(),p => EditSalaryData());
+            EditCommand = new RelayCommand<object>(p => IsEditSalaryData(), p => EditSalaryData());
 
             //Chức năng của BackCommand
-            BackCommand = new RelayCommand<ContentControl>(p => { return true; }, 
-                p => { p.Content = new uConListEmployeeAccounting(); });
+            BackCommand = new RelayCommand<ContentControl>(p => { return true; },
+                p => { p.Content = new uConListEmployeeAccounting(ID); });
 
             //Chức năng add ảnh
             AddImageCommand = new RelayCommand<object>(p => IsAddImageData(), p => AddImageData());
+        }
+
+        private void LoadCommandList(int ID)
+        {
+            #region Load Data khi mỗi khi truy cập tới view
+            LoadMonth();
+            LoadComboboxTypeList();
+            LoadUser(ID);
+            #endregion
+
+            //Chức năng của showEmployeeCommand
+            showEmployeeCommand = new RelayCommand<ContentControl>(p => {
+                if (SelectedItem != null)
+                { return true; }
+                else
+                { return false; }
+            },
+                p =>
+                { p.Content = new uConEmployeeSalary(SelectedItem, ID); });
 
             //Chức năng export to pdf
-            ExportPDFCommand = new RelayCommand<DataGrid>(p => IsExportCommand(), p => ExportCommand(p));
+            ExportPDFCommand = new RelayCommand<DataGrid>(p => IsExportCommand(), p => ExportPDF(p, USER_NAME));
 
+            //Chức năng export to excel
+            ExportExcelCommand = new RelayCommand<DataGrid>(p => IsExportCommand(), p => ExportExcel(p));
+        }
+
+        //Load user
+        private void LoadUser(int ID)
+        {
+            var emp = HRMSEntities.Ins.DB.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == ID).SingleOrDefault();
+            USER_NAME = emp.NAME;
+            USER_ROLE = (int)emp.ROLE.PERMISSION;
         }
 
         //Load data từ database vào datagrid trong EmployeeList
@@ -282,33 +325,115 @@ namespace HRMS.Accouting.ViewModel
                        select new
                        {
                            id = emp.EMPLOYEE_ID,
+                           month_start = sl.DATE_START.Value.Month, year_start = sl.DATE_START.Value.Year,
                            EMPLOYEE = emp,
                            TIMEKEEPING = tk,
                            SALARY = sl
-                       }).Distinct();                       
-
-            //lưu dữ liệu từ list vào 2 cái biến vừa khởi tạo
-            foreach (var item in list)
-            {                       
-                item.SALARY.TOTAL_SALARY = AccountingClass.CalculateSalary(item.SALARY, item.TIMEKEEPING);
-            }
-            HRMSEntities.Ins.DB.SaveChanges();
-
-            //Khởi tạo 2 biến lưu dữ liệu từ list ở trên (1 cái binding tới datagrid và 1 cái bản sao)
-            SalaryList = new ObservableCollection<SalaryData>();
-            SalaryTest = new ObservableCollection<SalaryData>();
-
-            foreach (var item in list)
+                       }).Distinct();                
+            if(list != null && list.Count() == 0)
             {
-                SalaryData salaryData = new SalaryData();
+                Console.WriteLine("NULL");
 
-                salaryData.ID = item.id;
-                salaryData.EMPLOYEE = item.EMPLOYEE;
-                salaryData.TIMEKEEPING = item.TIMEKEEPING;
-                salaryData.SALARY = item.SALARY;
+                var list_temp = from emp in DB.EMPLOYEEs select emp;
 
-                SalaryList.Add(salaryData);
-                SalaryTest.Add(salaryData);
+                SalaryList = new ObservableCollection<SalaryInformationData>();
+                SalaryTest = new ObservableCollection<SalaryInformationData>();
+
+                foreach (var item in list_temp)
+                {
+                    DateTime date = AccountingClass.GetDateBefore();
+                    SalaryInformationData salaryData = new SalaryInformationData();
+                    SALARY old_salary = DB.SALARies.Where(x => x.EMPLOYEE_ID == item.EMPLOYEE_ID && 
+                    x.DATE_START.Value.Month == date.Month && x.DATE_START.Value.Year == date.Year).SingleOrDefault();                    
+                    salaryData.EMPLOYEE_ID = item.EMPLOYEE_ID;
+                    salaryData.NAME = item.NAME;
+                    salaryData.DEPARTMENT = item.DEPARTMENT.DEPT_NAME;
+                    salaryData.ROLE = item.ROLE.ROLE_NAME;
+                    salaryData.BASIC_WAGE = (long)old_salary.BASIC_WAGE;
+                    salaryData.WORK_DAY = 0;
+                    salaryData.OVERTIME_DAY = 0;
+                    salaryData.OVERTIME_SALARY = (long)old_salary.OVERTIME_SALARY;
+                    salaryData.TOTAL_SALARY = 0;
+                    salaryData.SOCIAL_INSURANCE = 0;
+                    salaryData.HEALTH_INSURANCE = 0;
+                    salaryData.TAX = 0;
+                    salaryData.WELFARE = 0;
+                    salaryData.BONUS = 0;
+                    salaryData.COEFFICIENT = (double)old_salary.COEFFICIENT;
+                    salaryData.DATE_START = new DateTime(SELECTMONTHTYPE.YEAR,SELECTMONTHTYPE.MONTH, 1);
+                    salaryData.DATE_END = new DateTime(SELECTMONTHTYPE.YEAR, SELECTMONTHTYPE.MONTH, AccountingClass.GetDaybyMonth(SELECTMONTHTYPE.MONTH,SELECTMONTHTYPE.YEAR));
+                    
+                    SalaryList.Add(salaryData);
+                    SalaryTest.Add(salaryData);
+
+                    SALARY salary = new SALARY();
+                    salary.EMPLOYEE_ID = item.EMPLOYEE_ID;
+                    salary.BASIC_WAGE = (long)old_salary.BASIC_WAGE;
+                    salary.COEFFICIENT = (double)old_salary.COEFFICIENT;
+                    salary.OVERTIME_SALARY = (long)old_salary.OVERTIME_SALARY;
+                    salary.DATE_START = new DateTime(SELECTMONTHTYPE.YEAR, SELECTMONTHTYPE.MONTH, 1);
+                    salary.DATE_END = new DateTime(SELECTMONTHTYPE.YEAR, SELECTMONTHTYPE.MONTH, AccountingClass.GetDaybyMonth(SELECTMONTHTYPE.MONTH, SELECTMONTHTYPE.YEAR));
+                    salary.BONUS = 0;
+                    salary.HEALTH_INSURANCE = 0;
+                    salary.SOCIAL_INSURANCE = 0;
+                    salary.TAX = 0;
+                    salary.WELFARE = 0;
+                    salary.TOTAL_SALARY = 0;
+                    DB.SALARies.Add(salary);
+
+                    TIMEKEEPING temp = DB.TIMEKEEPINGs.Where(x => x.EMPLOYEE_ID == item.EMPLOYEE_ID && x.DATE_START.Value.Month == SELECTMONTHTYPE.MONTH && x.DATE_START.Value.Year == SELECTMONTHTYPE.YEAR).FirstOrDefault();
+                    if (temp == null)
+                    {
+                        TIMEKEEPING timekeeping = new TIMEKEEPING();
+                        timekeeping.DATE_START = new DateTime(SELECTMONTHTYPE.YEAR, SELECTMONTHTYPE.MONTH, 1);
+                        timekeeping.DATE_END = new DateTime(SELECTMONTHTYPE.YEAR, SELECTMONTHTYPE.MONTH, AccountingClass.GetDaybyMonth(SELECTMONTHTYPE.MONTH, SELECTMONTHTYPE.YEAR));
+                        timekeeping.EMPLOYEE_ID = item.EMPLOYEE_ID;
+                        timekeeping.NUMBER_OF_ABSENT_DAY = 0;
+                        timekeeping.NUMBER_OF_OVERTIME_DAY = 0;
+                        timekeeping.NUMBER_OF_WORK_DAY = 0;
+                        DB.TIMEKEEPINGs.Add(timekeeping);
+                    }                  
+                }
+                DB.SaveChanges();
+            }
+            else
+            {
+                //lưu dữ liệu từ list vào 2 cái biến vừa khởi tạo
+                foreach (var item in list)
+                {
+                    item.SALARY.TOTAL_SALARY = AccountingClass.CalculateSalary(item.SALARY, item.TIMEKEEPING);
+                }
+                HRMSEntities.Ins.DB.SaveChanges();
+
+                //Khởi tạo 2 biến lưu dữ liệu từ list ở trên (1 cái binding tới datagrid và 1 cái bản sao)
+                SalaryList = new ObservableCollection<SalaryInformationData>();
+                SalaryTest = new ObservableCollection<SalaryInformationData>();
+
+                foreach (var item in list)
+                {
+                    SalaryInformationData salaryData = new SalaryInformationData();
+
+                    salaryData.EMPLOYEE_ID = item.id;
+                    salaryData.NAME = item.EMPLOYEE.NAME;
+                    salaryData.DEPARTMENT = item.EMPLOYEE.DEPARTMENT.DEPT_NAME;
+                    salaryData.ROLE = item.EMPLOYEE.ROLE.ROLE_NAME;
+                    salaryData.BASIC_WAGE = (long)item.SALARY.BASIC_WAGE;
+                    salaryData.WORK_DAY = (int)item.TIMEKEEPING.NUMBER_OF_WORK_DAY;
+                    salaryData.OVERTIME_DAY = (int)item.TIMEKEEPING.NUMBER_OF_OVERTIME_DAY;
+                    salaryData.OVERTIME_SALARY = (long)item.SALARY.OVERTIME_SALARY;
+                    salaryData.TOTAL_SALARY = (long)item.SALARY.TOTAL_SALARY;
+                    salaryData.SOCIAL_INSURANCE = (long)item.SALARY.SOCIAL_INSURANCE;
+                    salaryData.HEALTH_INSURANCE = (long)item.SALARY.HEALTH_INSURANCE;
+                    salaryData.TAX = (long)item.SALARY.TAX;
+                    salaryData.WELFARE = (long)item.SALARY.WELFARE;
+                    salaryData.BONUS = (long)item.SALARY.BONUS;
+                    salaryData.COEFFICIENT = (double)item.SALARY.COEFFICIENT;
+                    salaryData.DATE_START = (DateTime)item.SALARY.DATE_START;
+                    salaryData.DATE_END = (DateTime)item.SALARY.DATE_END;
+
+                    SalaryList.Add(salaryData);
+                    SalaryTest.Add(salaryData);
+                }
             }
         }
 
@@ -333,12 +458,14 @@ namespace HRMS.Accouting.ViewModel
             //Khởi tạo biến MONTHLIST để chứa tháng
             MONTHLIST = new ObservableCollection<ComboboxModel>();
 
+            bool isMonthNow = false;
             //Đưa dữ liệu từ listmonth vào MONTHLIST
             foreach(var item in listmonth)
             {
                 DateTime start = (DateTime)item.Date_Start;
                 DateTime end = (DateTime)item.Date_End;
-
+                if (start.Month == DateTime.Now.Month && start.Year == DateTime.Now.Year)
+                    isMonthNow = true;
                 //Kiểm tra dữ liệu tháng có hợp lệ không
                 if(end.Month - start.Month <= 1)
                 {
@@ -357,8 +484,11 @@ namespace HRMS.Accouting.ViewModel
                     {
                         MONTHLIST.Add(new ComboboxModel(start.Month, start.Year, (start.Month == DateTime.Now.Month && start.Year == DateTime.Now.Year) ? true : false));
                     }
-
                 }
+            }
+            if(isMonthNow == false)
+            {
+                MONTHLIST.Add(new ComboboxModel(7, DateTime.Now.Year, true));
             }
             SELECTMONTHTYPE = MONTHLIST.Where(x => x.ISSELECTED == true).FirstOrDefault();
             if(SELECTMONTHTYPE == null)
@@ -370,32 +500,40 @@ namespace HRMS.Accouting.ViewModel
         //Thực hiện lệnh trong Edit Command
         private void EditSalaryData()
         {
-            var Employee = HRMSEntities.Ins.DB.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == SelectedItem.EMPLOYEE.EMPLOYEE_ID).SingleOrDefault();
-            var Salary = HRMSEntities.Ins.DB.SALARies.Where(x => x.EMPLOYEE_ID == SelectedItem.SALARY.EMPLOYEE_ID && x.DATE_START == SelectedItem.SALARY.DATE_START).SingleOrDefault();
-            Salary.HEALTH_INSURANCE = HEALTH_INSURANCE;
-            Salary.SOCIAL_INSURANCE = SOCIAL_INSURANCE;
-            Salary.WELFARE = WELFARE;
-            Salary.BONUS = BONUS;
-            Salary.TAX = TAX;
-            Salary.TOTAL_SALARY = AccountingClass.CalculateSalary(SelectedItem.SALARY, SelectedItem.TIMEKEEPING);
+            hrmsEntities DB = new hrmsEntities();
+            var Employee = DB.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == SelectedItem.EMPLOYEE_ID).SingleOrDefault();
+            var Salary = DB.SALARies.Where(x => x.EMPLOYEE_ID == SelectedItem.EMPLOYEE_ID && x.DATE_START.Value.Month == SelectedItem.DATE_START.Month).SingleOrDefault();
+            var Timekeeping = DB.TIMEKEEPINGs.Where(x => x.EMPLOYEE_ID == SelectedItem.EMPLOYEE_ID && x.DATE_START.Value.Month == SelectedItem.DATE_START.Month).SingleOrDefault();
+            Salary.HEALTH_INSURANCE = long.Parse(HEALTH_INSURANCE.ToString());
+            Salary.SOCIAL_INSURANCE = long.Parse(SOCIAL_INSURANCE.ToString());
+            Salary.WELFARE = long.Parse(WELFARE.ToString());
+            Salary.BONUS = long.Parse(BONUS.ToString());
+            Salary.TAX = long.Parse(TAX.ToString());
+            Salary.TOTAL_SALARY = AccountingClass.CalculateSalary(Salary,Timekeeping);
             if(IMAGESOURCE != null)
             {
                 Employee.IMAGE = IMAGESOURCE;
             }
-            HRMSEntities.Ins.DB.SaveChanges();
+            DB.SaveChanges();
         }
 
         //Điều kiện thực hiện command
         private bool IsEditSalaryData()
         {
-            //Chỉ được sửa tháng hiện tại ko cho sửa tháng trước
-            if (SelectedItem.SALARY.DATE_START.Value.Month >= DateTime.Now.Month - 1)
-                return true;
-            else return false;
+            if (SelectedItem != null)
+            {
+                if (USER_ROLE > 0)
+                    return true;               
+                //Chỉ được sửa tháng hiện tại ko cho sửa tháng trước
+                if (SelectedItem.DATE_START.Month >= DateTime.Now.Month - 1)
+                    return true;
+                else return false;
 
-            var salaryList = HRMSEntities.Ins.DB.SALARies.Where(x => x.EMPLOYEE_ID == SelectedItem.SALARY.EMPLOYEE_ID && x.DATE_START == SelectedItem.SALARY.DATE_START);
-            if (salaryList != null && salaryList.Count() != 0)
-                return true;
+                var salaryList = HRMSEntities.Ins.DB.SALARies.Where(x => x.EMPLOYEE_ID == SelectedItem.EMPLOYEE_ID && x.DATE_START.Value.Month == SelectedItem.DATE_START.Month);
+                if (salaryList != null && salaryList.Count() != 0)
+                    return true;
+                return false;
+            }
             return false;
         }
 
@@ -431,11 +569,10 @@ namespace HRMS.Accouting.ViewModel
         }
 
         //Lưu datagrid thàng pdf
-        private void ExportCommand(DataGrid dtgrid)
+        private void ExportPDF(DataGrid dtgrid, string name)
         {
-            PdfPTable table = new PdfPTable(dtgrid.Columns.Count);
-
-            Document doc = new Document(iTextSharp.text.PageSize.LETTER, 10, 10, 42, 35);
+            var d = dtgrid.ItemsSource.Cast<SalaryInformationData>();
+            var data = AccountingClass.ToDataTable(d.ToList());
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Pdf Files|*.pdf";
@@ -444,63 +581,104 @@ namespace HRMS.Accouting.ViewModel
 
             if (saveFileDialog.FileName != "")
             {
-                System.IO.FileStream fs =
-                    (System.IO.FileStream)saveFileDialog.OpenFile();
+                System.IO.FileStream fs = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
+                Document document = new Document(iTextSharp.text.PageSize.A4);
 
-                PdfWriter writer = PdfWriter.GetInstance(doc, fs);
+                PdfWriter writer = PdfWriter.GetInstance(document, fs);
+                document.Open();
 
-                doc.Open();
+                //Report Header
+                BaseFont bfntHead = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                Font fntHead = new Font(bfntHead, 40, 1, BaseColor.GRAY);
+                Paragraph prgHeading = new Paragraph();
+                prgHeading.Alignment = Element.ALIGN_CENTER;
+                prgHeading.Add(new Chunk(String.Format("SALARY REPORT {0}/{1}", SELECTMONTHTYPE.MONTH, SELECTMONTHTYPE.YEAR), fntHead));
+                document.Add(prgHeading);
 
-                for (int j = 0; j < dtgrid.Columns.Count; j++)
+                //Author
+                Paragraph prgAuthor = new Paragraph();
+                BaseFont btnAuthor = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                Font fntAuthor = new Font(btnAuthor, 8, 2, BaseColor.BLACK);
+                prgAuthor.Alignment = Element.ALIGN_RIGHT;
+                prgAuthor.Add(new Chunk(String.Format("Author : {0}",name), fntAuthor));
+                prgAuthor.Add(new Chunk("\nRun Date : " + DateTime.Now.ToShortDateString(), fntAuthor));
+                document.Add(prgAuthor);
+
+                //Add a line seperation
+                Paragraph p = new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLACK, Element.ALIGN_LEFT, 1)));
+                document.Add(p);
+
+                //Add line break
+                document.Add(new Chunk("\n", fntHead));
+
+                //Write the table
+                PdfPTable table = new PdfPTable(data.Columns.Count);
+                //Table header
+                BaseFont btnColumnHeader = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                Font fntColumnHeader = new Font(btnColumnHeader, 6, 1, BaseColor.WHITE);
+                Font fntColumnData = new Font(btnColumnHeader, 5, 1, BaseColor.BLACK);
+                for (int i = 0; i < data.Columns.Count; i++)
                 {
-                    table.AddCell(new Phrase(dtgrid.Columns[j].Header.ToString()));
+                    PdfPCell cell = new PdfPCell();
+                    cell.BackgroundColor = BaseColor.GRAY;
+                    String header = data.Columns[i].ColumnName.ToUpper();
+                    string[] split_string = header.Split('_');
+                    String name_temp = "";
+                    foreach (var item in split_string)
+                        name_temp = item + " ";
+                    
+                    cell.AddElement(new Chunk(String.Format("{0}",name_temp), fntColumnHeader));
+                    table.AddCell(cell);
                 }
-                table.HeaderRows = 1;
-                IEnumerable itemsSource = dtgrid.ItemsSource as IEnumerable;
-                if (itemsSource != null)
+                //table Data
+                for (int i = 0; i < data.Rows.Count; i++)
                 {
-                    foreach (var item in itemsSource)
+                    for (int j = 0; j < data.Columns.Count; j++)
                     {
-                        DataGridRow row = dtgrid.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
-                        if (row != null)
+                        DateTime date = DateTime.Now;
+                        if(data.Rows[i][j].GetType() == date.GetType())
                         {
-                            DataGridCellsPresenter presenter = FindVisualChild<DataGridCellsPresenter>(row);
-                            for (int i = 0; i < dtgrid.Columns.Count; i++)
-                            {
-                                DataGridCell cell = (DataGridCell)presenter.ItemContainerGenerator.ContainerFromIndex(i);
-                                TextBlock txt = cell.Content as TextBlock;
-                                if (txt != null)
-                                {
-                                    table.AddCell(new Phrase(txt.Text));
-                                }
-                            }
+                            date = (DateTime)data.Rows[i][j];
+                            PdfPCell cell_data = new PdfPCell();
+                            string data_table = date.Day +"/" + date.Month + "/" + date.Year;
+                            cell_data.AddElement(new Chunk(data_table, fntColumnData));
+                            table.AddCell(cell_data);
+                        }
+                        else
+                        {
+                            PdfPCell cell_data = new PdfPCell();
+                            string data_table = data.Rows[i][j].ToString();
+                            cell_data.AddElement(new Chunk(data_table, fntColumnData));
+                            table.AddCell(cell_data);
                         }
                     }
-                    doc.Add(table);
-                    doc.Close();
+                }
+
+                document.Add(table);
+                document.Close();
+                writer.Close();
+                fs.Close();
+            }
+            MessageBox.Show("Export data to " + saveFileDialog.FileName + " successful");
+        }
+
+        private void ExportExcel(DataGrid dtgrid)
+        {
+            var d = dtgrid.ItemsSource.Cast<SalaryInformationData>();
+            var data = AccountingClass.ToDataTable(d.ToList());
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Excel Files(.xlsx)| *.xlsx";
+            saveFileDialog.Title = "Save Excel file";
+
+            if (saveFileDialog.ShowDialog() == true)
+            {                
+                using(XLWorkbook workbook = new XLWorkbook())
+                {
+                    workbook.Worksheets.Add(data, "Month " + SELECTMONTHTYPE.MONTH + "-" + SELECTMONTHTYPE.YEAR);
+                    workbook.SaveAs(saveFileDialog.FileName);
                 }
                 MessageBox.Show("Export data to " + saveFileDialog.FileName + " successful");
-                fs.Close();
-            }            
-        }
-
-        private T FindVisualChild<T>(DependencyObject obj) where T : DependencyObject
-        {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
-                if (child != null && child is T)
-                    return (T)child;
-                else
-                {
-                    T childOfChild = FindVisualChild<T>(child);
-                    if (childOfChild != null)
-                        return childOfChild;
-                }
             }
-            return null;
-        }
-
-
+        }       
     }
 }

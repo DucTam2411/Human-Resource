@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HRMS.Accouting.uCon
+namespace HRMS.Accouting.View
 {
     /// <summary>
     /// Interaction logic for uConChangeInSalary.xaml

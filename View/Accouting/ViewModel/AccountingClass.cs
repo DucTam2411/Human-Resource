@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Augustine.VietnameseCalendar.Core.LuniSolarCalendar;
 using HRMS.Accouting.Model;
@@ -243,6 +246,75 @@ namespace HRMS.Accouting.ViewModel
                 else
                     return false;
             }
+        }
+
+        //Chuyển từ datagrid sang datatable
+        public static DataTable ToDataTable<T>(List<T> items)
+        {
+            var dataTable = new DataTable(typeof(T).Name);
+
+            //Get all the properties
+            var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (var prop in properties)
+            {
+                //Defining type of data column gives proper data table 
+                var type = (prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>) ? Nullable.GetUnderlyingType(prop.PropertyType) : prop.PropertyType);
+                //Setting column names as Property names
+                dataTable.Columns.Add(prop.Name, type);
+            }
+            foreach (var item in items)
+            {
+                var values = new object[properties.Length];
+                for (var i = 0; i < properties.Length; i++)
+                {
+                    //inserting property values to data table rows
+                    values[i] = properties[i].GetValue(item, null);
+                }
+                dataTable.Rows.Add(values);
+            }
+            //put a breakpoint here and check data table
+            return dataTable;
+        }
+
+        public static DataTable DataGridtoDataTable(DataGrid dg)
+        {
+            dg.SelectAllCells();
+            dg.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
+            ApplicationCommands.Copy.Execute(null, dg);
+            dg.UnselectAllCells();
+            String result = (string)Clipboard.GetData(DataFormats.CommaSeparatedValue);
+            string[] Lines = result.Split(new string[] { "\r\n", "\n" },
+            StringSplitOptions.None);
+            string[] Fields;
+            Fields = Lines[0].Split(new char[] { ',' });
+            int Cols = Fields.GetLength(0);
+            DataTable dt = new DataTable();
+            //1st row must be column names; force lower case to ensure matching later on.
+            for (int i = 0; i < Cols; i++)
+                dt.Columns.Add(Fields[i].ToUpper(), typeof(string));
+            DataRow Row;
+            for (int i = 1; i < Lines.GetLength(0) - 1; i++)
+            {
+                Fields = Lines[i].Split(new char[] { ',' });
+                Row = dt.NewRow();
+                for (int f = 0; f < Cols; f++)
+                {
+                    Row[f] = Fields[f];
+                }
+                dt.Rows.Add(Row);
+            }
+            return dt;
+
+        }
+
+        public static DateTime GetDateBefore()
+        {
+            if (DateTime.Now.Month == 1)
+            {
+                return new DateTime(DateTime.Now.Year - 1, 12, 1);
+            }
+            else
+                return new DateTime(DateTime.Now.Year, DateTime.Now.Month - 1, 1);
         }
     }
 }

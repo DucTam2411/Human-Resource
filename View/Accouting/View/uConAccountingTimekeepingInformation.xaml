@@ -1,13 +1,12 @@
 ﻿<UserControl
-    x:Class="HRMS.Accouting.uCon.uConAccountingTimekeepingInformation"
+    x:Class="HRMS.Accouting.View.uConAccountingTimekeepingInformation"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:HRMS.Accouting.uCon"
+    xmlns:local="clr-namespace:HRMS.Accouting.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="880"
-    DataContext="{StaticResource vmTimekeepingInformation}"
     mc:Ignorable="d">
     <UserControl.Resources>
         <Style x:Key="WrapText" TargetType="{x:Type TextBlock}">
@@ -36,18 +35,18 @@
                     Margin="5,0,0,0"
                     materialDesign:HintAssist.Hint="Search "
                     FontSize="18"
-                    Text ="{Binding SEARCH_TEXT, UpdateSourceTrigger=PropertyChanged}"/>
+                    Text="{Binding SEARCH_TEXT, UpdateSourceTrigger=PropertyChanged}" />
 
                 <ComboBox
                     Name="cbSearch"
                     Margin="30,0,80,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
+                    DisplayMemberPath="NAME"
                     FontSize="18"
                     Foreground="DimGray"
                     ItemsSource="{Binding ListType, Mode=TwoWay}"
-                    SelectedValue="{Binding SELECTEDTYPE}"
-                    DisplayMemberPath="NAME">
+                    SelectedValue="{Binding SELECTEDTYPE}">
                     <ComboBox.ItemContainerStyle>
                         <Style TargetType="ComboBoxItem">
                             <Setter Property="IsSelected" Value="{Binding ISSELECTED}" />
@@ -72,9 +71,9 @@
                 SelectedItem="{Binding SelectedItem}">
                 <DataGrid.InputBindings>
                     <MouseBinding
-                            Command="{Binding showDetailCommand}"
-                            CommandParameter="{Binding ElementName=contentControlMain}"
-                            Gesture="LeftDoubleClick" />
+                        Command="{Binding showDetailCommand}"
+                        CommandParameter="{Binding ElementName=contentControlMain}"
+                        Gesture="LeftDoubleClick" />
                 </DataGrid.InputBindings>
                 <DataGrid.Columns>
                     <DataGridTextColumn
@@ -85,7 +84,7 @@
                         Header="ID" />
                     <DataGridTextColumn
                         Width="150"
-                        Binding="{Binding MONTH, StringFormat='{}{0: MM/yyyy}'}"                        
+                        Binding="{Binding MONTH, StringFormat='{}{0: MM/yyyy}'}"
                         ElementStyle="{StaticResource WrapText}"
                         Foreground="DarkSlateGray"
                         Header="Month" />

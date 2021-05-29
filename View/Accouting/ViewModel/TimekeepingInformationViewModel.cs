@@ -130,17 +130,17 @@ namespace HRMS.Accouting.ViewModel
         public ICommand showDetailCommand { get; set; }
 
         public ICommand BackCommand { get; set; }
-        public TimekeepingInformationViewModel()
+        public TimekeepingInformationViewModel(int ID)
         {
-            EMPLOYEE_ID = 2;
+            EMPLOYEE_ID = ID;
             LoadComboboxTypeList();
             LoadTimekeepingData(EMPLOYEE_ID);
 
-            showDetailCommand = new RelayCommand<ContentControl>(p => { return true; }, p => { p.Content = new uCon.uConAccountingTimekeepingDetailInformation(); });
+            showDetailCommand = new RelayCommand<ContentControl>(p => { return true; }, p => { p.Content = new View.uConAccountingTimekeepingDetailInformation(EMPLOYEE_ID); });
 
             //Chức năng của BackCommand
             BackCommand = new RelayCommand<ContentControl>(p => { return true; },
-                p => { p.Content = new uCon.uConAccountingTimekeepingInformation(); });
+                p => { p.Content = new View.uConAccountingTimekeepingInformation(EMPLOYEE_ID); });
         }
         private void LoadComboboxTypeList()
         {

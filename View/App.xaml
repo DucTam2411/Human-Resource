@@ -2,18 +2,30 @@
     x:Class="HRMS.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:acv="clr-namespace:HRMS.Accouting.View"
+    xmlns:acvm="clr-namespace:HRMS.Accouting.ViewModel"
     xmlns:local="clr-namespace:HRMS"
     StartupUri="Accouting/View/Accouting_EmployeeWindow.xaml">
     <Application.Resources>
-
         <ResourceDictionary>
-
+            <DataTemplate DataType="{x:Type acvm:AccountingViewModel}">
+                <acv:uConListEmployeeAccounting />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type acvm:InformationViewModel}">
+                <acv:uConAccountingEmployeeInformation />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type acvm:SalaryInformationViewModel}">
+                <acv:uConAccountingSalaryInformation />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type acvm:TimekeepingInformationViewModel}">
+                <acv:uConAccountingTimekeepingInformation />
+            </DataTemplate>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.teal.xaml" />
-                <ResourceDictionary Source="/Resource/ResourceXAML.xaml"/>
+                <ResourceDictionary Source="/Resource/ResourceXAML.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 

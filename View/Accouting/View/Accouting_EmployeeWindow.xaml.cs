@@ -1,4 +1,4 @@
-﻿using HRMS.HR.uCon;
+﻿using HRMS.Accouting.ViewModel;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace HRMS.Accouting.uCon
+namespace HRMS.Accouting.View
 {
     /// <summary>
     /// Interaction logic for Accouting_EmployeeWindow.xaml
@@ -25,6 +25,13 @@ namespace HRMS.Accouting.uCon
     {
         public Accouting_EmployeeWindow()
         {
+            DataContext = new InterfaceViewModel();
+            InitializeComponent();
+        }
+
+        public Accouting_EmployeeWindow(int ID)
+        {
+            DataContext = new InterfaceViewModel(ID);
             InitializeComponent();
         }
 

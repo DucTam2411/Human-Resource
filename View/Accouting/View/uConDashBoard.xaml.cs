@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HRMS.Accouting.uCon
+namespace HRMS.Accouting.View
 {
     /// <summary>
     /// Interaction logic for uConDashBoard.xaml
@@ -23,18 +23,6 @@ namespace HRMS.Accouting.uCon
         public uConDashBoard()
         {
             InitializeComponent();
-        }
-
-        private void uConRequestBoard_RoutedUserControlClicked(object sender, RoutedEventArgs e)
-        {
-            StackNewemployee.Children.Remove(sender as UserControl);
-            this.Content = new uConEmployeeSalary(sender as UserControl);
-        }
-
-        private void uConChangeInSalary_RoutedUserControlClicked(object sender, RoutedEventArgs e)
-        {
-            StackEmployeeChanges.Children.Remove(sender as UserControl);
-            this.Content = new uConEmployeeSalary(sender as UserControl);
         }
     }
 }

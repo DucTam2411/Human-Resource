@@ -63,12 +63,13 @@ namespace HRMS.Accouting.ViewModel
         #endregion
         public InformationViewModel(int EMPLOYEE_ID)
         {
-            ID = EMPLOYEE_ID;            
+            ID = EMPLOYEE_ID;
+            LoadData(ID);
         }
 
         public InformationViewModel()
         {
-            LoadData(3);
+            LoadData(2);
         }
 
         void LoadData(int employee_id)

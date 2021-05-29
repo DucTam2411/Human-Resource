@@ -1,5 +1,5 @@
 ﻿using HRMS.Accouting.Model;
-using HRMS.Accouting.uCon;
+using HRMS.Accouting.View;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
@@ -23,9 +23,6 @@ namespace HRMS.Accouting.ViewModel
         private SideBarDatabase _HOMETAB;
         public SideBarDatabase HOMETAB { get => _HOMETAB; set { _HOMETAB = value; OnPropertyChanged(); } }
 
-        private SideBarDatabase _SALARYTABLETAB;
-        public SideBarDatabase SALARYTABLETAB { get => _SALARYTABLETAB; set { _SALARYTABLETAB = value; OnPropertyChanged(); } }
-
         private SideBarDatabase _REPORTTAB;
         public SideBarDatabase REPORTTAB { get => _REPORTTAB; set { _REPORTTAB = value; OnPropertyChanged(); } }
 
@@ -44,8 +41,6 @@ namespace HRMS.Accouting.ViewModel
         private SolidColorBrush _FOREGROUNDHOME;
         public SolidColorBrush FOREGROUNDHOME { get => _FOREGROUNDHOME; set { _FOREGROUNDHOME = value;OnPropertyChanged(); } }
 
-        private SolidColorBrush _FOREGROUNDSALARYTABLE;
-        public SolidColorBrush FOREGROUNDSALARYTABLE { get => _FOREGROUNDSALARYTABLE; set { _FOREGROUNDSALARYTABLE = value; OnPropertyChanged(); } }
 
         private SolidColorBrush _FOREGROUNDREPORT;
         public SolidColorBrush FOREGROUNDREPORT { get => _FOREGROUNDREPORT; set { _FOREGROUNDREPORT = value; OnPropertyChanged(); } }
@@ -62,9 +57,6 @@ namespace HRMS.Accouting.ViewModel
         private SolidColorBrush _BACKGROUNDHOME;
         public SolidColorBrush BACKGROUNDHOME { get => _BACKGROUNDHOME; set { _BACKGROUNDHOME = value; OnPropertyChanged(); } }
 
-        private SolidColorBrush _BACKGROUNDSALARYTABLE;
-        public SolidColorBrush BACKGROUNDSALARYTABLE { get => _BACKGROUNDSALARYTABLE; set { _BACKGROUNDSALARYTABLE = value; OnPropertyChanged(); } }
-
         private SolidColorBrush _BACKGROUNDREPORT;
         public SolidColorBrush BACKGROUNDREPORT { get => _BACKGROUNDREPORT; set { _BACKGROUNDREPORT = value; OnPropertyChanged(); } }
 
@@ -77,7 +69,7 @@ namespace HRMS.Accouting.ViewModel
         private SolidColorBrush _BACKGROUNDSALARY;
         public SolidColorBrush BACKGROUNDSALARY { get => _BACKGROUNDSALARY; set { _BACKGROUNDSALARY = value; OnPropertyChanged(); } }
 
-        private ContentControl _CONTENTCONTROL;
+        private ContentControl  _CONTENTCONTROL;
         public ContentControl CONTENTCONTROL { get => _CONTENTCONTROL; set { _CONTENTCONTROL = value; OnPropertyChanged(); } }
 
         private int _EMPLOYEE_ID;
@@ -87,7 +79,6 @@ namespace HRMS.Accouting.ViewModel
 
         #region Command
         public ICommand HomeCommand { get; set; }
-        public ICommand SalaryTableCommand { get; set; }
         public ICommand ReportCommand { get; set; }
         public ICommand InformationCommand { get; set; }
         public ICommand TimekeepingCommand { get; set; }
@@ -98,19 +89,21 @@ namespace HRMS.Accouting.ViewModel
 
         public InterfaceViewModel(int employee_id)
         {
-            EMPLOYEE_ID = employee_id;
+            if (employee_id == 0)
+                EMPLOYEE_ID = 2;
+            else { EMPLOYEE_ID = employee_id; }
             LoadCommand();
         }
 
         public InterfaceViewModel()
         {
+            EMPLOYEE_ID = 2;
             LoadCommand();
         }
         private void LoadCommand()
         {
             LoadNameSideBar();
             HomeCommand = new RelayCommand<object>(p => { return true; }, p => HomeClick());
-            SalaryTableCommand = new RelayCommand<object>(p => { return true; }, p => SalaryTableClick());
             ReportCommand = new RelayCommand<object>(p => { return true; }, p => ReportClick());
             InformationCommand = new RelayCommand<object>(p => { return true; }, p => InformationClick());
             TimekeepingCommand = new RelayCommand<object>(p => { return true; }, p => TimekeepingClick());
@@ -119,18 +112,14 @@ namespace HRMS.Accouting.ViewModel
         //Load data vào side bar
         private void LoadNameSideBar()
         {
-            SALARYTABLETAB = new SideBarDatabase("ListStatus", "SALARY TABLE");
-            HOMETAB = new SideBarDatabase("ViewDashboard", "HOME");
-            REPORTTAB = new SideBarDatabase("FileReport", "REPORT");
-            INFORMATIONTAB = new SideBarDatabase("FolderAccountOutline", "INFORMATION");
-            SALARYINFOTAB = new SideBarDatabase("Money", "SALARY");
-            TIMEKEEPINGTAB = new SideBarDatabase("ClockOutline", "TIMEKEEPING");
+            HOMETAB = new SideBarDatabase("ViewDashboard", "Home");
+            REPORTTAB = new SideBarDatabase("FileReport", "Report");
+            INFORMATIONTAB = new SideBarDatabase("FolderAccountOutline", "Information");
+            SALARYINFOTAB = new SideBarDatabase("Money", "Salary");
+            TIMEKEEPINGTAB = new SideBarDatabase("ClockOutline", "Timekeeping");
 
             BACKGROUNDHOME = new SolidColorBrush(Colors.Black);
             FOREGROUNDHOME = new SolidColorBrush(Colors.White);
-
-            FOREGROUNDSALARYTABLE = new SolidColorBrush(Colors.Black);
-            BACKGROUNDSALARYTABLE = new SolidColorBrush(Colors.Transparent);
 
             FOREGROUNDREPORT = new SolidColorBrush(Colors.Black);
             BACKGROUNDREPORT = new SolidColorBrush(Colors.Transparent);
@@ -144,7 +133,7 @@ namespace HRMS.Accouting.ViewModel
             FOREGROUNDSALARY = new SolidColorBrush(Colors.Black);
             BACKGROUNDSALARY = new SolidColorBrush(Colors.Transparent);
 
-            CONTENTCONTROL = new uCon.uConDashBoard();
+            CONTENTCONTROL = new uConListEmployeeAccounting(EMPLOYEE_ID);
         }
 
         private void HomeClick()
@@ -152,9 +141,6 @@ namespace HRMS.Accouting.ViewModel
             BACKGROUNDHOME = new SolidColorBrush(Colors.Black);
             FOREGROUNDHOME = new SolidColorBrush(Colors.White);
 
-            FOREGROUNDSALARYTABLE = new SolidColorBrush(Colors.Black);
-            BACKGROUNDSALARYTABLE = new SolidColorBrush(Colors.Transparent);
-
             FOREGROUNDREPORT = new SolidColorBrush(Colors.Black);
             BACKGROUNDREPORT = new SolidColorBrush(Colors.Transparent);
 
@@ -167,30 +153,7 @@ namespace HRMS.Accouting.ViewModel
             FOREGROUNDSALARY = new SolidColorBrush(Colors.Black);
             BACKGROUNDSALARY = new SolidColorBrush(Colors.Transparent);
 
-            CONTENTCONTROL = new uCon.uConDashBoard();
-        }
-
-        private void SalaryTableClick()
-        {
-            BACKGROUNDSALARYTABLE = new SolidColorBrush(Colors.Black);
-            FOREGROUNDSALARYTABLE = new SolidColorBrush(Colors.White);
-
-            FOREGROUNDHOME = new SolidColorBrush(Colors.Black);
-            BACKGROUNDHOME = new SolidColorBrush(Colors.Transparent);
-
-            FOREGROUNDREPORT = new SolidColorBrush(Colors.Black);
-            BACKGROUNDREPORT = new SolidColorBrush(Colors.Transparent);
-
-            FOREGROUNDINFORMATION = new SolidColorBrush(Colors.Black);
-            BACKGROUNDINFORMATION = new SolidColorBrush(Colors.Transparent);
-
-            FOREGROUNDTIMEKEEPING = new SolidColorBrush(Colors.Black);
-            BACKGROUNDTIMEKEEPING = new SolidColorBrush(Colors.Transparent);
-
-            FOREGROUNDSALARY = new SolidColorBrush(Colors.Black);
-            BACKGROUNDSALARY = new SolidColorBrush(Colors.Transparent);
-
-            CONTENTCONTROL = new uCon.uConListEmployeeAccounting();
+            CONTENTCONTROL = new uConListEmployeeAccounting(EMPLOYEE_ID);
         }
 
         private void ReportClick()
@@ -198,9 +161,6 @@ namespace HRMS.Accouting.ViewModel
             BACKGROUNDREPORT = new SolidColorBrush(Colors.Black);
             FOREGROUNDREPORT = new SolidColorBrush(Colors.White);
 
-            FOREGROUNDSALARYTABLE = new SolidColorBrush(Colors.Black);
-            BACKGROUNDSALARYTABLE = new SolidColorBrush(Colors.Transparent);
-
             FOREGROUNDHOME = new SolidColorBrush(Colors.Black);
             BACKGROUNDHOME = new SolidColorBrush(Colors.Transparent);
 
@@ -213,7 +173,7 @@ namespace HRMS.Accouting.ViewModel
             FOREGROUNDSALARY = new SolidColorBrush(Colors.Black);
             BACKGROUNDSALARY = new SolidColorBrush(Colors.Transparent);
 
-            CONTENTCONTROL = new uCon.uConRequestBoard();
+            CONTENTCONTROL = new uConListEmployeeAccounting(EMPLOYEE_ID);
         }
 
         private void InformationClick()
@@ -221,9 +181,6 @@ namespace HRMS.Accouting.ViewModel
             BACKGROUNDINFORMATION = new SolidColorBrush(Colors.Black);
             FOREGROUNDINFORMATION = new SolidColorBrush(Colors.White);
 
-            FOREGROUNDSALARYTABLE = new SolidColorBrush(Colors.Black);
-            BACKGROUNDSALARYTABLE = new SolidColorBrush(Colors.Transparent);
-
             FOREGROUNDREPORT = new SolidColorBrush(Colors.Black);
             BACKGROUNDREPORT = new SolidColorBrush(Colors.Transparent);
 
@@ -236,8 +193,7 @@ namespace HRMS.Accouting.ViewModel
             FOREGROUNDSALARY = new SolidColorBrush(Colors.Black);
             BACKGROUNDSALARY = new SolidColorBrush(Colors.Transparent);
 
-            INFORMATIONVM = new InformationViewModel(1);
-            CONTENTCONTROL = new uCon.uConAccountingEmployeeInformation();
+            CONTENTCONTROL = new uConAccountingEmployeeInformation(EMPLOYEE_ID);
         }
 
         private void TimekeepingClick()
@@ -245,9 +201,6 @@ namespace HRMS.Accouting.ViewModel
             BACKGROUNDTIMEKEEPING = new SolidColorBrush(Colors.Black);
             FOREGROUNDTIMEKEEPING = new SolidColorBrush(Colors.White);
 
-            FOREGROUNDSALARYTABLE = new SolidColorBrush(Colors.Black);
-            BACKGROUNDSALARYTABLE = new SolidColorBrush(Colors.Transparent);
-
             FOREGROUNDREPORT = new SolidColorBrush(Colors.Black);
             BACKGROUNDREPORT = new SolidColorBrush(Colors.Transparent);
 
@@ -260,16 +213,13 @@ namespace HRMS.Accouting.ViewModel
             FOREGROUNDSALARY = new SolidColorBrush(Colors.Black);
             BACKGROUNDSALARY = new SolidColorBrush(Colors.Transparent);
 
-            CONTENTCONTROL = new uCon.uConAccountingTimekeepingInformation();
+            CONTENTCONTROL = new uConAccountingTimekeepingInformation(EMPLOYEE_ID);
         }
 
         private void SalaryClick()
         {
             BACKGROUNDSALARY = new SolidColorBrush(Colors.Black);
             FOREGROUNDSALARY = new SolidColorBrush(Colors.White);
-
-            FOREGROUNDSALARYTABLE = new SolidColorBrush(Colors.Black);
-            BACKGROUNDSALARYTABLE = new SolidColorBrush(Colors.Transparent);
 
             FOREGROUNDREPORT = new SolidColorBrush(Colors.Black);
             BACKGROUNDREPORT = new SolidColorBrush(Colors.Transparent);
@@ -283,7 +233,7 @@ namespace HRMS.Accouting.ViewModel
             FOREGROUNDHOME = new SolidColorBrush(Colors.Black);
             BACKGROUNDHOME = new SolidColorBrush(Colors.Transparent);
 
-            CONTENTCONTROL = new uCon.uConAccountingSalaryInformation();
+            CONTENTCONTROL = new uConAccountingSalaryInformation(EMPLOYEE_ID);
         }     
     }
 }
