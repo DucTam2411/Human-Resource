@@ -1,0 +1,371 @@
+﻿<UserControl
+    x:Class="HRMS.Employee.uCon.uConEmployeeSalary"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:HRMS.Employee.uCon"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="auto"
+    Height="auto"
+    mc:Ignorable="d">
+
+    <ContentControl x:Name="contentControlMain" Height="600">
+
+        <Grid Margin="0,20,0,0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <DockPanel
+                    Grid.Column="0"
+                    Margin="20,20,20,40"
+                    HorizontalAlignment="Center">
+                    <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+                        <materialDesign:PackIcon
+                            Width="30"
+                            Height="30"
+                            VerticalAlignment="Center"
+                            Foreground="DimGray"
+                            Kind="CalendarAlert" />
+                        <ComboBox
+                            x:Name="cbMonth"
+                            Width="250"
+                            materialDesign:HintAssist.HelperText="The Month Payroll"
+                            materialDesign:HintAssist.HelperTextFontSize="12"
+                            materialDesign:HintAssist.Hint="Month"
+                            FontSize="24"
+                            IsEditable="False"
+                            ItemStringFormat="{}{0:M/yyy}"
+                            ItemsSource="{Binding SalaryMonthList}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding MonthSelectionChangedCommand}" CommandParameter="{Binding ElementName=cbMonth, Path=SelectedItem}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                        </ComboBox>
+                    </StackPanel>
+                </DockPanel>
+
+                <DockPanel
+                    Grid.Column="1"
+                    Margin="20,20,20,40"
+                    HorizontalAlignment="Center">
+                    <StackPanel
+                        Margin="0,0,0,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Orientation="Horizontal">
+                        <materialDesign:PackIcon
+                            Width="30"
+                            Height="30"
+                            VerticalAlignment="Center"
+                            Foreground="DimGray"
+                            Kind="Money" />
+                        <TextBox
+                            Width="250"
+                            Margin="8,0,0,0"
+                            materialDesign:HintAssist.HelperText="Total salary in a month"
+                            materialDesign:HintAssist.HelperTextFontSize="12"
+                            materialDesign:HintAssist.Hint="Total Salary"
+                            FontSize="24"
+                            IsReadOnly="True"
+                            Text="{Binding SalarySelected.TOTAL_SALARY, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                </DockPanel>
+
+                <Separator
+                    Grid.ColumnSpan="2"
+                    Width="700"
+                    Height="10"
+                    Margin="0,0,0,0"
+                    VerticalAlignment="Bottom"
+                    BorderBrush="Black"
+                    BorderThickness="15" />
+
+
+            </Grid>
+
+
+            <Grid Grid.Row="1" Margin="0,00,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <DockPanel
+                    Grid.Column="0"
+                    Margin="20"
+                    HorizontalAlignment="Center">
+
+
+                    <StackPanel DockPanel.Dock="Left">
+                        <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="CalendarDay" />
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Total work day in a month"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Number Of Work Day"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding TimekeepingSelected.NUMBER_OF_WORK_DAY, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+
+                        <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="Calendar" />
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Total overtime day in a month"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Number of Overtime Day"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding TimekeepingSelected.NUMBER_OF_OVERTIME_DAY, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+
+                        <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="Overboard" />
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Overtime salary in a day"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Overtime salary"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding SalarySelected.OVERTIME_SALARY, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+
+                        <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="MoneyOff" />
+
+
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Total absent day in a month"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Number Of Absent Day"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding TimekeepingSelected.NUMBER_OF_ABSENT_DAY, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                    </StackPanel>
+                </DockPanel>
+
+                <DockPanel
+                    Grid.Column="1"
+                    Margin="20"
+                    HorizontalAlignment="Center">
+                    <StackPanel DockPanel.Dock="Left">
+                        <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="Numbers" />
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Coefficient"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Coefficient"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding SalarySelected.COEFFICIENT, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+
+                        <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="DecimalIncrease" />
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Basic Wage in day"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Basic Wage"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding SalarySelected.BASIC_WAGE, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+
+                        <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="Add" />
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Welfare"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Welfare"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding SalarySelected.WELFARE, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+
+                        <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="Present" />
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Bonus"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Bonus"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding SalarySelected.BONUS, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                    </StackPanel>
+                </DockPanel>
+            </Grid>
+
+            <Separator
+                Grid.Row="2"
+                Width="700"
+                Margin="0,20,0,10"
+                BorderBrush="Black"
+                BorderThickness="15"
+                Opacity="1" />
+
+            <Grid Grid.Row="3" Margin="0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <DockPanel
+                    Grid.Column="0"
+                    Margin="20"
+                    HorizontalAlignment="Center">
+                    <StackPanel DockPanel.Dock="Left">
+                        <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="Globe" />
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Health Insurance Tax"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Health Insurance"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding SalarySelected.HEALTH_INSURANCE, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+
+                        <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="HealthPotion" />
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Social Insurance Tax"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Social Insurance"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding SalarySelected.SOCIAL_INSURANCE, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                    </StackPanel>
+                </DockPanel>
+
+                <DockPanel
+                    Grid.Column="1"
+                    Margin="20"
+                    HorizontalAlignment="Center">
+                    <StackPanel DockPanel.Dock="Left">
+                        <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="MoneyOff" />
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Income Tax"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Income Tax"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding SalarySelected.TAX, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+
+                        <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Foreground="DimGray"
+                                Kind="MoneyOff" />
+                            <TextBox
+                                Width="250"
+                                Margin="8,0,0,0"
+                                materialDesign:HintAssist.HelperText="Total tax in a month"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="Total Tax"
+                                FontSize="18"
+                                IsReadOnly="True"
+                                Text="{Binding SalarySelected.TOTAL_TAX, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                    </StackPanel>
+                </DockPanel>
+            </Grid>
+        </Grid>
+    </ContentControl>
+</UserControl>
