@@ -181,3 +181,34 @@ D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\bin\Debug\
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\bin\Debug\ClosedXML.xml
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\bin\Debug\DocumentFormat.OpenXml.xml
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\bin\Debug\ExcelNumberFormat.xml
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\View.csprojAssemblyReference.cache
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\Accouting\View\Accouting_EmployeeWindow.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\Accouting\View\uConAccountingEmployeeInformation.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\Accouting\View\uConAccountingSalaryInformation.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\Accouting\View\uConAccountingTimekeepingDetailInformation.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\Accouting\View\uConAccountingTimekeepingInformation.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\Accouting\View\uConChangeInSalary.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\Accouting\View\uConDashBoard.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\Accouting\View\uConEmployeeSalary.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\Accouting\View\uConListEmployeeAccounting.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\Accouting\View\uConRequestBoard.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\Accouting\View\uConSideBarAccouting.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\Employee\uCon\EmployeeWindow.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\Employee\uCon\uConEmployeeInformation.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\Employee\uCon\uConEmployeeTimekeepingDetail.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\Employee\uCon\uConSideBarEmployee.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\HR\uCon\HR_EmployeeWindow.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\HR\uCon\uConAddEmployee.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\HR\uCon\uConDashboard.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\HR\uCon\uConDetailTimeKeeping.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\HR\uCon\uConListEmployee.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\HR\uCon\uConModifyEmployee.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\HR\uCon\uConReport.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\HR\uCon\uConSideBar.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\App.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\HRMS_Content.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\HRMS_MarkupCompile.cache
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\HRMS_MarkupCompile.lref
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\HRMS.exe
+D:\One Drive\OneDrive - Trường ĐH CNTT - University of Information Technology\Máy tính\HMRS\Human-Resource\View\obj\Debug\HRMS.pdb
