@@ -27,6 +27,7 @@ namespace HRMS.Accouting.Model
         public Nullable<System.DateTime> DATE_START { get; set; }
         public Nullable<System.DateTime> DATE_END { get; set; }
         public Nullable<long> TOTAL_SALARY { get; set; }
+        public Nullable<System.DateTime> SALARY_MONTH { get; set; }
     
         public virtual EMPLOYEE EMPLOYEE { get; set; }
     }

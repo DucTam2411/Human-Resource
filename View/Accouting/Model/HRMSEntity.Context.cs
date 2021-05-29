@@ -30,7 +30,6 @@ namespace HRMS.Accouting.Model
         public virtual DbSet<ROLE> ROLEs { get; set; }
         public virtual DbSet<ROOM> ROOMs { get; set; }
         public virtual DbSet<SALARY> SALARies { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TIMEKEEPING> TIMEKEEPINGs { get; set; }
         public virtual DbSet<TIMEKEEPING_DETAIL> TIMEKEEPING_DETAIL { get; set; }
     }

@@ -243,9 +243,6 @@
     <Compile Include="Accouting\Model\SalaryData.cs" />
     <Compile Include="Accouting\Model\SalaryInformationData.cs" />
     <Compile Include="Accouting\Model\SideBarDatabase.cs" />
-    <Compile Include="Accouting\Model\sysdiagram.cs">
-      <DependentUpon>HRMSEntity.tt</DependentUpon>
-    </Compile>
     <Compile Include="Accouting\Model\TIMEKEEPING.cs">
       <DependentUpon>HRMSEntity.tt</DependentUpon>
     </Compile>
@@ -315,6 +312,7 @@
     <Compile Include="Employee\uCon\uConSideBarEmployee.xaml.cs">
       <DependentUpon>uConSideBarEmployee.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Employee\ViewModel\EmployeeViewModel.cs" />
     <Compile Include="HR\uCon\HR_EmployeeWindow.xaml.cs">
       <DependentUpon>HR_EmployeeWindow.xaml</DependentUpon>
     </Compile>
@@ -382,6 +380,9 @@
     <Folder Include="Director\" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Accouting\Model\HRMSEntity.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>HRMSEntity.edmx</DependentUpon>
@@ -392,9 +393,6 @@
       <DependentUpon>HRMSEntity.edmx</DependentUpon>
       <LastGenOutput>HRMSEntity.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />

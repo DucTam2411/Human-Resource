@@ -1,6 +1,5 @@
-﻿using HRMS.Accouting.ViewModel;
-using Model;
-using Model.Database;
+﻿using HRMS.Accouting.Model;
+using HRMS.Accouting.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -91,10 +90,10 @@ namespace HRMS.Employee.ViewModel
         public void MonthSelectionChange(DateTime a)
         {
             int day = a.Day, month = a.Month;
-            TimekeepingSelected = ((from timekeeping in HRMSEntity.Ins.DB.TIMEKEEPINGs
+            TimekeepingSelected = ((from timekeeping in HRMSEntities.Ins.DB.TIMEKEEPINGs
                                     where timekeeping.MONTH.Value.Month == month && timekeeping.MONTH.Value.Day == day
                                     select timekeeping).Take(1).Single());
-            SalarySelected = ((from s in HRMSEntity.Ins.DB.SALARies
+            SalarySelected = ((from s in HRMSEntities.Ins.DB.SALARies
                                where s.SALARY_MONTH.Value.Month == month && s.SALARY_MONTH.Value.Day == day
                                select s).Take(1).Single());
         }
@@ -158,7 +157,7 @@ namespace HRMS.Employee.ViewModel
                             if (Int32.TryParse(text, out intMonth))
                             {
                                 intMonth = Int32.Parse(text);
-                                TimekeepingList = (from timekeeping in HRMSEntity.Ins.DB.TIMEKEEPINGs
+                                TimekeepingList = (from timekeeping in HRMSEntities.Ins.DB.TIMEKEEPINGs
                                                    where timekeeping.MONTH.Value.Month == intMonth
                                                    select timekeeping).ToArray();
                             }
@@ -172,7 +171,7 @@ namespace HRMS.Employee.ViewModel
                             {
 
                                 intDay = Int32.Parse(text);
-                                TimekeepingList = (from timekeeping in HRMSEntity.Ins.DB.TIMEKEEPINGs
+                                TimekeepingList = (from timekeeping in HRMSEntities.Ins.DB.TIMEKEEPINGs
                                                    where timekeeping.DATE_START.Value.Day == intDay
                                                    select timekeeping).ToArray();
                             }
@@ -188,7 +187,7 @@ namespace HRMS.Employee.ViewModel
 
                                 intDay = Int32.Parse(text);
                                 MessageBox.Show("SS");
-                                TimekeepingList = (from timekeeping in HRMSEntity.Ins.DB.TIMEKEEPINGs
+                                TimekeepingList = (from timekeeping in HRMSEntities.Ins.DB.TIMEKEEPINGs
                                                    where timekeeping.DATE_END.Value.Day == intDay
                                                    select timekeeping).ToArray();
                             }
@@ -201,7 +200,7 @@ namespace HRMS.Employee.ViewModel
                         if (Int32.TryParse(text, out workday))
                         {
                             workday = Int32.Parse(text);
-                            TimekeepingList = (from timekeeping in HRMSEntity.Ins.DB.TIMEKEEPINGs
+                            TimekeepingList = (from timekeeping in HRMSEntities.Ins.DB.TIMEKEEPINGs
                                                where timekeeping.NUMBER_OF_WORK_DAY.Value == workday
                                                select timekeeping).ToArray();
                         }
@@ -212,7 +211,7 @@ namespace HRMS.Employee.ViewModel
                         if (Int32.TryParse(text, out overtimeday))
                         {
                             overtimeday = Int32.Parse(text);
-                            TimekeepingList = (from timekeeping in HRMSEntity.Ins.DB.TIMEKEEPINGs
+                            TimekeepingList = (from timekeeping in HRMSEntities.Ins.DB.TIMEKEEPINGs
                                                where timekeeping.NUMBER_OF_OVERTIME_DAY.Value == overtimeday
                                                select timekeeping).ToArray();
                         }
@@ -225,7 +224,7 @@ namespace HRMS.Employee.ViewModel
                         if (Int32.TryParse(text, out absentday))
                         {
                             overtimeday = Int32.Parse(text);
-                            TimekeepingList = (from timekeeping in HRMSEntity.Ins.DB.TIMEKEEPINGs
+                            TimekeepingList = (from timekeeping in HRMSEntities.Ins.DB.TIMEKEEPINGs
                                                where timekeeping.NUMBER_OF_ABSENT_DAY.Value.ToString().StartsWith(absentday.ToString())
                                                select timekeeping).ToArray();
                         }
@@ -235,7 +234,7 @@ namespace HRMS.Employee.ViewModel
             }
             else
             {
-                TimekeepingList = (from t in HRMSEntity.Ins.DB.TIMEKEEPINGs
+                TimekeepingList = (from t in HRMSEntities.Ins.DB.TIMEKEEPINGs
                                    orderby t.MONTH descending
                                    select t).ToArray();
             }
@@ -250,25 +249,24 @@ namespace HRMS.Employee.ViewModel
         public EmployeeViewModel()
         {
 
-            Employee = ((from employee in HRMSEntity.Ins.DB.EMPLOYEEs
+            Employee = ((from employee in HRMSEntities.Ins.DB.EMPLOYEEs
                          select employee).Take(1).Single());
 
 
-            TimekeepingList = (from timekeeping in HRMSEntity.Ins.DB.TIMEKEEPINGs
+            TimekeepingList = (from timekeeping in HRMSEntities.Ins.DB.TIMEKEEPINGs
+                               where timekeeping.EMPLOYEE_ID  == 3 
                                orderby timekeeping.MONTH descending
                                select timekeeping).ToArray();
 
-            SalaryList = (from salary in HRMSEntity.Ins.DB.SALARies
+            SalaryList = (from salary in HRMSEntities.Ins.DB.SALARies
                           where salary.EMPLOYEE_ID == 3
                           orderby salary.DATE_START descending
                           select salary).ToArray();
 
-            SalaryMonthList = ((from salary in HRMSEntity.Ins.DB.SALARies
+            SalaryMonthList = ((from salary in HRMSEntities.Ins.DB.SALARies
                                 where salary.EMPLOYEE_ID == 3
                                 orderby salary.SALARY_MONTH.Value descending
                                 select salary.SALARY_MONTH.Value).Distinct().ToArray());
-
-
 
 
             // declare command 
@@ -280,18 +278,18 @@ namespace HRMS.Employee.ViewModel
 
         public EmployeeViewModel(int employee_ID)
         {
-            EMPLOYEE tem = ((from employee in HRMSEntity.Ins.DB.EMPLOYEEs
+            EMPLOYEE tem = ((from employee in HRMSEntities.Ins.DB.EMPLOYEEs
                              where employee.EMPLOYEE_ID == employee_ID
                              select employee).Take(1).Single());
 
 
             Employee = tem;
-            TimekeepingList = (from timekeeping in HRMSEntity.Ins.DB.TIMEKEEPINGs
+            TimekeepingList = (from timekeeping in HRMSEntities.Ins.DB.TIMEKEEPINGs
                                where timekeeping.EMPLOYEE_ID == employee_ID
                                orderby timekeeping.MONTH descending
                                select timekeeping).ToArray();
 
-            SalaryList = (from salary in HRMSEntity.Ins.DB.SALARies
+            SalaryList = (from salary in HRMSEntities.Ins.DB.SALARies
                           where salary.EMPLOYEE_ID == employee_ID
                           orderby salary.DATE_START descending
                           select salary).ToArray();

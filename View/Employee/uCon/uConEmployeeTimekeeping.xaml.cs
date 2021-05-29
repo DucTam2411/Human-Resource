@@ -1,6 +1,7 @@
-﻿using HRMS.Employee.ViewModel;
+﻿using HRMS.Accouting.Model;
+using HRMS.Employee.ViewModel;
 using MaterialDesignThemes.Wpf;
-using Model;
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

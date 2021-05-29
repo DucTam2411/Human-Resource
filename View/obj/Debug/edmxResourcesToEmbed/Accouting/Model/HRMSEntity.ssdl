@@ -62,16 +62,7 @@
     <Property Name="DATE_START" Type="date" />
     <Property Name="DATE_END" Type="date" />
     <Property Name="TOTAL_SALARY" Type="bigint" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
+    <Property Name="SALARY_MONTH" Type="date" />
   </EntityType>
   <EntityType Name="TIMEKEEPING">
     <Key>
@@ -84,7 +75,7 @@
     <Property Name="NUMBER_OF_OVERTIME_DAY" Type="int" />
     <Property Name="DATE_START" Type="date" />
     <Property Name="DATE_END" Type="date" />
-    <Property Name="NOTE" Type="varchar" MaxLength="1000" />
+    <Property Name="MONTH" Type="date" />
   </EntityType>
   <EntityType Name="TIMEKEEPING_DETAIL">
     <Key>
@@ -120,7 +111,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ROLE__DEPT_ID__3B75D760">
+  <Association Name="FK__ROLE__DEPT_ID__32E0915F">
     <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1" />
     <End Role="ROLE" Type="Self.ROLE" Multiplicity="*" />
     <ReferentialConstraint>
@@ -132,7 +123,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ROOM__DEPT_ID__2739D489">
+  <Association Name="FK__ROOM__DEPT_ID__33D4B598">
     <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1" />
     <End Role="ROOM" Type="Self.ROOM" Multiplicity="*" />
     <ReferentialConstraint>
@@ -180,7 +171,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__TIMEKEEPI__TIMEK__46E78A0C">
+  <Association Name="FK__TIMEKEEPI__TIMEK__37A5467C">
     <End Role="TIMEKEEPING" Type="Self.TIMEKEEPING" Multiplicity="0..1" />
     <End Role="TIMEKEEPING_DETAIL" Type="Self.TIMEKEEPING_DETAIL" Multiplicity="*" />
     <ReferentialConstraint>
@@ -198,7 +189,6 @@
     <EntitySet Name="ROLE" EntityType="Self.ROLE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ROOM" EntityType="Self.ROOM" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SALARY" EntityType="Self.SALARY" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TIMEKEEPING" EntityType="Self.TIMEKEEPING" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TIMEKEEPING_DETAIL" EntityType="Self.TIMEKEEPING_DETAIL" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__EMPLOYEE__DEPT_I__3F466844" Association="Self.FK__EMPLOYEE__DEPT_I__3F466844">
@@ -209,11 +199,11 @@
       <End Role="ROLE" EntitySet="ROLE" />
       <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
     </AssociationSet>
-    <AssociationSet Name="FK__ROLE__DEPT_ID__3B75D760" Association="Self.FK__ROLE__DEPT_ID__3B75D760">
+    <AssociationSet Name="FK__ROLE__DEPT_ID__32E0915F" Association="Self.FK__ROLE__DEPT_ID__32E0915F">
       <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
       <End Role="ROLE" EntitySet="ROLE" />
     </AssociationSet>
-    <AssociationSet Name="FK__ROOM__DEPT_ID__2739D489" Association="Self.FK__ROOM__DEPT_ID__2739D489">
+    <AssociationSet Name="FK__ROOM__DEPT_ID__33D4B598" Association="Self.FK__ROOM__DEPT_ID__33D4B598">
       <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
       <End Role="ROOM" EntitySet="ROOM" />
     </AssociationSet>
@@ -229,7 +219,7 @@
       <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
       <End Role="TIMEKEEPING" EntitySet="TIMEKEEPING" />
     </AssociationSet>
-    <AssociationSet Name="FK__TIMEKEEPI__TIMEK__46E78A0C" Association="Self.FK__TIMEKEEPI__TIMEK__46E78A0C">
+    <AssociationSet Name="FK__TIMEKEEPI__TIMEK__37A5467C" Association="Self.FK__TIMEKEEPI__TIMEK__37A5467C">
       <End Role="TIMEKEEPING" EntitySet="TIMEKEEPING" />
       <End Role="TIMEKEEPING_DETAIL" EntitySet="TIMEKEEPING_DETAIL" />
     </AssociationSet>

@@ -5,7 +5,7 @@
     xmlns:acv="clr-namespace:HRMS.Accouting.View"
     xmlns:acvm="clr-namespace:HRMS.Accouting.ViewModel"
     xmlns:local="clr-namespace:HRMS"
-    StartupUri="Accouting/View/Accouting_EmployeeWindow.xaml">
+    StartupUri="Employee/uCon/EmployeeWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <DataTemplate DataType="{x:Type acvm:AccountingViewModel}">
