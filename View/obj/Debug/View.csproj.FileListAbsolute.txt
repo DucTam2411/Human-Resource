@@ -90,7 +90,6 @@ D:\Human Resource\View\obj\Debug\View.csproj.CoreCompileInputs.cache
 D:\Human Resource\View\obj\Debug\View.csproj.CopyComplete
 D:\Human Resource\View\obj\Debug\HRMS.exe
 D:\Human Resource\View\obj\Debug\HRMS.pdb
-D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\View.csprojAssemblyReference.cache
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\HR\uCon\HR_EmployeeWindow.g.cs
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\HR\uCon\uConAddEmployee.g.cs
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\HR\uCon\uConDashboard.g.cs
@@ -155,11 +154,9 @@ D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConAccountingSalaryInformation.g.cs
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConAccountingTimekeepingDetailInformation.g.cs
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConAccountingTimekeepingInformation.g.cs
-D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConChangeInSalary.g.cs
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConDashBoard.g.cs
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConEmployeeSalary.g.cs
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConListEmployeeAccounting.g.cs
-D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConRequestBoard.g.cs
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConSideBarAccouting.g.cs
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\HRMS_Content.g.cs
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\Accouting_EmployeeWindow.baml
@@ -167,11 +164,9 @@ D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConAccountingSalaryInformation.baml
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConAccountingTimekeepingDetailInformation.baml
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConAccountingTimekeepingInformation.baml
-D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConChangeInSalary.baml
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConDashBoard.baml
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConEmployeeSalary.baml
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConListEmployeeAccounting.baml
-D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConRequestBoard.baml
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConSideBarAccouting.baml
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\bin\Debug\ClosedXML.dll
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\bin\Debug\DocumentFormat.OpenXml.dll

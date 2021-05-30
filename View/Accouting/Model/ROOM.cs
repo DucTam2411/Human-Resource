@@ -14,10 +14,16 @@ namespace HRMS.Accouting.Model
     
     public partial class ROOM
     {
-        public int ROOM_ID { get; set; }
-        public string ROOM_NAME { get; set; }
-        public Nullable<int> DEPT_ID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ROOM()
+        {
+            this.DEPARTMENTs = new HashSet<DEPARTMENT>();
+        }
     
-        public virtual DEPARTMENT DEPARTMENT { get; set; }
+        public int ROOM_ID { get; set; }
+        public string ROOM_NUMBER { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DEPARTMENT> DEPARTMENTs { get; set; }
     }
 }

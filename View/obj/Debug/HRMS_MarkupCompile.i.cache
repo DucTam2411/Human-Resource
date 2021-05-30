@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\App.xaml
-26854866716
-2-512702133
-56-497376385
+24482156608
+2-1175688421
+53-2064089424
 291380677997
-Accouting\View\Accouting_EmployeeWindow.xaml;Accouting\View\uConAccountingEmployeeInformation.xaml;Accouting\View\uConAccountingSalaryInformation.xaml;Accouting\View\uConAccountingTimekeepingDetailInformation.xaml;Accouting\View\uConAccountingTimekeepingInformation.xaml;Accouting\View\uConChangeInSalary.xaml;Accouting\View\uConDashBoard.xaml;Accouting\View\uConEmployeeSalary.xaml;Accouting\View\uConListEmployeeAccounting.xaml;Accouting\View\uConRequestBoard.xaml;Accouting\View\uConSideBarAccouting.xaml;Employee\uCon\EmployeeWindow.xaml;Employee\uCon\uConEmployeeInformation.xaml;Employee\uCon\uConEmployeeSalary.xaml;Employee\uCon\uConEmployeeTimekeeping.xaml;Employee\uCon\uConEmployeeTimekeepingDetail.xaml;Employee\uCon\uConSideBarEmployee.xaml;HR\uCon\HR_EmployeeWindow.xaml;HR\uCon\uConAddEmployee.xaml;HR\uCon\uConDashboard.xaml;HR\uCon\uConDetailTimeKeeping.xaml;HR\uCon\uConListEmployee.xaml;HR\uCon\uConModifyEmployee.xaml;HR\uCon\uConReport.xaml;HR\uCon\uConSideBar.xaml;Resource\ResourceXAML.xaml;
+Accouting\View\Accouting_EmployeeWindow.xaml;Accouting\View\uConAccountingEmployeeInformation.xaml;Accouting\View\uConAccountingSalaryInformation.xaml;Accouting\View\uConAccountingTimekeepingDetailInformation.xaml;Accouting\View\uConAccountingTimekeepingInformation.xaml;Accouting\View\uConDashBoard.xaml;Accouting\View\uConEmployeeSalary.xaml;Accouting\View\uConListEmployeeAccounting.xaml;Accouting\View\uConSideBarAccouting.xaml;Employee\uCon\EmployeeWindow.xaml;Employee\uCon\uConEmployeeInformation.xaml;Employee\uCon\uConEmployeeSalary.xaml;Employee\uCon\uConEmployeeTimekeeping.xaml;Employee\uCon\uConEmployeeTimekeepingDetail.xaml;Employee\uCon\uConSideBarEmployee.xaml;HR\uCon\HR_EmployeeWindow.xaml;HR\uCon\uConAddEmployee.xaml;HR\uCon\uConDashboard.xaml;HR\uCon\uConDetailTimeKeeping.xaml;HR\uCon\uConListEmployee.xaml;HR\uCon\uConModifyEmployee.xaml;HR\uCon\uConReport.xaml;HR\uCon\uConSideBar.xaml;Resource\ResourceXAML.xaml;
 
-True
+False
 

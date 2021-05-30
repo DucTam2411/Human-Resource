@@ -14,12 +14,12 @@ namespace HRMS.Accouting.Model
     
     public partial class RECORD
     {
-        public int Record_ID { get; set; }
-        public int EMPLOYEE_ID { get; set; }
+        public int ID { get; set; }
+        public Nullable<int> EMPLOYEE_ID { get; set; }
         public Nullable<int> DEPT_ID { get; set; }
         public Nullable<int> EMPLOYEE_CHANGE_ID { get; set; }
-        public string CHANGE { get; set; }
         public string EMPLOYEE_CHANGE_NAME { get; set; }
+        public string CHANGE { get; set; }
         public Nullable<System.DateTime> DATE_CHANGE { get; set; }
         public Nullable<System.DateTime> MONTH_CHANGE { get; set; }
     

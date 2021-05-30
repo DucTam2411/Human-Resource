@@ -94,6 +94,7 @@ namespace HRMS.Accouting.ViewModel
                     BASIC_WAGE = (long)SelectedItem.BASIC_WAGE;
                     COEFFICIENT = (double)SelectedItem.COEFFICIENT;
                     TOTAL_SALARY = SelectedItem.TOTAL_SALARY;
+                    NOTE = SelectedItem.NOTE;
                     EMPLOYEE emp = HRMSEntities.Ins.DB.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == SelectedItem.EMPLOYEE_ID).FirstOrDefault();
                     IMAGESOURCE = emp.IMAGE;
                     if (IMAGESOURCE == null)
@@ -611,6 +612,7 @@ namespace HRMS.Accouting.ViewModel
             }
             if(!NOTE.Equals(SelectedItem.NOTE))
             {
+                Salary.NOTE = NOTE;
                 change = change + string.Format("NOTE ('{0}' -> '{1}')     ,", SelectedItem.NOTE, NOTE);
                 countchange++;
             }
