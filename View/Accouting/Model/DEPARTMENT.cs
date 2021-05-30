@@ -20,6 +20,7 @@ namespace HRMS.Accouting.Model
             this.EMPLOYEEs = new HashSet<EMPLOYEE>();
             this.ROLEs = new HashSet<ROLE>();
             this.ROOMs = new HashSet<ROOM>();
+            this.RECORDs = new HashSet<RECORD>();
         }
     
         public int DEPT_ID { get; set; }
@@ -31,5 +32,7 @@ namespace HRMS.Accouting.Model
         public virtual ICollection<ROLE> ROLEs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ROOM> ROOMs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RECORD> RECORDs { get; set; }
     }
 }

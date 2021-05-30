@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HRMS.Accouting.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,8 +21,9 @@ namespace HRMS.Accouting.View
     /// </summary>
     public partial class uConDashBoard : UserControl
     {
-        public uConDashBoard()
+        public uConDashBoard(int ID)
         {
+            DataContext = new DashBoardViewModel(ID);
             InitializeComponent();
         }
     }

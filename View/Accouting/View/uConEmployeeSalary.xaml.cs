@@ -33,7 +33,12 @@ namespace HRMS.Accouting.View
         {
             DataContext = new AccountingViewModel(data,ID);
             InitializeComponent();
+        }
 
+        public uConEmployeeSalary(int IDSelect, int IDUser,int month,int year)
+        {
+            DataContext = new AccountingViewModel(IDSelect, IDUser,month,year);
+            InitializeComponent();
         }
     }
 }

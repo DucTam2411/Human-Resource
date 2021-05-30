@@ -178,7 +178,6 @@ namespace HRMS.Accouting.ViewModel
                 tkdata.TOTAL_WORK_DAY = (int)item.TIMEKEEPING.NUMBER_OF_WORK_DAY;
                 tkdata.TOTAL_OVERTIME_DAY = (int)item.TIMEKEEPING.NUMBER_OF_OVERTIME_DAY;
                 tkdata.TOTAL_ABSENT_DAY = (int)item.TIMEKEEPING.NUMBER_OF_ABSENT_DAY;
-               // tkdata.NOTE = item.TIMEKEEPING.NOTE;
 
                 TimekeepingList.Add(tkdata);
                 TimekeepingTest.Add(tkdata);

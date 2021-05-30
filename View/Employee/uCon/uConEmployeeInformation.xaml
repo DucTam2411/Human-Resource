@@ -38,8 +38,13 @@
                         materialDesign:HintAssist.HelperText="Employee full name."
                         materialDesign:HintAssist.Hint="Name"
                         FontSize="18"
-                        IsReadOnly="True"
-                        Text="{Binding Employee.NAME, UpdateSourceTrigger=PropertyChanged}" />
+                        IsReadOnly="True">
+                        <TextBox.Text>
+                            <Binding Path="NAME" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules />
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
 
                 </StackPanel>
 
@@ -56,8 +61,13 @@
                         materialDesign:HintAssist.HelperText="ID Card number"
                         materialDesign:HintAssist.Hint="ID"
                         FontSize="18"
-                        IsReadOnly="True"
-                        Text="{Binding Employee.EMPLOYEE_ID, UpdateSourceTrigger=PropertyChanged}" />
+                        IsReadOnly="True">
+                        <TextBox.Text>
+                            <Binding Path="EMPLOYEE_ID" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules />
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
 
                 </StackPanel>
 
@@ -74,8 +84,13 @@
                         Margin="8,0,0,0"
                         materialDesign:HintAssist.Hint="Birthday"
                         FontSize="18"
-                        IsReadOnly="True"
-                        Text="{Binding Employee.BIRTH_DATE, StringFormat=d}" />
+                        IsReadOnly="True">
+                        <TextBox.Text>
+                            <Binding Path="BIRTHDAY" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules />
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </StackPanel>
 
             </StackPanel>
@@ -122,10 +137,16 @@
                         <TextBox
                             Width="200"
                             Margin="8,0,0,0"
-                            materialDesign:HintAssist.HelperText="Birthplace"
+                            materialDesign:HintAssist.HelperText="In ID Card"
+                            materialDesign:HintAssist.Hint="Birthplace"
                             FontSize="18"
-                            IsReadOnly="True"
-                            Text="{Binding Employee.BIRTH_PLACE, UpdateSourceTrigger=PropertyChanged}" />
+                            IsReadOnly="True">
+                            <TextBox.Text>
+                                <Binding Path="BIRTPLACE" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
 
                     </StackPanel>
 
@@ -140,10 +161,15 @@
                         <TextBox
                             Width="200"
                             Margin="8,0,0,0"
-                            materialDesign:HintAssist.HelperText="Citizenship"
+                            materialDesign:HintAssist.Hint="Citizenship"
                             FontSize="18"
-                            IsReadOnly="true"
-                            Text="{Binding Employee.CITIZENSHIP, UpdateSourceTrigger=PropertyChanged}" />
+                            IsReadOnly="true">
+                            <TextBox.Text>
+                                <Binding Path="CITIZENSHIP" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
 
                     </StackPanel>
 
@@ -159,10 +185,15 @@
                         <TextBox
                             Width="200"
                             Margin="8,0,0,0"
-                            materialDesign:HintAssist.HelperText="Gender"
+                            materialDesign:HintAssist.Hint="Gender"
                             FontSize="18"
-                            IsReadOnly="true"
-                            Text="{Binding Employee.GENDER, UpdateSourceTrigger=PropertyChanged}" />
+                            IsReadOnly="true">
+                            <TextBox.Text>
+                                <Binding Path="GENDER" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
 
                     </StackPanel>
 
@@ -177,10 +208,15 @@
                         <TextBox
                             Width="200"
                             Margin="8,0,0,0"
-                            materialDesign:HintAssist.HelperText="Phone Number"
+                            materialDesign:HintAssist.Hint="Phone Number"
                             FontSize="18"
-                            IsReadOnly="True"
-                            Text="{Binding Employee.PHONE, UpdateSourceTrigger=PropertyChanged}" />
+                            IsReadOnly="True">
+                            <TextBox.Text>
+                                <Binding Path="PHONE" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
 
                     </StackPanel>
 
@@ -203,10 +239,15 @@
                         <TextBox
                             Width="200"
                             Margin="8,0,0,0"
-                            materialDesign:HintAssist.HelperText="Position"
+                            materialDesign:HintAssist.Hint="Position"
                             FontSize="18"
-                            IsReadOnly="True"
-                            Text="{Binding Employee.ROLE.ROLE_NAME, UpdateSourceTrigger=PropertyChanged}" />
+                            IsReadOnly="True">
+                            <TextBox.Text>
+                                <Binding Path="POSITION" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
 
                     </StackPanel>
 
@@ -224,8 +265,13 @@
                             materialDesign:HintAssist.HelperText="Department in company"
                             materialDesign:HintAssist.Hint="Department"
                             FontSize="18"
-                            IsReadOnly="True"
-                            Text="{Binding Employee.DEPARTMENT.DEPT_NAME, UpdateSourceTrigger=PropertyChanged}" />
+                            IsReadOnly="True">
+                            <TextBox.Text>
+                                <Binding Path="DEPARTMENT" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
 
                     </StackPanel>
 
@@ -240,10 +286,15 @@
                         <TextBox
                             Width="200"
                             Margin="8,0,0,0"
-                            materialDesign:HintAssist.HelperText="Academic Level"
+                            materialDesign:HintAssist.Hint="Academic Level"
                             FontSize="18"
-                            IsReadOnly="true"
-                            Text="{Binding Employee.ACADEMIC_LEVEL, UpdateSourceTrigger=PropertyChanged}" />
+                            IsReadOnly="true">
+                            <TextBox.Text>
+                                <Binding Path="ACADEMIC_LEVEL" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                     </StackPanel>
                     <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
 
@@ -257,10 +308,15 @@
                         <TextBox
                             Width="200"
                             Margin="8,0,0,0"
-                            materialDesign:HintAssist.HelperText="Email"
+                            materialDesign:HintAssist.Hint="Email"
                             FontSize="18"
-                            IsReadOnly="true"
-                            Text="{Binding Employee.EMAIL, UpdateSourceTrigger=PropertyChanged}" />
+                            IsReadOnly="true">
+                            <TextBox.Text>
+                                <Binding Path="EMAIL" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules />
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                     </StackPanel>
                 </StackPanel>
             </DockPanel>

@@ -133,7 +133,7 @@ namespace HRMS.Accouting.ViewModel
             FOREGROUNDSALARY = new SolidColorBrush(Colors.Black);
             BACKGROUNDSALARY = new SolidColorBrush(Colors.Transparent);
 
-            CONTENTCONTROL = new uConListEmployeeAccounting(EMPLOYEE_ID);
+            CONTENTCONTROL = new uConDashBoard(EMPLOYEE_ID);
         }
 
         private void HomeClick()
@@ -153,7 +153,7 @@ namespace HRMS.Accouting.ViewModel
             FOREGROUNDSALARY = new SolidColorBrush(Colors.Black);
             BACKGROUNDSALARY = new SolidColorBrush(Colors.Transparent);
 
-            CONTENTCONTROL = new uConListEmployeeAccounting(EMPLOYEE_ID);
+            CONTENTCONTROL = new uConDashBoard(EMPLOYEE_ID);
         }
 
         private void ReportClick()
@@ -234,7 +234,8 @@ namespace HRMS.Accouting.ViewModel
             BACKGROUNDHOME = new SolidColorBrush(Colors.Transparent);
 
             CONTENTCONTROL = new uConAccountingSalaryInformation(EMPLOYEE_ID);
-        }     
+        }  
+                
     }
 }
 

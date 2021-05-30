@@ -58,6 +58,9 @@ namespace HRMS.Accouting.Model
         public long TAX { get => _TAX; set { _TAX = value; OnPropertyChanged(); } }
 
         private long _TOTAL_SALARY;
-        public long TOTAL_SALARY { get => _TOTAL_SALARY; set { _TOTAL_SALARY = value; OnPropertyChanged(); } }       
+        public long TOTAL_SALARY { get => _TOTAL_SALARY; set { _TOTAL_SALARY = value; OnPropertyChanged(); } }
+
+        private string _NOTE;
+        public string NOTE { get => _NOTE; set { _NOTE = value; OnPropertyChanged(); } }
     }
 }

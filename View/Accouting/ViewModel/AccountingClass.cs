@@ -215,6 +215,23 @@ namespace HRMS.Accouting.ViewModel
             return total_salary;
         }
 
+        public static long CalculateSalary(long SOCIAL_INSURANCE, long HEALTH_INSURANCE, long TAX, long BONUS, long WELFARE, 
+                                            long BASIC_WAGE, long OVERTIME_SALARY, double COEFFICIENT,
+                                            int NUMBER_OF_WORK_DAY, int NUMBER_OF_OVERTIME_DAY, int MONTH, int YEAR)
+        {
+            long total_salary = 0;
+            AVERAGE_DAY = CalculateAverageDay(MONTH, YEAR);
+            long basic_salary = (long)(((COEFFICIENT * BASIC_WAGE) + WELFARE) * NUMBER_OF_WORK_DAY / AVERAGE_DAY +
+                                            OVERTIME_SALARY * NUMBER_OF_OVERTIME_DAY + BONUS);
+
+            //Thuế = thuế BHXH + thuế BHYT + thuế cá nhân * Lương cơ bản / 100
+            long tax_income = (long)(HEALTH_INSURANCE + SOCIAL_INSURANCE + TAX);
+
+            total_salary = basic_salary - tax_income;
+            total_salary = (long)Math.Round((double)(total_salary / 1000)) * 1000;
+            return total_salary;
+        }
+
         //Convert byte[] sang bitmap
         public static BitmapImage ToImage(byte[] array)
         {

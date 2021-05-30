@@ -20,6 +20,7 @@ namespace HRMS.Accouting.Model
             this.SALARies = new HashSet<SALARY>();
             this.TIMEKEEPING_DETAIL = new HashSet<TIMEKEEPING_DETAIL>();
             this.TIMEKEEPINGs = new HashSet<TIMEKEEPING>();
+            this.RECORDs = new HashSet<RECORD>();
         }
     
         public int EMPLOYEE_ID { get; set; }
@@ -46,5 +47,7 @@ namespace HRMS.Accouting.Model
         public virtual ICollection<TIMEKEEPING_DETAIL> TIMEKEEPING_DETAIL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TIMEKEEPING> TIMEKEEPINGs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RECORD> RECORDs { get; set; }
     }
 }

@@ -57,6 +57,9 @@ namespace HRMS.Accouting.ViewModel
         private string _USER_NAME;
         public string USER_NAME { get => _USER_NAME; set { _USER_NAME = value; OnPropertyChanged(); } }
 
+        private int _USER_DEPT;
+        public int USER_DEPT { get => _USER_DEPT; set { _USER_DEPT = value; OnPropertyChanged(); } }
+
         private int _USER_ROLE;
         public int USER_ROLE { get => _USER_ROLE; set { _USER_ROLE = value; OnPropertyChanged(); } }
 
@@ -90,6 +93,7 @@ namespace HRMS.Accouting.ViewModel
                     ROLE_NAME = SelectedItem.ROLE;
                     BASIC_WAGE = (long)SelectedItem.BASIC_WAGE;
                     COEFFICIENT = (double)SelectedItem.COEFFICIENT;
+                    TOTAL_SALARY = SelectedItem.TOTAL_SALARY;
                     EMPLOYEE emp = HRMSEntities.Ins.DB.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == SelectedItem.EMPLOYEE_ID).FirstOrDefault();
                     IMAGESOURCE = emp.IMAGE;
                     if (IMAGESOURCE == null)
@@ -196,28 +200,28 @@ namespace HRMS.Accouting.ViewModel
         //Toàn bộ dữ liệu binding trong SalaryDetailEmployee
 
         private long _SOCIAL_INSURANCE;
-        public long SOCIAL_INSURANCE { get => _SOCIAL_INSURANCE; set { _SOCIAL_INSURANCE = value; OnPropertyChanged(); } }
+        public long SOCIAL_INSURANCE { get => _SOCIAL_INSURANCE; set { _SOCIAL_INSURANCE = value; OnPropertyChanged(); TOTAL_SALARY = AccountingClass.CalculateSalary(SOCIAL_INSURANCE,HEALTH_INSURANCE,TAX,BONUS,WELFARE,BASIC_WAGE,OVERTIME_SALARY,COEFFICIENT,SelectedItem.WORK_DAY,SelectedItem.OVERTIME_DAY, SelectedItem.DATE_START.Month,SelectedItem.DATE_START.Year); } }
 
         private long _OVERTIME_SALARY;
         public long OVERTIME_SALARY { get => _OVERTIME_SALARY; set { _OVERTIME_SALARY = value; OnPropertyChanged(); } }
 
         private long _HEALTH_INSURANCE;
-        public long HEALTH_INSURANCE { get => _HEALTH_INSURANCE; set { _HEALTH_INSURANCE = value; OnPropertyChanged(); } }
+        public long HEALTH_INSURANCE { get => _HEALTH_INSURANCE; set { _HEALTH_INSURANCE = value; OnPropertyChanged(); TOTAL_SALARY = AccountingClass.CalculateSalary(SOCIAL_INSURANCE, HEALTH_INSURANCE, TAX, BONUS, WELFARE, BASIC_WAGE, OVERTIME_SALARY, COEFFICIENT, SelectedItem.WORK_DAY, SelectedItem.OVERTIME_DAY, SelectedItem.DATE_START.Month, SelectedItem.DATE_START.Year); } }
 
         private long _BONUS;
-        public long BONUS { get => _BONUS; set { _BONUS = value; OnPropertyChanged(); } }
+        public long BONUS { get => _BONUS; set { _BONUS = value; OnPropertyChanged(); TOTAL_SALARY = AccountingClass.CalculateSalary(SOCIAL_INSURANCE, HEALTH_INSURANCE, TAX, BONUS, WELFARE, BASIC_WAGE, OVERTIME_SALARY, COEFFICIENT, SelectedItem.WORK_DAY, SelectedItem.OVERTIME_DAY, SelectedItem.DATE_START.Month, SelectedItem.DATE_START.Year); } }
 
         private long _BASIC_WAGE;
         public long BASIC_WAGE { get => _BASIC_WAGE; set { _BASIC_WAGE = value; OnPropertyChanged(); } }
 
         private long _WELFARE;
-        public long WELFARE { get => _WELFARE; set { _WELFARE = value; OnPropertyChanged(); } }
+        public long WELFARE { get => _WELFARE; set { _WELFARE = value; OnPropertyChanged(); TOTAL_SALARY = AccountingClass.CalculateSalary(SOCIAL_INSURANCE, HEALTH_INSURANCE, TAX, BONUS, WELFARE, BASIC_WAGE, OVERTIME_SALARY, COEFFICIENT, SelectedItem.WORK_DAY, SelectedItem.OVERTIME_DAY, SelectedItem.DATE_START.Month, SelectedItem.DATE_START.Year); } }
 
         private double _COEFFICIENT;
         public double COEFFICIENT { get => _COEFFICIENT; set { _COEFFICIENT = value; OnPropertyChanged(); } }
 
         private long _TAX;
-        public long TAX { get => _TAX; set { _TAX = value; OnPropertyChanged(); } }
+        public long TAX { get => _TAX; set { _TAX = value; OnPropertyChanged(); TOTAL_SALARY = AccountingClass.CalculateSalary(SOCIAL_INSURANCE, HEALTH_INSURANCE, TAX, BONUS, WELFARE, BASIC_WAGE, OVERTIME_SALARY, COEFFICIENT, SelectedItem.WORK_DAY, SelectedItem.OVERTIME_DAY, SelectedItem.DATE_START.Month, SelectedItem.DATE_START.Year); } }
 
         private int _EMPLOYEE_ID;
         public int EMPLOYEE_ID { get => _EMPLOYEE_ID; set { _EMPLOYEE_ID = value; OnPropertyChanged(); } }
@@ -230,6 +234,9 @@ namespace HRMS.Accouting.ViewModel
 
         private string _ROLE_NAME;
         public string ROLE_NAME { get => _ROLE_NAME; set { _ROLE_NAME = value; OnPropertyChanged(); } }
+
+        private string _NOTE;
+        public string NOTE { get => _NOTE; set { _NOTE = value; OnPropertyChanged(); } }
 
         private long _TOTAL_SALARY;
         public long TOTAL_SALARY { get => _TOTAL_SALARY; set { _TOTAL_SALARY = value; OnPropertyChanged(); } }
@@ -257,6 +264,12 @@ namespace HRMS.Accouting.ViewModel
             LoadCommandDetail(ID);
         }
 
+        public AccountingViewModel(int idSelect, int idUser,int month,int year)
+        {
+            SelectedItem = LoadSelectedData(idSelect, month, year);
+            LoadCommandDetail(idUser);
+        }
+
         private void LoadCommandDetail(int ID)
         {
             LoadUser(ID);
@@ -269,6 +282,50 @@ namespace HRMS.Accouting.ViewModel
 
             //Chức năng add ảnh
             AddImageCommand = new RelayCommand<object>(p => IsAddImageData(), p => AddImageData());
+        }
+
+        private SalaryInformationData LoadSelectedData(int ID, int month, int year)
+        {
+            SalaryInformationData data = new SalaryInformationData();
+            hrmsEntities DB = new hrmsEntities();
+            var item = (from emp in DB.EMPLOYEEs
+                        join tk in DB.TIMEKEEPINGs on emp.EMPLOYEE_ID equals tk.EMPLOYEE_ID into temp1
+                        from tk in temp1.DefaultIfEmpty()
+                        join sl in DB.SALARies on emp.EMPLOYEE_ID equals sl.EMPLOYEE_ID into temp2
+                        from sl in temp2.DefaultIfEmpty()
+                        where sl.DATE_START.Value.Month == month && sl.DATE_START.Value.Year == year &&
+                             tk.DATE_START.Value.Month == month && tk.DATE_START.Value.Year == year &&
+                             emp.EMPLOYEE_ID == ID
+                        select new
+                        {
+                            id = emp.EMPLOYEE_ID,
+                            month_start = sl.DATE_START.Value.Month,
+                            year_start = sl.DATE_START.Value.Year,
+                            EMPLOYEE = emp,
+                            TIMEKEEPING = tk,
+                            SALARY = sl
+                        }).SingleOrDefault();
+
+            data.EMPLOYEE_ID = item.id;
+            data.NAME = item.EMPLOYEE.NAME;
+            data.DEPARTMENT = item.EMPLOYEE.DEPARTMENT.DEPT_NAME;
+            data.ROLE = item.EMPLOYEE.ROLE.ROLE_NAME;
+            data.BASIC_WAGE = (long)item.SALARY.BASIC_WAGE;
+            data.WORK_DAY = (int)item.TIMEKEEPING.NUMBER_OF_WORK_DAY;
+            data.OVERTIME_DAY = (int)item.TIMEKEEPING.NUMBER_OF_OVERTIME_DAY;
+            data.OVERTIME_SALARY = (long)item.SALARY.OVERTIME_SALARY;
+            data.TOTAL_SALARY = (long)item.SALARY.TOTAL_SALARY;
+            data.SOCIAL_INSURANCE = (long)item.SALARY.SOCIAL_INSURANCE;
+            data.HEALTH_INSURANCE = (long)item.SALARY.HEALTH_INSURANCE;
+            data.TAX = (long)item.SALARY.TAX;
+            data.WELFARE = (long)item.SALARY.WELFARE;
+            data.BONUS = (long)item.SALARY.BONUS;
+            data.COEFFICIENT = (double)item.SALARY.COEFFICIENT;
+            data.DATE_START = (DateTime)item.SALARY.DATE_START;
+            data.DATE_END = (DateTime)item.SALARY.DATE_END;
+            data.NOTE = item.SALARY.NOTE;
+
+            return data;
         }
 
         private void LoadCommandList(int ID)
@@ -300,8 +357,10 @@ namespace HRMS.Accouting.ViewModel
         private void LoadUser(int ID)
         {
             var emp = HRMSEntities.Ins.DB.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == ID).SingleOrDefault();
+            USER_ID = ID;
             USER_NAME = emp.NAME;
             USER_ROLE = (int)emp.ROLE.PERMISSION;
+            USER_DEPT = (int)emp.DEPT_ID;
         }
 
         //Load data từ database vào datagrid trong EmployeeList
@@ -360,6 +419,7 @@ namespace HRMS.Accouting.ViewModel
                     salaryData.WELFARE = 0;
                     salaryData.BONUS = 0;
                     salaryData.COEFFICIENT = (double)old_salary.COEFFICIENT;
+                    salaryData.NOTE = "";
                     salaryData.DATE_START = new DateTime(SELECTMONTHTYPE.YEAR,SELECTMONTHTYPE.MONTH, 1);
                     salaryData.DATE_END = new DateTime(SELECTMONTHTYPE.YEAR, SELECTMONTHTYPE.MONTH, AccountingClass.GetDaybyMonth(SELECTMONTHTYPE.MONTH,SELECTMONTHTYPE.YEAR));
                     
@@ -379,6 +439,7 @@ namespace HRMS.Accouting.ViewModel
                     salary.TAX = 0;
                     salary.WELFARE = 0;
                     salary.TOTAL_SALARY = 0;
+                    salary.NOTE = "";
                     DB.SALARies.Add(salary);
 
                     TIMEKEEPING temp = DB.TIMEKEEPINGs.Where(x => x.EMPLOYEE_ID == item.EMPLOYEE_ID && x.DATE_START.Value.Month == SELECTMONTHTYPE.MONTH && x.DATE_START.Value.Year == SELECTMONTHTYPE.YEAR).FirstOrDefault();
@@ -430,6 +491,7 @@ namespace HRMS.Accouting.ViewModel
                     salaryData.COEFFICIENT = (double)item.SALARY.COEFFICIENT;
                     salaryData.DATE_START = (DateTime)item.SALARY.DATE_START;
                     salaryData.DATE_END = (DateTime)item.SALARY.DATE_END;
+                    salaryData.NOTE = item.SALARY.NOTE;
 
                     SalaryList.Add(salaryData);
                     SalaryTest.Add(salaryData);
@@ -510,9 +572,59 @@ namespace HRMS.Accouting.ViewModel
             Salary.BONUS = long.Parse(BONUS.ToString());
             Salary.TAX = long.Parse(TAX.ToString());
             Salary.TOTAL_SALARY = AccountingClass.CalculateSalary(Salary,Timekeeping);
+            TOTAL_SALARY = (long)Salary.TOTAL_SALARY;
             if(IMAGESOURCE != null)
             {
                 Employee.IMAGE = IMAGESOURCE;
+            }
+            String change = "";
+            int countchange = 0;
+            if (SOCIAL_INSURANCE != SelectedItem.SOCIAL_INSURANCE)
+            {
+                change = change + string.Format("SOCIAL INSUARANCE ({0} -> {1})     ", SelectedItem.SOCIAL_INSURANCE, SOCIAL_INSURANCE);
+                countchange++;
+            }
+            if(HEALTH_INSURANCE != SelectedItem.HEALTH_INSURANCE)
+            {
+                change = change + string.Format("HEALTH INSUARANCE ({0} -> {1})     ,", SelectedItem.HEALTH_INSURANCE, HEALTH_INSURANCE);
+                countchange++;
+            }
+            if (BONUS != SelectedItem.BONUS)
+            {
+                change = change + string.Format("BONUS ({0} -> {1})     ,", SelectedItem.BONUS, BONUS);
+                countchange++;
+            }
+            if (TAX != SelectedItem.TAX)
+            {
+                change = change + string.Format("TAX({0} -> {1})     ,", SelectedItem.TAX, TAX);
+                countchange++;
+            }
+            if (WELFARE != SelectedItem.WELFARE)
+            {
+                change = change + string.Format("WELFARE ({0} -> {1})     ,", SelectedItem.WELFARE, WELFARE);
+                countchange++;
+            }
+            if (TOTAL_SALARY != SelectedItem.TOTAL_SALARY)
+            {
+                change = change + string.Format("TOTAL SALARY ({0} -> {1})     ,", SelectedItem.TOTAL_SALARY, TOTAL_SALARY);
+                countchange++;
+            }
+            if(!NOTE.Equals(SelectedItem.NOTE))
+            {
+                change = change + string.Format("NOTE ('{0}' -> '{1}')     ,", SelectedItem.NOTE, NOTE);
+                countchange++;
+            }
+            if (countchange != 0)
+            {
+                RECORD record = new RECORD();
+                record.EMPLOYEE_ID = USER_ID;
+                record.EMPLOYEE_CHANGE_NAME = EMPLOYEE_NAME;
+                record.EMPLOYEE_CHANGE_ID = EMPLOYEE_ID;
+                record.DATE_CHANGE = DateTime.Now;
+                record.DEPT_ID = USER_DEPT;
+                record.CHANGE = change;
+                record.MONTH_CHANGE = new DateTime(SelectedItem.DATE_START.Year, SelectedItem.DATE_START.Month, 1);
+                DB.RECORDs.Add(record);
             }
             DB.SaveChanges();
         }
@@ -568,7 +680,7 @@ namespace HRMS.Accouting.ViewModel
             return false;
         }
 
-        //Lưu datagrid thàng pdf
+        //Lưu datagrid thàng pdf (name: UserName)
         private void ExportPDF(DataGrid dtgrid, string name)
         {
             var d = dtgrid.ItemsSource.Cast<SalaryInformationData>();
@@ -661,7 +773,8 @@ namespace HRMS.Accouting.ViewModel
             }
             MessageBox.Show("Export data to " + saveFileDialog.FileName + " successful");
         }
-
+        
+        //Lưu datagrid thành excel
         private void ExportExcel(DataGrid dtgrid)
         {
             var d = dtgrid.ItemsSource.Cast<SalaryInformationData>();
@@ -680,5 +793,6 @@ namespace HRMS.Accouting.ViewModel
                 MessageBox.Show("Export data to " + saveFileDialog.FileName + " successful");
             }
         }       
+   
     }
 }

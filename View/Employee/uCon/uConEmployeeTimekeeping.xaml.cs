@@ -1,7 +1,4 @@
-﻿using HRMS.Accouting.Model;
-using HRMS.Employee.ViewModel;
-using MaterialDesignThemes.Wpf;
-
+﻿using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,15 +24,9 @@ namespace HRMS.Employee.uCon
     
     public partial class uConEmployeeTimekeeping : UserControl
     {
-        private ObservableCollection<TimekeepingData> TimekeepingList;
-
         public uConEmployeeTimekeeping()
         {
-            TimekeepingList = new ObservableCollection<TimekeepingData>();
             InitializeComponent();
-            DataContext = new EmployeeViewModel();
-
         }
-
     }
 }

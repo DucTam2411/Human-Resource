@@ -1,5 +1,4 @@
-﻿using HRMS.Employee.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +23,6 @@ namespace HRMS.Employee.uCon
         public uConEmployeeInformation()
         {
             InitializeComponent();
-            DataContext = new EmployeeViewModel();
         }
 
     }
