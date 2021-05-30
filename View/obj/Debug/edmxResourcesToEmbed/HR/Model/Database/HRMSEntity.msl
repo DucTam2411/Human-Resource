@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="hrmsModelStoreContainer" CdmEntityContainer="hrmsEntities">
+  <EntityContainerMapping StorageEntityContainer="hrmsModelStoreContainer" CdmEntityContainer="hrmsEntities1">
     <EntitySetMapping Name="DEPARTMENTs">
       <EntityTypeMapping TypeName="hrmsModel.DEPARTMENT">
         <MappingFragment StoreEntitySet="DEPARTMENT">
           <ScalarProperty Name="DEPT_ID" ColumnName="DEPT_ID" />
           <ScalarProperty Name="DEPT_NAME" ColumnName="DEPT_NAME" />
+          <ScalarProperty Name="ROOM_ID" ColumnName="ROOM_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -17,7 +18,7 @@
           <ScalarProperty Name="NAME" ColumnName="NAME" />
           <ScalarProperty Name="AGE" ColumnName="AGE" />
           <ScalarProperty Name="GENDER" ColumnName="GENDER" />
-          <ScalarProperty Name="BLOODTYPE" ColumnName="BLOODTYPE" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
           <ScalarProperty Name="ACADEMIC_LEVEL" ColumnName="ACADEMIC_LEVEL" />
           <ScalarProperty Name="BIRTH_DATE" ColumnName="BIRTH_DATE" />
           <ScalarProperty Name="BIRTH_PLACE" ColumnName="BIRTH_PLACE" />
@@ -45,8 +46,7 @@
       <EntityTypeMapping TypeName="hrmsModel.ROOM">
         <MappingFragment StoreEntitySet="ROOM">
           <ScalarProperty Name="ROOM_ID" ColumnName="ROOM_ID" />
-          <ScalarProperty Name="ROOM_NAME" ColumnName="ROOM_NAME" />
-          <ScalarProperty Name="DEPT_ID" ColumnName="DEPT_ID" />
+          <ScalarProperty Name="ROOM_NUMBER" ColumnName="ROOM_NUMBER" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -55,10 +55,11 @@
         <MappingFragment StoreEntitySet="SALARY">
           <ScalarProperty Name="SALARY_ID" ColumnName="SALARY_ID" />
           <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
-          <ScalarProperty Name="BASIC_WAGE" ColumnName="BASIC_WAGE" />
+          <ScalarProperty Name="BASIC_SALARY" ColumnName="BASIC_SALARY" />
           <ScalarProperty Name="OVERTIME_SALARY" ColumnName="OVERTIME_SALARY" />
           <ScalarProperty Name="COEFFICIENT" ColumnName="COEFFICIENT" />
           <ScalarProperty Name="BONUS" ColumnName="BONUS" />
+          <ScalarProperty Name="WAGE" ColumnName="WAGE" />
           <ScalarProperty Name="WELFARE" ColumnName="WELFARE" />
           <ScalarProperty Name="TAX" ColumnName="TAX" />
           <ScalarProperty Name="SOCIAL_INSURANCE" ColumnName="SOCIAL_INSURANCE" />
@@ -77,8 +78,6 @@
           <ScalarProperty Name="NUMBER_OF_WORK_DAY" ColumnName="NUMBER_OF_WORK_DAY" />
           <ScalarProperty Name="NUMBER_OF_ABSENT_DAY" ColumnName="NUMBER_OF_ABSENT_DAY" />
           <ScalarProperty Name="NUMBER_OF_OVERTIME_DAY" ColumnName="NUMBER_OF_OVERTIME_DAY" />
-          <ScalarProperty Name="DATE_START" ColumnName="DATE_START" />
-          <ScalarProperty Name="DATE_END" ColumnName="DATE_END" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -1,4 +1,5 @@
 ﻿using HRMS.HR.Model.Database;
+using HRMS.HR.Model;
 using HRMS.HR.uCon;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace HRMS.HR.ViewModel
     public class ListEmployeeViewModel : BaseViewModel
     {
         private ObservableCollection<EMPLOYEE> _employees;
+        private ObservableCollection<EMPLOYEE> _testemployees;
         public ICommand GridLoadCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand DoubleClickCommand { get; set; }
@@ -23,6 +25,7 @@ namespace HRMS.HR.ViewModel
         public ICommand ConfirmCommand { get; set; }
         public ICommand RemoveCommand { get; set; }
         public ObservableCollection<EMPLOYEE> employees { get => _employees; set { _employees = value;OnPropertyChanged(); } }
+        public ObservableCollection<EMPLOYEE> testemployees { get => _testemployees; set { _testemployees = value; OnPropertyChanged(); } }
 
         private EMPLOYEE _SELECTED_ITEM;
         public EMPLOYEE SELECTED_ITEM {
@@ -72,9 +75,124 @@ namespace HRMS.HR.ViewModel
         public string ACADEMIC_LEVEL { get => _ACADEMIC_LEVEL; set { _ACADEMIC_LEVEL = value; OnPropertyChanged(); } }
         private string _EMAIL;
         public string EMAIL { get => _EMAIL; set { _EMAIL = value; OnPropertyChanged(); } }
+        private ComboboxModel _SELECTEDTYPE;
+        public ComboboxModel SELECTEDTYPE { get => _SELECTEDTYPE; set { _SELECTEDTYPE = value; OnPropertyChanged(); } }
+
+        private ObservableCollection<ComboboxModel> _ListType;
+        public ObservableCollection<ComboboxModel> ListType { get => _ListType; set { _ListType = value; OnPropertyChanged(); } }
+        private ObservableCollection<ComboboxModel> _ListDeptType;
+        public ObservableCollection<ComboboxModel> ListDeptType { get => _ListType; set { _ListType = value; OnPropertyChanged(); } }
+
+        private string _SEARCH_TEXT;
+        public string SEARCH_TEXT
+        {
+            get => _SEARCH_TEXT; set
+            {
+                _SEARCH_TEXT = value;
+                OnPropertyChanged();
+
+                //Đưa SalaryTest vào trong SalaryList để dữ liệu được refresh mỗi lần nhập
+                employees = testemployees;
+
+                //Kiểm tra SearchText có khác null không
+                if (!string.IsNullOrEmpty(SEARCH_TEXT))
+                {
+                    //Kiểm tra ComboBox chọn loại để lọc có khác null không
+                    if (SELECTEDTYPE != null)
+                    {
+                        //Chọn kiểu lọc
+                        switch (SELECTEDTYPE.NAME)
+                        {
+                            //Lọc theo ID
+                            case "ID":
+                                employees = new ObservableCollection<EMPLOYEE>(employees.Where(x => x.ID_CARD.ToString().Contains(SEARCH_TEXT)));
+                                break;
+
+                            //Lọc theo tên
+                            case "NAME":
+                                employees = new ObservableCollection<EMPLOYEE>(employees.Where(x => x.NAME.Contains(SEARCH_TEXT) ||
+                                                                                                        x.NAME.ToLower().Contains(SEARCH_TEXT) ||
+                                                                                                        x.NAME.ToUpper().Contains(SEARCH_TEXT)));
+                                break;
+
+                            //Lọc theo Department
+                            case "DEPARTMENT":
+                                employees = new ObservableCollection<EMPLOYEE>(employees.Where(x => x.DEPARTMENT.DEPT_NAME.Contains(SEARCH_TEXT) ||
+                                                                                                        x.DEPARTMENT.DEPT_NAME.ToLower().Contains(SEARCH_TEXT) ||
+                                                                                                        x.DEPARTMENT.DEPT_NAME.ToUpper().Contains(SEARCH_TEXT)));
+                                break;
+
+                            //Lọc theo role
+                            case "ROLE":
+                                employees = new ObservableCollection<EMPLOYEE>(employees.Where(x => x.ROLE.ROLE_NAME.Contains(SEARCH_TEXT) ||
+                                                                                                        x.ROLE.ROLE_NAME.ToLower().Contains(SEARCH_TEXT) ||
+                                                                                                        x.ROLE.ROLE_NAME.ToUpper().Contains(SEARCH_TEXT)));
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+
+        private string _SEARCH_DEPT_TEXT;
+        public string SEARCH_DEPT_TEXT
+        {
+            get => _SEARCH_DEPT_TEXT; set
+            {
+                _SEARCH_DEPT_TEXT = value;
+                OnPropertyChanged();
+
+                //Đưa SalaryTest vào trong SalaryList để dữ liệu được refresh mỗi lần nhập
+                employees = testemployees;
+
+                //Kiểm tra SearchText có khác null không
+                if (!string.IsNullOrEmpty(SEARCH_TEXT))
+                {
+                    //Kiểm tra ComboBox chọn loại để lọc có khác null không
+                    if (SELECTEDTYPE != null)
+                    {
+                        //Chọn kiểu lọc
+                        switch (SELECTEDTYPE.NAME)
+                        {
+                            //Lọc theo ID
+                            case "ID":
+                                employees = new ObservableCollection<EMPLOYEE>(employees.Where(x => x.ID_CARD.ToString().Contains(SEARCH_TEXT)));
+                                break;
+
+                            //Lọc theo tên
+                            case "NAME":
+                                employees = new ObservableCollection<EMPLOYEE>(employees.Where(x => x.NAME.Contains(SEARCH_TEXT) ||
+                                                                                                        x.NAME.ToLower().Contains(SEARCH_TEXT) ||
+                                                                                                        x.NAME.ToUpper().Contains(SEARCH_TEXT)));
+                                break;
+
+                            //Lọc theo Department
+                            case "DEPARTMENT":
+                                employees = new ObservableCollection<EMPLOYEE>(employees.Where(x => x.DEPARTMENT.DEPT_NAME.Contains(SEARCH_TEXT) ||
+                                                                                                        x.DEPARTMENT.DEPT_NAME.ToLower().Contains(SEARCH_TEXT) ||
+                                                                                                        x.DEPARTMENT.DEPT_NAME.ToUpper().Contains(SEARCH_TEXT)));
+                                break;
+
+                            //Lọc theo role
+                            case "ROLE":
+                                employees = new ObservableCollection<EMPLOYEE>(employees.Where(x => x.ROLE.ROLE_NAME.Contains(SEARCH_TEXT) ||
+                                                                                                        x.ROLE.ROLE_NAME.ToLower().Contains(SEARCH_TEXT) ||
+                                                                                                        x.ROLE.ROLE_NAME.ToUpper().Contains(SEARCH_TEXT)));
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+        }
 
         public ListEmployeeViewModel()
         {
+            
+            LoadComboboxTypeList();
             LoadData();
             AddCommand = new RelayCommand<ContentControl>(p => { return true;
             }, p =>
@@ -85,7 +203,7 @@ namespace HRMS.HR.ViewModel
             p => {
                 p.Content = new uConModifyEmployee(SELECTED_ITEM);
             });
-            ConfirmCommand = new RelayCommand<object>(p => {
+            ConfirmCommand = new RelayCommand<ContentControl>(p => {
                 if (string.IsNullOrEmpty(ID_CARD.ToString()) || string.IsNullOrEmpty(NAME) || string.IsNullOrEmpty(DEPT_NAME) || string.IsNullOrEmpty(ROLE_NAME))
                     return false;
                 var displayList = HRMSEntities.Ins.DB.EMPLOYEEs.Where(x => x.ID_CARD == ID_CARD);
@@ -94,7 +212,7 @@ namespace HRMS.HR.ViewModel
                 return true;
             }, p => {
                 setID();
-                hrmsEntities db = new hrmsEntities();
+                hrmsEntities1 db = new hrmsEntities1();
                 var employee = new EMPLOYEE()
                 {
                     ID_CARD = ID_CARD,
@@ -110,33 +228,36 @@ namespace HRMS.HR.ViewModel
                     DEPT_ID = DEPT_ID,
                     ROLE_ID = ROLE_ID,
                     IMAGE = null,
-                    BLOODTYPE = null
+                    PASSWORD = null
                 };
                 db.EMPLOYEEs.Add(employee);
                 db.SaveChanges();
                 MessageBox.Show("Added successfully!");
+                p.Content = new uConListEmployee();
             });
             BackCommand = new RelayCommand<ContentControl>(p => { return true; }, p => { p.Content = new uConListEmployee(); });
         }
         public ListEmployeeViewModel(EMPLOYEE selected)
         {
             SELECTED_ITEM = selected;
-            SaveCommand = new RelayCommand<object>(p => { return true; }, p =>
+            SaveCommand = new RelayCommand<ContentControl>(p => { return true; }, p =>
             {
                 EditData(selected);
                 MessageBox.Show("Saved successfully");
+                p.Content = new uConListEmployee();
             });
             BackCommand = new RelayCommand<ContentControl>(p => { return true; }, p => { p.Content = new uConListEmployee(); });
-            RemoveCommand = new RelayCommand<object>(p => { return true; }, p =>
+            RemoveCommand = new RelayCommand<ContentControl>(p => { return true; }, p =>
             {
                 DeleteData(selected);
                 MessageBox.Show("Deleted successfully");
+                p.Content = new uConListEmployee();
             });
         }
 
         private void EditData(EMPLOYEE e)
         {
-            hrmsEntities db = new hrmsEntities();
+            hrmsEntities1 db = new hrmsEntities1();
             var Employee = db.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == e.EMPLOYEE_ID).SingleOrDefault();
             Employee.NAME = NAME;
             Employee.AGE = DateTime.Now.Year - BIRTH_DATE.Year;
@@ -154,7 +275,7 @@ namespace HRMS.HR.ViewModel
         }
         private void DeleteData(EMPLOYEE e)
         {
-            hrmsEntities db = new hrmsEntities();
+            hrmsEntities1 db = new hrmsEntities1();
             var Employee = db.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == e.EMPLOYEE_ID).SingleOrDefault();
             db.EMPLOYEEs.Remove(Employee);
             db.SaveChanges();
@@ -220,10 +341,21 @@ namespace HRMS.HR.ViewModel
         {
             var list = (from emp in HRMSEntities.Ins.DB.EMPLOYEEs select emp);
             employees = new ObservableCollection<EMPLOYEE>();
+            testemployees = new ObservableCollection<EMPLOYEE>();
             foreach (var item in list)
             {
                 employees.Add(item);
+                testemployees.Add(item);
             }
+        }
+        private void LoadComboboxTypeList()
+        {
+            ListType = new ObservableCollection<ComboboxModel>();
+            ListType.Add(new ComboboxModel("ID", true));
+            ListType.Add(new ComboboxModel("NAME", false));
+            ListType.Add(new ComboboxModel("DEPARTMENT", false));
+            ListType.Add(new ComboboxModel("ROLE", false));
+            SELECTEDTYPE = ListType.Where(x => x.ISSELECTED == true).FirstOrDefault();
         }
 
 

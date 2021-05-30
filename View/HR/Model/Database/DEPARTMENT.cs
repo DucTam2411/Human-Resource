@@ -18,18 +18,24 @@ namespace HRMS.HR.Model.Database
         public DEPARTMENT()
         {
             this.EMPLOYEEs = new HashSet<EMPLOYEE>();
+            this.EMPLOYEEs1 = new HashSet<EMPLOYEE>();
             this.ROLEs = new HashSet<ROLE>();
-            this.ROOMs = new HashSet<ROOM>();
+            this.ROLEs1 = new HashSet<ROLE>();
         }
     
         public int DEPT_ID { get; set; }
         public string DEPT_NAME { get; set; }
+        public Nullable<int> ROOM_ID { get; set; }
     
+        public virtual ROOM ROOM { get; set; }
+        public virtual ROOM ROOM1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EMPLOYEE> EMPLOYEEs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EMPLOYEE> EMPLOYEEs1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ROLE> ROLEs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ROOM> ROOMs { get; set; }
+        public virtual ICollection<ROLE> ROLEs1 { get; set; }
     }
 }

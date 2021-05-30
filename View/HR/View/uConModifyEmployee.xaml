@@ -478,7 +478,8 @@
                             Content="Remove"
                             FontSize="18"
                             FontWeight="Light"
-                            Command="{Binding RemoveCommand}"/>
+                            Command="{Binding RemoveCommand}"
+                            CommandParameter="{Binding ElementName=contentControlModify}"/>
                         <Button
                             Width="100"
                             Height="50"
@@ -487,7 +488,8 @@
                             Content="Save"
                             FontSize="18"
                             FontWeight="Light"
-                            Command="{Binding SaveCommand}"/>
+                            Command="{Binding SaveCommand}"
+                            CommandParameter="{Binding ElementName=contentControlModify}"/>
 
 
 

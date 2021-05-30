@@ -151,6 +151,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="HR\Model\ComboboxModel.cs" />
     <Compile Include="HR\Model\Database\DEPARTMENT.cs">
       <DependentUpon>HRMSEntity.tt</DependentUpon>
     </Compile>

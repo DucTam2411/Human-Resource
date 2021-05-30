@@ -11,6 +11,7 @@
           </Key>
           <Property Name="DEPT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DEPT_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="ROOM_ID" Type="int" />
         </EntityType>
         <EntityType Name="EMPLOYEE">
           <Key>
@@ -21,7 +22,7 @@
           <Property Name="NAME" Type="varchar" MaxLength="100" />
           <Property Name="AGE" Type="int" />
           <Property Name="GENDER" Type="varchar" MaxLength="20" />
-          <Property Name="BLOODTYPE" Type="varchar" MaxLength="20" />
+          <Property Name="PASSWORD" Type="varchar" MaxLength="20" />
           <Property Name="ACADEMIC_LEVEL" Type="varchar" MaxLength="100" />
           <Property Name="BIRTH_DATE" Type="date" />
           <Property Name="BIRTH_PLACE" Type="varchar" MaxLength="200" />
@@ -47,8 +48,7 @@
             <PropertyRef Name="ROOM_ID" />
           </Key>
           <Property Name="ROOM_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ROOM_NAME" Type="varchar" MaxLength="20" />
-          <Property Name="DEPT_ID" Type="int" />
+          <Property Name="ROOM_NUMBER" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="SALARY">
           <Key>
@@ -56,14 +56,15 @@
           </Key>
           <Property Name="SALARY_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EMPLOYEE_ID" Type="int" />
-          <Property Name="BASIC_WAGE" Type="bigint" />
+          <Property Name="BASIC_SALARY" Type="bigint" />
           <Property Name="OVERTIME_SALARY" Type="bigint" />
           <Property Name="COEFFICIENT" Type="float" />
           <Property Name="BONUS" Type="bigint" />
+          <Property Name="WAGE" Type="bigint" />
           <Property Name="WELFARE" Type="bigint" />
           <Property Name="TAX" Type="bigint" />
           <Property Name="SOCIAL_INSURANCE" Type="bigint" />
-          <Property Name="HEALTH_INSURANCE" Type="bigint" />
+          <Property Name="HEALTH_INSURANCE" Type="int" />
           <Property Name="DATE_START" Type="date" />
           <Property Name="DATE_END" Type="date" />
           <Property Name="TOTAL_SALARY" Type="bigint" />
@@ -77,8 +78,6 @@
           <Property Name="NUMBER_OF_WORK_DAY" Type="int" />
           <Property Name="NUMBER_OF_ABSENT_DAY" Type="int" />
           <Property Name="NUMBER_OF_OVERTIME_DAY" Type="int" />
-          <Property Name="DATE_START" Type="date" />
-          <Property Name="DATE_END" Type="date" />
         </EntityType>
         <EntityType Name="TIMEKEEPING_DETAIL">
           <Key>
@@ -90,7 +89,31 @@
           <Property Name="CHECK_TIME" Type="time" Precision="7" />
           <Property Name="EMPLOYEE_ID" Type="int" />
         </EntityType>
-        <Association Name="FK__EMPLOYEE__DEPT_I__3F466844">
+        <Association Name="FK__DEPARTMEN__ROOM___30F848ED">
+          <End Role="ROOM" Type="Self.ROOM" Multiplicity="0..1" />
+          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOM">
+              <PropertyRef Name="ROOM_ID" />
+            </Principal>
+            <Dependent Role="DEPARTMENT">
+              <PropertyRef Name="ROOM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DEPARTMEN__ROOM___4E88ABD4">
+          <End Role="ROOM" Type="Self.ROOM" Multiplicity="0..1" />
+          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOM">
+              <PropertyRef Name="ROOM_ID" />
+            </Principal>
+            <Dependent Role="DEPARTMENT">
+              <PropertyRef Name="ROOM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMPLOYEE__DEPT_I__31EC6D26">
           <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1" />
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -102,7 +125,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EMPLOYEE__ROLE_I__403A8C7D">
+        <Association Name="FK__EMPLOYEE__DEPT_I__4F7CD00D">
+          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1" />
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTMENT">
+              <PropertyRef Name="DEPT_ID" />
+            </Principal>
+            <Dependent Role="EMPLOYEE">
+              <PropertyRef Name="DEPT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMPLOYEE__ROLE_I__32E0915F">
           <End Role="ROLE" Type="Self.ROLE" Multiplicity="0..1" />
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -114,7 +149,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ROLE__DEPT_ID__32E0915F">
+        <Association Name="FK__EMPLOYEE__ROLE_I__5070F446">
+          <End Role="ROLE" Type="Self.ROLE" Multiplicity="0..1" />
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLE">
+              <PropertyRef Name="ROLE_ID" />
+            </Principal>
+            <Dependent Role="EMPLOYEE">
+              <PropertyRef Name="ROLE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ROLE__DEPT_ID__33D4B598">
           <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1" />
           <End Role="ROLE" Type="Self.ROLE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -126,19 +173,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ROOM__DEPT_ID__33D4B598">
+        <Association Name="FK__ROLE__DEPT_ID__5165187F">
           <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1" />
-          <End Role="ROOM" Type="Self.ROOM" Multiplicity="*" />
+          <End Role="ROLE" Type="Self.ROLE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DEPARTMENT">
               <PropertyRef Name="DEPT_ID" />
             </Principal>
-            <Dependent Role="ROOM">
+            <Dependent Role="ROLE">
               <PropertyRef Name="DEPT_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SALARY__EMPLOYEE__339FAB6E">
+        <Association Name="FK__SALARY__EMPLOYEE__49C3F6B7">
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="0..1" />
           <End Role="SALARY" Type="Self.SALARY" Multiplicity="*" />
           <ReferentialConstraint>
@@ -150,19 +197,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TIMEKEEPI__EMPLO__45F365D3">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="0..1" />
-          <End Role="TIMEKEEPING_DETAIL" Type="Self.TIMEKEEPING_DETAIL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EMPLOYEE_ID" />
-            </Principal>
-            <Dependent Role="TIMEKEEPING_DETAIL">
-              <PropertyRef Name="EMPLOYEE_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__TIMEKEEPI__NUMBE__4316F928">
+        <Association Name="FK__TIMEKEEPI__EMPLO__35BCFE0A">
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="0..1" />
           <End Role="TIMEKEEPING" Type="Self.TIMEKEEPING" Multiplicity="*" />
           <ReferentialConstraint>
@@ -174,7 +209,55 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__TIMEKEEPI__EMPLO__36B12243">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="0..1" />
+          <End Role="TIMEKEEPING_DETAIL" Type="Self.TIMEKEEPING_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EMPLOYEE_ID" />
+            </Principal>
+            <Dependent Role="TIMEKEEPING_DETAIL">
+              <PropertyRef Name="EMPLOYEE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TIMEKEEPI__EMPLO__52593CB8">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="0..1" />
+          <End Role="TIMEKEEPING" Type="Self.TIMEKEEPING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EMPLOYEE_ID" />
+            </Principal>
+            <Dependent Role="TIMEKEEPING">
+              <PropertyRef Name="EMPLOYEE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TIMEKEEPI__EMPLO__534D60F1">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="0..1" />
+          <End Role="TIMEKEEPING_DETAIL" Type="Self.TIMEKEEPING_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EMPLOYEE_ID" />
+            </Principal>
+            <Dependent Role="TIMEKEEPING_DETAIL">
+              <PropertyRef Name="EMPLOYEE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__TIMEKEEPI__TIMEK__37A5467C">
+          <End Role="TIMEKEEPING" Type="Self.TIMEKEEPING" Multiplicity="0..1" />
+          <End Role="TIMEKEEPING_DETAIL" Type="Self.TIMEKEEPING_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIMEKEEPING">
+              <PropertyRef Name="TIMEKEEPING_ID" />
+            </Principal>
+            <Dependent Role="TIMEKEEPING_DETAIL">
+              <PropertyRef Name="TIMEKEEPING_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TIMEKEEPI__TIMEK__5441852A">
           <End Role="TIMEKEEPING" Type="Self.TIMEKEEPING" Multiplicity="0..1" />
           <End Role="TIMEKEEPING_DETAIL" Type="Self.TIMEKEEPING_DETAIL" Multiplicity="*" />
           <ReferentialConstraint>
@@ -194,35 +277,63 @@
           <EntitySet Name="SALARY" EntityType="Self.SALARY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TIMEKEEPING" EntityType="Self.TIMEKEEPING" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TIMEKEEPING_DETAIL" EntityType="Self.TIMEKEEPING_DETAIL" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__EMPLOYEE__DEPT_I__3F466844" Association="Self.FK__EMPLOYEE__DEPT_I__3F466844">
-            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
-          </AssociationSet>
-          <AssociationSet Name="FK__EMPLOYEE__ROLE_I__403A8C7D" Association="Self.FK__EMPLOYEE__ROLE_I__403A8C7D">
-            <End Role="ROLE" EntitySet="ROLE" />
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ROLE__DEPT_ID__32E0915F" Association="Self.FK__ROLE__DEPT_ID__32E0915F">
-            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
-            <End Role="ROLE" EntitySet="ROLE" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ROOM__DEPT_ID__33D4B598" Association="Self.FK__ROOM__DEPT_ID__33D4B598">
-            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
+          <AssociationSet Name="FK__DEPARTMEN__ROOM___30F848ED" Association="Self.FK__DEPARTMEN__ROOM___30F848ED">
             <End Role="ROOM" EntitySet="ROOM" />
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
           </AssociationSet>
-          <AssociationSet Name="FK__SALARY__EMPLOYEE__339FAB6E" Association="Self.FK__SALARY__EMPLOYEE__339FAB6E">
+          <AssociationSet Name="FK__DEPARTMEN__ROOM___4E88ABD4" Association="Self.FK__DEPARTMEN__ROOM___4E88ABD4">
+            <End Role="ROOM" EntitySet="ROOM" />
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPLOYEE__DEPT_I__31EC6D26" Association="Self.FK__EMPLOYEE__DEPT_I__31EC6D26">
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPLOYEE__DEPT_I__4F7CD00D" Association="Self.FK__EMPLOYEE__DEPT_I__4F7CD00D">
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPLOYEE__ROLE_I__32E0915F" Association="Self.FK__EMPLOYEE__ROLE_I__32E0915F">
+            <End Role="ROLE" EntitySet="ROLE" />
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPLOYEE__ROLE_I__5070F446" Association="Self.FK__EMPLOYEE__ROLE_I__5070F446">
+            <End Role="ROLE" EntitySet="ROLE" />
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ROLE__DEPT_ID__33D4B598" Association="Self.FK__ROLE__DEPT_ID__33D4B598">
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
+            <End Role="ROLE" EntitySet="ROLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ROLE__DEPT_ID__5165187F" Association="Self.FK__ROLE__DEPT_ID__5165187F">
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
+            <End Role="ROLE" EntitySet="ROLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALARY__EMPLOYEE__49C3F6B7" Association="Self.FK__SALARY__EMPLOYEE__49C3F6B7">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="SALARY" EntitySet="SALARY" />
           </AssociationSet>
-          <AssociationSet Name="FK__TIMEKEEPI__EMPLO__45F365D3" Association="Self.FK__TIMEKEEPI__EMPLO__45F365D3">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
-            <End Role="TIMEKEEPING_DETAIL" EntitySet="TIMEKEEPING_DETAIL" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TIMEKEEPI__NUMBE__4316F928" Association="Self.FK__TIMEKEEPI__NUMBE__4316F928">
+          <AssociationSet Name="FK__TIMEKEEPI__EMPLO__35BCFE0A" Association="Self.FK__TIMEKEEPI__EMPLO__35BCFE0A">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="TIMEKEEPING" EntitySet="TIMEKEEPING" />
           </AssociationSet>
+          <AssociationSet Name="FK__TIMEKEEPI__EMPLO__36B12243" Association="Self.FK__TIMEKEEPI__EMPLO__36B12243">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="TIMEKEEPING_DETAIL" EntitySet="TIMEKEEPING_DETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TIMEKEEPI__EMPLO__52593CB8" Association="Self.FK__TIMEKEEPI__EMPLO__52593CB8">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="TIMEKEEPING" EntitySet="TIMEKEEPING" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TIMEKEEPI__EMPLO__534D60F1" Association="Self.FK__TIMEKEEPI__EMPLO__534D60F1">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="TIMEKEEPING_DETAIL" EntitySet="TIMEKEEPING_DETAIL" />
+          </AssociationSet>
           <AssociationSet Name="FK__TIMEKEEPI__TIMEK__37A5467C" Association="Self.FK__TIMEKEEPI__TIMEK__37A5467C">
+            <End Role="TIMEKEEPING" EntitySet="TIMEKEEPING" />
+            <End Role="TIMEKEEPING_DETAIL" EntitySet="TIMEKEEPING_DETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TIMEKEEPI__TIMEK__5441852A" Association="Self.FK__TIMEKEEPI__TIMEK__5441852A">
             <End Role="TIMEKEEPING" EntitySet="TIMEKEEPING" />
             <End Role="TIMEKEEPING_DETAIL" EntitySet="TIMEKEEPING_DETAIL" />
           </AssociationSet>
@@ -238,9 +349,13 @@
           </Key>
           <Property Name="DEPT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DEPT_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="EMPLOYEEs" Relationship="Self.FK__EMPLOYEE__DEPT_I__3F466844" FromRole="DEPARTMENT" ToRole="EMPLOYEE" />
-          <NavigationProperty Name="ROLEs" Relationship="Self.FK__ROLE__DEPT_ID__32E0915F" FromRole="DEPARTMENT" ToRole="ROLE" />
-          <NavigationProperty Name="ROOMs" Relationship="Self.FK__ROOM__DEPT_ID__33D4B598" FromRole="DEPARTMENT" ToRole="ROOM" />
+          <Property Name="ROOM_ID" Type="Int32" />
+          <NavigationProperty Name="ROOM" Relationship="Self.FK__DEPARTMEN__ROOM___30F848ED" FromRole="DEPARTMENT" ToRole="ROOM" />
+          <NavigationProperty Name="ROOM1" Relationship="Self.FK__DEPARTMEN__ROOM___4E88ABD4" FromRole="DEPARTMENT" ToRole="ROOM" />
+          <NavigationProperty Name="EMPLOYEEs" Relationship="Self.FK__EMPLOYEE__DEPT_I__31EC6D26" FromRole="DEPARTMENT" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="EMPLOYEEs1" Relationship="Self.FK__EMPLOYEE__DEPT_I__4F7CD00D" FromRole="DEPARTMENT" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="ROLEs" Relationship="Self.FK__ROLE__DEPT_ID__33D4B598" FromRole="DEPARTMENT" ToRole="ROLE" />
+          <NavigationProperty Name="ROLEs1" Relationship="Self.FK__ROLE__DEPT_ID__5165187F" FromRole="DEPARTMENT" ToRole="ROLE" />
         </EntityType>
         <EntityType Name="EMPLOYEE">
           <Key>
@@ -251,7 +366,7 @@
           <Property Name="NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="AGE" Type="Int32" />
           <Property Name="GENDER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="BLOODTYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="ACADEMIC_LEVEL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="BIRTH_DATE" Type="DateTime" Precision="0" />
           <Property Name="BIRTH_PLACE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -261,11 +376,15 @@
           <Property Name="DEPT_ID" Type="Int32" />
           <Property Name="ROLE_ID" Type="Int32" />
           <Property Name="IMAGE" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="DEPARTMENT" Relationship="Self.FK__EMPLOYEE__DEPT_I__3F466844" FromRole="EMPLOYEE" ToRole="DEPARTMENT" />
-          <NavigationProperty Name="ROLE" Relationship="Self.FK__EMPLOYEE__ROLE_I__403A8C7D" FromRole="EMPLOYEE" ToRole="ROLE" />
-          <NavigationProperty Name="SALARies" Relationship="Self.FK__SALARY__EMPLOYEE__339FAB6E" FromRole="EMPLOYEE" ToRole="SALARY" />
-          <NavigationProperty Name="TIMEKEEPING_DETAIL" Relationship="Self.FK__TIMEKEEPI__EMPLO__45F365D3" FromRole="EMPLOYEE" ToRole="TIMEKEEPING_DETAIL" />
-          <NavigationProperty Name="TIMEKEEPINGs" Relationship="Self.FK__TIMEKEEPI__NUMBE__4316F928" FromRole="EMPLOYEE" ToRole="TIMEKEEPING" />
+          <NavigationProperty Name="DEPARTMENT" Relationship="Self.FK__EMPLOYEE__DEPT_I__31EC6D26" FromRole="EMPLOYEE" ToRole="DEPARTMENT" />
+          <NavigationProperty Name="DEPARTMENT1" Relationship="Self.FK__EMPLOYEE__DEPT_I__4F7CD00D" FromRole="EMPLOYEE" ToRole="DEPARTMENT" />
+          <NavigationProperty Name="ROLE" Relationship="Self.FK__EMPLOYEE__ROLE_I__32E0915F" FromRole="EMPLOYEE" ToRole="ROLE" />
+          <NavigationProperty Name="ROLE1" Relationship="Self.FK__EMPLOYEE__ROLE_I__5070F446" FromRole="EMPLOYEE" ToRole="ROLE" />
+          <NavigationProperty Name="SALARies" Relationship="Self.FK__SALARY__EMPLOYEE__49C3F6B7" FromRole="EMPLOYEE" ToRole="SALARY" />
+          <NavigationProperty Name="TIMEKEEPINGs" Relationship="Self.FK__TIMEKEEPI__EMPLO__35BCFE0A" FromRole="EMPLOYEE" ToRole="TIMEKEEPING" />
+          <NavigationProperty Name="TIMEKEEPING_DETAIL" Relationship="Self.FK__TIMEKEEPI__EMPLO__36B12243" FromRole="EMPLOYEE" ToRole="TIMEKEEPING_DETAIL" />
+          <NavigationProperty Name="TIMEKEEPINGs1" Relationship="Self.FK__TIMEKEEPI__EMPLO__52593CB8" FromRole="EMPLOYEE" ToRole="TIMEKEEPING" />
+          <NavigationProperty Name="TIMEKEEPING_DETAIL1" Relationship="Self.FK__TIMEKEEPI__EMPLO__534D60F1" FromRole="EMPLOYEE" ToRole="TIMEKEEPING_DETAIL" />
         </EntityType>
         <EntityType Name="ROLE">
           <Key>
@@ -276,17 +395,19 @@
           <Property Name="ROLE_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="ROLE_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DEPT_ID" Type="Int32" />
-          <NavigationProperty Name="DEPARTMENT" Relationship="Self.FK__ROLE__DEPT_ID__32E0915F" FromRole="ROLE" ToRole="DEPARTMENT" />
-          <NavigationProperty Name="EMPLOYEEs" Relationship="Self.FK__EMPLOYEE__ROLE_I__403A8C7D" FromRole="ROLE" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="DEPARTMENT" Relationship="Self.FK__ROLE__DEPT_ID__33D4B598" FromRole="ROLE" ToRole="DEPARTMENT" />
+          <NavigationProperty Name="DEPARTMENT1" Relationship="Self.FK__ROLE__DEPT_ID__5165187F" FromRole="ROLE" ToRole="DEPARTMENT" />
+          <NavigationProperty Name="EMPLOYEEs" Relationship="Self.FK__EMPLOYEE__ROLE_I__32E0915F" FromRole="ROLE" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="EMPLOYEEs1" Relationship="Self.FK__EMPLOYEE__ROLE_I__5070F446" FromRole="ROLE" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="ROOM">
           <Key>
             <PropertyRef Name="ROOM_ID" />
           </Key>
           <Property Name="ROOM_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ROOM_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="DEPT_ID" Type="Int32" />
-          <NavigationProperty Name="DEPARTMENT" Relationship="Self.FK__ROOM__DEPT_ID__33D4B598" FromRole="ROOM" ToRole="DEPARTMENT" />
+          <Property Name="ROOM_NUMBER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DEPARTMENTs" Relationship="Self.FK__DEPARTMEN__ROOM___30F848ED" FromRole="ROOM" ToRole="DEPARTMENT" />
+          <NavigationProperty Name="DEPARTMENTs1" Relationship="Self.FK__DEPARTMEN__ROOM___4E88ABD4" FromRole="ROOM" ToRole="DEPARTMENT" />
         </EntityType>
         <EntityType Name="SALARY">
           <Key>
@@ -294,18 +415,19 @@
           </Key>
           <Property Name="SALARY_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EMPLOYEE_ID" Type="Int32" />
-          <Property Name="BASIC_WAGE" Type="Int64" />
+          <Property Name="BASIC_SALARY" Type="Int64" />
           <Property Name="OVERTIME_SALARY" Type="Int64" />
           <Property Name="COEFFICIENT" Type="Double" />
           <Property Name="BONUS" Type="Int64" />
+          <Property Name="WAGE" Type="Int64" />
           <Property Name="WELFARE" Type="Int64" />
           <Property Name="TAX" Type="Int64" />
           <Property Name="SOCIAL_INSURANCE" Type="Int64" />
-          <Property Name="HEALTH_INSURANCE" Type="Int64" />
+          <Property Name="HEALTH_INSURANCE" Type="Int32" />
           <Property Name="DATE_START" Type="DateTime" Precision="0" />
           <Property Name="DATE_END" Type="DateTime" Precision="0" />
           <Property Name="TOTAL_SALARY" Type="Int64" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__SALARY__EMPLOYEE__339FAB6E" FromRole="SALARY" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__SALARY__EMPLOYEE__49C3F6B7" FromRole="SALARY" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="TIMEKEEPING">
           <Key>
@@ -316,10 +438,10 @@
           <Property Name="NUMBER_OF_WORK_DAY" Type="Int32" />
           <Property Name="NUMBER_OF_ABSENT_DAY" Type="Int32" />
           <Property Name="NUMBER_OF_OVERTIME_DAY" Type="Int32" />
-          <Property Name="DATE_START" Type="DateTime" Precision="0" />
-          <Property Name="DATE_END" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__TIMEKEEPI__NUMBE__4316F928" FromRole="TIMEKEEPING" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__TIMEKEEPI__EMPLO__35BCFE0A" FromRole="TIMEKEEPING" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="EMPLOYEE1" Relationship="Self.FK__TIMEKEEPI__EMPLO__52593CB8" FromRole="TIMEKEEPING" ToRole="EMPLOYEE" />
           <NavigationProperty Name="TIMEKEEPING_DETAIL" Relationship="Self.FK__TIMEKEEPI__TIMEK__37A5467C" FromRole="TIMEKEEPING" ToRole="TIMEKEEPING_DETAIL" />
+          <NavigationProperty Name="TIMEKEEPING_DETAIL1" Relationship="Self.FK__TIMEKEEPI__TIMEK__5441852A" FromRole="TIMEKEEPING" ToRole="TIMEKEEPING_DETAIL" />
         </EntityType>
         <EntityType Name="TIMEKEEPING_DETAIL">
           <Key>
@@ -330,10 +452,36 @@
           <Property Name="CHECK_DATE" Type="DateTime" Precision="0" />
           <Property Name="CHECK_TIME" Type="Time" Precision="7" />
           <Property Name="EMPLOYEE_ID" Type="Int32" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__TIMEKEEPI__EMPLO__45F365D3" FromRole="TIMEKEEPING_DETAIL" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__TIMEKEEPI__EMPLO__36B12243" FromRole="TIMEKEEPING_DETAIL" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="EMPLOYEE1" Relationship="Self.FK__TIMEKEEPI__EMPLO__534D60F1" FromRole="TIMEKEEPING_DETAIL" ToRole="EMPLOYEE" />
           <NavigationProperty Name="TIMEKEEPING" Relationship="Self.FK__TIMEKEEPI__TIMEK__37A5467C" FromRole="TIMEKEEPING_DETAIL" ToRole="TIMEKEEPING" />
+          <NavigationProperty Name="TIMEKEEPING1" Relationship="Self.FK__TIMEKEEPI__TIMEK__5441852A" FromRole="TIMEKEEPING_DETAIL" ToRole="TIMEKEEPING" />
         </EntityType>
-        <Association Name="FK__EMPLOYEE__DEPT_I__3F466844">
+        <Association Name="FK__DEPARTMEN__ROOM___30F848ED">
+          <End Role="ROOM" Type="Self.ROOM" Multiplicity="0..1" />
+          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOM">
+              <PropertyRef Name="ROOM_ID" />
+            </Principal>
+            <Dependent Role="DEPARTMENT">
+              <PropertyRef Name="ROOM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DEPARTMEN__ROOM___4E88ABD4">
+          <End Role="ROOM" Type="Self.ROOM" Multiplicity="0..1" />
+          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOM">
+              <PropertyRef Name="ROOM_ID" />
+            </Principal>
+            <Dependent Role="DEPARTMENT">
+              <PropertyRef Name="ROOM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMPLOYEE__DEPT_I__31EC6D26">
           <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1" />
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -345,7 +493,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ROLE__DEPT_ID__32E0915F">
+        <Association Name="FK__EMPLOYEE__DEPT_I__4F7CD00D">
+          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1" />
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTMENT">
+              <PropertyRef Name="DEPT_ID" />
+            </Principal>
+            <Dependent Role="EMPLOYEE">
+              <PropertyRef Name="DEPT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ROLE__DEPT_ID__33D4B598">
           <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1" />
           <End Role="ROLE" Type="Self.ROLE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -357,19 +517,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ROOM__DEPT_ID__33D4B598">
+        <Association Name="FK__ROLE__DEPT_ID__5165187F">
           <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1" />
-          <End Role="ROOM" Type="Self.ROOM" Multiplicity="*" />
+          <End Role="ROLE" Type="Self.ROLE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DEPARTMENT">
               <PropertyRef Name="DEPT_ID" />
             </Principal>
-            <Dependent Role="ROOM">
+            <Dependent Role="ROLE">
               <PropertyRef Name="DEPT_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EMPLOYEE__ROLE_I__403A8C7D">
+        <Association Name="FK__EMPLOYEE__ROLE_I__32E0915F">
           <End Role="ROLE" Type="Self.ROLE" Multiplicity="0..1" />
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -381,7 +541,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SALARY__EMPLOYEE__339FAB6E">
+        <Association Name="FK__EMPLOYEE__ROLE_I__5070F446">
+          <End Role="ROLE" Type="Self.ROLE" Multiplicity="0..1" />
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLE">
+              <PropertyRef Name="ROLE_ID" />
+            </Principal>
+            <Dependent Role="EMPLOYEE">
+              <PropertyRef Name="ROLE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SALARY__EMPLOYEE__49C3F6B7">
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="0..1" />
           <End Role="SALARY" Type="Self.SALARY" Multiplicity="*" />
           <ReferentialConstraint>
@@ -393,7 +565,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TIMEKEEPI__EMPLO__45F365D3">
+        <Association Name="FK__TIMEKEEPI__EMPLO__35BCFE0A">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="0..1" />
+          <End Role="TIMEKEEPING" Type="Self.TIMEKEEPING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EMPLOYEE_ID" />
+            </Principal>
+            <Dependent Role="TIMEKEEPING">
+              <PropertyRef Name="EMPLOYEE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TIMEKEEPI__EMPLO__36B12243">
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="0..1" />
           <End Role="TIMEKEEPING_DETAIL" Type="Self.TIMEKEEPING_DETAIL" Multiplicity="*" />
           <ReferentialConstraint>
@@ -405,7 +589,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TIMEKEEPI__NUMBE__4316F928">
+        <Association Name="FK__TIMEKEEPI__EMPLO__52593CB8">
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="0..1" />
           <End Role="TIMEKEEPING" Type="Self.TIMEKEEPING" Multiplicity="*" />
           <ReferentialConstraint>
@@ -413,6 +597,18 @@
               <PropertyRef Name="EMPLOYEE_ID" />
             </Principal>
             <Dependent Role="TIMEKEEPING">
+              <PropertyRef Name="EMPLOYEE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TIMEKEEPI__EMPLO__534D60F1">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="0..1" />
+          <End Role="TIMEKEEPING_DETAIL" Type="Self.TIMEKEEPING_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EMPLOYEE_ID" />
+            </Principal>
+            <Dependent Role="TIMEKEEPING_DETAIL">
               <PropertyRef Name="EMPLOYEE_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -429,7 +625,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="hrmsEntities" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK__TIMEKEEPI__TIMEK__5441852A">
+          <End Role="TIMEKEEPING" Type="Self.TIMEKEEPING" Multiplicity="0..1" />
+          <End Role="TIMEKEEPING_DETAIL" Type="Self.TIMEKEEPING_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIMEKEEPING">
+              <PropertyRef Name="TIMEKEEPING_ID" />
+            </Principal>
+            <Dependent Role="TIMEKEEPING_DETAIL">
+              <PropertyRef Name="TIMEKEEPING_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="hrmsEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="DEPARTMENTs" EntityType="Self.DEPARTMENT" />
           <EntitySet Name="EMPLOYEEs" EntityType="Self.EMPLOYEE" />
           <EntitySet Name="ROLEs" EntityType="Self.ROLE" />
@@ -437,35 +645,63 @@
           <EntitySet Name="SALARies" EntityType="Self.SALARY" />
           <EntitySet Name="TIMEKEEPINGs" EntityType="Self.TIMEKEEPING" />
           <EntitySet Name="TIMEKEEPING_DETAIL" EntityType="Self.TIMEKEEPING_DETAIL" />
-          <AssociationSet Name="FK__EMPLOYEE__DEPT_I__3F466844" Association="Self.FK__EMPLOYEE__DEPT_I__3F466844">
-            <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ROLE__DEPT_ID__32E0915F" Association="Self.FK__ROLE__DEPT_ID__32E0915F">
-            <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
-            <End Role="ROLE" EntitySet="ROLEs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ROOM__DEPT_ID__33D4B598" Association="Self.FK__ROOM__DEPT_ID__33D4B598">
-            <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
+          <AssociationSet Name="FK__DEPARTMEN__ROOM___30F848ED" Association="Self.FK__DEPARTMEN__ROOM___30F848ED">
             <End Role="ROOM" EntitySet="ROOMs" />
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
           </AssociationSet>
-          <AssociationSet Name="FK__EMPLOYEE__ROLE_I__403A8C7D" Association="Self.FK__EMPLOYEE__ROLE_I__403A8C7D">
+          <AssociationSet Name="FK__DEPARTMEN__ROOM___4E88ABD4" Association="Self.FK__DEPARTMEN__ROOM___4E88ABD4">
+            <End Role="ROOM" EntitySet="ROOMs" />
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPLOYEE__DEPT_I__31EC6D26" Association="Self.FK__EMPLOYEE__DEPT_I__31EC6D26">
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPLOYEE__DEPT_I__4F7CD00D" Association="Self.FK__EMPLOYEE__DEPT_I__4F7CD00D">
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ROLE__DEPT_ID__33D4B598" Association="Self.FK__ROLE__DEPT_ID__33D4B598">
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
+            <End Role="ROLE" EntitySet="ROLEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ROLE__DEPT_ID__5165187F" Association="Self.FK__ROLE__DEPT_ID__5165187F">
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
+            <End Role="ROLE" EntitySet="ROLEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPLOYEE__ROLE_I__32E0915F" Association="Self.FK__EMPLOYEE__ROLE_I__32E0915F">
             <End Role="ROLE" EntitySet="ROLEs" />
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
           </AssociationSet>
-          <AssociationSet Name="FK__SALARY__EMPLOYEE__339FAB6E" Association="Self.FK__SALARY__EMPLOYEE__339FAB6E">
+          <AssociationSet Name="FK__EMPLOYEE__ROLE_I__5070F446" Association="Self.FK__EMPLOYEE__ROLE_I__5070F446">
+            <End Role="ROLE" EntitySet="ROLEs" />
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALARY__EMPLOYEE__49C3F6B7" Association="Self.FK__SALARY__EMPLOYEE__49C3F6B7">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
             <End Role="SALARY" EntitySet="SALARies" />
           </AssociationSet>
-          <AssociationSet Name="FK__TIMEKEEPI__EMPLO__45F365D3" Association="Self.FK__TIMEKEEPI__EMPLO__45F365D3">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="TIMEKEEPING_DETAIL" EntitySet="TIMEKEEPING_DETAIL" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TIMEKEEPI__NUMBE__4316F928" Association="Self.FK__TIMEKEEPI__NUMBE__4316F928">
+          <AssociationSet Name="FK__TIMEKEEPI__EMPLO__35BCFE0A" Association="Self.FK__TIMEKEEPI__EMPLO__35BCFE0A">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
             <End Role="TIMEKEEPING" EntitySet="TIMEKEEPINGs" />
           </AssociationSet>
+          <AssociationSet Name="FK__TIMEKEEPI__EMPLO__36B12243" Association="Self.FK__TIMEKEEPI__EMPLO__36B12243">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="TIMEKEEPING_DETAIL" EntitySet="TIMEKEEPING_DETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TIMEKEEPI__EMPLO__52593CB8" Association="Self.FK__TIMEKEEPI__EMPLO__52593CB8">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="TIMEKEEPING" EntitySet="TIMEKEEPINGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TIMEKEEPI__EMPLO__534D60F1" Association="Self.FK__TIMEKEEPI__EMPLO__534D60F1">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="TIMEKEEPING_DETAIL" EntitySet="TIMEKEEPING_DETAIL" />
+          </AssociationSet>
           <AssociationSet Name="FK__TIMEKEEPI__TIMEK__37A5467C" Association="Self.FK__TIMEKEEPI__TIMEK__37A5467C">
+            <End Role="TIMEKEEPING" EntitySet="TIMEKEEPINGs" />
+            <End Role="TIMEKEEPING_DETAIL" EntitySet="TIMEKEEPING_DETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TIMEKEEPI__TIMEK__5441852A" Association="Self.FK__TIMEKEEPI__TIMEK__5441852A">
             <End Role="TIMEKEEPING" EntitySet="TIMEKEEPINGs" />
             <End Role="TIMEKEEPING_DETAIL" EntitySet="TIMEKEEPING_DETAIL" />
           </AssociationSet>
@@ -475,12 +711,13 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="hrmsModelStoreContainer" CdmEntityContainer="hrmsEntities">
+        <EntityContainerMapping StorageEntityContainer="hrmsModelStoreContainer" CdmEntityContainer="hrmsEntities1">
           <EntitySetMapping Name="DEPARTMENTs">
             <EntityTypeMapping TypeName="hrmsModel.DEPARTMENT">
               <MappingFragment StoreEntitySet="DEPARTMENT">
                 <ScalarProperty Name="DEPT_ID" ColumnName="DEPT_ID" />
                 <ScalarProperty Name="DEPT_NAME" ColumnName="DEPT_NAME" />
+                <ScalarProperty Name="ROOM_ID" ColumnName="ROOM_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -492,7 +729,7 @@
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
                 <ScalarProperty Name="AGE" ColumnName="AGE" />
                 <ScalarProperty Name="GENDER" ColumnName="GENDER" />
-                <ScalarProperty Name="BLOODTYPE" ColumnName="BLOODTYPE" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
                 <ScalarProperty Name="ACADEMIC_LEVEL" ColumnName="ACADEMIC_LEVEL" />
                 <ScalarProperty Name="BIRTH_DATE" ColumnName="BIRTH_DATE" />
                 <ScalarProperty Name="BIRTH_PLACE" ColumnName="BIRTH_PLACE" />
@@ -520,8 +757,7 @@
             <EntityTypeMapping TypeName="hrmsModel.ROOM">
               <MappingFragment StoreEntitySet="ROOM">
                 <ScalarProperty Name="ROOM_ID" ColumnName="ROOM_ID" />
-                <ScalarProperty Name="ROOM_NAME" ColumnName="ROOM_NAME" />
-                <ScalarProperty Name="DEPT_ID" ColumnName="DEPT_ID" />
+                <ScalarProperty Name="ROOM_NUMBER" ColumnName="ROOM_NUMBER" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -530,10 +766,11 @@
               <MappingFragment StoreEntitySet="SALARY">
                 <ScalarProperty Name="SALARY_ID" ColumnName="SALARY_ID" />
                 <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
-                <ScalarProperty Name="BASIC_WAGE" ColumnName="BASIC_WAGE" />
+                <ScalarProperty Name="BASIC_SALARY" ColumnName="BASIC_SALARY" />
                 <ScalarProperty Name="OVERTIME_SALARY" ColumnName="OVERTIME_SALARY" />
                 <ScalarProperty Name="COEFFICIENT" ColumnName="COEFFICIENT" />
                 <ScalarProperty Name="BONUS" ColumnName="BONUS" />
+                <ScalarProperty Name="WAGE" ColumnName="WAGE" />
                 <ScalarProperty Name="WELFARE" ColumnName="WELFARE" />
                 <ScalarProperty Name="TAX" ColumnName="TAX" />
                 <ScalarProperty Name="SOCIAL_INSURANCE" ColumnName="SOCIAL_INSURANCE" />
@@ -552,8 +789,6 @@
                 <ScalarProperty Name="NUMBER_OF_WORK_DAY" ColumnName="NUMBER_OF_WORK_DAY" />
                 <ScalarProperty Name="NUMBER_OF_ABSENT_DAY" ColumnName="NUMBER_OF_ABSENT_DAY" />
                 <ScalarProperty Name="NUMBER_OF_OVERTIME_DAY" ColumnName="NUMBER_OF_OVERTIME_DAY" />
-                <ScalarProperty Name="DATE_START" ColumnName="DATE_START" />
-                <ScalarProperty Name="DATE_END" ColumnName="DATE_END" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

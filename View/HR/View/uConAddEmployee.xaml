@@ -461,7 +461,8 @@
                         Content="Confirm"
                         FontSize="28"
                         FontWeight="Light"
-                        Command="{Binding ConfirmCommand}"/>
+                        Command="{Binding ConfirmCommand}"
+                        CommandParameter="{Binding ElementName=contentControlAdd}"/>
 
 
 

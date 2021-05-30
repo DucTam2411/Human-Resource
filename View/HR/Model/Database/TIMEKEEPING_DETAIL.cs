@@ -21,6 +21,8 @@ namespace HRMS.HR.Model.Database
         public Nullable<int> EMPLOYEE_ID { get; set; }
     
         public virtual EMPLOYEE EMPLOYEE { get; set; }
+        public virtual EMPLOYEE EMPLOYEE1 { get; set; }
         public virtual TIMEKEEPING TIMEKEEPING { get; set; }
+        public virtual TIMEKEEPING TIMEKEEPING1 { get; set; }
     }
 }

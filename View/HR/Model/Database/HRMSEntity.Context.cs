@@ -13,10 +13,10 @@ namespace HRMS.HR.Model.Database
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class hrmsEntities : DbContext
+    public partial class hrmsEntities1 : DbContext
     {
-        public hrmsEntities()
-            : base("name=hrmsEntities")
+        public hrmsEntities1()
+            : base("name=hrmsEntities1")
         {
         }
     
