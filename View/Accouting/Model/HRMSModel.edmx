@@ -81,6 +81,7 @@
           <Property Name="DATE_END" Type="date" />
           <Property Name="TOTAL_SALARY" Type="bigint" />
           <Property Name="NOTE" Type="varchar" MaxLength="1000" />
+          <Property Name="MONTH" Type="date" />
         </EntityType>
         <EntityType Name="TIMEKEEPING">
           <Key>
@@ -93,6 +94,7 @@
           <Property Name="NUMBER_OF_OVERTIME_DAY" Type="int" />
           <Property Name="DATE_START" Type="date" />
           <Property Name="DATE_END" Type="date" />
+          <Property Name="MONTH" Type="date" />
         </EntityType>
         <EntityType Name="TIMEKEEPING_DETAIL">
           <Key>
@@ -370,6 +372,7 @@
           <Property Name="TOTAL_SALARY" Type="Int64" />
           <Property Name="NOTE" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__SALARY__EMPLOYEE__49C3F6B7" FromRole="SALARY" ToRole="EMPLOYEE" />
+          <Property Name="MONTH" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="TIMEKEEPING">
           <Key>
@@ -384,6 +387,7 @@
           <Property Name="DATE_END" Type="DateTime" Precision="0" />
           <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__TIMEKEEPI__EMPLO__35BCFE0A" FromRole="TIMEKEEPING" ToRole="EMPLOYEE" />
           <NavigationProperty Name="TIMEKEEPING_DETAIL" Relationship="Self.FK__TIMEKEEPI__TIMEK__37A5467C" FromRole="TIMEKEEPING" ToRole="TIMEKEEPING_DETAIL" />
+          <Property Name="MONTH" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="TIMEKEEPING_DETAIL">
           <Key>
@@ -639,6 +643,7 @@
           <EntitySetMapping Name="SALARies">
             <EntityTypeMapping TypeName="hrmsModel.SALARY">
               <MappingFragment StoreEntitySet="SALARY">
+                <ScalarProperty Name="MONTH" ColumnName="MONTH" />
                 <ScalarProperty Name="SALARY_ID" ColumnName="SALARY_ID" />
                 <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
                 <ScalarProperty Name="OVERTIME_SALARY" ColumnName="OVERTIME_SALARY" />
@@ -659,6 +664,7 @@
           <EntitySetMapping Name="TIMEKEEPINGs">
             <EntityTypeMapping TypeName="hrmsModel.TIMEKEEPING">
               <MappingFragment StoreEntitySet="TIMEKEEPING">
+                <ScalarProperty Name="MONTH" ColumnName="MONTH" />
                 <ScalarProperty Name="TIMEKEEPING_ID" ColumnName="TIMEKEEPING_ID" />
                 <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
                 <ScalarProperty Name="NUMBER_OF_WORK_DAY" ColumnName="NUMBER_OF_WORK_DAY" />

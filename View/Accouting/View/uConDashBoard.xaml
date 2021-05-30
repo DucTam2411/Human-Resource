@@ -11,7 +11,7 @@
     <UserControl.Resources>
         <Style x:Key="WrapText" TargetType="{x:Type TextBlock}">
             <Setter Property="TextWrapping" Value="Wrap" />
-            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+            <Setter Property="TextBlock.TextAlignment" Value="Left" />
         </Style>
     </UserControl.Resources>
 
@@ -147,7 +147,7 @@
                         Foreground="DarkSlateGray"
                         Header="Employee Changed" />
                     <DataGridTextColumn
-                        Width="400"
+                        Width="600"
                         Binding="{Binding CHANGE, UpdateSourceTrigger=PropertyChanged}"
                         ElementStyle="{StaticResource WrapText}"
                         Foreground="DarkSlateGray"

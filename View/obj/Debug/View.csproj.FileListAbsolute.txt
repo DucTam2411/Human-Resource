@@ -176,3 +176,4 @@ D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\bin\Debug\
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\bin\Debug\ClosedXML.xml
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\bin\Debug\DocumentFormat.OpenXml.xml
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\bin\Debug\ExcelNumberFormat.xml
+D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\View.csprojAssemblyReference.cache

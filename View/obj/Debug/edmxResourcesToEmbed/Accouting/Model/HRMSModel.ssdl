@@ -76,6 +76,7 @@
     <Property Name="DATE_END" Type="date" />
     <Property Name="TOTAL_SALARY" Type="bigint" />
     <Property Name="NOTE" Type="varchar" MaxLength="1000" />
+    <Property Name="MONTH" Type="date" />
   </EntityType>
   <EntityType Name="TIMEKEEPING">
     <Key>
@@ -88,6 +89,7 @@
     <Property Name="NUMBER_OF_OVERTIME_DAY" Type="int" />
     <Property Name="DATE_START" Type="date" />
     <Property Name="DATE_END" Type="date" />
+    <Property Name="MONTH" Type="date" />
   </EntityType>
   <EntityType Name="TIMEKEEPING_DETAIL">
     <Key>

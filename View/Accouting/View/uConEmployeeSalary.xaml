@@ -322,6 +322,8 @@
                             </StackPanel>
                         </DockPanel>
                         <TextBox
+                            AcceptsReturn="True"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
                             Margin="20"
                             materialDesign:HintAssist.HelperText="Note"
                             materialDesign:HintAssist.Hint="Note"

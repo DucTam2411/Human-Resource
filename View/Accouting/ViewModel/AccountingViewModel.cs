@@ -380,8 +380,8 @@ namespace HRMS.Accouting.ViewModel
                        from tk in temp1.DefaultIfEmpty()
                        join sl in DB.SALARies on emp.EMPLOYEE_ID equals sl.EMPLOYEE_ID into temp2
                        from sl in temp2.DefaultIfEmpty()
-                       where sl.DATE_START.Value.Month == SELECTMONTHTYPE.MONTH && sl.DATE_START.Value.Year == SELECTMONTHTYPE.YEAR && 
-                            tk.DATE_START.Value.Month == SELECTMONTHTYPE.MONTH && tk.DATE_START.Value.Year == SELECTMONTHTYPE.YEAR
+                       where sl.MONTH.Value.Month == SELECTMONTHTYPE.MONTH && sl.MONTH.Value.Year == SELECTMONTHTYPE.YEAR && 
+                            tk.MONTH.Value.Month == SELECTMONTHTYPE.MONTH && tk.MONTH.Value.Year == SELECTMONTHTYPE.YEAR
                        select new
                        {
                            id = emp.EMPLOYEE_ID,
@@ -404,7 +404,7 @@ namespace HRMS.Accouting.ViewModel
                     DateTime date = AccountingClass.GetDateBefore();
                     SalaryInformationData salaryData = new SalaryInformationData();
                     SALARY old_salary = DB.SALARies.Where(x => x.EMPLOYEE_ID == item.EMPLOYEE_ID && 
-                    x.DATE_START.Value.Month == date.Month && x.DATE_START.Value.Year == date.Year).SingleOrDefault();                    
+                    x.MONTH.Value.Month == date.Month && x.MONTH.Value.Year == date.Year).SingleOrDefault();                    
                     salaryData.EMPLOYEE_ID = item.EMPLOYEE_ID;
                     salaryData.NAME = item.NAME;
                     salaryData.DEPARTMENT = item.DEPARTMENT.DEPT_NAME;
@@ -423,6 +423,7 @@ namespace HRMS.Accouting.ViewModel
                     salaryData.NOTE = "";
                     salaryData.DATE_START = new DateTime(SELECTMONTHTYPE.YEAR,SELECTMONTHTYPE.MONTH, 1);
                     salaryData.DATE_END = new DateTime(SELECTMONTHTYPE.YEAR, SELECTMONTHTYPE.MONTH, AccountingClass.GetDaybyMonth(SELECTMONTHTYPE.MONTH,SELECTMONTHTYPE.YEAR));
+                    salaryData.MONTH = new DateTime(SELECTMONTHTYPE.MONTH, SELECTMONTHTYPE.YEAR, 1);
                     
                     SalaryList.Add(salaryData);
                     SalaryTest.Add(salaryData);
@@ -434,6 +435,7 @@ namespace HRMS.Accouting.ViewModel
                     salary.OVERTIME_SALARY = (long)old_salary.OVERTIME_SALARY;
                     salary.DATE_START = new DateTime(SELECTMONTHTYPE.YEAR, SELECTMONTHTYPE.MONTH, 1);
                     salary.DATE_END = new DateTime(SELECTMONTHTYPE.YEAR, SELECTMONTHTYPE.MONTH, AccountingClass.GetDaybyMonth(SELECTMONTHTYPE.MONTH, SELECTMONTHTYPE.YEAR));
+                    salary.MONTH = new DateTime(SELECTMONTHTYPE.YEAR, SELECTMONTHTYPE.MONTH, 1);
                     salary.BONUS = 0;
                     salary.HEALTH_INSURANCE = 0;
                     salary.SOCIAL_INSURANCE = 0;
@@ -443,11 +445,12 @@ namespace HRMS.Accouting.ViewModel
                     salary.NOTE = "";
                     DB.SALARies.Add(salary);
 
-                    TIMEKEEPING temp = DB.TIMEKEEPINGs.Where(x => x.EMPLOYEE_ID == item.EMPLOYEE_ID && x.DATE_START.Value.Month == SELECTMONTHTYPE.MONTH && x.DATE_START.Value.Year == SELECTMONTHTYPE.YEAR).FirstOrDefault();
+                    TIMEKEEPING temp = DB.TIMEKEEPINGs.Where(x => x.EMPLOYEE_ID == item.EMPLOYEE_ID && x.MONTH.Value.Month == SELECTMONTHTYPE.MONTH && x.MONTH.Value.Year == SELECTMONTHTYPE.YEAR).FirstOrDefault();
                     if (temp == null)
                     {
                         TIMEKEEPING timekeeping = new TIMEKEEPING();
                         timekeeping.DATE_START = new DateTime(SELECTMONTHTYPE.YEAR, SELECTMONTHTYPE.MONTH, 1);
+                        timekeeping.MONTH = new DateTime(SELECTMONTHTYPE.YEAR, SELECTMONTHTYPE.MONTH, 1);
                         timekeeping.DATE_END = new DateTime(SELECTMONTHTYPE.YEAR, SELECTMONTHTYPE.MONTH, AccountingClass.GetDaybyMonth(SELECTMONTHTYPE.MONTH, SELECTMONTHTYPE.YEAR));
                         timekeeping.EMPLOYEE_ID = item.EMPLOYEE_ID;
                         timekeeping.NUMBER_OF_ABSENT_DAY = 0;
@@ -491,6 +494,7 @@ namespace HRMS.Accouting.ViewModel
                     salaryData.BONUS = (long)item.SALARY.BONUS;
                     salaryData.COEFFICIENT = (double)item.SALARY.COEFFICIENT;
                     salaryData.DATE_START = (DateTime)item.SALARY.DATE_START;
+                    salaryData.MONTH = (DateTime)item.SALARY.MONTH;
                     salaryData.DATE_END = (DateTime)item.SALARY.DATE_END;
                     salaryData.NOTE = item.SALARY.NOTE;
 
@@ -516,7 +520,8 @@ namespace HRMS.Accouting.ViewModel
         {
             //Chọn tháng từ database KHÔNG TRÙNG LẶP (chọn DATE_START và DATE_END để kiểm tra tháng bắt đầu và tháng kết thúc có hợp lệ không (nếu cách nhau không quá 31 ngày hợp lệ)
             var listmonth = (from month in HRMSEntities.Ins.DB.SALARies
-                            select new {Date_Start = month.DATE_START, Date_End = month.DATE_END }).Distinct();
+                             orderby month.MONTH descending
+                            select new {Month = month.MONTH }).Distinct();
 
             //Khởi tạo biến MONTHLIST để chứa tháng
             MONTHLIST = new ObservableCollection<ComboboxModel>();
@@ -525,33 +530,15 @@ namespace HRMS.Accouting.ViewModel
             //Đưa dữ liệu từ listmonth vào MONTHLIST
             foreach(var item in listmonth)
             {
-                DateTime start = (DateTime)item.Date_Start;
-                DateTime end = (DateTime)item.Date_End;
-                if (start.Month == DateTime.Now.Month && start.Year == DateTime.Now.Year)
+                DateTime date = (DateTime)item.Month;
+                if (date.Month == DateTime.Now.Month && date.Year == DateTime.Now.Year)
                     isMonthNow = true;
-                //Kiểm tra dữ liệu tháng có hợp lệ không
-                if(end.Month - start.Month <= 1)
-                {
-                    int day_end = end.Day;
-                    int day_start = start.Day;
-
-                    //Kiểm tra tháng kết thúc có lớn hơn tháng bắt đầu không
-                    if(end.Month - start.Month == 1)
-                    {
-                        day_end = end.Day + AccountingClass.GetDaybyMonth((end.Month == 1) ? 12 : end.Month, (end.Month == 1) ? end.Year - 1 : end.Year);
-                        day_start = start.Day;                      
-                    }
-
-                    //Nếu điều kiện hợp lệ thì lưu dữ liệu vào ComboBox Month thông qua MONTHLIST
-                    if (day_end - day_start <= 31)
-                    {
-                        MONTHLIST.Add(new ComboboxModel(start.Month, start.Year, (start.Month == DateTime.Now.Month && start.Year == DateTime.Now.Year) ? true : false));
-                    }
-                }
+                //Nếu điều kiện hợp lệ thì lưu dữ liệu vào ComboBox Month thông qua MONTHLIST
+                MONTHLIST.Add(new ComboboxModel(date.Month, date.Year, (date.Month == DateTime.Now.Month && date.Year == DateTime.Now.Year) ? true : false));
             }
             if(isMonthNow == false)
             {
-                MONTHLIST.Add(new ComboboxModel(7, DateTime.Now.Year, true));
+                MONTHLIST.Add(new ComboboxModel(DateTime.Now.Month, DateTime.Now.Year, true));
             }
             SELECTMONTHTYPE = MONTHLIST.Where(x => x.ISSELECTED == true).FirstOrDefault();
             if(SELECTMONTHTYPE == null)
@@ -565,7 +552,7 @@ namespace HRMS.Accouting.ViewModel
         {
             hrmsEntities DB = new hrmsEntities();
             var Employee = DB.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == SelectedItem.EMPLOYEE_ID).SingleOrDefault();
-            var Salary = DB.SALARies.Where(x => x.EMPLOYEE_ID == SelectedItem.EMPLOYEE_ID && x.DATE_START.Value.Month == SelectedItem.DATE_START.Month).SingleOrDefault();
+            var Salary = DB.SALARies.Where(x => x.EMPLOYEE_ID == SelectedItem.EMPLOYEE_ID && x.MONTH.Value.Month == SelectedItem.DATE_START.Month).SingleOrDefault();
             var Timekeeping = DB.TIMEKEEPINGs.Where(x => x.EMPLOYEE_ID == SelectedItem.EMPLOYEE_ID && x.DATE_START.Value.Month == SelectedItem.DATE_START.Month).SingleOrDefault();
             Salary.HEALTH_INSURANCE = long.Parse(HEALTH_INSURANCE.ToString());
             Salary.SOCIAL_INSURANCE = long.Parse(SOCIAL_INSURANCE.ToString());

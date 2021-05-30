@@ -92,6 +92,7 @@
     <Property Name="TOTAL_SALARY" Type="Int64" />
     <Property Name="NOTE" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__SALARY__EMPLOYEE__49C3F6B7" FromRole="SALARY" ToRole="EMPLOYEE" />
+    <Property Name="MONTH" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="TIMEKEEPING">
     <Key>
@@ -106,6 +107,7 @@
     <Property Name="DATE_END" Type="DateTime" Precision="0" />
     <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__TIMEKEEPI__EMPLO__35BCFE0A" FromRole="TIMEKEEPING" ToRole="EMPLOYEE" />
     <NavigationProperty Name="TIMEKEEPING_DETAIL" Relationship="Self.FK__TIMEKEEPI__TIMEK__37A5467C" FromRole="TIMEKEEPING" ToRole="TIMEKEEPING_DETAIL" />
+    <Property Name="MONTH" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="TIMEKEEPING_DETAIL">
     <Key>

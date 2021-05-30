@@ -30,6 +30,9 @@ namespace HRMS.Accouting.Model
         private DateTime _DATE_END;
         public DateTime DATE_END { get => _DATE_END; set { _DATE_END = value; OnPropertyChanged(); } }
 
+        private DateTime _MONTH;
+        public DateTime MONTH { get => _MONTH; set { _MONTH = value; OnPropertyChanged(); } }
+
         private int _WORK_DAY;
         public int WORK_DAY { get => _WORK_DAY; set { _WORK_DAY = value; OnPropertyChanged(); } }
 

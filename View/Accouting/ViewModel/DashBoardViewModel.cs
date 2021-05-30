@@ -150,7 +150,7 @@ namespace HRMS.Accouting.ViewModel
         private void LoadComboboxTypeList()
         {
             ListType = new ObservableCollection<ComboboxModel>();
-            ListType.Add(new ComboboxModel("Id", true));
+            ListType.Add(new ComboboxModel("ID", true));
             ListType.Add(new ComboboxModel("Name", false));
             ListType.Add(new ComboboxModel("Department", false));
             ListType.Add(new ComboboxModel("Employee Changed", false));
@@ -162,7 +162,8 @@ namespace HRMS.Accouting.ViewModel
         {
             //Chọn tháng từ database KHÔNG TRÙNG LẶP (chọn DATE_START và DATE_END để kiểm tra tháng bắt đầu và tháng kết thúc có hợp lệ không (nếu cách nhau không quá 31 ngày hợp lệ)
             var listmonth = (from month in HRMSEntities.Ins.DB.SALARies
-                             select new { Date_Start = month.DATE_START, Date_End = month.DATE_END }).Distinct();
+                             orderby month.MONTH descending
+                             select new { Month = month.MONTH }).Distinct();
 
             //Khởi tạo biến MONTHLIST để chứa tháng
             MONTHLIST = new ObservableCollection<ComboboxModel>();
@@ -170,27 +171,9 @@ namespace HRMS.Accouting.ViewModel
             //Đưa dữ liệu từ listmonth vào MONTHLIST
             foreach (var item in listmonth)
             {
-                DateTime start = (DateTime)item.Date_Start;
-                DateTime end = (DateTime)item.Date_End;
-                //Kiểm tra dữ liệu tháng có hợp lệ không
-                if (end.Month - start.Month <= 1)
-                {
-                    int day_end = end.Day;
-                    int day_start = start.Day;
-
-                    //Kiểm tra tháng kết thúc có lớn hơn tháng bắt đầu không
-                    if (end.Month - start.Month == 1)
-                    {
-                        day_end = end.Day + AccountingClass.GetDaybyMonth((end.Month == 1) ? 12 : end.Month, (end.Month == 1) ? end.Year - 1 : end.Year);
-                        day_start = start.Day;
-                    }
-
-                    //Nếu điều kiện hợp lệ thì lưu dữ liệu vào ComboBox Month thông qua MONTHLIST
-                    if (day_end - day_start <= 31)
-                    {
-                        MONTHLIST.Add(new ComboboxModel(start.Month, start.Year, (start.Month == DateTime.Now.Month && start.Year == DateTime.Now.Year) ? true : false));
-                    }
-                }
+                DateTime date = (DateTime)item.Month;
+                //Nếu điều kiện hợp lệ thì lưu dữ liệu vào ComboBox Month thông qua MONTHLIST
+                MONTHLIST.Add(new ComboboxModel(date.Month, date.Year, (date.Month == DateTime.Now.Month && date.Year == DateTime.Now.Year) ? true : false));
             }
             SELECTMONTHTYPE = MONTHLIST.Where(x => x.ISSELECTED == true).FirstOrDefault();
             if (SELECTMONTHTYPE == null)
