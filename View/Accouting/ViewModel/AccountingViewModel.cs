@@ -375,26 +375,39 @@ namespace HRMS.Accouting.ViewModel
 
             //Tạo list chứa dữ liệu có lọc theo tháng
             hrmsEntities DB = new hrmsEntities();
-            var list = (from emp in DB.EMPLOYEEs
+            var list_temp = (from emp in DB.EMPLOYEEs
+                            join del in DB.DELETEs on emp.EMPLOYEE_ID equals del.EMPLOYEE_ID
+                            where (del.ISDELETED == false) || (del.ISDELETED == true &&
+                            (del.MONTH.Value.Year > SELECTMONTHTYPE.YEAR || (del.MONTH.Value.Month > SELECTMONTHTYPE.MONTH && del.MONTH.Value.Year == SELECTMONTHTYPE.YEAR)))
+                            select emp).Distinct();
+
+
+            var list = (from emp in list_temp
                        join tk in DB.TIMEKEEPINGs on emp.EMPLOYEE_ID equals tk.EMPLOYEE_ID into temp1
-                       from tk in temp1.DefaultIfEmpty()
-                       join sl in DB.SALARies on emp.EMPLOYEE_ID equals sl.EMPLOYEE_ID into temp2
-                       from sl in temp2.DefaultIfEmpty()
-                       where sl.MONTH.Value.Month == SELECTMONTHTYPE.MONTH && sl.MONTH.Value.Year == SELECTMONTHTYPE.YEAR && 
+                        from tk in temp1.DefaultIfEmpty()
+                        join sl in DB.SALARies on emp.EMPLOYEE_ID equals sl.EMPLOYEE_ID into temp2
+                        from sl in temp2.DefaultIfEmpty()
+                        where sl.MONTH.Value.Month == SELECTMONTHTYPE.MONTH && sl.MONTH.Value.Year == SELECTMONTHTYPE.YEAR && 
                             tk.MONTH.Value.Month == SELECTMONTHTYPE.MONTH && tk.MONTH.Value.Year == SELECTMONTHTYPE.YEAR
-                       select new
+                        select new
                        {
                            id = emp.EMPLOYEE_ID,
                            month_start = sl.DATE_START.Value.Month, year_start = sl.DATE_START.Value.Year,
                            EMPLOYEE = emp,
                            TIMEKEEPING = tk,
                            SALARY = sl
-                       }).Distinct();                
-            if(list != null && list.Count() == 0)
+                       }).Distinct();
+
+
+            if (list != null && list.Count() == 0)
             {
                 Console.WriteLine("NULL");
 
-                var list_temp = from emp in DB.EMPLOYEEs select emp;
+                list_temp = from emp in DB.EMPLOYEEs
+                                join del in DB.DELETEs on emp.EMPLOYEE_ID equals del.EMPLOYEE_ID
+                                where ((del.ISDELETED == false) || (del.ISDELETED == true &&
+                                (del.MONTH.Value.Year > SELECTMONTHTYPE.YEAR || (del.MONTH.Value.Month > SELECTMONTHTYPE.MONTH && del.MONTH.Value.Year == SELECTMONTHTYPE.YEAR))))
+                                select emp; 
 
                 SalaryList = new ObservableCollection<SalaryInformationData>();
                 SalaryTest = new ObservableCollection<SalaryInformationData>();
@@ -423,7 +436,7 @@ namespace HRMS.Accouting.ViewModel
                     salaryData.NOTE = "";
                     salaryData.DATE_START = new DateTime(SELECTMONTHTYPE.YEAR,SELECTMONTHTYPE.MONTH, 1);
                     salaryData.DATE_END = new DateTime(SELECTMONTHTYPE.YEAR, SELECTMONTHTYPE.MONTH, AccountingClass.GetDaybyMonth(SELECTMONTHTYPE.MONTH,SELECTMONTHTYPE.YEAR));
-                    salaryData.MONTH = new DateTime(SELECTMONTHTYPE.MONTH, SELECTMONTHTYPE.YEAR, 1);
+                    salaryData.MONTH = new DateTime(SELECTMONTHTYPE.YEAR, SELECTMONTHTYPE.MONTH, 1);
                     
                     SalaryList.Add(salaryData);
                     SalaryTest.Add(salaryData);

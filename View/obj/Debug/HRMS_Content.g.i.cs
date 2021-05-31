@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("accouting/model/hrmsmodel.context.tt")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("accouting/model/hrmsmodel.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("accouting/model/hrmsentites.context.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("accouting/model/hrmsentites.tt")]
 
 

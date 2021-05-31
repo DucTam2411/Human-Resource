@@ -134,10 +134,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Accouting\View\uConSideBarAccouting.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Employee\uCon\EmployeeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -195,49 +191,55 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Compile Include="Accouting\Model\ComboboxModel.cs" />
+    <Compile Include="Accouting\Model\DELETE.cs">
+      <DependentUpon>HRMSEntites.tt</DependentUpon>
+    </Compile>
     <Compile Include="Accouting\Model\DEPARTMENT.cs">
-      <DependentUpon>HRMSModel.tt</DependentUpon>
+      <DependentUpon>HRMSEntites.tt</DependentUpon>
     </Compile>
     <Compile Include="Accouting\Model\EMPLOYEE.cs">
-      <DependentUpon>HRMSModel.tt</DependentUpon>
+      <DependentUpon>HRMSEntites.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Accouting\Model\HRMSEntites.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HRMSEntites.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Accouting\Model\HRMSEntites.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HRMSEntites.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Accouting\Model\HRMSEntites.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HRMSEntites.edmx</DependentUpon>
     </Compile>
     <Compile Include="Accouting\Model\HRMSEntities.cs" />
-    <Compile Include="Accouting\Model\HRMSModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HRMSModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Accouting\Model\HRMSModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HRMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Accouting\Model\HRMSModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HRMSModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Accouting\Model\RECORD.cs">
-      <DependentUpon>HRMSModel.tt</DependentUpon>
+      <DependentUpon>HRMSEntites.tt</DependentUpon>
     </Compile>
     <Compile Include="Accouting\Model\ROLE.cs">
-      <DependentUpon>HRMSModel.tt</DependentUpon>
+      <DependentUpon>HRMSEntites.tt</DependentUpon>
     </Compile>
     <Compile Include="Accouting\Model\ROOM.cs">
-      <DependentUpon>HRMSModel.tt</DependentUpon>
+      <DependentUpon>HRMSEntites.tt</DependentUpon>
     </Compile>
     <Compile Include="Accouting\Model\SALARY.cs">
-      <DependentUpon>HRMSModel.tt</DependentUpon>
+      <DependentUpon>HRMSEntites.tt</DependentUpon>
     </Compile>
     <Compile Include="Accouting\Model\SalaryData.cs" />
     <Compile Include="Accouting\Model\SalaryInformationData.cs" />
     <Compile Include="Accouting\Model\SideBarDatabase.cs" />
     <Compile Include="Accouting\Model\TIMEKEEPING.cs">
-      <DependentUpon>HRMSModel.tt</DependentUpon>
+      <DependentUpon>HRMSEntites.tt</DependentUpon>
     </Compile>
     <Compile Include="Accouting\Model\TimekeepingData.cs" />
     <Compile Include="Accouting\Model\TIMEKEEPING_DETAIL.cs">
-      <DependentUpon>HRMSModel.tt</DependentUpon>
+      <DependentUpon>HRMSEntites.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Accouting\Model\USER.cs">
+      <DependentUpon>HRMSEntites.tt</DependentUpon>
     </Compile>
     <Compile Include="Accouting\ViewModel\DashBoardViewModel.cs" />
     <Compile Include="Accouting\View\Accouting_EmployeeWindow.xaml.cs">
@@ -263,9 +265,6 @@
     </Compile>
     <Compile Include="Accouting\View\uConListEmployeeAccounting.xaml.cs">
       <DependentUpon>uConListEmployeeAccounting.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Accouting\View\uConSideBarAccouting.xaml.cs">
-      <DependentUpon>uConSideBarAccouting.xaml</DependentUpon>
     </Compile>
     <Compile Include="Accouting\ViewModel\AccountingClass.cs" />
     <Compile Include="Accouting\ViewModel\AccountingViewModel.cs" />
@@ -320,10 +319,6 @@
     <Compile Include="HR\uCon\uConSideBar.xaml.cs">
       <DependentUpon>uConSideBar.xaml</DependentUpon>
     </Compile>
-    <Page Include="Resource\ResourceXAML.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -343,12 +338,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Accouting\Model\HRMSModel.edmx">
+    <EntityDeploy Include="Accouting\Model\HRMSEntites.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>HRMSModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>HRMSEntites.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Accouting\Model\HRMSModel.edmx.diagram">
-      <DependentUpon>HRMSModel.edmx</DependentUpon>
+    <None Include="Accouting\Model\HRMSEntites.edmx.diagram">
+      <DependentUpon>HRMSEntites.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -366,15 +361,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Accouting\Model\HRMSModel.Context.tt">
+    <Content Include="Accouting\Model\HRMSEntites.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HRMSModel.edmx</DependentUpon>
-      <LastGenOutput>HRMSModel.Context.cs</LastGenOutput>
+      <DependentUpon>HRMSEntites.edmx</DependentUpon>
+      <LastGenOutput>HRMSEntites.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Accouting\Model\HRMSModel.tt">
+    <Content Include="Accouting\Model\HRMSEntites.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HRMSModel.edmx</DependentUpon>
-      <LastGenOutput>HRMSModel.cs</LastGenOutput>
+      <DependentUpon>HRMSEntites.edmx</DependentUpon>
+      <LastGenOutput>HRMSEntites.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -126,7 +126,6 @@ D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\View.csproj.GenerateResource.cache
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\View.csproj.CoreCompileInputs.cache
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\View.csproj.CopyComplete
-D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Resource\ResourceXAML.baml
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Employee\uCon\EmployeeWindow.g.cs
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Employee\uCon\uConEmployeeInformation.g.cs
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Employee\uCon\uConSideBarEmployee.g.cs
@@ -157,7 +156,6 @@ D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConDashBoard.g.cs
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConEmployeeSalary.g.cs
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConListEmployeeAccounting.g.cs
-D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConSideBarAccouting.g.cs
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\HRMS_Content.g.cs
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\Accouting_EmployeeWindow.baml
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConAccountingEmployeeInformation.baml
@@ -167,7 +165,6 @@ D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConDashBoard.baml
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConEmployeeSalary.baml
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConListEmployeeAccounting.baml
-D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\obj\Debug\Accouting\View\uConSideBarAccouting.baml
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\bin\Debug\ClosedXML.dll
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\bin\Debug\DocumentFormat.OpenXml.dll
 D:\Study\Nhập môn công nghê phàn mềm\Human-Resource-main\View\bin\Debug\ExcelNumberFormat.dll

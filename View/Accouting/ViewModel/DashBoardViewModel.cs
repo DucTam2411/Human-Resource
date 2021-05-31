@@ -188,6 +188,7 @@ namespace HRMS.Accouting.ViewModel
             hrmsEntities db = new hrmsEntities();
             var list = from rc in db.RECORDs
                        where rc.MONTH_CHANGE.Value.Month == SELECTMONTHTYPE.MONTH && rc.MONTH_CHANGE.Value.Year == SELECTMONTHTYPE.YEAR 
+                       orderby rc.DATE_CHANGE descending
                        select rc;
 
             RecordList = new ObservableCollection<RECORD>();
