@@ -43,12 +43,6 @@ namespace HRMS.Accouting.ViewModel
         public ICommand ExportExcelCommand { get; set; }
         #endregion
 
-        private BaseViewModel _AccountingVM;
-        public BaseViewModel AccountingVM { get => _AccountingVM; set { _AccountingVM = value; OnPropertyChanged(); } }
-
-        private BaseViewModel _AccountingDetailVM;
-        public BaseViewModel AccountingDetailVM { get => _AccountingDetailVM; set { _AccountingDetailVM = value; OnPropertyChanged(); } }
-
         #region Data Binding Salary List 
         //Binding tới tài khoản hiện tại
         private int _USER_ID;
@@ -120,6 +114,24 @@ namespace HRMS.Accouting.ViewModel
         //Binding dữ liệu với select trong comboox chọn loại lọc
         private ComboboxModel _SELECTEDTYPE;
         public ComboboxModel SELECTEDTYPE { get => _SELECTEDTYPE; set { _SELECTEDTYPE = value; OnPropertyChanged(); } }
+
+        //Binding dữ liệu vào combobox department của chọn loại để lọc
+        private ObservableCollection<ComboboxModel> _ListDeptType;
+        public ObservableCollection<ComboboxModel> ListDeptType { get => _ListDeptType; set { _ListDeptType = value; OnPropertyChanged(); } }
+
+        //Binding dữ liệu với select trong comboox chọn loại lọc
+        private ComboboxModel _SELECTEDDEPTTYPE;
+        public ComboboxModel SELECTEDDEPTTYPE 
+        { 
+            get => _SELECTEDDEPTTYPE; 
+            set 
+            { 
+                _SELECTEDDEPTTYPE = value; 
+                OnPropertyChanged(); 
+                if(SELECTEDDEPTTYPE != null)
+                    LoadSalaryData();
+            } 
+        }
 
         //Binding dữ liệu với Search Text
         private string _SEARCH_TEXT;
@@ -332,8 +344,9 @@ namespace HRMS.Accouting.ViewModel
         private void LoadCommandList(int ID)
         {
             #region Load Data khi mỗi khi truy cập tới view
+            LoadComboboxTypeDeptList();
             LoadMonth();
-            LoadComboboxTypeList();
+            LoadComboboxTypeList();            
             LoadUser(ID);
             #endregion
 
@@ -372,15 +385,20 @@ namespace HRMS.Accouting.ViewModel
             {
                 return;
             }
-
+            if(SELECTEDDEPTTYPE == null)
+            {
+                return;
+            }
             //Tạo list chứa dữ liệu có lọc theo tháng
             hrmsEntities DB = new hrmsEntities();
-            var list_temp = (from emp in DB.EMPLOYEEs
+
+            var list_filter_dept = from emp in DB.EMPLOYEEs where SELECTEDDEPTTYPE.DEPT_ID > 0 ? emp.DEPT_ID == SELECTEDDEPTTYPE.DEPT_ID : true select emp;          
+
+            var list_temp = (from emp in list_filter_dept
                             join del in DB.DELETEs on emp.EMPLOYEE_ID equals del.EMPLOYEE_ID
                             where (del.ISDELETED == false) || (del.ISDELETED == true &&
                             (del.MONTH.Value.Year > SELECTMONTHTYPE.YEAR || (del.MONTH.Value.Month > SELECTMONTHTYPE.MONTH && del.MONTH.Value.Year == SELECTMONTHTYPE.YEAR)))
                             select emp).Distinct();
-
 
             var list = (from emp in list_temp
                        join tk in DB.TIMEKEEPINGs on emp.EMPLOYEE_ID equals tk.EMPLOYEE_ID into temp1
@@ -398,12 +416,12 @@ namespace HRMS.Accouting.ViewModel
                            SALARY = sl
                        }).Distinct();
 
-
+            
             if (list != null && list.Count() == 0)
             {
                 Console.WriteLine("NULL");
 
-                list_temp = from emp in DB.EMPLOYEEs
+                list_temp = from emp in list_filter_dept
                                 join del in DB.DELETEs on emp.EMPLOYEE_ID equals del.EMPLOYEE_ID
                                 where ((del.ISDELETED == false) || (del.ISDELETED == true &&
                                 (del.MONTH.Value.Year > SELECTMONTHTYPE.YEAR || (del.MONTH.Value.Month > SELECTMONTHTYPE.MONTH && del.MONTH.Value.Year == SELECTMONTHTYPE.YEAR))))
@@ -528,6 +546,20 @@ namespace HRMS.Accouting.ViewModel
             SELECTEDTYPE = ListType.Where(x => x.ISSELECTED == true).FirstOrDefault();
         }
 
+        //Load dữ liệu chọn loại vào comboBox chọn dept để lọc (có thể thêm chọn loại mới vào đây)        
+        private void LoadComboboxTypeDeptList()
+        {
+            hrmsEntities DB = new hrmsEntities();
+            var list = from dept in DB.DEPARTMENTs select dept;
+            ListDeptType = new ObservableCollection<ComboboxModel>();
+            ListDeptType.Add(new ComboboxModel("ALL",0, true));
+            foreach (var item in list)
+            {
+                ListDeptType.Add(new ComboboxModel(item.DEPT_NAME,item.DEPT_ID, false));
+            }
+            SELECTEDDEPTTYPE = ListDeptType.Where(x => x.ISSELECTED == true).FirstOrDefault();
+        }
+
         //Load dữ liệu tháng vào comboBox Month
         private void LoadMonth()
         {
@@ -629,6 +661,9 @@ namespace HRMS.Accouting.ViewModel
                 DB.RECORDs.Add(record);
             }
             DB.SaveChanges();
+
+            String message = "Save successful";
+            MessageBox.Show(message, "MESSAGE", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         //Điều kiện thực hiện command
@@ -773,7 +808,8 @@ namespace HRMS.Accouting.ViewModel
                 writer.Close();
                 fs.Close();
             }
-            MessageBox.Show("Export data to " + saveFileDialog.FileName + " successful");
+            String message = "Export data to " + saveFileDialog.FileName + " successful";
+            MessageBox.Show(message, "MESSAGE", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         
         //Lưu datagrid thành excel
@@ -792,7 +828,8 @@ namespace HRMS.Accouting.ViewModel
                     workbook.Worksheets.Add(data, "Month " + SELECTMONTHTYPE.MONTH + "-" + SELECTMONTHTYPE.YEAR);
                     workbook.SaveAs(saveFileDialog.FileName);
                 }
-                MessageBox.Show("Export data to " + saveFileDialog.FileName + " successful");
+                String message = "Export data to " + saveFileDialog.FileName + " successful";
+                MessageBox.Show(message, "MESSAGE", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }       
    
