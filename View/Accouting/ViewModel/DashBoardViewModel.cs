@@ -14,7 +14,7 @@ namespace HRMS.Accouting.ViewModel
     public class DashBoardViewModel : BaseViewModel
     {
         #region Data Binding
-        //Binding tới tài khoản hiện tại
+        //Binding tới tài khoản hiện tại gồm USER_ID và USER_NAME
         private int _USER_ID;
         public int USER_ID { get => _USER_ID; set { _USER_ID = value; OnPropertyChanged(); } }
 
@@ -128,24 +128,29 @@ namespace HRMS.Accouting.ViewModel
             }
         }
     #endregion
-
+        //Command để chọn record để hiển thị chi tiết lương
         public ICommand SelectedCommand { get; set; } 
+
+        //Contructor có ID để cung cấp thông tin cho người dùng
         public DashBoardViewModel(int ID)
         {
             USER_ID = ID;
             LoadDataCommand();
         }
-
+        //Constructor mặc định của DashBoardViewModel
         public DashBoardViewModel()
         {
             LoadDataCommand();
         }
+
+        //Load những command và dữ liệu khi khởi tạo constructor
         private void LoadDataCommand()
         {
             LoadComboboxTypeList();
             LoadMonth();
             SelectedCommand = new RelayCommand<ContentControl>(p => IsSelect(), p => SelectClick(p));
         }
+
         //Load dữ liệu chọn loại vào comboBox chọn loại để lọc (có thể thêm chọn loại mới vào đây)        
         private void LoadComboboxTypeList()
         {
@@ -182,13 +187,13 @@ namespace HRMS.Accouting.ViewModel
             }
         }
 
-        //Load data vaof grid
+        //Load data vào grid
         private void LoadRecordData()
         {
             hrmsEntities db = new hrmsEntities();
             var list = from rc in db.RECORDs
                        where rc.MONTH_CHANGE.Value.Month == SELECTMONTHTYPE.MONTH && rc.MONTH_CHANGE.Value.Year == SELECTMONTHTYPE.YEAR 
-                       orderby rc.DATE_CHANGE descending
+                       orderby rc.DATE_CHANGE descending //hiển thị theo thứ tự giảm dần của ngày thay đổi
                        select rc;
 
             RecordList = new ObservableCollection<RECORD>();
@@ -199,14 +204,14 @@ namespace HRMS.Accouting.ViewModel
                 RecordTest.Add(item);
             }
         }
-
+        //Điều kiện để list vào datagrid
         private bool IsSelect()
         {
             if (SelectedItem != null)
                 return true;
             return false;
         }
-
+        //Hàm thực hiện khi click vào datagrid
         private void SelectClick(ContentControl main)
         {
             main.Content = new uConEmployeeSalary((int)SelectedItem.EMPLOYEE_CHANGE_ID, USER_ID, SELECTMONTHTYPE.MONTH, SELECTMONTHTYPE.YEAR);

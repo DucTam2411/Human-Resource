@@ -18,6 +18,7 @@ namespace HRMS.Accouting.ViewModel
     using ButtonContent = Tuple<TextBlock, PackIcon>;
     public class InterfaceViewModel : BaseViewModel
     { 
+        //Những BACKGROUND và FOREGROUND cho từng button để đổi màu khi click
         #region Data Binding cho Side Bar
 
         private SideBarDatabase _HOMETAB;
@@ -77,6 +78,7 @@ namespace HRMS.Accouting.ViewModel
 
         #endregion
 
+        //Những command cho từng button
         #region Command
         public ICommand HomeCommand { get; set; }
         public ICommand ReportCommand { get; set; }
@@ -85,8 +87,8 @@ namespace HRMS.Accouting.ViewModel
         public ICommand SalaryCommand { get; set; }
 
         #endregion
-        public InformationViewModel INFORMATIONVM { get; set; }
 
+        //Constructor mặc định của InterfaceViewModel (cần ID của người dùng để chia sẽ cho các User Control khác)
         public InterfaceViewModel(int employee_id)
         {
             if (employee_id == 0)
@@ -95,11 +97,14 @@ namespace HRMS.Accouting.ViewModel
             LoadCommand();
         }
 
+        //Constructor mặc định của InterfaceViewModel
         public InterfaceViewModel()
         {
             EMPLOYEE_ID = 2;
             LoadCommand();
         }
+
+        //Load những command để đưa vào constructor
         private void LoadCommand()
         {
             LoadNameSideBar();
@@ -109,6 +114,7 @@ namespace HRMS.Accouting.ViewModel
             TimekeepingCommand = new RelayCommand<object>(p => { return true; }, p => TimekeepingClick());
             SalaryCommand = new RelayCommand<object>(p => { return true; }, p => SalaryClick());
         }
+
         //Load data vào side bar
         private void LoadNameSideBar()
         {
@@ -136,6 +142,9 @@ namespace HRMS.Accouting.ViewModel
             CONTENTCONTROL = new uConDashBoard(EMPLOYEE_ID);
         }
 
+        //Command khi click vào button (khi nhấn vào button thì BACKGROUND và FOREGROUND của chính button đó đổi màu còn những button còn lại giữ nguyên)
+        #region Giải quyết command
+        //Command cho button Home
         private void HomeClick()
         {
             BACKGROUNDHOME = new SolidColorBrush(Colors.Black);
@@ -156,6 +165,7 @@ namespace HRMS.Accouting.ViewModel
             CONTENTCONTROL = new uConDashBoard(EMPLOYEE_ID);
         }
 
+        //Command cho button Report
         private void ReportClick()
         {
             BACKGROUNDREPORT = new SolidColorBrush(Colors.Black);
@@ -176,6 +186,7 @@ namespace HRMS.Accouting.ViewModel
             CONTENTCONTROL = new uConListEmployeeAccounting(EMPLOYEE_ID);
         }
 
+        //Command cho button Information
         private void InformationClick()
         {
             BACKGROUNDINFORMATION = new SolidColorBrush(Colors.Black);
@@ -196,6 +207,7 @@ namespace HRMS.Accouting.ViewModel
             CONTENTCONTROL = new uConAccountingEmployeeInformation(EMPLOYEE_ID);
         }
 
+        //Command cho button Timekeeping
         private void TimekeepingClick()
         {
             BACKGROUNDTIMEKEEPING = new SolidColorBrush(Colors.Black);
@@ -216,6 +228,7 @@ namespace HRMS.Accouting.ViewModel
             CONTENTCONTROL = new uConAccountingTimekeepingInformation(EMPLOYEE_ID);
         }
 
+        //Command cho button Salary
         private void SalaryClick()
         {
             BACKGROUNDSALARY = new SolidColorBrush(Colors.Black);
@@ -234,8 +247,8 @@ namespace HRMS.Accouting.ViewModel
             BACKGROUNDHOME = new SolidColorBrush(Colors.Transparent);
 
             CONTENTCONTROL = new uConAccountingSalaryInformation(EMPLOYEE_ID);
-        }  
-                
+        }
+        #endregion
     }
 }
 

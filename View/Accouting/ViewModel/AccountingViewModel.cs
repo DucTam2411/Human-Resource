@@ -45,6 +45,8 @@ namespace HRMS.Accouting.ViewModel
 
         #region Data Binding Salary List 
         //Binding tới tài khoản hiện tại
+
+        //Binding lấy thông tin USER để hiện thị cập nhật thay đổi và xuất PDF
         private int _USER_ID;
         public int USER_ID { get =>_USER_ID ; set { _USER_ID = value; OnPropertyChanged(); } }
 
@@ -56,6 +58,7 @@ namespace HRMS.Accouting.ViewModel
 
         private int _USER_ROLE;
         public int USER_ROLE { get => _USER_ROLE; set { _USER_ROLE = value; OnPropertyChanged(); } }
+
 
         //Binding tới datagrid của Salary List
         private ObservableCollection<SalaryInformationData> _SalaryList;
@@ -266,23 +269,28 @@ namespace HRMS.Accouting.ViewModel
         private int _BUTTONTHICKNESS;
         public int BUTTONTHICKNESS { get => _BUTTONTHICKNESS; set { _BUTTONTHICKNESS = value; OnPropertyChanged(); } }
         #endregion
+
+        #region Constructor
+        //Constructor mặc định
         public AccountingViewModel(int ID)
         {
             LoadCommandList(ID);
         }
-
+        //Constructor để hiển thị chi tiết lương
         public AccountingViewModel(SalaryInformationData data, int ID)
         {
             SelectedItem = data;
             LoadCommandDetail(ID);
         }
-
+        //Constructor để hiển thị chi tiết lương khi nhấn vào record
         public AccountingViewModel(int idSelect, int idUser,int month,int year)
         {
             SelectedItem = LoadSelectedData(idSelect, month, year);
             LoadCommandDetail(idUser);
         }
+        #endregion
 
+        //Các command trong User Control hiển thị chi tiết lương
         private void LoadCommandDetail(int ID)
         {
             LoadUser(ID);
@@ -297,6 +305,7 @@ namespace HRMS.Accouting.ViewModel
             AddImageCommand = new RelayCommand<object>(p => IsAddImageData(), p => AddImageData());
         }
 
+        //Tìm thông tin của Selected trong record thay đổi để binding tới chi tiết lương
         private SalaryInformationData LoadSelectedData(int ID, int month, int year)
         {
             SalaryInformationData data = new SalaryInformationData();
@@ -341,6 +350,7 @@ namespace HRMS.Accouting.ViewModel
             return data;
         }
 
+        //Các command trong User Control hiển thị trong list lương
         private void LoadCommandList(int ID)
         {
             #region Load Data khi mỗi khi truy cập tới view
@@ -385,21 +395,26 @@ namespace HRMS.Accouting.ViewModel
             {
                 return;
             }
+            //Kiểm tra selected của comboBox chọn phòng ban có khác null không
             if(SELECTEDDEPTTYPE == null)
             {
                 return;
             }
+
             //Tạo list chứa dữ liệu có lọc theo tháng
             hrmsEntities DB = new hrmsEntities();
 
+            //Tạo ra list lưu dữ liệu các nhân viên được lọc theo phòng ban (hiện thị tất cả thì trả về true)
             var list_filter_dept = from emp in DB.EMPLOYEEs where SELECTEDDEPTTYPE.DEPT_ID > 0 ? emp.DEPT_ID == SELECTEDDEPTTYPE.DEPT_ID : true select emp;          
 
+            //Tạo ra list temp lưu dữ liệu các nhân viên nào chưa bị xóa nằm trong phòng ban đã lọc (nếu tháng được chọn, lúc đó nhân viên chưa bị xóa thì vẫn hiện)
             var list_temp = (from emp in list_filter_dept
                             join del in DB.DELETEs on emp.EMPLOYEE_ID equals del.EMPLOYEE_ID
                             where (del.ISDELETED == false) || (del.ISDELETED == true &&
                             (del.MONTH.Value.Year > SELECTMONTHTYPE.YEAR || (del.MONTH.Value.Month > SELECTMONTHTYPE.MONTH && del.MONTH.Value.Year == SELECTMONTHTYPE.YEAR)))
                             select emp).Distinct();
 
+            //Tạo ra list lưu dữ liệu lương dựa vào nhân viên đã được lọc theo các điều kiện trên (lọc thoe phòng ban và hiển thị thông tin của nhân viên chưa bị xóa)
             var list = (from emp in list_temp
                        join tk in DB.TIMEKEEPINGs on emp.EMPLOYEE_ID equals tk.EMPLOYEE_ID into temp1
                         from tk in temp1.DefaultIfEmpty()
@@ -416,49 +431,71 @@ namespace HRMS.Accouting.ViewModel
                            SALARY = sl
                        }).Distinct();
 
-            
+            //Kiểm tra xem list có null không (trong điều kiện qua tháng mới thì chưa có dữ liệu cần phải tạo tháng mới)
             if (list != null && list.Count() == 0)
             {
-                Console.WriteLine("NULL");
-
+                //Kiểm tra xem tháng hiện tại có nhân viên nào bị xóa không
                 list_temp = from emp in list_filter_dept
                                 join del in DB.DELETEs on emp.EMPLOYEE_ID equals del.EMPLOYEE_ID
                                 where ((del.ISDELETED == false) || (del.ISDELETED == true &&
                                 (del.MONTH.Value.Year > SELECTMONTHTYPE.YEAR || (del.MONTH.Value.Month > SELECTMONTHTYPE.MONTH && del.MONTH.Value.Year == SELECTMONTHTYPE.YEAR))))
                                 select emp; 
 
+                //Tạo ra 2 list (1 để binding tới datagrid và 1 cái bản sao)
                 SalaryList = new ObservableCollection<SalaryInformationData>();
                 SalaryTest = new ObservableCollection<SalaryInformationData>();
 
+                //Tạo ra bảng lương tháng mới lấy basic_wage, overtime_salary, coefficient của tháng cũ trong trường hợp nhân viên cũ
                 foreach (var item in list_temp)
                 {
-                    DateTime date = AccountingClass.GetDateBefore();
                     SalaryInformationData salaryData = new SalaryInformationData();
+
+                    //Tìm tháng trước đó để lấy dữ liệu nói trên
+                    DateTime date = AccountingClass.GetDateBefore();
+
+                    //Tìm bảng lương tháng trước của nhân viên đó 
                     SALARY old_salary = DB.SALARies.Where(x => x.EMPLOYEE_ID == item.EMPLOYEE_ID && 
-                    x.MONTH.Value.Month == date.Month && x.MONTH.Value.Year == date.Year).SingleOrDefault();                    
+                    x.MONTH.Value.Month == date.Month && x.MONTH.Value.Year == date.Year).SingleOrDefault();     
+
+                    //Kiểm tra điều kiện nếu nhân viên đó là nhân viên mới
+                    if(old_salary == null)
+                    {
+                        //Tìm bảng lương hiện tại (không cần thiết lắm vì đó là điều kiện lọc
+                        SALARY new_salary = DB.SALARies.Where(x => x.EMPLOYEE_ID == item.EMPLOYEE_ID &&
+                             x.MONTH.Value.Month == DateTime.Now.Month && x.MONTH.Value.Year == DateTime.Now.Year).SingleOrDefault();
+                        salaryData.BASIC_WAGE = (long)new_salary.BASIC_WAGE;
+                        salaryData.OVERTIME_SALARY = (long)new_salary.OVERTIME_SALARY;
+                        salaryData.COEFFICIENT = (double)new_salary.COEFFICIENT;
+                    }
+                    else
+                    {
+                        salaryData.BASIC_WAGE = (long)old_salary.BASIC_WAGE;
+                        salaryData.OVERTIME_SALARY = (long)old_salary.OVERTIME_SALARY;
+                        salaryData.COEFFICIENT = (double)old_salary.COEFFICIENT;
+                    }
+                    //Binding dữ liệu
                     salaryData.EMPLOYEE_ID = item.EMPLOYEE_ID;
                     salaryData.NAME = item.NAME;
                     salaryData.DEPARTMENT = item.DEPARTMENT.DEPT_NAME;
-                    salaryData.ROLE = item.ROLE.ROLE_NAME;
-                    salaryData.BASIC_WAGE = (long)old_salary.BASIC_WAGE;
+                    salaryData.ROLE = item.ROLE.ROLE_NAME;                    
                     salaryData.WORK_DAY = 0;
-                    salaryData.OVERTIME_DAY = 0;
-                    salaryData.OVERTIME_SALARY = (long)old_salary.OVERTIME_SALARY;
+                    salaryData.OVERTIME_DAY = 0;                    
                     salaryData.TOTAL_SALARY = 0;
                     salaryData.SOCIAL_INSURANCE = 0;
                     salaryData.HEALTH_INSURANCE = 0;
                     salaryData.TAX = 0;
                     salaryData.WELFARE = 0;
-                    salaryData.BONUS = 0;
-                    salaryData.COEFFICIENT = (double)old_salary.COEFFICIENT;
+                    salaryData.BONUS = 0;                    
                     salaryData.NOTE = "";
                     salaryData.DATE_START = new DateTime(SELECTMONTHTYPE.YEAR,SELECTMONTHTYPE.MONTH, 1);
                     salaryData.DATE_END = new DateTime(SELECTMONTHTYPE.YEAR, SELECTMONTHTYPE.MONTH, AccountingClass.GetDaybyMonth(SELECTMONTHTYPE.MONTH,SELECTMONTHTYPE.YEAR));
                     salaryData.MONTH = new DateTime(SELECTMONTHTYPE.YEAR, SELECTMONTHTYPE.MONTH, 1);
                     
+                    //Add dữ liệu vào list
                     SalaryList.Add(salaryData);
                     SalaryTest.Add(salaryData);
 
+                    //Tạo ra 1 bảng tương tự để add dữ liệu vào database
                     SALARY salary = new SALARY();
                     salary.EMPLOYEE_ID = item.EMPLOYEE_ID;
                     salary.BASIC_WAGE = (long)old_salary.BASIC_WAGE;
@@ -476,6 +513,7 @@ namespace HRMS.Accouting.ViewModel
                     salary.NOTE = "";
                     DB.SALARies.Add(salary);
 
+                    //Tạo bảng timekeeping nếu bảng timekeeping của tháng hiện tại chưa có
                     TIMEKEEPING temp = DB.TIMEKEEPINGs.Where(x => x.EMPLOYEE_ID == item.EMPLOYEE_ID && x.MONTH.Value.Month == SELECTMONTHTYPE.MONTH && x.MONTH.Value.Year == SELECTMONTHTYPE.YEAR).FirstOrDefault();
                     if (temp == null)
                     {
@@ -505,6 +543,7 @@ namespace HRMS.Accouting.ViewModel
                 SalaryList = new ObservableCollection<SalaryInformationData>();
                 SalaryTest = new ObservableCollection<SalaryInformationData>();
 
+                //Lưu dữ liệu từ list đã lọc ở trên vào 2 list vừa khởi tạo 
                 foreach (var item in list)
                 {
                     SalaryInformationData salaryData = new SalaryInformationData();
@@ -552,7 +591,10 @@ namespace HRMS.Accouting.ViewModel
             hrmsEntities DB = new hrmsEntities();
             var list = from dept in DB.DEPARTMENTs select dept;
             ListDeptType = new ObservableCollection<ComboboxModel>();
+
+            //ALL để chọn lọc theo tất cả phòng ban
             ListDeptType.Add(new ComboboxModel("ALL",0, true));
+
             foreach (var item in list)
             {
                 ListDeptType.Add(new ComboboxModel(item.DEPT_NAME,item.DEPT_ID, false));
@@ -596,6 +638,8 @@ namespace HRMS.Accouting.ViewModel
         private void EditSalaryData()
         {
             hrmsEntities DB = new hrmsEntities();
+            
+            //Lưu những thay đổi vào database 
             var Employee = DB.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == SelectedItem.EMPLOYEE_ID).SingleOrDefault();
             var Salary = DB.SALARies.Where(x => x.EMPLOYEE_ID == SelectedItem.EMPLOYEE_ID && x.MONTH.Value.Month == SelectedItem.DATE_START.Month).SingleOrDefault();
             var Timekeeping = DB.TIMEKEEPINGs.Where(x => x.EMPLOYEE_ID == SelectedItem.EMPLOYEE_ID && x.DATE_START.Value.Month == SelectedItem.DATE_START.Month).SingleOrDefault();
@@ -610,6 +654,8 @@ namespace HRMS.Accouting.ViewModel
             {
                 Employee.IMAGE = IMAGESOURCE;
             }
+
+            //change để lưu những thay đổi, countchange để kiểm tra có thay đổi ko
             String change = "";
             int countchange = 0;
             if (SOCIAL_INSURANCE != SelectedItem.SOCIAL_INSURANCE)
@@ -648,6 +694,8 @@ namespace HRMS.Accouting.ViewModel
                 change = change + string.Format("NOTE ('{0}' -> '{1}')     ,", SelectedItem.NOTE, NOTE);
                 countchange++;
             }
+
+            //Nếu có thay đổi thì lưu những thay đổi vào bảng record trong database
             if (countchange != 0)
             {
                 RECORD record = new RECORD();
@@ -662,6 +710,7 @@ namespace HRMS.Accouting.ViewModel
             }
             DB.SaveChanges();
 
+            //Thông báo lưu thành công
             String message = "Save successful";
             MessageBox.Show(message, "MESSAGE", MessageBoxButton.OK, MessageBoxImage.Information);
         }

@@ -25,9 +25,11 @@ namespace HRMS.Accouting.Model
         private int _YEAR;
         public int YEAR { get => _YEAR; set { _YEAR = value; OnPropertyChanged(); } }
 
+        //Lưu dữ liệu DEPT_NAME vào ComboBox chọn phòng ban
         private string _DEPT_NAME;
         public string DEPT_NAME { get => _DEPT_NAME; set { _DEPT_NAME = value; OnPropertyChanged(); } }
 
+        //Lưu dữ liệu DEPT_ID vào ComboBox chọn phòng ban
         private int _DEPT_ID;
         public int DEPT_ID { get => _DEPT_ID; set { _DEPT_ID = value; OnPropertyChanged(); } }
 
@@ -45,7 +47,7 @@ namespace HRMS.Accouting.Model
             this.YEAR = year;
             this.ISSELECTED = isselected;
         }
-
+        //Contructor cho ComboBox chọn phòng ban
         public ComboboxModel(string dept_name, int dept_id, bool isselected)
         {
             this.DEPT_NAME = dept_name;
