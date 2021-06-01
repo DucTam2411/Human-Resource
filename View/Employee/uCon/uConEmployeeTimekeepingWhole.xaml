@@ -1,0 +1,149 @@
+﻿<UserControl
+    x:Class="HRMS.Employee.uCon.uConEmployeeTimekeepingWhole"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:HRMS.Employee.uCon"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="880"
+    mc:Ignorable="d">
+
+
+
+
+    <UserControl.Resources>
+        <Style x:Key="WrapText" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+
+
+    <ContentControl x:Name="contentControlMain" Height="600">
+        <Grid Margin="0,20,0,0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Margin="60,10,0,10" Orientation="Horizontal">
+
+                <materialDesign:PackIcon
+                    Width="30"
+                    Height="30"
+                    VerticalAlignment="Center"
+                    Foreground="DimGray"
+                    Kind="Search" />
+                <TextBox
+                    x:Name="tbSearch"
+                    Width="370"
+                    Margin="5,0,0,0"
+                    materialDesign:HintAssist.Hint="Search "
+                    FontSize="18">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SearchTextChangedCommand}" CommandParameter="{Binding ElementName=tbSearch, Path=Text}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+
+                <ComboBox
+                    Name="cbSearch"
+                    Margin="30,0,80,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="DimGray"
+                    SelectedValue="{Binding strSearchBy, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+
+                    <ComboBoxItem Content="Month" IsSelected="True" />
+                    <ComboBoxItem Content="Day Start" />
+                    <ComboBoxItem Content="Day End" />
+                    <ComboBoxItem Content="Total Work Day" />
+                    <ComboBoxItem Content="Total Overtime Day" />
+                    <ComboBoxItem Content="Total Absent Day" />
+                </ComboBox>
+            </StackPanel>
+
+            <DataGrid
+                x:Name="dgTimekeeping"
+                Grid.Row="1"
+                Width="800"
+                Height="400"
+                Margin="0,20.4,0,0"
+                VerticalAlignment="Top"
+                AllowDrop="True"
+                AutoGenerateColumns="False"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                CanUserReorderColumns="False"
+                CanUserResizeColumns="True"
+                HorizontalScrollBarVisibility="Visible"
+                IsReadOnly="True"
+                ItemsSource="{Binding TimekeepingList}"
+                SelectedItem="{Binding SelectedItem}"
+                VerticalScrollBarVisibility="Visible">
+
+                <!--<DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick" />
+                    </Style>
+                </DataGrid.Resources>-->
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding DoubleClickCommmand}" CommandParameter="{Binding ElementName=dgTimekeeping, Path=SelectedValue}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+
+                <DataGrid.Columns>
+                    <!--<DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding EMPLOYEE_ID, UpdateSourceTrigger=PropertyChanged}"
+                        Foreground="DarkSlateGray"
+                        Header="ID" />-->
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding MONTH, StringFormat={} {0:MM/yyyy}, UpdateSourceTrigger=PropertyChanged}"
+                        Foreground="DarkSlateGray"
+                        Header="Month" />
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding DATE_START, StringFormat={}{0:dd/MM/yyyy}, UpdateSourceTrigger=PropertyChanged}"
+                        Foreground="DarkSlateGray"
+                        Header="Day Start" />
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding DATE_END, StringFormat={}{0:dd/MM/yyyy}, UpdateSourceTrigger=PropertyChanged}"
+                        Foreground="DarkSlateGray"
+                        Header="Day End" />
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding NUMBER_OF_WORK_DAY, UpdateSourceTrigger=PropertyChanged}"
+                        Foreground="DarkSlateGray"
+                        Header="Total Work Day" />
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding NUMBER_OF_OVERTIME_DAY, UpdateSourceTrigger=PropertyChanged}"
+                        Foreground="DarkSlateGray"
+                        Header="Total Overtime Day" />
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding NUMBER_OF_ABSENT_DAY, UpdateSourceTrigger=PropertyChanged}"
+                        Foreground="DarkSlateGray"
+                        Header="Total Absent Day" />
+                    <!--<DataGridTextColumn
+                        Width="200"
+                        Binding="{Binding IS_NOTE}"
+                        ElementStyle="{StaticResource WrapText}"
+                        Foreground="DarkSlateGray"
+                        Header="Note" />-->
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Grid>
+    </ContentControl>
+</UserControl>
