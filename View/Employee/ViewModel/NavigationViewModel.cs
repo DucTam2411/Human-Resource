@@ -23,7 +23,7 @@ namespace HRMS.Employee.ViewModel
 
             TimekeepingCommand = new RelayCommand<object>(null, p =>
             {
-                CONTENT_MAIN = new uConEmployeeTimekeepingDetail();
+                CONTENT_MAIN = new uConEmployeeTimekeepingWhole();
             });
 
             SalaryCommand = new RelayCommand<object>(null, p =>

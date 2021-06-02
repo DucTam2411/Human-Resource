@@ -1,4 +1,4 @@
-﻿using HRMS.Employee.ViewModel;
+﻿using HRMS.Login.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +14,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HRMS.Employee.uCon
+namespace LoginUI
 {
     /// <summary>
-    /// Interaction logic for uConEmployeeSalary.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class uConEmployeeSalary : UserControl
+    public partial class MainWindow : Window
     {
-        public uConEmployeeSalary()
+        public MainWindow()
         {
             InitializeComponent();
-            DataContext = new EmployeeViewModel();
+            DataContext = new LoginViewModel();
+        }
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
     }
 }

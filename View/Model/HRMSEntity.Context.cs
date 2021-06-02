@@ -13,10 +13,10 @@ namespace HRMS.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class hrmsEntities1 : DbContext
+    public partial class hrmsEntities : DbContext
     {
-        public hrmsEntities1()
-            : base("name=hrmsEntities1")
+        public hrmsEntities()
+            : base("name=hrmsEntities")
         {
         }
     
@@ -25,6 +25,7 @@ namespace HRMS.Model
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<DELETE> DELETEs { get; set; }
         public virtual DbSet<DEPARTMENT> DEPARTMENTs { get; set; }
         public virtual DbSet<EMPLOYEE> EMPLOYEEs { get; set; }
         public virtual DbSet<RECORD> RECORDs { get; set; }
@@ -34,5 +35,6 @@ namespace HRMS.Model
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TIMEKEEPING> TIMEKEEPINGs { get; set; }
         public virtual DbSet<TIMEKEEPING_DETAIL> TIMEKEEPING_DETAIL { get; set; }
+        public virtual DbSet<USER> USERs { get; set; }
     }
 }

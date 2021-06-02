@@ -94,3 +94,6 @@ D:\Human Resource\View\obj\Debug\Employee\uCon\uConEmployeeTimekeepingDetail.bam
 D:\Human Resource\View\obj\Debug\Employee\uCon\uConSideBarEmployee.baml
 D:\Human Resource\View\obj\Debug\Employee\uCon\uConEmployeeTimekeepingWhole.g.cs
 D:\Human Resource\View\obj\Debug\Employee\uCon\uConEmployeeTimekeepingWhole.baml
+D:\Human Resource\View\obj\Debug\Login\ModernButton.baml
+D:\Human Resource\View\obj\Debug\Login\LoginWindow.g.cs
+D:\Human Resource\View\obj\Debug\Login\LoginWindow.baml

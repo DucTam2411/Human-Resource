@@ -8,12 +8,12 @@ namespace HRMS.Model
 {
     public class HRMSDatabase
     {
-        private  static hrmsEntities1 _ins;
-        public static hrmsEntities1 Ins
+        private  static hrmsEntities _ins;
+        public static hrmsEntities Ins
         {
             get
             {
-                _ins = new hrmsEntities1();
+                _ins = new hrmsEntities();
                 return _ins;
             }
         }

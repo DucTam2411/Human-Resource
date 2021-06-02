@@ -26,5 +26,10 @@ namespace HRMS.Employee.uCon
             InitializeComponent();
             DataContext = new EmployeeViewModel();
         }
+
+        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            this.Content = new uConEmployeeTimekeepingDetail();
+        }
     }
 }
