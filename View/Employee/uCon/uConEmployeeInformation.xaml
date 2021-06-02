@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:HRMS.Employee.uCon"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="620"
+    Width="670"
     Height="auto"
     Background="Transparent"
     mc:Ignorable="d">
@@ -33,7 +33,7 @@
                         Foreground="DimGray"
                         Kind="User" />
                     <TextBox
-                        Width="200"
+                        Width="250"
                         Margin="8,0,0,0"
                         materialDesign:HintAssist.HelperText="Employee full name."
                         materialDesign:HintAssist.Hint="Name"
@@ -51,7 +51,7 @@
                         Foreground="DimGray"
                         Kind="IdCard" />
                     <TextBox
-                        Width="200"
+                        Width="250"
                         Margin="8,0,0,0"
                         materialDesign:HintAssist.HelperText="ID Card number"
                         materialDesign:HintAssist.Hint="ID"
@@ -70,7 +70,7 @@
                         Foreground="DimGray"
                         Kind="Calendar" />
                     <TextBox
-                        Width="200"
+                        Width="250"
                         Margin="8,0,0,0"
                         materialDesign:HintAssist.Hint="Birthday"
                         FontSize="18"
@@ -120,7 +120,7 @@
                             Foreground="DimGray"
                             Kind="Place" />
                         <TextBox
-                            Width="200"
+                            Width="250"
                             Margin="8,0,0,0"
                             materialDesign:HintAssist.HelperText="Birthplace"
                             FontSize="18"
@@ -138,7 +138,7 @@
                             Foreground="DimGray"
                             Kind="Globe" />
                         <TextBox
-                            Width="200"
+                            Width="250"
                             Margin="8,0,0,0"
                             materialDesign:HintAssist.HelperText="Citizenship"
                             FontSize="18"
@@ -157,7 +157,7 @@
                             Kind="GenderMaleFemaleVariant" />
 
                         <TextBox
-                            Width="200"
+                            Width="250"
                             Margin="8,0,0,0"
                             materialDesign:HintAssist.HelperText="Gender"
                             FontSize="18"
@@ -175,7 +175,7 @@
                             Foreground="DimGray"
                             Kind="Phone" />
                         <TextBox
-                            Width="200"
+                            Width="250"
                             Margin="8,0,0,0"
                             materialDesign:HintAssist.HelperText="Phone Number"
                             FontSize="18"
@@ -201,7 +201,7 @@
                             Foreground="DimGray"
                             Kind="CardAccountDetailsStar" />
                         <TextBox
-                            Width="200"
+                            Width="250"
                             Margin="8,0,0,0"
                             materialDesign:HintAssist.HelperText="Position"
                             FontSize="18"
@@ -219,7 +219,7 @@
                             Foreground="DimGray"
                             Kind="House" />
                         <TextBox
-                            Width="200"
+                            Width="250"
                             Margin="8,0,0,0"
                             materialDesign:HintAssist.HelperText="Department in company"
                             materialDesign:HintAssist.Hint="Department"
@@ -238,7 +238,7 @@
                             Foreground="DimGray"
                             Kind="Equalizer" />
                         <TextBox
-                            Width="200"
+                            Width="250"
                             Margin="8,0,0,0"
                             materialDesign:HintAssist.HelperText="Academic Level"
                             FontSize="18"
@@ -255,7 +255,7 @@
                             Kind="Email" />
 
                         <TextBox
-                            Width="200"
+                            Width="250"
                             Margin="8,0,0,0"
                             materialDesign:HintAssist.HelperText="Email"
                             FontSize="18"

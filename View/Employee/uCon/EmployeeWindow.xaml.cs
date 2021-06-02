@@ -25,12 +25,28 @@ namespace HRMS.Employee.uCon
     public partial class EmployeeWindow : Window
     {
 
+        //int employee_id;
         NavigationViewModel a { get; set; }
         public EmployeeWindow()
         {
             InitializeComponent();
 
-            a = new NavigationViewModel();
+            //a = new NavigationViewModel(employee_id);
+            //Sidebar.DataContext = a;
+            //sss.DataContext = a;
+
+            //System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            //dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            //dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
+            //dispatcherTimer.Start();
+        }
+
+
+        public EmployeeWindow(int employee_id)
+        {
+            InitializeComponent();
+
+            a = new NavigationViewModel(employee_id);
             Sidebar.DataContext = a;
             sss.DataContext = a;
 
@@ -39,6 +55,7 @@ namespace HRMS.Employee.uCon
             dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
             dispatcherTimer.Start();
         }
+
 
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)

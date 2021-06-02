@@ -82,14 +82,12 @@ D:\Human Resource\View\bin\Debug\LiveCharts.Wpf.xml
 D:\Human Resource\View\obj\Debug\Employee\uCon\EmployeeWindow.g.cs
 D:\Human Resource\View\obj\Debug\Employee\uCon\uConEmployeeInformation.g.cs
 D:\Human Resource\View\obj\Debug\Employee\uCon\uConEmployeeSalary.g.cs
-D:\Human Resource\View\obj\Debug\Employee\uCon\uConEmployeeTimekeeping.g.cs
 D:\Human Resource\View\obj\Debug\Employee\uCon\uConEmployeeTimekeepingDetail.g.cs
 D:\Human Resource\View\obj\Debug\Employee\uCon\uConSideBarEmployee.g.cs
 D:\Human Resource\View\obj\Debug\HRMS_Content.g.cs
 D:\Human Resource\View\obj\Debug\Employee\uCon\EmployeeWindow.baml
 D:\Human Resource\View\obj\Debug\Employee\uCon\uConEmployeeInformation.baml
 D:\Human Resource\View\obj\Debug\Employee\uCon\uConEmployeeSalary.baml
-D:\Human Resource\View\obj\Debug\Employee\uCon\uConEmployeeTimekeeping.baml
 D:\Human Resource\View\obj\Debug\Employee\uCon\uConEmployeeTimekeepingDetail.baml
 D:\Human Resource\View\obj\Debug\Employee\uCon\uConSideBarEmployee.baml
 D:\Human Resource\View\obj\Debug\Employee\uCon\uConEmployeeTimekeepingWhole.g.cs

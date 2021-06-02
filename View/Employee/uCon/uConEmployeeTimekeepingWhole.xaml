@@ -87,11 +87,12 @@
                 SelectedItem="{Binding SelectedItem}"
                 VerticalScrollBarVisibility="Visible">
 
-                <DataGrid.Resources>
-                    <Style TargetType="{x:Type DataGridRow}">
-                        <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick" />
-                    </Style>
-                </DataGrid.Resources>
+                <DataGrid.InputBindings>
+                    <MouseBinding
+                        Command="{Binding DoubleClickCommand}"
+                        CommandParameter="{Binding ElementName=contentControlMain}"
+                        Gesture="LeftDoubleClick" />
+                </DataGrid.InputBindings>
 
 
                 <DataGrid.Columns>

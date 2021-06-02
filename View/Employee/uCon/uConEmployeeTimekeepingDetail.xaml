@@ -7,13 +7,13 @@
     xmlns:local="clr-namespace:HRMS.Employee.uCon"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="uConMain"
     mc:Ignorable="d">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
-
-
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -29,7 +29,9 @@
             Margin="0,0,10,217.8"
             VerticalAlignment="Bottom"
             Background="Transparent"
-            BorderThickness="0">
+            BorderThickness="0"
+            Command="{Binding BackToWholeCommand}"
+            CommandParameter="{Binding ElementName=uConMain}">
 
             <materialDesign:PackIcon
                 Width="40"
@@ -60,7 +62,8 @@
                     Margin="8,0,0,0"
                     materialDesign:HintAssist.HelperText="Employee full name."
                     materialDesign:HintAssist.Hint="Name"
-                    FontSize="15">
+                    FontSize="15"
+                    IsReadOnly="True">
                     <TextBox.Text>
                         <Binding Path=" Employee.NAME" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules />
@@ -121,6 +124,7 @@
                 Margin="10,0,0,0"
                 BorderBrush="DimGray"
                 BorderThickness="1"
+                ItemStringFormat="{}{0:dd/MM/yyy}"
                 ItemsSource="{Binding workdayList}" />
 
 
@@ -134,6 +138,7 @@
                 Margin="10,0,0,0"
                 BorderBrush="DimGray"
                 BorderThickness="1"
+                ItemStringFormat="{}{0:dd/MM/yyy}"
                 ItemsSource="{Binding absentdayList}" />
 
 
@@ -147,6 +152,7 @@
                 Margin="10,0,0,0"
                 BorderBrush="DimGray"
                 BorderThickness="1"
+                ItemStringFormat="{}{0:dd/MM/yyy}"
                 ItemsSource="{Binding overtimeList}" />
 
 
@@ -156,6 +162,5 @@
 
 
     </Grid>
-
 
 </UserControl>

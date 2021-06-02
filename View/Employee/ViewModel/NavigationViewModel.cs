@@ -14,28 +14,29 @@ namespace HRMS.Employee.ViewModel
     public class NavigationViewModel : BaseViewModel
     {
 
-        public NavigationViewModel()
+        int employee_id;
+        public NavigationViewModel(int employee_id)
         {
             InformationCommand = new RelayCommand<object>(null, p =>
             {
-                CONTENT_MAIN = new uConEmployeeInformation();
+                CONTENT_MAIN = new uConEmployeeInformation(employee_id);
             });
 
             TimekeepingCommand = new RelayCommand<object>(null, p =>
             {
-                CONTENT_MAIN = new uConEmployeeTimekeepingWhole();
+                CONTENT_MAIN = new uConEmployeeTimekeepingWhole(employee_id);
             });
 
             SalaryCommand = new RelayCommand<object>(null, p =>
             {
-                CONTENT_MAIN = new uConEmployeeSalary();
+                CONTENT_MAIN = new uConEmployeeSalary(employee_id);
             });
 
-        
+            CONTENT_MAIN = new uConEmployeeInformation(employee_id);
         }
 
 
-        private object _CONTENT_MAIN = new uConEmployeeInformation();
+        private object _CONTENT_MAIN;
         public object CONTENT_MAIN
         {
             get

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace HRMS.Employee.ViewModel
@@ -14,15 +15,13 @@ namespace HRMS.Employee.ViewModel
     class EmployeeViewModel : BaseViewModel
     {
 
-
+       
         #region Handle uConSalary
-
-        public ICommand MonthSelectionChangedCommand { get; set; }
-        // get data in combobox
-
-
+        
+        /// <summary>
+        ///  PROPERTIES
+        /// </summary>
         public DateTime[] SalaryMonthList { get; set; }
-
 
         // i need timekeeping to fill data into datagrid 
         private TIMEKEEPING[] _TimekeepingList;
@@ -71,7 +70,6 @@ namespace HRMS.Employee.ViewModel
             }
         }
 
-
         private TIMEKEEPING _TimekeepingSelected;
         public TIMEKEEPING TimekeepingSelected
         {
@@ -87,8 +85,21 @@ namespace HRMS.Employee.ViewModel
         }
 
 
+        /// <summary>
+        /// COMMANDS
+        /// </summary>
+        public ICommand MonthSelectionChangedCommand { get; set; } // get data in combobox
+
+
+        /// <summary>
+        /// FUNCTIONS
+        /// </summary>
+        /// <param name="a"></param>
         public void MonthSelectionChange(DateTime a)
         {
+            // select month
+            monthSelectInTimkeepingDetail = a;
+
             int day = a.Day, month = a.Month;
             TimekeepingSelected = ((from timekeeping in HRMSDatabase.Ins.TIMEKEEPINGs
                                     where timekeeping.MONTH.Value.Month == month && timekeeping.MONTH.Value.Day == day
@@ -98,19 +109,18 @@ namespace HRMS.Employee.ViewModel
                                select s).Take(1).Single());
 
         }
-
         #endregion
 
 
 
 
-        #region Handle uConDetailTimekeeping
 
+
+        #region Handle uConDetailTimekeepingWhole
 
         /// <summary>
         ///  PROPERTIES
         /// </summary>
-
         private DateTime[] _TimekeepingMonthList;
         public DateTime[] TimekeepingMonthList
         {
@@ -128,109 +138,19 @@ namespace HRMS.Employee.ViewModel
 
         }
 
-        private DateTime[] _workdayList { get; set; }
-        public DateTime[] workdayList
-        {
+     
 
-            get { return _workdayList; }
+        private DateTime _monthSelectInTimkeepingDetail;
+        private DateTime monthSelectInTimkeepingDetail
+        {
+            get => _monthSelectInTimkeepingDetail;
             set
             {
-                _workdayList = value;
-                OnPropertyChanged();
-            }
-
-        }
-
-        public DateTime[] _absentdayList { get; set; }
-        public DateTime[] absentdayList
-        {
-            get
-            {
-                return _absentdayList;
-            }
-            set
-            {
-                _absentdayList = value;
+                _monthSelectInTimkeepingDetail = value;
                 OnPropertyChanged();
             }
         }
 
-        public DateTime[] _overtimeList { get; set; }
-        public DateTime[] overtimeList
-        {
-            get
-            {
-                return _overtimeList;
-            }
-            set
-            {
-                _overtimeList = value;
-                OnPropertyChanged();
-            }
-        }
-
-
-
-        /// <summary>
-        ///  COMMAND
-        /// </summary>
-        public ICommand MonthSelectionChangedDetailCommand { get; set; }
-
-
-
-        /// <summary>
-        ///  FUNCTION
-        /// </summary>
-        public void getDayList(DateTime timekeeping_date)
-        {
-            workdayList = ((from t in HRMSDatabase.Ins.TIMEKEEPING_DETAIL
-                            where t.TIMEKEEPING.MONTH.Value.Month == timekeeping_date.Month &&
-                            t.TIMEKEEPING.MONTH.Value.Year == timekeeping_date.Year &&
-                            t.TIMEKEEPING_DETAIL_TYPE == 1
-                            select t.CHECK_DATE.Value).ToArray());
-
-            absentdayList = ((from t in HRMSDatabase.Ins.TIMEKEEPING_DETAIL
-                              where t.TIMEKEEPING.MONTH == timekeeping_date && t.TIMEKEEPING_DETAIL_TYPE == 2
-                              select t.CHECK_DATE.Value).ToArray());
-
-            overtimeList = ((from t in HRMSDatabase.Ins.TIMEKEEPING_DETAIL
-                             where t.TIMEKEEPING.MONTH == timekeeping_date && t.TIMEKEEPING_DETAIL_TYPE == 3
-                             select t.CHECK_DATE.Value).ToArray());
-
-        }
-
-
-        #endregion
-
-
-        #region Handle uConTimekeeping + uConInformation
-        public ICommand SearchTextCommand { get; set; }
-        public ICommand SearchTextChangedCommand { get; set; }
-
-
-
-        // for binding for information
-        private EMPLOYEE _employee;
-        public EMPLOYEE Employee
-        {
-            get
-            {
-                return _employee;
-            }
-
-
-            set
-            {
-                _employee = value;
-                OnPropertyChanged();
-            }
-        }
-
-
-
-        // 
-
-        // for first_select
         private int _selectedIndex;
         public int selectedIndex
         {
@@ -265,8 +185,6 @@ namespace HRMS.Employee.ViewModel
 
         }
 
-
-
         // search in dtgv
         private string _strSearchBy;
         public string strSearchBy
@@ -282,6 +200,22 @@ namespace HRMS.Employee.ViewModel
             }
         }
 
+
+
+
+        /// <summary>
+        ///  COMMAND
+        /// </summary>
+      
+        public ICommand SearchTextCommand { get; set; }
+        public ICommand SearchTextChangedCommand { get; set; }
+        public ICommand DoubleClickCommand { get; set; }
+
+
+        /// <summary>
+        ///  FUNCTION
+        /// </summary>
+      
         public void SearchBarChange(string text)
         {
 
@@ -326,7 +260,6 @@ namespace HRMS.Employee.ViewModel
                             {
 
                                 intDay = Int32.Parse(text);
-                                MessageBox.Show("SS");
                                 TimekeepingList = (from timekeeping in HRMSDatabase.Ins.TIMEKEEPINGs
                                                    where timekeeping.DATE_END.Value.Day == intDay
                                                    select timekeeping).ToArray();
@@ -384,66 +317,117 @@ namespace HRMS.Employee.ViewModel
         #endregion
 
 
-        #region Handle navigation 
-        public ICommand DoubleClickCommmand { get; set; }
 
+
+        #region Handle  uConInformation
+        /// <summary>
+        /// PROPERTIES
+        /// </summary>
+        private EMPLOYEE _employee;
+        public EMPLOYEE Employee
+        {
+            get
+            {
+                return _employee;
+            }
+
+
+            set
+            {
+                _employee = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
 
-        // constructor 
-        public EmployeeViewModel()
+
+
+
+        #region uConEmployeeTimekeepingDetail
+        /// <summary>
+        /// PROPERTIES
+        /// </summary>
+        private DateTime[] _workdayList { get; set; }
+        public DateTime[] workdayList
         {
 
-            Employee = ((from employee in HRMSDatabase.Ins.EMPLOYEEs
-                         select employee).Take(1).Single());
-
-
-            TimekeepingList = (from timekeeping in HRMSDatabase.Ins.TIMEKEEPINGs
-                               orderby timekeeping.MONTH descending
-                               select timekeeping).ToArray();
-
-            SalaryList = (from salary in HRMSDatabase.Ins.SALARies
-                          where salary.EMPLOYEE_ID == 4
-                          orderby salary.DATE_START descending
-                          select salary).ToArray();
-
-            SalaryMonthList = ((from salary in HRMSDatabase.Ins.SALARies
-                                where salary.EMPLOYEE_ID == 4
-                                orderby salary.MONTH.Value descending
-                                select salary.MONTH.Value).Distinct().ToArray());
-
-            // select the top month
-            selectedIndex = 0;
-
-            // declare command 
-            SearchTextChangedCommand = new RelayCommand<string>(null, p => { SearchBarChange(p); });
-            MonthSelectionChangedCommand = new RelayCommand<DateTime>(null, p => { MonthSelectionChange(p); });
-            DoubleClickCommmand = new RelayCommand<TIMEKEEPING>(null, p =>
-                      {
-                          MessageBox.Show(p.NUMBER_OF_WORK_DAY.Value.ToString());
-                      });
-
-            MonthSelectionChangedDetailCommand = new RelayCommand<DateTime>(null, p => { getDayList(p); });
-
-
-            // for detail salary 
-            TimekeepingMonthList = (from t in HRMSDatabase.Ins.TIMEKEEPINGs
-                                    orderby t.MONTH.Value descending
-                                    select t.MONTH.Value).Distinct().ToArray();
-
-
-
+            get { return _workdayList; }
+            set
+            {
+                _workdayList = value;
+                OnPropertyChanged();
+            }
 
         }
 
+        public DateTime[] _absentdayList { get; set; }
+        public DateTime[] absentdayList
+        {
+            get
+            {
+                return _absentdayList;
+            }
+            set
+            {
+                _absentdayList = value;
+                OnPropertyChanged();
+            }
+        }
+        
+        public DateTime[] _overtimeList { get; set; }
+        public DateTime[] overtimeList
+        {
+            get
+            {
+                return _overtimeList;
+            }
+            set
+            {
+                _overtimeList = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+
+        /// <summary>
+        /// COMMANDS
+        /// </summary>
+        public ICommand MonthSelectionChangedDetailCommand { get; set; }
+        public ICommand BackToWholeCommand { get; set; }
+
+
+        /// <summary>
+        /// FUNCTIONS
+        /// </summary>
+        public void getDayList(DateTime timekeeping_date)
+        {
+            workdayList = ((from t in HRMSDatabase.Ins.TIMEKEEPING_DETAIL
+                            where t.TIMEKEEPING.MONTH.Value.Month == timekeeping_date.Month &&
+                            t.TIMEKEEPING.MONTH.Value.Year == timekeeping_date.Year &&
+                            t.TIMEKEEPING_DETAIL_TYPE == 1
+                            select t.CHECK_DATE.Value).ToArray());
+
+            absentdayList = ((from t in HRMSDatabase.Ins.TIMEKEEPING_DETAIL
+                              where t.TIMEKEEPING.MONTH == timekeeping_date && t.TIMEKEEPING_DETAIL_TYPE == 2
+                              select t.CHECK_DATE.Value).ToArray());
+
+            overtimeList = ((from t in HRMSDatabase.Ins.TIMEKEEPING_DETAIL
+                             where t.TIMEKEEPING.MONTH == timekeeping_date && t.TIMEKEEPING_DETAIL_TYPE == 3
+                             select t.CHECK_DATE.Value).ToArray());
+        }
+        #endregion
+
+
         public EmployeeViewModel(int employee_ID)
         {
-            EMPLOYEE tem = ((from employee in HRMSDatabase.Ins.EMPLOYEEs
-                             where employee.EMPLOYEE_ID == employee_ID
-                             select employee).Take(1).Single());
+
+            Employee = ((from employee in HRMSDatabase.Ins.EMPLOYEEs
+                         where employee.EMPLOYEE_ID == employee_ID
+                         select employee).Take(1).Single());
 
 
-            Employee = tem;
             TimekeepingList = (from timekeeping in HRMSDatabase.Ins.TIMEKEEPINGs
                                where timekeeping.EMPLOYEE_ID == employee_ID
                                orderby timekeeping.MONTH descending
@@ -454,13 +438,35 @@ namespace HRMS.Employee.ViewModel
                           orderby salary.DATE_START descending
                           select salary).ToArray();
 
+            SalaryMonthList = ((from salary in HRMSDatabase.Ins.SALARies
+                                where salary.EMPLOYEE_ID == employee_ID
+                                orderby salary.MONTH.Value descending
+                                select salary.MONTH.Value).Distinct().ToArray());
 
-            SearchTextCommand = new RelayCommand<string>(null, p => { MessageBox.Show("DDD"); });
+
+            // for detail timekeeping
+            TimekeepingMonthList = (from t in HRMSDatabase.Ins.TIMEKEEPINGs
+                                    orderby t.MONTH.Value descending
+                                    select t.MONTH.Value).Distinct().ToArray();
+
+
+            // select the top month
+            selectedIndex = 0;
+
+
+
+            // declare command 
             SearchTextChangedCommand = new RelayCommand<string>(null, p => { SearchBarChange(p); });
+            
+            MonthSelectionChangedCommand = new RelayCommand<DateTime>(null, p => { MonthSelectionChange(p); });
+
+            
+            // command for detail timekeeping
+            DoubleClickCommand = new RelayCommand<ContentControl>(null, p => p.Content = new uConEmployeeTimekeepingDetail(Employee.EMPLOYEE_ID));
+            BackToWholeCommand = new RelayCommand<UserControl>(null, p => p.Content  = new uConEmployeeTimekeepingWhole(Employee.EMPLOYEE_ID));
+            MonthSelectionChangedDetailCommand = new RelayCommand<DateTime>(null, p => { getDayList(p); });
+
         }
-
-
-
 
 
         public void CheckAttendance()
@@ -474,9 +480,9 @@ namespace HRMS.Employee.ViewModel
                                    select t.MONTH.Value).Take(1).Single();
 
             int idTimekeeping = (from t in HRMSDatabase.Ins.TIMEKEEPINGs
-                                   orderby t.MONTH descending
-                                   where t.MONTH.HasValue == true
-                                   select t.TIMEKEEPING_ID ).Take(1).Single();
+                                 orderby t.MONTH descending
+                                 where t.MONTH.HasValue == true
+                                 select t.TIMEKEEPING_ID).Take(1).Single();
             for (DateTime tem = dateBefore.AddDays(1); DateTime.Compare(tem, today) > 0; tem.AddDays(1))
             {
                 TIMEKEEPING_DETAIL tem_detail = new TIMEKEEPING_DETAIL();
@@ -488,7 +494,7 @@ namespace HRMS.Employee.ViewModel
 
 
             // first day of the month 
-            if(today.Day == 1)
+            if (today.Day == 1)
             {
 
             }

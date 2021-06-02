@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace HRMS.Login.ViewModel
@@ -25,7 +26,7 @@ namespace HRMS.Login.ViewModel
         }
 
         private string _Password;
-        public string Pasword
+        public string Password
         {
             get => _Password;
             set
@@ -38,29 +39,65 @@ namespace HRMS.Login.ViewModel
 
         public ICommand CloseCommand { get; set; }
         public ICommand LoginCommand { get; set; }
-
+        public ICommand PasswordChangedCommand { get; set; }
+        
+        
         public LoginViewModel()
         {
             CloseCommand = new RelayCommand<Window>(p => p != null, p => p.Close());
 
             LoginCommand = new RelayCommand<Window>(null,
 
-                p =>
-                {
-                    MessageBox.Show("S");
-                    EmployeeWindow a = new EmployeeWindow();
-                    p.Close();
-                    a.ShowDialog();
-                }
-                );
+                p => Login(p));
+            PasswordChangedCommand = new RelayCommand<PasswordBox>(null, p => { Password = p.Password; });
         }
+
+  
+        
+        public void Login(Window w)
+        {
+
+            string str = CreateMD5(Base64Encode(Password));
+            USER[] user = (from u in HRMSDatabase.Ins.USERs
+                           where u.USERNAME == Username && u.PASSWORD == str
+                           select u).ToArray();
+
+            if(user.Length > 0)
+            {
+                switch (user[0].EMPLOYEE.DEPT_ID.Value)
+                {
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                        int id = user[0].EMPLOYEE_ID.Value;
+                        EmployeeWindow e = new EmployeeWindow(id);
+                        w.Close();
+                        e.ShowDialog();
+                        break;
+
+                    case 1:  // HR
+                    case 2: // ACCOUTING
+                    case 3: // DIRECTOR
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Wrong password or Username !!!");
+            }
+        }
+
 
         public static string Base64Encode(string plainText)
         {
-            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
-            return System.Convert.ToBase64String(plainTextBytes);
+            if (plainText != String.Empty)
+            {
+                var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+                return System.Convert.ToBase64String(plainTextBytes);
+            }
+            return String.Empty;
         }
-
 
         public static string CreateMD5(string input)
         {
@@ -77,6 +114,5 @@ namespace HRMS.Login.ViewModel
                 return sb.ToString();
             }
         }
-
     }
 }

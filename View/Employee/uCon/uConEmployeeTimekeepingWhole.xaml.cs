@@ -21,15 +21,12 @@ namespace HRMS.Employee.uCon
     /// </summary>
     public partial class uConEmployeeTimekeepingWhole : UserControl
     {
-        public uConEmployeeTimekeepingWhole()
+        public uConEmployeeTimekeepingWhole(int employee_id)
         {
             InitializeComponent();
-            DataContext = new EmployeeViewModel();
+            DataContext = new EmployeeViewModel(employee_id);
         }
 
-        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            this.Content = new uConEmployeeTimekeepingDetail();
-        }
+       
     }
 }
