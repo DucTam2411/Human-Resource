@@ -63,3 +63,18 @@ as
 	end
 
 go
+
+
+create trigger TIMEKEEPING_INSERT_INIT on TIMEKEEPING
+for insert
+as 
+	declare @timekeeping_id integer
+	select @timekeeping_id = TIMEKEEPING_ID from inserted
+
+	begin
+		update TIMEKEEPING
+		set NUMBER_OF_ABSENT_DAY =0 , NUMBER_OF_OVERTIME_DAY =0 , NUMBER_OF_WORK_DAY =0 
+		where TIMEKEEPING_ID  = @timekeeping_id
+
+		end
+go
