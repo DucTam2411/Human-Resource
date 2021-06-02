@@ -13,7 +13,7 @@
         <EntityTypeShape EntityType="hrmsModel.SALARY" Width="1.5" PointX="9.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmsModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmsModel.TIMEKEEPING" Width="1.5" PointX="9.75" PointY="18.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmsModel.TIMEKEEPING_DETAIL" Width="1.5" PointX="12" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmsModel.TIMEKEEPING_DETAIL" Width="2.5" PointX="12" PointY="15.375" IsExpanded="true" />
         <AssociationConnector Association="hrmsModel.FK__DEPARTMEN__ROOM___32E0915F" ManuallyRouted="false" />
         <AssociationConnector Association="hrmsModel.FK__EMPLOYEE__DEPT_I__33D4B598" ManuallyRouted="false" />
         <AssociationConnector Association="hrmsModel.FK__RECORD__DEPT_ID__35BCFE0A" ManuallyRouted="false" />

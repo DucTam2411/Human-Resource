@@ -1,0 +1,65 @@
+
+alter table TIMEKEEPING_DETAIL
+add TIMEKEEPING_DETAIL_TYPE INTEGER
+go
+
+create trigger TIMEKEEPING_DETAIL_INSERT on  TIMEKEEPING_DETAIL
+for insert
+as 
+	declare @timekeeping_id integer
+	declare @timekeeping_detail_type integer
+	select @timekeeping_id = TIMEKEEPING_ID, @timekeeping_detail_type = TIMEKEEPING_DETAIL_TYPE from inserted
+
+	if ( @timekeeping_detail_type = 1 )
+	begin
+		update TIMEKEEPING 
+		set NUMBER_OF_WORK_DAY =  (NUMBER_OF_WORK_DAY +1) 
+		where TIMEKEEPING_ID = @timekeeping_id
+	end
+
+	if(@timekeeping_detail_type = 2 )
+	begin
+		update TIMEKEEPING 
+		set NUMBER_OF_ABSENT_DAY =  (NUMBER_OF_ABSENT_DAY +1) 
+		where TIMEKEEPING_ID = @timekeeping_id
+	end
+
+	if(@timekeeping_detail_type = 3 )
+	begin
+		update TIMEKEEPING 
+		set NUMBER_OF_OVERTIME_DAY  =  (NUMBER_OF_OVERTIME_DAY +1) 
+		where TIMEKEEPING_ID = @timekeeping_id
+	end
+
+go
+
+
+create trigger TIMEKEEPING_DETAIL_DELETE on  TIMEKEEPING_DETAIL
+for delete
+as 
+	declare @timekeeping_id integer
+	declare @timekeeping_detail_type integer
+	select @timekeeping_id = TIMEKEEPING_ID, @timekeeping_detail_type = TIMEKEEPING_DETAIL_TYPE from deleted
+
+	if ( @timekeeping_detail_type = 1 )
+	begin
+		update TIMEKEEPING 
+		set NUMBER_OF_WORK_DAY =  (NUMBER_OF_WORK_DAY  -1) 
+		where TIMEKEEPING_ID = @timekeeping_id
+	end
+
+	if(@timekeeping_detail_type = 2 )
+	begin
+		update TIMEKEEPING 
+		set NUMBER_OF_ABSENT_DAY =  (NUMBER_OF_ABSENT_DAY  - 1) 
+		where TIMEKEEPING_ID = @timekeeping_id
+	end
+
+	if(@timekeeping_detail_type = 3 )
+	begin
+		update TIMEKEEPING 
+		set NUMBER_OF_OVERTIME_DAY  =  (NUMBER_OF_OVERTIME_DAY - 1) 
+		where TIMEKEEPING_ID = @timekeeping_id
+	end
+
+go

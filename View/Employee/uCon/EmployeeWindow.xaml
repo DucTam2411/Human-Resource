@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:HRMS.Employee.uCon"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:userCon="clr-namespace:HRMS.Employee.uCon"
     Title="EmployeeWindow"
@@ -44,10 +45,21 @@
             DockPanel.Dock="Left" />
         <DockPanel Grid.Column="2" Margin="0,-6,26,6" />
 
+
+        <Button
+            Width="100"
+            Height="50"
+            Margin="0,0,0,50"
+            VerticalAlignment="Bottom"
+            Visibility="{Binding VISIBLE}">
+            <materialDesign:PackIcon Kind="Check" />
+
+        </Button>
+
         <ContentControl
             x:Name="sss"
             Grid.Column="1"
-            Content="{Binding CONTENT_MAIN, UpdateSourceTrigger=PropertyChanged}" />
+            Content="{Binding CONTENT_MAIN}" />
 
 
 

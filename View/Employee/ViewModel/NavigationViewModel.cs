@@ -1,6 +1,7 @@
 ﻿using HRMS.Employee.uCon;
 using HRMS.Model;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,6 +31,7 @@ namespace HRMS.Employee.ViewModel
                 CONTENT_MAIN = new uConEmployeeSalary();
             });
 
+        
         }
 
 
@@ -48,8 +50,29 @@ namespace HRMS.Employee.ViewModel
             }
         }
 
+
+        public bool _VISIBLE = true;
+        public bool VISIBLE
+        {
+            get
+            {
+                return _VISIBLE;
+            }
+            set
+            {
+                _VISIBLE = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        public ICommand checkAttendanceCommand { get; set; }
+
         public ICommand InformationCommand { get; set; }
         public ICommand TimekeepingCommand { get; set; }
         public ICommand SalaryCommand { get; set; }
     }
+    
+  
+
 }

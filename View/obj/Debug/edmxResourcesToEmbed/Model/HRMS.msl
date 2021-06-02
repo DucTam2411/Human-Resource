@@ -113,6 +113,7 @@
     <EntitySetMapping Name="TIMEKEEPING_DETAIL">
       <EntityTypeMapping TypeName="hrmsModel.TIMEKEEPING_DETAIL">
         <MappingFragment StoreEntitySet="TIMEKEEPING_DETAIL">
+          <ScalarProperty Name="TIMEKEEPING_DETAIL_TYPE" ColumnName="TIMEKEEPING_DETAIL_TYPE" />
           <ScalarProperty Name="TIMEKEEPING_DETAIL_ID" ColumnName="TIMEKEEPING_DETAIL_ID" />
           <ScalarProperty Name="TIMEKEEPING_ID" ColumnName="TIMEKEEPING_ID" />
           <ScalarProperty Name="CHECK_DATE" ColumnName="CHECK_DATE" />

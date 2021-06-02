@@ -1,4 +1,5 @@
 ﻿using HRMS.Employee.ViewModel;
+using HRMS.Model;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
@@ -31,69 +32,105 @@ namespace HRMS.Employee.uCon
 
             a = new NavigationViewModel();
             Sidebar.DataContext = a;
-           sss.DataContext = a;
+            sss.DataContext = a;
+
+            System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
+            dispatcherTimer.Start();
         }
+
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+
+
+            /* Compare today with last day in the TIMEKEEPING.MONTH
+             *  if (today.MONTH > lastday.MONTH && today.YEAR > lastday.YEAR)   -> need a new timekeeping record */
+
+            DateTime today = DateTime.Now;
+            DateTime lastday = (from t in HRMSDatabase.Ins.TIMEKEEPINGs
+                                orderby t.MONTH descending
+                                select t.MONTH.Value
+                                ).Take(1).Single();
+            
+            if(lastday != null && today.Month > lastday.Month && today.Year > lastday.Year)
+            {
+                insertNewTimekeepingAsync(3);
+            }
+
+
+
+            if (isNormalWorkday(DateTime.Now))
+            {
+                insertNewTimekeepingAsync(4);
+            }
+            else
+            {
+                   
+            }
+
+        }
+
+
+        public async Task insertNewTimekeepingAsync(int emplopyee_id)
+        {
+            TIMEKEEPING record = new TIMEKEEPING();
+            record.EMPLOYEE_ID = emplopyee_id;
+            record.NUMBER_OF_ABSENT_DAY = 0;
+            record.NUMBER_OF_OVERTIME_DAY= 0;
+            record.NUMBER_OF_WORK_DAY = 0;
+
+            HRMSDatabase.Ins.TIMEKEEPINGs.Add(record);
+            await HRMSDatabase.Ins.SaveChangesAsync();
+        }
+
+
+        private bool isNormalWorkday(DateTime a)
+        {
+
+            switch (a.DayOfWeek)
+            {
+                case DayOfWeek.Monday:
+                case DayOfWeek.Tuesday:
+                case DayOfWeek.Wednesday:
+                case DayOfWeek.Thursday:
+                case DayOfWeek.Friday:
+                    return true;
+
+                case DayOfWeek.Saturday:
+                    string strHour = a.ToString("HH");
+                    int hour = 0;
+
+                    //i will use 24h 
+                    if (Int32.TryParse(strHour, out hour))
+                    {
+
+                        // 1h is still A.M
+                        if (hour <= 1)
+                        {
+                            return true;
+                        }
+
+                        // else if it  > 1h AM -> not a normal day
+                        return false;
+                    }
+
+                    break;
+
+                default:
+                    // Sunday -> not a normal day 
+                    return false;
+            }
+            return false;
+        }
+
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-           //DragMove();
+            //DragMove();
         }
 
-        //private void uConSideBarAccouting_RoutedUserControlClicked(object sender, RoutedEventArgs e)
-        //{
-
-        //    ButtonContent btn = getChildren(e.Source as Button);
-
-
-        //    string str = btn.Item1.Text;
-
-
-
-        //    if (str == uConSideBarEmployee.INFORMATION)
-        //    {
-        //        uConMain.Content = new uConEmployeeInformation();
-        //        uConMain.Margin = new Thickness(0, 10, 0, 0);
-        //    }
-        //    else if (str == uConSideBarEmployee.TIMEKEEPING)
-        //    {
-        //        uConMain.Content = new uConEmployeeTimekeeping();
-        //        uConMain.Margin = new Thickness(0, 10, 0, 0);
-        //    }
-        //    else if (str == uConSideBarEmployee.SALARY)
-        //    {
-        //        uConMain.Content = new uConEmployeeSalary();
-        //        uConMain.Margin = new Thickness(0, 10, 0, 0);
-        //    }
-        //}
-
-        //private void SideBar_RoutedUserControlClicked(object sender, RoutedEventArgs e)
-        //{
-
-        //    ButtonContent btn = getChildren(e.Source as Button);
-
-
-        //    string str = btn.Item1.Text;
-
-
-
-        //    if (str == uConSideBarEmployee.INFORMATION)
-        //    {
-
-        //        uConMain.Content = new uConEmployeeInformation();
-        //        uConMain.Margin = new Thickness(0, 30, 0, 0);
-
-        //    }
-        //    else if (str == uConSideBarEmployee.TIMEKEEPING)
-        //    {
-        //        uConMain.Content = new uConEmployeeTimekeeping();
-        //        uConMain.Margin = new Thickness(0, 10, 0, 0);
-        //    }
-        //    else if (str == uConSideBarEmployee.SALARY)
-        //    {
-        //        uConMain.Content = new uConEmployeeSalary();
-        //        uConMain.Margin = new Thickness(0, 10, 0, 0);
-        //    }
-        //}
 
         private ButtonContent getChildren(Button myButtonInSidebar)
         {

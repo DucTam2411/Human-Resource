@@ -130,6 +130,7 @@
     <Property Name="EMPLOYEE_ID" Type="Int32" />
     <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__TIMEKEEPI__EMPLO__3A81B327" FromRole="TIMEKEEPING_DETAIL" ToRole="EMPLOYEE" />
     <NavigationProperty Name="TIMEKEEPING" Relationship="Self.FK__TIMEKEEPI__TIMEK__3B75D760" FromRole="TIMEKEEPING_DETAIL" ToRole="TIMEKEEPING" />
+    <Property Name="TIMEKEEPING_DETAIL_TYPE" Type="Int32" />
   </EntityType>
   <Association Name="FK__DEPARTMEN__ROOM___32E0915F">
     <End Role="ROOM" Type="Self.ROOM" Multiplicity="0..1" />

@@ -1,0 +1,12 @@
+- phải add thêm loại vào bảng timekeeping detail
+- TIMEKEEPING_DETAIL_TYPE INTEGER. Quy định
+1: WORK
+2: ABSENT
+3: OVERTIME
+Mình có viết thêm hai trigger.
+	- Trigger cho insert: nếu thêm một timekeeping_detail 
+loại nào thì tự số ngày của loại đó trong timekeeping. Eg:
+		+ thêm type = 1 ( workday ), update number_of_workday
+	- Trigger cho delete: tương tự, xóa loại nào thì update lại ngày
+
+-- PHẦN SCRIPT CÁC BẠN LÀM ƠN XEM FILE phanThayDoiTrongDatabase.txt

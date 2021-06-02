@@ -110,6 +110,7 @@
     <Property Name="CHECK_DATE" Type="date" />
     <Property Name="CHECK_TIME" Type="time" Precision="7" />
     <Property Name="EMPLOYEE_ID" Type="int" />
+    <Property Name="TIMEKEEPING_DETAIL_TYPE" Type="int" />
   </EntityType>
   <Association Name="FK__DEPARTMEN__ROOM___32E0915F">
     <End Role="ROOM" Type="Self.ROOM" Multiplicity="0..1" />

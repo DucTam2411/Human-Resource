@@ -103,6 +103,106 @@ namespace HRMS.Employee.ViewModel
 
 
 
+
+        #region Handle uConDetailTimekeeping
+
+
+        /// <summary>
+        ///  PROPERTIES
+        /// </summary>
+
+        private DateTime[] _TimekeepingMonthList;
+        public DateTime[] TimekeepingMonthList
+        {
+            get
+            {
+
+                return _TimekeepingMonthList;
+            }
+            set
+            {
+                _TimekeepingMonthList = value;
+                OnPropertyChanged();
+
+            }
+
+        }
+
+        private DateTime[] _workdayList { get; set; }
+        public DateTime[] workdayList
+        {
+
+            get { return _workdayList; }
+            set
+            {
+                _workdayList = value;
+                OnPropertyChanged();
+            }
+
+        }
+
+        public DateTime[] _absentdayList { get; set; }
+        public DateTime[] absentdayList
+        {
+            get
+            {
+                return _absentdayList;
+            }
+            set
+            {
+                _absentdayList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public DateTime[] _overtimeList { get; set; }
+        public DateTime[] overtimeList
+        {
+            get
+            {
+                return _overtimeList;
+            }
+            set
+            {
+                _overtimeList = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+
+        /// <summary>
+        ///  COMMAND
+        /// </summary>
+        public ICommand MonthSelectionChangedDetailCommand { get; set; }
+
+
+
+        /// <summary>
+        ///  FUNCTION
+        /// </summary>
+        public void getDayList(DateTime timekeeping_date)
+        {
+            workdayList = ((from t in HRMSDatabase.Ins.TIMEKEEPING_DETAIL
+                            where t.TIMEKEEPING.MONTH.Value.Month == timekeeping_date.Month &&
+                            t.TIMEKEEPING.MONTH.Value.Year == timekeeping_date.Year &&
+                            t.TIMEKEEPING_DETAIL_TYPE == 1
+                            select t.CHECK_DATE.Value).ToArray());
+
+            absentdayList = ((from t in HRMSDatabase.Ins.TIMEKEEPING_DETAIL
+                              where t.TIMEKEEPING.MONTH == timekeeping_date && t.TIMEKEEPING_DETAIL_TYPE == 2
+                              select t.CHECK_DATE.Value).ToArray());
+
+            overtimeList = ((from t in HRMSDatabase.Ins.TIMEKEEPING_DETAIL
+                             where t.TIMEKEEPING.MONTH == timekeeping_date && t.TIMEKEEPING_DETAIL_TYPE == 3
+                             select t.CHECK_DATE.Value).ToArray());
+
+        }
+
+
+        #endregion
+
+
         #region Handle uConTimekeeping + uConInformation
         public ICommand SearchTextCommand { get; set; }
         public ICommand SearchTextChangedCommand { get; set; }
@@ -287,9 +387,10 @@ namespace HRMS.Employee.ViewModel
         #region Handle navigation 
         public ICommand DoubleClickCommmand { get; set; }
 
-
         #endregion
 
+
+        // constructor 
         public EmployeeViewModel()
         {
 
@@ -322,6 +423,17 @@ namespace HRMS.Employee.ViewModel
                           MessageBox.Show(p.NUMBER_OF_WORK_DAY.Value.ToString());
                       });
 
+            MonthSelectionChangedDetailCommand = new RelayCommand<DateTime>(null, p => { getDayList(p); });
+
+
+            // for detail salary 
+            TimekeepingMonthList = (from t in HRMSDatabase.Ins.TIMEKEEPINGs
+                                    orderby t.MONTH.Value descending
+                                    select t.MONTH.Value).Distinct().ToArray();
+
+
+
+
         }
 
         public EmployeeViewModel(int employee_ID)
@@ -348,14 +460,48 @@ namespace HRMS.Employee.ViewModel
         }
 
 
-        public DateTime[] getDayList(int month)
+
+
+
+        public void CheckAttendance()
         {
-            return null;
+
+            // insert absent day
+            DateTime today = new DateTime();
+            DateTime dateBefore = (from t in HRMSDatabase.Ins.TIMEKEEPINGs
+                                   orderby t.MONTH descending
+                                   where t.MONTH.HasValue == true
+                                   select t.MONTH.Value).Take(1).Single();
+
+            int idTimekeeping = (from t in HRMSDatabase.Ins.TIMEKEEPINGs
+                                   orderby t.MONTH descending
+                                   where t.MONTH.HasValue == true
+                                   select t.TIMEKEEPING_ID ).Take(1).Single();
+            for (DateTime tem = dateBefore.AddDays(1); DateTime.Compare(tem, today) > 0; tem.AddDays(1))
+            {
+                TIMEKEEPING_DETAIL tem_detail = new TIMEKEEPING_DETAIL();
+                tem_detail.EMPLOYEE_ID = Employee.EMPLOYEE_ID;
+                tem_detail.CHECK_DATE = tem;
+                tem_detail.TIMEKEEPING_ID = idTimekeeping;
+                tem_detail.TIMEKEEPING_DETAIL_TYPE = 3;
+            }
+
+
+            // first day of the month 
+            if(today.Day == 1)
+            {
+
+            }
+
+
         }
 
-        public DateTime[] workdayList { get; set; }
-        public DateTime[] absentdayList { get; set; }
-        public DateTime[] overtimeList { get; set; }
+
+
+
+
+
+
 
     }
 }
