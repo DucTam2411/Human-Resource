@@ -13,11 +13,11 @@ namespace HRMS.HR.Model.Database
 
         public static HRMSEntities Ins { get { ins = new HRMSEntities(); return ins; } set { ins = value; } }
 
-        public hrmsEntities1 DB { get; set; }
+        public hrmsEntities DB { get; set; }
 
         private HRMSEntities()
         {
-            DB = new hrmsEntities1();
+            DB = new hrmsEntities();
         }
     }
 }

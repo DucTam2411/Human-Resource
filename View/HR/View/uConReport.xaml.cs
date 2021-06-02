@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HRMS.HR.ViewModel;
 using LiveCharts;
 using LiveCharts.Wpf;
 
@@ -22,9 +23,10 @@ namespace HRMS.HR.uCon
     /// </summary>
     public partial class uConReport : UserControl
     {
-        public uConReport()
+        public uConReport(int ID)
         {
             InitializeComponent();
+            DataContext = new ReportViewModel(ID);
         }
     }
 }

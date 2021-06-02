@@ -10,13 +10,18 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Web.Security;
+using Microsoft.Win32;
+using System.Windows.Media.Imaging;
+using System.IO;
+using System.Windows.Media;
 
 namespace HRMS.HR.ViewModel
 {
     public class ListEmployeeViewModel : BaseViewModel
     {
-        private ObservableCollection<EMPLOYEE> _employees;
-        private ObservableCollection<EMPLOYEE> _testemployees;
+        private ObservableCollection<EmployeeInformation> _employees;
+        private ObservableCollection<EmployeeInformation> _testemployees;
         public ICommand GridLoadCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand DoubleClickCommand { get; set; }
@@ -24,11 +29,16 @@ namespace HRMS.HR.ViewModel
         public ICommand SaveCommand { get; set; }
         public ICommand ConfirmCommand { get; set; }
         public ICommand RemoveCommand { get; set; }
-        public ObservableCollection<EMPLOYEE> employees { get => _employees; set { _employees = value;OnPropertyChanged(); } }
-        public ObservableCollection<EMPLOYEE> testemployees { get => _testemployees; set { _testemployees = value; OnPropertyChanged(); } }
+        public ICommand AddImageCommand { get; set; }
+        public ICommand ViewUser { get; set; }
 
-        private EMPLOYEE _SELECTED_ITEM;
-        public EMPLOYEE SELECTED_ITEM {
+        public ICommand Next { get; set; }
+
+        public ObservableCollection<EmployeeInformation> employees { get => _employees; set { _employees = value; OnPropertyChanged(); } }
+        public ObservableCollection<EmployeeInformation> testemployees { get => _testemployees; set { _testemployees = value; OnPropertyChanged(); } }
+
+        private EmployeeInformation _SELECTED_ITEM;
+        public EmployeeInformation SELECTED_ITEM {
             get => _SELECTED_ITEM;
             set {
                 _SELECTED_ITEM = value;
@@ -42,13 +52,36 @@ namespace HRMS.HR.ViewModel
                     CITIZENSHIP = SELECTED_ITEM.CITIZENSHIP;
                     GENDER = SELECTED_ITEM.GENDER;
                     PHONE = SELECTED_ITEM.PHONE;
-                    ROLE_NAME = SELECTED_ITEM.ROLE.ROLE_NAME;
-                    DEPT_NAME = SELECTED_ITEM.DEPARTMENT.DEPT_NAME;
+                    ROLE_NAME = SELECTED_ITEM.ROLE_NAME;
+                    DEPT_NAME = SELECTED_ITEM.DEPT_NAME;
                     ACADEMIC_LEVEL = SELECTED_ITEM.ACADEMIC_LEVEL;
                     EMAIL = SELECTED_ITEM.EMAIL;
+                    USER user = HRMSEntities.Ins.DB.USERs.Where(x => x.EMPLOYEE_ID == SELECTED_ITEM.EMPLOYEE_ID).FirstOrDefault();
+                    PASSWORD = user.PASSWORD;
+                    USERNAME = user.USERNAME;
+                    EMPLOYEE emp = HRMSEntities.Ins.DB.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == SELECTED_ITEM.EMPLOYEE_ID).FirstOrDefault();
+                    IMAGESOURCE = emp.IMAGE;
+                    if (IMAGESOURCE == null)
+                    {
+                        BUTTONTHICKNESS = 1;
+                        IMAGE_SOURCE = null;
+                        BRUSH = Brushes.AliceBlue;
+                    }
+                    else
+                    {
+                        BUTTONTHICKNESS = 0;
+                        IMAGE_SOURCE = ToImage(IMAGESOURCE);
+                        BRUSH = Brushes.Transparent;
+                    }
                 }
             }
         }
+        private string _USERNAME;
+        public string USERNAME { get => _USERNAME; set { _USERNAME = value; OnPropertyChanged(); } }
+        private string _PASSWORD;
+        public string PASSWORD { get => _PASSWORD; set { _PASSWORD = value; OnPropertyChanged(); } }
+        private int _EMPLOYEE_ID;
+        public int EMPLOYEE_ID { get => _EMPLOYEE_ID; set { _EMPLOYEE_ID = value;OnPropertyChanged(); } }
         private string _NAME;
         public string NAME { get => _NAME; set { _NAME = value; OnPropertyChanged(); } }
         private int _ID_CARD;
@@ -75,13 +108,51 @@ namespace HRMS.HR.ViewModel
         public string ACADEMIC_LEVEL { get => _ACADEMIC_LEVEL; set { _ACADEMIC_LEVEL = value; OnPropertyChanged(); } }
         private string _EMAIL;
         public string EMAIL { get => _EMAIL; set { _EMAIL = value; OnPropertyChanged(); } }
+        private double _COEFFICIENT;
+        public double COEFFICIENT { get => _COEFFICIENT; set { _COEFFICIENT = value; OnPropertyChanged(); } }
+        private long _BASIC_WAGE;
+        public long BASIC_WAGE { get => _BASIC_WAGE; set { _BASIC_WAGE = value; OnPropertyChanged(); } }
+
+        private long _OVERTIME_SALARY;
+        public long OVERTIME_SALARY { get => _OVERTIME_SALARY; set { _OVERTIME_SALARY = value; OnPropertyChanged(); } }
+        private string _NOTE;
+        public string NOTE { get => _NOTE; set { _NOTE = value; OnPropertyChanged(); } }
+
+        private string _NOTE_REMOVE;
+        public string NOTE_REMOVE { get => _NOTE_REMOVE; set { _NOTE_REMOVE = value; OnPropertyChanged(); } }
+
+        private ObservableCollection<string> _ListRole;
+        public ObservableCollection<string> ListRole { get => _ListRole; set { _ListRole = value; OnPropertyChanged(); } }
+
         private ComboboxModel _SELECTEDTYPE;
         public ComboboxModel SELECTEDTYPE { get => _SELECTEDTYPE; set { _SELECTEDTYPE = value; OnPropertyChanged(); } }
 
         private ObservableCollection<ComboboxModel> _ListType;
         public ObservableCollection<ComboboxModel> ListType { get => _ListType; set { _ListType = value; OnPropertyChanged(); } }
-        private ObservableCollection<ComboboxModel> _ListDeptType;
-        public ObservableCollection<ComboboxModel> ListDeptType { get => _ListType; set { _ListType = value; OnPropertyChanged(); } }
+
+        private byte[] _IMAGESOURCE;
+        public byte[] IMAGESOURCE { get => _IMAGESOURCE; set { _IMAGESOURCE = value; OnPropertyChanged(); } }
+
+        private BitmapImage _IMAGE_SOURCE;
+        public BitmapImage IMAGE_SOURCE { get => _IMAGE_SOURCE; set { _IMAGE_SOURCE = value; OnPropertyChanged(); } }
+
+        private Brush _BRUSH;
+        public Brush BRUSH { get => _BRUSH; set { _BRUSH = value; OnPropertyChanged(); } }
+
+        private int _BUTTONTHICKNESS;
+        public int BUTTONTHICKNESS { get => _BUTTONTHICKNESS; set { _BUTTONTHICKNESS = value; OnPropertyChanged(); } }
+
+        private int _USER_ID;
+        public int USER_ID { get => _USER_ID; set { _USER_ID = value; OnPropertyChanged(); } }
+
+        private string _USER_NAME;
+        public string USER_NAME { get => _USER_NAME; set { _USER_NAME = value; OnPropertyChanged(); } }
+
+        private int _USER_DEPT;
+        public int USER_DEPT { get => _USER_DEPT; set { _USER_DEPT = value; OnPropertyChanged(); } }
+
+        private int _USER_ROLE;
+        public int USER_ROLE { get => _USER_ROLE; set { _USER_ROLE = value; OnPropertyChanged(); } }
 
         private string _SEARCH_TEXT;
         public string SEARCH_TEXT
@@ -105,28 +176,28 @@ namespace HRMS.HR.ViewModel
                         {
                             //Lọc theo ID
                             case "ID":
-                                employees = new ObservableCollection<EMPLOYEE>(employees.Where(x => x.ID_CARD.ToString().Contains(SEARCH_TEXT)));
+                                employees = new ObservableCollection<EmployeeInformation>(employees.Where(x => x.ID_CARD.ToString().Contains(SEARCH_TEXT)));
                                 break;
 
                             //Lọc theo tên
                             case "NAME":
-                                employees = new ObservableCollection<EMPLOYEE>(employees.Where(x => x.NAME.Contains(SEARCH_TEXT) ||
+                                employees = new ObservableCollection<EmployeeInformation>(employees.Where(x => x.NAME.Contains(SEARCH_TEXT) ||
                                                                                                         x.NAME.ToLower().Contains(SEARCH_TEXT) ||
                                                                                                         x.NAME.ToUpper().Contains(SEARCH_TEXT)));
                                 break;
 
                             //Lọc theo Department
                             case "DEPARTMENT":
-                                employees = new ObservableCollection<EMPLOYEE>(employees.Where(x => x.DEPARTMENT.DEPT_NAME.Contains(SEARCH_TEXT) ||
-                                                                                                        x.DEPARTMENT.DEPT_NAME.ToLower().Contains(SEARCH_TEXT) ||
-                                                                                                        x.DEPARTMENT.DEPT_NAME.ToUpper().Contains(SEARCH_TEXT)));
+                                employees = new ObservableCollection<EmployeeInformation>(employees.Where(x => x.DEPT_NAME.Contains(SEARCH_TEXT) ||
+                                                                                                        x.DEPT_NAME.ToLower().Contains(SEARCH_TEXT) ||
+                                                                                                        x.DEPT_NAME.ToUpper().Contains(SEARCH_TEXT)));
                                 break;
 
                             //Lọc theo role
                             case "ROLE":
-                                employees = new ObservableCollection<EMPLOYEE>(employees.Where(x => x.ROLE.ROLE_NAME.Contains(SEARCH_TEXT) ||
-                                                                                                        x.ROLE.ROLE_NAME.ToLower().Contains(SEARCH_TEXT) ||
-                                                                                                        x.ROLE.ROLE_NAME.ToUpper().Contains(SEARCH_TEXT)));
+                                employees = new ObservableCollection<EmployeeInformation>(employees.Where(x => x.ROLE_NAME.Contains(SEARCH_TEXT) ||
+                                                                                                        x.ROLE_NAME.ToLower().Contains(SEARCH_TEXT) ||
+                                                                                                        x.ROLE_NAME.ToUpper().Contains(SEARCH_TEXT)));
                                 break;
                             default:
                                 break;
@@ -136,75 +207,34 @@ namespace HRMS.HR.ViewModel
             }
         }
 
-        private string _SEARCH_DEPT_TEXT;
-        public string SEARCH_DEPT_TEXT
+
+
+        public ListEmployeeViewModel(int ID)
         {
-            get => _SEARCH_DEPT_TEXT; set
-            {
-                _SEARCH_DEPT_TEXT = value;
-                OnPropertyChanged();
 
-                //Đưa SalaryTest vào trong SalaryList để dữ liệu được refresh mỗi lần nhập
-                employees = testemployees;
-
-                //Kiểm tra SearchText có khác null không
-                if (!string.IsNullOrEmpty(SEARCH_TEXT))
-                {
-                    //Kiểm tra ComboBox chọn loại để lọc có khác null không
-                    if (SELECTEDTYPE != null)
-                    {
-                        //Chọn kiểu lọc
-                        switch (SELECTEDTYPE.NAME)
-                        {
-                            //Lọc theo ID
-                            case "ID":
-                                employees = new ObservableCollection<EMPLOYEE>(employees.Where(x => x.ID_CARD.ToString().Contains(SEARCH_TEXT)));
-                                break;
-
-                            //Lọc theo tên
-                            case "NAME":
-                                employees = new ObservableCollection<EMPLOYEE>(employees.Where(x => x.NAME.Contains(SEARCH_TEXT) ||
-                                                                                                        x.NAME.ToLower().Contains(SEARCH_TEXT) ||
-                                                                                                        x.NAME.ToUpper().Contains(SEARCH_TEXT)));
-                                break;
-
-                            //Lọc theo Department
-                            case "DEPARTMENT":
-                                employees = new ObservableCollection<EMPLOYEE>(employees.Where(x => x.DEPARTMENT.DEPT_NAME.Contains(SEARCH_TEXT) ||
-                                                                                                        x.DEPARTMENT.DEPT_NAME.ToLower().Contains(SEARCH_TEXT) ||
-                                                                                                        x.DEPARTMENT.DEPT_NAME.ToUpper().Contains(SEARCH_TEXT)));
-                                break;
-
-                            //Lọc theo role
-                            case "ROLE":
-                                employees = new ObservableCollection<EMPLOYEE>(employees.Where(x => x.ROLE.ROLE_NAME.Contains(SEARCH_TEXT) ||
-                                                                                                        x.ROLE.ROLE_NAME.ToLower().Contains(SEARCH_TEXT) ||
-                                                                                                        x.ROLE.ROLE_NAME.ToUpper().Contains(SEARCH_TEXT)));
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }
-            }
-        }
-
-        public ListEmployeeViewModel()
-        {
-            
             LoadComboboxTypeList();
             LoadData();
+            USER_ID = ID;
+            BUTTONTHICKNESS = 1;
+            IMAGE_SOURCE = null;
+            BRUSH = Brushes.AliceBlue;
             AddCommand = new RelayCommand<ContentControl>(p => { return true;
             }, p =>
             {
-                p.Content = new uConAddEmployee();
+                p.Content = new uConAddEmployee(ID);
+                RandomGenerator generator = new RandomGenerator();
+                USERNAME = generator.RandomNumber(10000, 99999).ToString();
+                PASSWORD = generator.RandomPassword();
+                BASIC_WAGE = 0;
+                OVERTIME_SALARY = 0;
+                COEFFICIENT = 0;
             });
             DoubleClickCommand = new RelayCommand<ContentControl>(p => { if (SELECTED_ITEM != null) { return true; } else { return false; } },
             p => {
-                p.Content = new uConModifyEmployee(SELECTED_ITEM);
+                p.Content = new uConModifyEmployee(SELECTED_ITEM, ID);
             });
             ConfirmCommand = new RelayCommand<ContentControl>(p => {
-                if (string.IsNullOrEmpty(ID_CARD.ToString()) || string.IsNullOrEmpty(NAME) || string.IsNullOrEmpty(DEPT_NAME) || string.IsNullOrEmpty(ROLE_NAME))
+                if (string.IsNullOrEmpty(ID_CARD.ToString()) || string.IsNullOrEmpty(NAME) || string.IsNullOrEmpty(DEPT_NAME) || string.IsNullOrEmpty(ROLE_NAME) || BASIC_WAGE == 0 || OVERTIME_SALARY == 0 || COEFFICIENT == 0)
                     return false;
                 var displayList = HRMSEntities.Ins.DB.EMPLOYEEs.Where(x => x.ID_CARD == ID_CARD);
                 if (displayList == null || displayList.Count() != 0)
@@ -212,7 +242,8 @@ namespace HRMS.HR.ViewModel
                 return true;
             }, p => {
                 setID();
-                hrmsEntities1 db = new hrmsEntities1();
+
+                hrmsEntities db = new hrmsEntities();
                 var employee = new EMPLOYEE()
                 {
                     ID_CARD = ID_CARD,
@@ -227,37 +258,111 @@ namespace HRMS.HR.ViewModel
                     CITIZENSHIP = CITIZENSHIP,
                     DEPT_ID = DEPT_ID,
                     ROLE_ID = ROLE_ID,
-                    IMAGE = null,
-                    PASSWORD = null
+                    IMAGE = IMAGESOURCE,
                 };
+
                 db.EMPLOYEEs.Add(employee);
+                RandomGenerator generator = new RandomGenerator();
+                var user = new USER()
+                {
+
+                    EMPLOYEE_ID = employee.EMPLOYEE_ID,
+                    ID_USER = employee.EMPLOYEE_ID,
+                    USERNAME = generator.RandomNumber(100000,999999).ToString(),
+                    PASSWORD = generator.RandomPassword()
+                };
+                db.USERs.Add(user);
+                var delete = new DELETE()
+                {
+                    EMPLOYEE_ID = employee.EMPLOYEE_ID,
+                    ID_DELETE = employee.EMPLOYEE_ID,
+                    ISDELETED = false,
+                };
+                var salary = new SALARY()
+                {
+                    EMPLOYEE_ID = employee.EMPLOYEE_ID,
+                    BASIC_WAGE = BASIC_WAGE,
+                    OVERTIME_SALARY = OVERTIME_SALARY,
+                    COEFFICIENT = COEFFICIENT,
+                    BONUS = 0,
+                    WELFARE = 0,
+                    TAX = 0,
+                    SOCIAL_INSURANCE = 0,
+                    HEALTH_INSURANCE = 0,
+                    MONTH = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1),
+                    DATE_START = DateTime.Now,
+                    DATE_END = new DateTime(DateTime.Now.Year,DateTime.Now.Month + 1,1),
+                    NOTE = NOTE
+                };
+                var Employee = db.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == ID).SingleOrDefault();
+                var record = new RECORD()
+                {
+                    EMPLOYEE_ID = ID,
+                    DEPT_ID = Employee.DEPT_ID,
+                    EMPLOYEE_CHANGE_ID = employee.EMPLOYEE_ID,
+                    EMPLOYEE_CHANGE_NAME = employee.NAME,
+                    CHANGE = "Added Name = " + NAME,
+                    DATE_CHANGE = DateTime.Now,
+                    MONTH_CHANGE = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)
+                };
+
+                
+                db.RECORDs.Add(record);
+                db.SALARies.Add(salary);
+                db.DELETEs.Add(delete);
                 db.SaveChanges();
                 MessageBox.Show("Added successfully!");
-                p.Content = new uConListEmployee();
+                p.Content = new uConListEmployee(ID);
             });
-            BackCommand = new RelayCommand<ContentControl>(p => { return true; }, p => { p.Content = new uConListEmployee(); });
+            BackCommand = new RelayCommand<ContentControl>(p => { return true; }, p => { p.Content = new uConListEmployee(ID); });
+            AddImageCommand = new RelayCommand<object>(p => IsAddImageData(), p => AddImageData());
+            ViewUser = new RelayCommand<object>(p => { return true; }, p => { MessageBox.Show("Username: " + USERNAME + "\nPassword: " + PASSWORD); });
+            {
+                if (DEPT_NAME == "DIRECTOR")
+                {
+                    ListRole = new ObservableCollection<string>();
+                    ListRole.Add("DIRECTOR");
+                    ListRole.Add("VICE DIRECTOR");
+                }
+                else
+                {
+                    ListRole = new ObservableCollection<string>();
+                    ListRole.Add("MANAGER");
+                    ListRole.Add("VICE MANAGER");
+                    ListRole.Add("EMPLOYEE");
+                }
+
+            } ;
+            Next = new RelayCommand<TabControl>(p => { return true; }, p => { p.SelectedItem = 1; });
         }
-        public ListEmployeeViewModel(EMPLOYEE selected)
+        public ListEmployeeViewModel(EmployeeInformation selected,int ID)
         {
             SELECTED_ITEM = selected;
+            hrmsEntities db = new hrmsEntities();
+            var User = db.USERs.Where(x => x.EMPLOYEE_ID == selected.EMPLOYEE_ID).SingleOrDefault();
+            USERNAME = User.USERNAME;
+            PASSWORD = User.PASSWORD;
+            string dept = DEPT_NAME;
             SaveCommand = new RelayCommand<ContentControl>(p => { return true; }, p =>
             {
-                EditData(selected);
+                EditData(selected,ID);
                 MessageBox.Show("Saved successfully");
-                p.Content = new uConListEmployee();
+                p.Content = new uConListEmployee(ID);
             });
-            BackCommand = new RelayCommand<ContentControl>(p => { return true; }, p => { p.Content = new uConListEmployee(); });
-            RemoveCommand = new RelayCommand<ContentControl>(p => { return true; }, p =>
+            BackCommand = new RelayCommand<ContentControl>(p => { return true; }, p => { p.Content = new uConListEmployee(ID); });
+            RemoveCommand = new RelayCommand<ContentControl>(p => { if (string.IsNullOrEmpty(NOTE_REMOVE)) { return false; } return true; }, p =>
             {
-                DeleteData(selected);
-                MessageBox.Show("Deleted successfully");
-                p.Content = new uConListEmployee();
+                DeleteData(selected,ID);
+                MessageBox.Show("Removed successfully");
+                p.Content = new uConListEmployee(ID);
             });
+            AddImageCommand = new RelayCommand<object>(p => IsAddImageData(), p => AddImageData());
+            ViewUser = new RelayCommand<object>(p => { return true; }, p => { MessageBox.Show("Username: " + USERNAME + "\nPassword: " + PASSWORD + "\nDEPT_NAME: "+ DEPT_NAME); });
         }
 
-        private void EditData(EMPLOYEE e)
+        private void EditData(EmployeeInformation e, int ID)
         {
-            hrmsEntities1 db = new hrmsEntities1();
+            hrmsEntities db = new hrmsEntities();
             var Employee = db.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == e.EMPLOYEE_ID).SingleOrDefault();
             Employee.NAME = NAME;
             Employee.AGE = DateTime.Now.Year - BIRTH_DATE.Year;
@@ -271,45 +376,116 @@ namespace HRMS.HR.ViewModel
             setID();
             Employee.ROLE_ID = ROLE_ID;
             Employee.DEPT_ID = DEPT_ID;
+            Employee.IMAGE = IMAGESOURCE;
+
+            String change = "";
+            int countchange = 0;
+            if (NAME != e.NAME)
+            {
+                change = change + string.Format("NAME ({0} -> {1})   ", e.NAME, NAME);
+                countchange++;
+            }
+            if (BIRTH_DATE != e.BIRTH_DATE)
+            {
+                change = change + string.Format("AGE ({0} -> {1})   ,BIRTHDATE ({2} -> {3})   ", DateTime.Now.Year - e.BIRTH_DATE.Year, DateTime.Now.Year - BIRTH_DATE.Year, e.BIRTH_DATE, BIRTH_DATE);
+                countchange++;
+            }
+            if (ACADEMIC_LEVEL != e.ACADEMIC_LEVEL)
+            {
+                change = change + string.Format("ACADEMIC LEVEL ({0} -> {1})   ", e.ACADEMIC_LEVEL, ACADEMIC_LEVEL);
+                countchange++;
+            }
+            if (GENDER != e.GENDER)
+            {
+                change = change + string.Format("GENDER ({0} -> {1})   ", e.GENDER, GENDER);
+                countchange++;
+            }
+            if (EMAIL != e.EMAIL)
+            {
+                change = change + string.Format("EMAIL ({0} -> {1})   ", e.EMAIL, EMAIL);
+                countchange++;
+            }
+            if (PHONE != e.PHONE)
+            {
+                change = change + string.Format("PHONE ({0} -> {1})   ", e.PHONE, PHONE);
+                countchange++;
+            }
+            if (BIRTH_PLACE != e.BIRTH_PLACE)
+            {
+                change = change + string.Format("BIRTH_PLACE ({0} -> {1})   ", e.BIRTH_PLACE, BIRTH_PLACE);
+                countchange++;
+            }
+            if (CITIZENSHIP != e.CITIZENSHIP)
+            {
+                change = change + string.Format("CITIZENSHIP ({0} -> {1})   ", e.CITIZENSHIP, CITIZENSHIP);
+                countchange++;
+            }
+            if (ROLE_ID != e.ROLE_ID)
+            {
+                change = change + string.Format("ROLE ({0} -> {1})   ", e.ROLE_NAME, ROLE_NAME);
+                countchange++;
+            }
+            if (DEPT_ID != e.DEPT_ID)
+            {
+                change = change + string.Format("DEPARTMENT ({0} -> {1})   ", e.DEPT_NAME, DEPT_NAME);
+                countchange++;
+            }
+            if (countchange != 0)
+            {
+                var employee = db.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == ID).SingleOrDefault();
+                RECORD record = new RECORD();
+                record.EMPLOYEE_ID = employee.EMPLOYEE_ID;
+                record.EMPLOYEE_CHANGE_NAME = NAME;
+                record.EMPLOYEE_CHANGE_ID = EMPLOYEE_ID;
+                record.DATE_CHANGE = DateTime.Now;
+                record.DEPT_ID = employee.DEPT_ID;
+                record.CHANGE = change;
+                record.MONTH_CHANGE = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                db.RECORDs.Add(record);
+            }
+            
             db.SaveChanges();
         }
-        private void DeleteData(EMPLOYEE e)
+        private void DeleteData(EmployeeInformation e, int ID)
         {
-            hrmsEntities1 db = new hrmsEntities1();
-            var Employee = db.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == e.EMPLOYEE_ID).SingleOrDefault();
-            db.EMPLOYEEs.Remove(Employee);
+
+            hrmsEntities db = new hrmsEntities();
+            var employee = db.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == ID).SingleOrDefault();
+            var Employee = db.DELETEs.Where(x => x.EMPLOYEE_ID == e.EMPLOYEE_ID).SingleOrDefault();
+            Employee.ISDELETED = true;
+            Employee.MONTH = DateTime.Now;
+            Employee.NOTE = NOTE_REMOVE;
+            var record = new RECORD()
+            {
+                EMPLOYEE_ID = ID,
+                DEPT_ID = employee.DEPT_ID,
+                EMPLOYEE_CHANGE_ID = Employee.EMPLOYEE_ID,
+                EMPLOYEE_CHANGE_NAME = NAME,
+                CHANGE = " Removed ID = " + Employee.EMPLOYEE_ID + ", Name = " + NAME + ", Reason: " + NOTE_REMOVE,
+                DATE_CHANGE = DateTime.Now,
+                MONTH_CHANGE = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)
+            };
+            db.RECORDs.Add(record);
             db.SaveChanges();
         }
         private void setID()
         {
             switch (ROLE_NAME)
             {
-                case "MANAGER HR DEPT":
+                case "MANAGER":
                     ROLE_ID = 1;
                     break;
-                case "VICE MANAGER HR DEPT":
+                case "VICE MANAGER":
                     ROLE_ID = 2;
                     break;
-                case "EMPLOYEE HR DEPT":
+                case "EMPLOYEE":
                     ROLE_ID = 3;
                     break;
-                case "MANAGER ACCOUNTING":
+                case "DIRECTOR":
                     ROLE_ID = 4;
                     break;
-                case "VICE MANAGER ACCOUNTING":
-                    ROLE_ID = 5;
-                    break;
-                case "EMPLOYEE ACOUNTING":
-                    ROLE_ID = 6;
-                    break;
-                case "DIRECTOR":
-                    ROLE_ID = 7;
-                    break;
                 case "VICE DIRECTOR":
-                    ROLE_ID = 8;
-                    break;
-                case "EMPLOYEE SOFTWARE DEPT":
-                    ROLE_ID = 9;
+                    ROLE_ID = 5;
                     break;
             }
             switch (DEPT_NAME)
@@ -339,13 +515,43 @@ namespace HRMS.HR.ViewModel
         }
         private void LoadData()
         {
-            var list = (from emp in HRMSEntities.Ins.DB.EMPLOYEEs select emp);
-            employees = new ObservableCollection<EMPLOYEE>();
-            testemployees = new ObservableCollection<EMPLOYEE>();
+
+            hrmsEntities DB = new hrmsEntities();
+            var list = (from emp in DB.EMPLOYEEs
+                        join sl in DB.SALARies on emp.EMPLOYEE_ID equals sl.EMPLOYEE_ID
+                        join del in DB.DELETEs on sl.EMPLOYEE_ID equals del.EMPLOYEE_ID
+                        where del.ISDELETED == false
+                        && sl.MONTH.Value.Month == DateTime.Now.Month
+                        && sl.MONTH.Value.Year == DateTime.Now.Year
+                        select new
+                        {
+                            id = emp.EMPLOYEE_ID,
+                            EMPLOYEE = emp,
+                            SALARY = sl,
+                            DELETE = del
+                        }).Distinct();
+            employees = new ObservableCollection<EmployeeInformation>();
+            testemployees = new ObservableCollection<EmployeeInformation>();
             foreach (var item in list)
             {
-                employees.Add(item);
-                testemployees.Add(item);
+                EmployeeInformation employeeInformation = new EmployeeInformation();
+                employeeInformation.EMPLOYEE_ID = item.EMPLOYEE.EMPLOYEE_ID;
+                employeeInformation.ID_CARD = (int)item.EMPLOYEE.ID_CARD;
+                employeeInformation.NAME = item.EMPLOYEE.NAME;
+                employeeInformation.DEPT_NAME = item.EMPLOYEE.DEPARTMENT.DEPT_NAME;
+                employeeInformation.GENDER = item.EMPLOYEE.GENDER;
+                employeeInformation.CITIZENSHIP = item.EMPLOYEE.CITIZENSHIP;
+                employeeInformation.ROLE_NAME = item.EMPLOYEE.ROLE.ROLE_NAME;
+                employeeInformation.BASIC_WAGE = (long)item.SALARY.BASIC_WAGE;
+                employeeInformation.OVERTIME_SALARY = (long)item.SALARY.OVERTIME_SALARY;
+                employeeInformation.COEFFICIENT = (double)item.SALARY.COEFFICIENT;
+                employeeInformation.BIRTH_DATE = (DateTime)item.EMPLOYEE.BIRTH_DATE;
+                employeeInformation.PHONE = item.EMPLOYEE.PHONE;
+                employeeInformation.EMAIL = item.EMPLOYEE.EMAIL;
+                employeeInformation.ACADEMIC_LEVEL = item.EMPLOYEE.ACADEMIC_LEVEL;
+                employeeInformation.BIRTH_PLACE = item.EMPLOYEE.BIRTH_PLACE;
+                employees.Add(employeeInformation);
+                testemployees.Add(employeeInformation);
             }
         }
         private void LoadComboboxTypeList()
@@ -359,24 +565,43 @@ namespace HRMS.HR.ViewModel
         }
 
 
-        //private void Grid_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    var customers = (from customer in HRMSEntities.Ins.DB.EMPLOYEEs
-        //                     select customer);
-        //    dtgvEmployees.ItemsSource = customers.ToArray();
-        //}
+        //Điều kiện add ảnh
+        private bool IsAddImageData()
+        {
+            if (IMAGESOURCE == null)
+                return true;
+            return false;
+        }
 
-        //private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        //{
+        //Command add ảnh
+        private void AddImageData()
+        {
+            OpenFileDialog ofd = new OpenFileDialog() { Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png", ValidateNames = true, Multiselect = false };
 
-        //    EMPLOYEE employee = (dtgvEmployees.SelectedItem as EMPLOYEE);
-        //    contentControlMain.Content = new uConModifyEmployee(employee);
-        //}
+            if (ofd.ShowDialog() == true)
+            {
+                string FILENAME = ofd.FileName;
+                BitmapImage image = new BitmapImage(new Uri(FILENAME));
+                IMAGESOURCE = File.ReadAllBytes(FILENAME);
+                IMAGE_SOURCE = image;
+                BUTTONTHICKNESS = 0;
+                BRUSH = Brushes.Transparent;
+            }
+        }
 
-        //private void btnNewEmployee_Click(object sender, RoutedEventArgs e)
-        //{
-        //    contentControlMain.Content = new uConAddEmployee();
-        //}
+        public static BitmapImage ToImage(byte[] array)
+        {
+            using (var ms = new System.IO.MemoryStream(array))
+            {
+                var image = new BitmapImage();
+                image.BeginInit();
+                image.CacheOption = BitmapCacheOption.OnLoad; // here
+                image.StreamSource = ms;
+                image.EndInit();
+                return image;
+            }
+        }
+
 
     }
 }

@@ -19,10 +19,9 @@ namespace HRMS.HR.Model.Database
         public Nullable<System.DateTime> CHECK_DATE { get; set; }
         public Nullable<System.TimeSpan> CHECK_TIME { get; set; }
         public Nullable<int> EMPLOYEE_ID { get; set; }
+        public Nullable<int> TIMEKEEPING_DETAIL_TYPE { get; set; }
     
         public virtual EMPLOYEE EMPLOYEE { get; set; }
-        public virtual EMPLOYEE EMPLOYEE1 { get; set; }
         public virtual TIMEKEEPING TIMEKEEPING { get; set; }
-        public virtual TIMEKEEPING TIMEKEEPING1 { get; set; }
     }
 }

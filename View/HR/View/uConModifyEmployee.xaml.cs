@@ -1,4 +1,5 @@
-﻿using HRMS.HR.Model.Database;
+﻿using HRMS.HR.Model;
+using HRMS.HR.Model.Database;
 using HRMS.HR.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -24,10 +25,10 @@ namespace HRMS.HR.uCon
     public partial class uConModifyEmployee : UserControl
     {
 
-        public uConModifyEmployee(EMPLOYEE selected)
+        public uConModifyEmployee(EmployeeInformation selected,int ID)
         {
             InitializeComponent();
-            DataContext = new ListEmployeeViewModel(selected);
+            DataContext = new ListEmployeeViewModel(selected,ID);
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)

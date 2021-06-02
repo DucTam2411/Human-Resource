@@ -18,7 +18,6 @@ namespace HRMS.HR.Model.Database
         public ROLE()
         {
             this.EMPLOYEEs = new HashSet<EMPLOYEE>();
-            this.EMPLOYEEs1 = new HashSet<EMPLOYEE>();
         }
     
         public int ROLE_ID { get; set; }
@@ -28,10 +27,7 @@ namespace HRMS.HR.Model.Database
         public Nullable<int> DEPT_ID { get; set; }
     
         public virtual DEPARTMENT DEPARTMENT { get; set; }
-        public virtual DEPARTMENT DEPARTMENT1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EMPLOYEE> EMPLOYEEs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EMPLOYEE> EMPLOYEEs1 { get; set; }
     }
 }

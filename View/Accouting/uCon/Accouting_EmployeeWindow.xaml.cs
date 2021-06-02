@@ -58,29 +58,6 @@ namespace HRMS.Accouting.uCon
             }
         }
 
-        private void SideBar_RoutedUserControlClicked(object sender, RoutedEventArgs e)
-        {
-
-            ButtonContent btn = getChildren(e.Source as Button);
-
-
-            string str = btn.Item1.Text;
-
-
-
-            if (str == uConSideBarAccouting.EMPLOYEE)
-            {
-
-                uConMain.Content = new uConEmployeeSalary();
-                uConMain.Margin = new Thickness(0, 30, 0, 0);
-
-            }
-            else /*if (str == uConSideBarAccouting.HOME)*/
-            {
-                uConMain.Content = new uConDashboard();
-                uConMain.Margin = new Thickness(20, 20, 20, 20);
-            }
-        }
 
         private ButtonContent getChildren(Button myButtonInSidebar)
         {

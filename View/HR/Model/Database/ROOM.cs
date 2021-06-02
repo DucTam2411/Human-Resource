@@ -18,7 +18,6 @@ namespace HRMS.HR.Model.Database
         public ROOM()
         {
             this.DEPARTMENTs = new HashSet<DEPARTMENT>();
-            this.DEPARTMENTs1 = new HashSet<DEPARTMENT>();
         }
     
         public int ROOM_ID { get; set; }
@@ -26,7 +25,5 @@ namespace HRMS.HR.Model.Database
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DEPARTMENT> DEPARTMENTs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DEPARTMENT> DEPARTMENTs1 { get; set; }
     }
 }

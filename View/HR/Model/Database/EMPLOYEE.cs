@@ -17,11 +17,12 @@ namespace HRMS.HR.Model.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EMPLOYEE()
         {
+            this.DELETEs = new HashSet<DELETE>();
+            this.RECORDs = new HashSet<RECORD>();
             this.SALARies = new HashSet<SALARY>();
             this.TIMEKEEPINGs = new HashSet<TIMEKEEPING>();
             this.TIMEKEEPING_DETAIL = new HashSet<TIMEKEEPING_DETAIL>();
-            this.TIMEKEEPINGs1 = new HashSet<TIMEKEEPING>();
-            this.TIMEKEEPING_DETAIL1 = new HashSet<TIMEKEEPING_DETAIL>();
+            this.USERs = new HashSet<USER>();
         }
     
         public int EMPLOYEE_ID { get; set; }
@@ -40,10 +41,12 @@ namespace HRMS.HR.Model.Database
         public Nullable<int> ROLE_ID { get; set; }
         public byte[] IMAGE { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DELETE> DELETEs { get; set; }
         public virtual DEPARTMENT DEPARTMENT { get; set; }
-        public virtual DEPARTMENT DEPARTMENT1 { get; set; }
         public virtual ROLE ROLE { get; set; }
-        public virtual ROLE ROLE1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RECORD> RECORDs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SALARY> SALARies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -51,8 +54,6 @@ namespace HRMS.HR.Model.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TIMEKEEPING_DETAIL> TIMEKEEPING_DETAIL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TIMEKEEPING> TIMEKEEPINGs1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TIMEKEEPING_DETAIL> TIMEKEEPING_DETAIL1 { get; set; }
+        public virtual ICollection<USER> USERs { get; set; }
     }
 }

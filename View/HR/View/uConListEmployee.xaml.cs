@@ -21,14 +21,12 @@ namespace HRMS.HR.uCon
     public partial class uConListEmployee : UserControl
     {
         
-        private ObservableCollection<EMPLOYEE> employees = new ObservableCollection<EMPLOYEE>();
-
-        public uConListEmployee()
+        public uConListEmployee(int ID)
         {
             InitializeComponent();
-            DataContext = new ListEmployeeViewModel();
+            DataContext = new ListEmployeeViewModel(ID);
         }
 
-       
+
     }
 }

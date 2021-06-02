@@ -220,7 +220,6 @@ D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConListEmployee.
 D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConModifyEmployee.baml
 D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConReport.baml
 D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConSideBar.baml
-D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\Resource\ResourceHR.baml
 D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HRMS.g.resources
 D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HRMS.Properties.Resources.resources
 D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\View.csproj.GenerateResource.cache
@@ -228,3 +227,10 @@ D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\View.csproj.CoreCompileIn
 D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\View.csproj.CopyComplete
 D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HRMS.exe
 D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HRMS.pdb
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConHRInformation.g.cs
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConTimekeepingInformation.g.cs
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConHRInformation.baml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConTimekeepingInformation.baml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\Augustine.VietnameseCalendar.Core.dll
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\Augustine.VietnameseCalendar.Core.pdb
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\Augustine.VietnameseCalendar.Core.dll.config

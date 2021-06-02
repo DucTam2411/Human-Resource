@@ -23,50 +23,23 @@ namespace HRMS.HR.uCon
     using ButtonContent = Tuple<TextBlock, PackIcon>;
     public partial class HR_EmployeeWindow : Window
     {
-        public HR_EmployeeWindow()
+        public HR_EmployeeWindow(int ID)
         {
             
             InitializeComponent();
-            DataContext = new ListEmployeeViewModel();
+            DataContext = new InterfaceViewModel(ID);
         }
 
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-            
-        }
-
-        private void uConSideBar_RoutedUserControlClicked(object sender, RoutedEventArgs e)
+        public HR_EmployeeWindow()
         {
 
-            ButtonContent btn = getChildren(e.Source as Button);
-
-
-
-            string str = btn.Item1.Text;
-
-
-
-            if (str == uConSideBar.HOME)
-            {
-                uConMain.Content = new uConListEmployee();
-            }
-            else
-            {
-                uConMain.Content = new uConReport();
-
-            }
+            InitializeComponent();
+            DataContext = new InterfaceViewModel();
         }
 
-        private ButtonContent getChildren(Button myButtonInSidebar)
-        {
-            StackPanel stack = (StackPanel)myButtonInSidebar.Content;
-
-            TextBlock textBlock = (TextBlock)stack.Children[1];
-            PackIcon pack = (PackIcon)stack.Children[0];
-
-
-            return new ButtonContent(textBlock, pack);
-        }
+        //private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    DragMove();
+        //}
     }
 }

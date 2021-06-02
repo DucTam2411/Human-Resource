@@ -5,67 +5,69 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:HRMS.HR.uCon"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodel="clr-namespace:HRMS.HR.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ListEmployeeViewModel}"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodel="clr-namespace:HRMS.HR.ViewModel"
     Width="auto"
     Height="auto"
+    d:DataContext="{d:DesignInstance Type=viewmodel:ListEmployeeViewModel}"
     Background="Transparent"
     mc:Ignorable="d">
 
     <ContentControl x:Name="contentControlModify" Height="auto">
-    <Grid Margin="0,20,0,0">
-        <TabControl
-            materialDesign:ColorZoneAssist.Mode="Standard"
-            materialDesign:ShadowAssist.ShadowDepth="Depth0"
-            Background="Transparent"
-            Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
-            TabStripPlacement="Right">
-
-            <TabItem
+        <Grid Margin="0,20,0,0">
+            <TabControl
+                materialDesign:ColorZoneAssist.Mode="Standard"
+                materialDesign:ShadowAssist.ShadowDepth="Depth0"
                 Background="Transparent"
-                Header="{materialDesign:PackIcon Kind=FolderInformation,
-                                                 Size=24}"
-                Style="{StaticResource MaterialDesignNavigationRailTabItem}">
-                <Grid>
+                Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+                TabStripPlacement="Right">
 
-                    <Grid.ColumnDefinitions>
-                        <!--  back button  -->
-                        <ColumnDefinition Width="auto" />
+                <TabItem
+                    Background="Transparent"
+                    Header="{materialDesign:PackIcon Kind=FolderInformation,
+                                                     Size=24}"
+                    Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                    <Grid>
 
-                        <!--  Content part  -->
-                        <ColumnDefinition Width="auto" />
+                        <Grid.ColumnDefinitions>
+                            <!--  back button  -->
+                            <ColumnDefinition Width="auto" />
 
-                        <!--  Salary part  -->
-                        <ColumnDefinition Width="auto" />
-                    </Grid.ColumnDefinitions>
+                            <!--  Content part  -->
+                            <ColumnDefinition Width="auto" />
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
+                            <!--  Salary part  -->
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
 
-                    <!--  button to back  -->
-                    <Button
-                        Grid.RowSpan="3"
-                        Height="95"
-                        Margin="0,0,10,217.8"
-                        VerticalAlignment="Bottom"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Command="{Binding BackCommand}"
-                        CommandParameter="{Binding ElementName=contentControlModify}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
 
-                        <materialDesign:PackIcon
-                            Width="40"
-                            Height="40"
-                            Foreground="DimGray"
-                            Kind="ArrowBack" />
-                    </Button>
+                        <!--  button to back  -->
+                        <Button
+                            Grid.RowSpan="3"
+                            Height="95"
+                            Margin="0,0,10,217.8"
+                            VerticalAlignment="Bottom"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Command="{Binding BackCommand}"
+                            CommandParameter="{Binding ElementName=contentControlModify}">
+
+                            <materialDesign:PackIcon
+                                Width="40"
+                                Height="40"
+                                Foreground="DimGray"
+                                Kind="ArrowBack" />
+                        </Button>
 
 
-                    <!--  Tab betwween  salary  -->
-                    <!--<TabControl
+                        <!--  Tab betwween  salary  -->
+                        <!--<TabControl
             Grid.RowSpan="3"
             Grid.Column="1"
                     materialDesign:ColorZoneAssist.Mode="Standard"
@@ -73,181 +75,41 @@
             Background="Transparent"
             Style="{StaticResource MaterialDesignNavigatilRailTabControl"/>-->
 
-                    <!--
-                        Row = 0, Col = 1,
-                        include NAME, ID, BIRTHDAY
-                    -->
-                    <DockPanel
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Margin="0,0,0,0">
-
-                        <StackPanel Margin="20" DockPanel.Dock="Left">
-
-                            <StackPanel Orientation="Horizontal">
-
-                                <materialDesign:PackIcon
-                                    Width="30"
-                                    Height="30"
-                                    VerticalAlignment="Center"
-                                    Foreground="DimGray"
-                                    Kind="User" />
-                                <TextBox
-                                    x:Name="tbName"
-                                    Width="200"
-                                    Margin="8,0,0,0"
-                                    materialDesign:HintAssist.HelperText="Employee full name."
-                                    materialDesign:HintAssist.Hint="Name"
-                                    FontSize="18"
-                                    >
-                                        <TextBox.Text>
-                                            <Binding Path="NAME" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                            <Binding.ValidationRules />
-                                        </Binding>
-                                        </TextBox.Text>
-
-                                    </TextBox>
-
-                            </StackPanel>
-
-
-
-                            <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-                                <materialDesign:PackIcon
-                                    Width="30"
-                                    Height="30"
-                                    VerticalAlignment="Center"
-                                    Foreground="DimGray"
-                                    Kind="IdCard" />
-                                <TextBox
-                                    x:Name="tbID"
-                                    Width="200"
-                                    Margin="8,0,0,0"
-                                    materialDesign:HintAssist.HelperText="ID Card number"
-                                    materialDesign:HintAssist.Hint="ID"
-                                    FontSize="18"
-                                    IsReadOnly="true">
-                                    <TextBox.Text>
-                                            <Binding Path="ID_CARD" UpdateSourceTrigger="PropertyChanged"  Mode="TwoWay">
-                                            <Binding.ValidationRules />
-                                        </Binding>
-                                    </TextBox.Text>
-
-                                </TextBox>
-
-                            </StackPanel>
-
-                            <StackPanel Margin="0,40,0,0" Orientation="Horizontal">
-
-
-                                <DatePicker
-                                    x:Name="dtpkBirthday"
-                                    Width="240"
-                                    Height="60"
-                                    materialDesign:HintAssist.Hint="Brithday"
-                                    FontSize="22"
-                                    SelectedDateFormat="Short"
-                                    Style="{StaticResource MaterialDesignOutlinedDatePicker}">
-
-
-                                    <DatePicker.SelectedDate>
-                                        <Binding Path="BIRTH_DATE" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
-                                    </DatePicker.SelectedDate>
-                                </DatePicker>
-                            </StackPanel>
-
-                        </StackPanel>
-
-
-
-                        <Button
+                        <!--
+                            Row = 0, Col = 1,
+                            include NAME, ID, BIRTHDAY
+                        -->
+                        <DockPanel
+                            Grid.Row="0"
                             Grid.Column="1"
-                            Width="200"
-                            Height="200"
-                            Margin="20,10,0,0"
-                            DockPanel.Dock="Right">
+                            Margin="0,0,0,0">
 
+                            <StackPanel Margin="20" DockPanel.Dock="Left">
 
-                            <materialDesign:PackIcon
-                                Width="50"
-                                Height="50"
-                                Kind="ImageAdd" />
-
-                        </Button>
-
-
-                    </DockPanel>
-
-                    <Separator
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Margin="0,10,0,0"
-                        BorderBrush="Black"
-                        BorderThickness="10"
-                        Opacity="0.8" />
-
-                    <DockPanel
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        Margin="0,0,0,0.2">
-
-
-
-                        <DockPanel Margin="20" HorizontalAlignment="Left">
-
-
-                            <StackPanel DockPanel.Dock="Left">
-
-
-
-
-                                <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal">
 
                                     <materialDesign:PackIcon
                                         Width="30"
                                         Height="30"
                                         VerticalAlignment="Center"
                                         Foreground="DimGray"
-                                        Kind="Place" />
+                                        Kind="User" />
                                     <TextBox
-                                        x:Name="tbBirthplace"
+                                        x:Name="tbName"
                                         Width="200"
                                         Margin="8,0,0,0"
-                                        materialDesign:HintAssist.HelperText="In ID Card"
-                                        materialDesign:HintAssist.Hint="Birthplace"
+                                        materialDesign:HintAssist.HelperText="Employee full name."
+                                        materialDesign:HintAssist.Hint="Name"
                                         FontSize="18">
                                         <TextBox.Text>
-                                            <Binding Path="BIRTH_PLACE" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                            <Binding
+                                                Mode="TwoWay"
+                                                Path="NAME"
+                                                UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules />
                                             </Binding>
                                         </TextBox.Text>
-                                    </TextBox>
 
-                                </StackPanel>
-
-
-
-
-
-                                <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-
-                                    <materialDesign:PackIcon
-                                        Width="30"
-                                        Height="30"
-                                        VerticalAlignment="Center"
-                                        Foreground="DimGray"
-                                        Kind="Globe" />
-                                    <TextBox
-                                        x:Name="tbCitizenship"
-                                        Width="200"
-                                        Margin="8,0,0,0"
-                                        materialDesign:HintAssist.Hint="Citizenship"
-                                        FontSize="18">
-                                        <TextBox.Text>
-                                            <Binding Path="CITIZENSHIP" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                                <Binding.ValidationRules />
-                                            </Binding>
-                                        </TextBox.Text>
                                     </TextBox>
 
                                 </StackPanel>
@@ -255,21 +117,167 @@
 
 
                                 <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-
                                     <materialDesign:PackIcon
                                         Width="30"
                                         Height="30"
                                         VerticalAlignment="Center"
                                         Foreground="DimGray"
-                                        Kind="GenderMaleFemaleVariant" />
+                                        Kind="IdCard" />
+                                    <TextBox
+                                        x:Name="tbID"
+                                        Width="200"
+                                        Margin="8,0,0,0"
+                                        materialDesign:HintAssist.HelperText="ID Card number"
+                                        materialDesign:HintAssist.Hint="ID"
+                                        FontSize="18"
+                                        IsReadOnly="true">
+                                        <TextBox.Text>
+                                            <Binding
+                                                Mode="TwoWay"
+                                                Path="ID_CARD"
+                                                UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules />
+                                            </Binding>
+                                        </TextBox.Text>
+
+                                    </TextBox>
+
+                                </StackPanel>
+
+
+
+                                <StackPanel Margin="0,40,0,0" Orientation="Horizontal">
+
+
+                                    <DatePicker
+                                        x:Name="dtpkBirthday"
+                                        Width="240"
+                                        Height="60"
+                                        materialDesign:HintAssist.Hint="Brithday"
+                                        FontSize="22"
+                                        SelectedDate="{Binding BIRTH_DATE, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat='{}{0: dd/MM/yyyy}'}"
+                                        Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                                </StackPanel>
+
+                            </StackPanel>
+
+
+                            <Button
+                                Width="220"
+                                Height="220"
+                                Margin="20,10,20,0"
+                                Background="{Binding BRUSH}"
+                                BorderThickness="{Binding BUTTONTHICKNESS}"
+                                Command="{Binding AddImageCommand}"
+                                DockPanel.Dock="Right"
+                                Opacity="100">
+                                <Image
+                                    x:Name="img"
+                                    Source="{Binding IMAGE_SOURCE}"
+                                    Stretch="Fill" />
+                            </Button>
+
+
+                        </DockPanel>
+
+                        <Separator
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="0,10,0,0"
+                            BorderBrush="Black"
+                            BorderThickness="10"
+                            Opacity="0.8" />
+
+                        <DockPanel
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Margin="0,0,0,0.2">
+
+
+
+                            <DockPanel Margin="20" HorizontalAlignment="Left">
+
+
+                                <StackPanel DockPanel.Dock="Left">
+
+
+
+
+                                    <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+
+                                        <materialDesign:PackIcon
+                                            Width="30"
+                                            Height="30"
+                                            VerticalAlignment="Center"
+                                            Foreground="DimGray"
+                                            Kind="Place" />
+                                        <TextBox
+                                            x:Name="tbBirthplace"
+                                            Width="200"
+                                            Margin="8,0,0,0"
+                                            materialDesign:HintAssist.HelperText="In ID Card"
+                                            materialDesign:HintAssist.Hint="Birthplace"
+                                            FontSize="18">
+                                            <TextBox.Text>
+                                                <Binding
+                                                    Mode="TwoWay"
+                                                    Path="BIRTH_PLACE"
+                                                    UpdateSourceTrigger="PropertyChanged">
+                                                    <Binding.ValidationRules />
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
+
+                                    </StackPanel>
+
+
+
+
+
+                                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+
+                                        <materialDesign:PackIcon
+                                            Width="30"
+                                            Height="30"
+                                            VerticalAlignment="Center"
+                                            Foreground="DimGray"
+                                            Kind="Globe" />
+                                        <TextBox
+                                            x:Name="tbCitizenship"
+                                            Width="200"
+                                            Margin="8,0,0,0"
+                                            materialDesign:HintAssist.Hint="Citizenship"
+                                            FontSize="18">
+                                            <TextBox.Text>
+                                                <Binding
+                                                    Mode="TwoWay"
+                                                    Path="CITIZENSHIP"
+                                                    UpdateSourceTrigger="PropertyChanged">
+                                                    <Binding.ValidationRules />
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
+
+                                    </StackPanel>
+
+
+
+                                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+
+                                        <materialDesign:PackIcon
+                                            Width="30"
+                                            Height="30"
+                                            VerticalAlignment="Center"
+                                            Foreground="DimGray"
+                                            Kind="GenderMaleFemaleVariant" />
 
                                         <ComboBox
-                                        Width="200"
-                                        Margin="10,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        materialDesign:HintAssist.Hint="Gender"
-                                        FontSize="18"
-                                        Foreground="DimGray">
+                                            Width="200"
+                                            Margin="10,0,0,0"
+                                            HorizontalAlignment="Left"
+                                            materialDesign:HintAssist.Hint="Gender"
+                                            FontSize="18"
+                                            Foreground="DimGray">
                                             <ComboBoxItem Content="MALE" />
                                             <ComboBoxItem Content="FEMALE" />
                                             <ComboBoxItem Content="TRANSGENDER" />
@@ -277,7 +285,10 @@
                                             <ComboBoxItem Content="NON-BINARY" />
                                             <ComboBoxItem Content="PANGENDER" />
                                             <ComboBox.Text>
-                                                <Binding Path="GENDER" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                                <Binding
+                                                    Mode="TwoWay"
+                                                    Path="GENDER"
+                                                    UpdateSourceTrigger="PropertyChanged">
                                                     <Binding.ValidationRules />
                                                 </Binding>
                                             </ComboBox.Text>
@@ -285,74 +296,76 @@
                                     </StackPanel>
 
 
-                                <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
 
-                                    <materialDesign:PackIcon
-                                        Width="30"
-                                        Height="30"
-                                        VerticalAlignment="Center"
-                                        Foreground="DimGray"
-                                        Kind="Phone" />
+                                        <materialDesign:PackIcon
+                                            Width="30"
+                                            Height="30"
+                                            VerticalAlignment="Center"
+                                            Foreground="DimGray"
+                                            Kind="Phone" />
 
-                                    <TextBox
-                                        x:Name="tbPhone"
-                                        Width="200"
-                                        Margin="10,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        materialDesign:HintAssist.Hint="Phone number"
-                                        FontSize="18"
-                                        Foreground="DimGray"
-                                        PreviewTextInput="NumberValidationTextBox">
+                                        <TextBox
+                                            x:Name="tbPhone"
+                                            Width="200"
+                                            Margin="10,0,0,0"
+                                            HorizontalAlignment="Left"
+                                            materialDesign:HintAssist.Hint="Phone number"
+                                            FontSize="18"
+                                            Foreground="DimGray"
+                                            PreviewTextInput="NumberValidationTextBox">
 
-                                        <TextBox.Text>
-                                            <Binding Path="PHONE" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                                <Binding.ValidationRules />
-                                            </Binding>
-                                        </TextBox.Text>
-                                    </TextBox>
+                                            <TextBox.Text>
+                                                <Binding
+                                                    Mode="TwoWay"
+                                                    Path="PHONE"
+                                                    UpdateSourceTrigger="PropertyChanged">
+                                                    <Binding.ValidationRules />
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
 
+
+                                    </StackPanel>
 
                                 </StackPanel>
 
-                            </StackPanel>
-
-                        </DockPanel>
+                            </DockPanel>
 
 
-                        <DockPanel Margin="20,20,30,20" HorizontalAlignment="Right">
+                            <DockPanel Margin="20,20,30,20" HorizontalAlignment="Right">
 
 
-                            <StackPanel DockPanel.Dock="Left">
+                                <StackPanel DockPanel.Dock="Left">
 
 
 
 
-                                <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+                                    <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
 
-                                    <materialDesign:PackIcon
-                                        Width="30"
-                                        Height="30"
-                                        VerticalAlignment="Center"
-                                        Foreground="DimGray"
-                                        Kind="CardAccountDetailsStar" />
+                                        <materialDesign:PackIcon
+                                            Width="30"
+                                            Height="30"
+                                            VerticalAlignment="Center"
+                                            Foreground="DimGray"
+                                            Kind="CardAccountDetailsStar" />
                                         <ComboBox
-                                        Width="200"
-                                        Margin="10,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        materialDesign:HintAssist.Hint="ROLE"
-                                        FontSize="18"
-                                        Foreground="DimGray">
-                                            <ComboBoxItem Content="MANAGER HR DEPT" />
-                                            <ComboBoxItem Content="VICE MANAGER HR DEPT" />
-                                            <ComboBoxItem Content="EMPLOYEE HR DEPT" />
-                                            <ComboBoxItem Content="MANAGER ACCOUNTING" />
-                                            <ComboBoxItem Content="VICE MANAGER ACCOUNTING" />
-                                            <ComboBoxItem Content="EMPLOYEE ACOUNTING" />
+                                            Width="200"
+                                            Margin="10,0,0,0"
+                                            HorizontalAlignment="Left"
+                                            materialDesign:HintAssist.Hint="ROLE"
+                                            FontSize="18"
+                                            Foreground="DimGray">
+                                            <ComboBoxItem Content="MANAGER" />
+                                            <ComboBoxItem Content="VICE MANAGER" />
+                                            <ComboBoxItem Content="EMPLOYEE" />
                                             <ComboBoxItem Content="DIRECTOR" />
                                             <ComboBoxItem Content="VICE DIRECTOR" />
-                                            <ComboBoxItem Content="EMPLOYEE SOFTWARE DEPT" />
                                             <ComboBox.Text>
-                                                <Binding Path="ROLE_NAME" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                                <Binding
+                                                    Mode="TwoWay"
+                                                    Path="ROLE_NAME"
+                                                    UpdateSourceTrigger="PropertyChanged">
                                                     <Binding.ValidationRules />
                                                 </Binding>
                                             </ComboBox.Text>
@@ -361,21 +374,21 @@
                                     </StackPanel>
 
 
-                                <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
 
-                                    <materialDesign:PackIcon
-                                        Width="30"
-                                        Height="30"
-                                        VerticalAlignment="Center"
-                                        Foreground="DimGray"
-                                        Kind="House" />
+                                        <materialDesign:PackIcon
+                                            Width="30"
+                                            Height="30"
+                                            VerticalAlignment="Center"
+                                            Foreground="DimGray"
+                                            Kind="House" />
                                         <ComboBox
-                                        Width="200"
-                                        Margin="10,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        materialDesign:HintAssist.Hint="DEPARTMENT"
-                                        FontSize="18"
-                                        Foreground="DimGray">
+                                            Width="200"
+                                            Margin="10,0,0,0"
+                                            HorizontalAlignment="Left"
+                                            materialDesign:HintAssist.Hint="DEPARTMENT"
+                                            FontSize="18"
+                                            Foreground="DimGray">
                                             <ComboBoxItem Content="HUMAN RESOURCE DEPT" />
                                             <ComboBoxItem Content="ACOUNTING DEPT" />
                                             <ComboBoxItem Content="DIRECTOR DEPT" />
@@ -384,329 +397,226 @@
                                             <ComboBoxItem Content="BUSSINESS DEPT" />
                                             <ComboBoxItem Content="SUPPORT DEPT" />
                                             <ComboBox.Text>
-                                                <Binding Path="DEPT_NAME" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                                <Binding
+                                                    Mode="TwoWay"
+                                                    Path="DEPT_NAME"
+                                                    UpdateSourceTrigger="PropertyChanged">
                                                     <Binding.ValidationRules />
                                                 </Binding>
                                             </ComboBox.Text>
-                                            </ComboBox>
+                                        </ComboBox>
 
                                     </StackPanel>
 
 
 
-                                <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
 
-                                    <materialDesign:PackIcon
-                                        Width="30"
-                                        Height="30"
-                                        VerticalAlignment="Center"
-                                        Foreground="DimGray"
-                                        Kind="Equalizer" />
+                                        <materialDesign:PackIcon
+                                            Width="30"
+                                            Height="30"
+                                            VerticalAlignment="Center"
+                                            Foreground="DimGray"
+                                            Kind="Equalizer" />
 
-                                    <ComboBox
-                                        Width="200"
-                                        Margin="10,0,0,0"
-                                        materialDesign:HintAssist.Hint="Academic level"
-                                        materialDesign:HintAssist.HintOpacity=".3"
-                                        FontSize="18"
-                                        IsEditable="True">
-                                        <ComboBoxItem Content="Bachelor" />
-                                        <ComboBoxItem Content="Master" />
-                                        <ComboBoxItem Content="Post Doctor" />
-                                        <ComboBoxItem Content="Doctor" />
-                                        <ComboBox.Text>
-                                            <Binding Path="ACADEMIC_LEVEL" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                                <Binding.ValidationRules />
-                                            </Binding>
-                                        </ComboBox.Text>
-                                    </ComboBox>
-                                       
+                                        <ComboBox
+                                            Width="200"
+                                            Margin="10,0,0,0"
+                                            materialDesign:HintAssist.Hint="Academic level"
+                                            materialDesign:HintAssist.HintOpacity=".3"
+                                            FontSize="18"
+                                            IsEditable="True">
+                                            <ComboBoxItem Content="Bachelor" />
+                                            <ComboBoxItem Content="Master" />
+                                            <ComboBoxItem Content="Post Doctor" />
+                                            <ComboBoxItem Content="Doctor" />
+                                            <ComboBox.Text>
+                                                <Binding
+                                                    Mode="TwoWay"
+                                                    Path="ACADEMIC_LEVEL"
+                                                    UpdateSourceTrigger="PropertyChanged">
+                                                    <Binding.ValidationRules />
+                                                </Binding>
+                                            </ComboBox.Text>
+                                        </ComboBox>
+
+
+
+
+                                    </StackPanel>
+
+
+
+                                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+
+                                        <materialDesign:PackIcon
+                                            Width="30"
+                                            Height="30"
+                                            VerticalAlignment="Center"
+                                            Foreground="DimGray"
+                                            Kind="Email" />
+
+                                        <TextBox
+                                            x:Name="tbEmail"
+                                            Width="220"
+                                            Margin="10,0,0,0"
+                                            HorizontalAlignment="Left"
+                                            materialDesign:HintAssist.Hint="Email"
+                                            FontSize="18"
+                                            Foreground="DimGray">
+                                            <TextBox.Text>
+                                                <Binding
+                                                    Mode="TwoWay"
+                                                    Path="EMAIL"
+                                                    UpdateSourceTrigger="PropertyChanged">
+                                                    <Binding.ValidationRules />
+                                                </Binding>
+                                            </TextBox.Text>
+
+                                        </TextBox>
+
+
+                                    </StackPanel>
 
 
 
                                 </StackPanel>
 
-
-
-                                <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-
-                                    <materialDesign:PackIcon
-                                        Width="30"
-                                        Height="30"
-                                        VerticalAlignment="Center"
-                                        Foreground="DimGray"
-                                        Kind="Email" />
-
-                                    <TextBox
-                                        x:Name="tbEmail"
-                                        Width="220"
-                                        Margin="10,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        materialDesign:HintAssist.Hint="Email"
-                                        FontSize="18"
-                                        Foreground="DimGray">
-                                        <TextBox.Text>
-                                            <Binding Path="EMAIL" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                                <Binding.ValidationRules />
-                                            </Binding>
-                                        </TextBox.Text>
-
-                                    </TextBox>
-
-
-                                </StackPanel>
-
-
-
-                            </StackPanel>
+                            </DockPanel>
 
                         </DockPanel>
 
-                    </DockPanel>
 
-
-                    <StackPanel
-                        Grid.Row="3"
-                        Grid.Column="1"
-                        Orientation="Horizontal">
-
-                        <Button
-                            Width="100"
-                            Height="50"
-                            Margin="10,10,50,0"
-                            HorizontalAlignment="Right"
-                            Content="Remove"
-                            FontSize="18"
-                            FontWeight="Light"
-                            Command="{Binding RemoveCommand}"
-                            CommandParameter="{Binding ElementName=contentControlModify}"/>
-                        <Button
-                            Width="100"
-                            Height="50"
-                            Margin="150,10,20,0"
-                            HorizontalAlignment="Right"
-                            Content="Save"
-                            FontSize="18"
-                            FontWeight="Light"
-                            Command="{Binding SaveCommand}"
-                            CommandParameter="{Binding ElementName=contentControlModify}"/>
-
-
-
-                    </StackPanel>
-
-                    <StackPanel
-                        Grid.RowSpan="4"
-                        Grid.Column="3"
-                        Margin="10,0,0,0"
-                        Orientation="Horizontal">
-                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-                    </StackPanel>
-
-                </Grid>
-            </TabItem>
-
-            <TabItem
-                Background="Transparent"
-                Header="{materialDesign:PackIcon Kind=Timeline,
-                                                 Size=24}"
-                Style="{StaticResource MaterialDesignNavigationRailTabItem}">
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <!--  back button  -->
-                        <ColumnDefinition Width="auto" />
-
-                        <!--  Content part  -->
-                        <ColumnDefinition Width="auto" />
-
-                        <!--  Salary part  -->
-                        <ColumnDefinition Width="auto" />
-                    </Grid.ColumnDefinitions>
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
-
-
-
-
-
-                    <!--  button to back  -->
-                    <Button
-                        Height="95"
-                        VerticalAlignment="Center"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Command="{Binding BackCommand}"
-                        CommandParameter="{Binding ElementName=contentControlModify}">
-
-                        <materialDesign:PackIcon
-                            Width="40"
-                            Height="40"
-                            Foreground="DimGray"
-                            Kind="ArrowBack" />
-                    </Button>
-
-
-
-
-                    <StackPanel
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Margin="0,30,0,0.2">
-
-                        <TextBlock
-                            Grid.Row="0"
+                        <StackPanel
+                            Grid.Row="3"
                             Grid.Column="1"
-                            Margin="0,0,30,0"
-                            Foreground="DimGray"
-                            Style="{StaticResource MaterialDesignHeadline2TextBlock}">
-                            Timekeeping Update
-                        </TextBlock>
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+
+
+                            <Button
+                                Width="100"
+                                Height="50"
+                                Margin="150,10,20,0"
+                                HorizontalAlignment="Right"
+                                Command="{Binding SaveCommand}"
+                                CommandParameter="{Binding ElementName=contentControlModify}"
+                                Content="Save"
+                                FontSize="18"
+                                FontWeight="Light" />
+                            <Button
+                                Width="110"
+                                Height="50"
+                                Margin="10,10,50,0"
+                                HorizontalAlignment="Right"
+                                Command="{Binding ViewUser}"
+                                CommandParameter="{Binding ElementName=contentControlModify}"
+                                Content="View User"
+                                FontSize="18"
+                                FontWeight="Light" />
 
 
 
-                        <StackPanel>
-
-                            <StackPanel Margin="20,40,0,0" Orientation="Horizontal">
-
-                                <materialDesign:PackIcon
-                                    Width="30"
-                                    Height="30"
-                                    VerticalAlignment="Center"
-                                    Foreground="DimGray"
-                                    Kind="CalendarMonth" />
-                                <TextBox
-                                    Width="244"
-                                    Margin="8,0,0,0"
-                                    materialDesign:HintAssist.HelperText="In this month"
-                                    materialDesign:HintAssist.Hint="Number of workday"
-                                    FontSize="18">
-                                    <TextBox.Text>
-                                        <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules />
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-
-                            </StackPanel>
 
                         </StackPanel>
 
-
-
-                        <StackPanel>
-
-                            <StackPanel Margin="20,40,0,0" Orientation="Horizontal">
-
-                                <materialDesign:PackIcon
-                                    Width="30"
-                                    Height="30"
-                                    VerticalAlignment="Center"
-                                    Foreground="DimGray"
-                                    Kind="CalendarMonthOutline" />
-                                <TextBox
-                                    Width="250"
-                                    Margin="8,0,0,0"
-                                    materialDesign:HintAssist.Hint="Number of overtime workday"
-                                    FontSize="18">
-                                    <TextBox.Text>
-                                        <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules />
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-
-                            </StackPanel>
-
+                        <StackPanel
+                            Grid.RowSpan="4"
+                            Grid.Column="3"
+                            Margin="10,0,0,0"
+                            Orientation="Horizontal">
+                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
                         </StackPanel>
 
+                    </Grid>
+                </TabItem>
 
-                    </StackPanel>
+                <!--<TabItem
+                    Background="Transparent"
+                    Header="{materialDesign:PackIcon Kind=TrashCanOutline,
+                                                     Size=24}"
+                    Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="575*" />
+                            <ColumnDefinition Width="219*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Vertical" />
+                    </Grid>
+                </TabItem>-->
 
 
-                    <StackPanel
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Orientation="Vertical">
+
+
+                <TabItem
+                    Background="Transparent"
+                    Header="{materialDesign:PackIcon Kind=TrashCanOutline,
+                                                     Size=24}"
+                    Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <!--  back button  -->
+
+                            <ColumnDefinition Width="auto" />
+
+                            <!--  //Content part  -->
+
+                            <ColumnDefinition Width="auto" />
+
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+
+
+                        <!--  ////button to back  -->
+
                         <Button
-                            Width="100"
-                            Height="50"
-                            Margin="0,30,10,0"
-                            HorizontalAlignment="Center"
-                            Content="Save"
-                            FontSize="18"
-                            FontWeight="Light" />
+                            Grid.RowSpan="3"
+                            Height="95"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Command="{Binding BackCommand}"
+                            CommandParameter="{Binding ElementName=contentControlModify}">
 
-                    </StackPanel>
-
-
-
-                </Grid>
-            </TabItem>
-
-
-
-
-            <TabItem
-                Background="Transparent"
-                Header="{materialDesign:PackIcon Kind=AttachMoney,
-                                                 Size=24}"
-                Style="{StaticResource MaterialDesignNavigationRailTabItem}">
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <!--  back button  -->
-                        <ColumnDefinition Width="auto" />
-                        <!--  Content part  -->
-                        <ColumnDefinition Width="auto" />
-
-                    </Grid.ColumnDefinitions>
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
-
-                    <!--  button to back  -->
-                    <Button
-                        Grid.RowSpan="3"
-                        Height="95"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Command="{Binding BackCommand}"
-                        CommandParameter="{Binding ElementName=contentControlModify}">
-
-                        <materialDesign:PackIcon
-                            Width="40"
-                            Height="40"
-                            Foreground="DimGray"
-                            Kind="ArrowBack" />
-                    </Button>
+                            <materialDesign:PackIcon
+                                Width="40"
+                                Height="40"
+                                Foreground="DimGray"
+                                Kind="ArrowBack" />
+                        </Button>
 
 
 
 
 
-                    <StackPanel
-                        Grid.Column="1"
-                        Margin="50,0,20,40"
-                        Orientation="Vertical">
+                        <StackPanel
+                            Grid.Column="1"
+                            Margin="50,0,20,40"
+                            Orientation="Vertical">
 
-                        <TextBlock
-                            Foreground="DimGray"
-                            Style="{StaticResource MaterialDesignHeadline2TextBlock}"
-                            Text="Salary update" />
+                            <TextBlock
+                                Foreground="DimGray"
+                                Style="{StaticResource MaterialDesignHeadline2TextBlock}"
+                                Text="Remove option" />
 
-                        <TextBlock
-                            Margin="15,15,0,0"
-                            FontSize="17"
-                            Foreground="DimGray"
-                            Style="{StaticResource MaterialDesignButtonTextBlock}"
-                            Text="Properties that needed to change ?" />
+                            <TextBox
+                                Width="400"
+                                Height="300"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                materialDesign:HintAssist.HelperText="Why is this employee getting removed?"
+                                materialDesign:HintAssist.Hint="Remove note"
+                                AcceptsReturn="True"
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                Text="{Binding NOTE_REMOVE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto" />
 
-                        <ComboBox
+                            <!--<ComboBox
                             Width="400"
                             Margin="15,10,0,0"
                             HorizontalAlignment="Left"
@@ -755,26 +665,28 @@
                             Foreground="DimGray"
                             MinLines="7"
                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                            TextWrapping="Wrap" />
+                            TextWrapping="Wrap" />-->
 
-                        <Button
-                            Width="100"
-                            Height="50"
-                            Margin="0,20,30,0"
-                            HorizontalAlignment="Right"
-                            Content="Send"
-                            FontSize="18"
-                            FontWeight="Light" />
+                            <Button
+                                Width="110"
+                                Height="50"
+                                Margin="10,10,0,0"
+                                HorizontalAlignment="Right"
+                                Command="{Binding RemoveCommand}"
+                                CommandParameter="{Binding ElementName=contentControlModify}"
+                                Content="Remove"
+                                FontSize="18"
+                                FontWeight="Light" />
 
-                    </StackPanel>
-
-
-                </Grid>
-            </TabItem>
+                        </StackPanel>
 
 
-        </TabControl>
-    </Grid>
+                    </Grid>
+                </TabItem>
+
+
+            </TabControl>
+        </Grid>
     </ContentControl>
 </UserControl>
 

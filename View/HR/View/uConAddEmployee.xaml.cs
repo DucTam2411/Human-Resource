@@ -22,10 +22,10 @@ namespace HRMS.HR.uCon
     /// </summary>
     public partial class uConAddEmployee : UserControl
     {
-        public uConAddEmployee()
+        public uConAddEmployee(int ID)
         {
             InitializeComponent();
-            DataContext = new ListEmployeeViewModel();
+            DataContext = new ListEmployeeViewModel(ID);
             BirthdayDP.SelectedDate = DateTime.Now;
         }
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)

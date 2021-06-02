@@ -5,32 +5,207 @@
     xmlns:Chart="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:HRMS.HR.uCon"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodel="clr-namespace:HRMS.HR.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ReportViewModel}"
+    Width="880"
+    Height="620"
     mc:Ignorable="d">
-    <Grid x:Name="ss">
-        <Chart:PieChart>
-            <Chart:PieChart.Series>
 
-                <Chart:PieSeries
-                    Title="Sieu "
-                    DataLabels="True"
-                    Values="24" />
-                <Chart:PieSeries
-                    Title="Nhan"
-                    DataLabels="True"
-                    Values="23" />
-                <Chart:PieSeries
-                    Title="Dien"
-                    DataLabels="True"
-                    Values="42" />
+    <UserControl.Resources>
+        <Style x:Key="WrapText" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="TextBlock.TextAlignment" Value="Left" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid Margin="0,20,0,0">
 
-            </Chart:PieChart.Series>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
 
+            <StackPanel Margin="40,10,0,10" Orientation="Horizontal">
 
-        </Chart:PieChart>
+                <materialDesign:PackIcon
+                    Width="30"
+                    Height="30"
+                    VerticalAlignment="Center"
+                    Foreground="DimGray"
+                    Kind="Search" />
+                <TextBox
+                    x:Name="tbSearch"
+                    Width="370"
+                    Margin="5,0,0,0"
+                    materialDesign:HintAssist.Hint="Search "
+                    FontSize="18"
+                    Text="{Binding SEARCH_TEXT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
 
+                <ComboBox
+                    Width="170"
+                    Margin="8,0,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    DisplayMemberPath="NAME"
+                    FontSize="18"
+                    Foreground="DimGray"
+                    ItemsSource="{Binding ListType, Mode=TwoWay}"
+                    SelectedValue="{Binding SELECTEDTYPE}">
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="IsSelected" Value="{Binding ISSELECTED}" />
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                </ComboBox>
 
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="30,0,0,-0.4"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                        Width="30"
+                        Height="30"
+                        VerticalAlignment="Center"
+                        Foreground="DimGray"
+                        Kind="Calendar" />
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Center"
+                        FontSize="18"
+                        Text="Month" />
+
+                    <ComboBox
+                        Margin="8,0,0,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        FontSize="18"
+                        Foreground="DimGray"
+                        ItemsSource="{Binding MONTHLIST, Mode=TwoWay}"
+                        SelectedValue="{Binding SELECTMONTHTYPE}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding MONTH}" />
+                                    <TextBlock Text=" / " />
+                                    <TextBlock Text="{Binding YEAR}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                        <ComboBox.ItemContainerStyle>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="IsSelected" Value="{Binding ISSELECTED}" />
+                            </Style>
+                        </ComboBox.ItemContainerStyle>
+                    </ComboBox>
+                </StackPanel>
+                <!--<StackPanel
+                    Grid.Column="1"
+                    Margin="30,0,0,-0.4"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                        Width="30"
+                        Height="30"
+                        VerticalAlignment="Center"
+                        Foreground="DimGray"
+                        Kind="Home" />
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Center"
+                        FontSize="18"
+                        Text="Department" />
+
+                    <ComboBox
+                        Margin="8,0,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="18"
+                        Foreground="DimGray"
+                        ItemsSource="{Binding MONTHLIST, Mode=TwoWay}"
+                        SelectedValue="{Binding SELECTMONTHTYPE}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding MONTH}" />
+                                    <TextBlock Text=" / " />
+                                    <TextBlock Text="{Binding YEAR}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                        <ComboBox.ItemContainerStyle>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="IsSelected" Value="{Binding ISSELECTED}" />
+                            </Style>
+                        </ComboBox.ItemContainerStyle>
+                    </ComboBox>
+                </StackPanel>-->
+            </StackPanel>
+
+            <DataGrid
+                x:Name="dgDashboard"
+                Grid.Row="1"
+                Height="500"
+                Margin="0,20.4,0,0"
+                VerticalAlignment="Top"
+                AllowDrop="True"
+                AutoGenerateColumns="False"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                CanUserReorderColumns="False"
+                CanUserResizeColumns="True"
+                IsReadOnly="True"
+                ItemsSource="{Binding TimekeepingList}"
+                VerticalScrollBarVisibility="Visible">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="70"
+                        Binding="{Binding EMPLOYEE.EMPLOYEE_ID, UpdateSourceTrigger=PropertyChanged}"
+                        Foreground="DarkSlateGray"
+                        Header="ID" />
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding EMPLOYEE.NAME, UpdateSourceTrigger=PropertyChanged}"
+                        ElementStyle="{StaticResource WrapText}"
+                        Foreground="DarkSlateGray"
+                        Header="Name" />
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding EMPLOYEE.DEPARTMENT.DEPT_NAME, UpdateSourceTrigger=PropertyChanged}"
+                        Foreground="DarkSlateGray"
+                        Header="Department" />
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding EMPLOYEE.ROLE.ROLE_NAME, UpdateSourceTrigger=PropertyChanged}"
+                        Foreground="DarkSlateGray"
+                        Header="Role" />
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding NUMBER_OF_WORK_DAY, UpdateSourceTrigger=PropertyChanged}"
+                        ElementStyle="{StaticResource WrapText}"
+                        Foreground="DarkSlateGray"
+                        Header="Work days" />
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding NUMBER_OF_ABSENT_DAY, UpdateSourceTrigger=PropertyChanged}"
+                        ElementStyle="{StaticResource WrapText}"
+                        Foreground="DarkSlateGray"
+                        Header="Absent days" />
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding NUMBER_OF_OVERTIME_DAY, UpdateSourceTrigger=PropertyChanged}"
+                        ElementStyle="{StaticResource WrapText}"
+                        Foreground="DarkSlateGray"
+                        Header="Overtime days" />
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding NUMBER_OF_STANDARD_DAY, UpdateSourceTrigger=PropertyChanged}"
+                        ElementStyle="{StaticResource WrapText}"
+                        Foreground="DarkSlateGray"
+                        Header="Standard working days" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Grid>
     </Grid>
 </UserControl>
