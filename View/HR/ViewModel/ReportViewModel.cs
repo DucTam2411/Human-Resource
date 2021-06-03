@@ -1,28 +1,58 @@
-﻿using Augustine.VietnameseCalendar.Core.LuniSolarCalendar;
-using HRMS.HR.Model.Database;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Input;
+using Augustine.VietnameseCalendar.Core.LuniSolarCalendar;
+using Microsoft.Win32;
+using System.Windows.Media.Imaging;
+using System.IO;
+using System.Windows;
+using System.Windows.Media;
+using MaterialDesignThemes.Wpf;
+using System.Collections;
+using System.Windows.Controls.Primitives;
+using System.Data;
+using HRMS.HR.Model.Database;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using ClosedXML.Excel;
+using System.Data;
+using System.Reflection;
+using HRMS.HR.Model;
 
 namespace HRMS.HR.ViewModel
 {
     class ReportViewModel : BaseViewModel
     {
+        //Export to PDF
+        public ICommand ExportPDFCommand { get; set; }
+        //Export to Excel
+        public ICommand ExportExcelCommand { get; set; }
         public ReportViewModel(int ID)
         {
             LoadComboboxTypeList();
             LoadMonth();
+            LoadDeptList();
+            hrmsEntities db = new hrmsEntities();
+            var employee = db.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == ID).SingleOrDefault();
+            //Chức năng export to pdf
+            ExportPDFCommand = new RelayCommand<DataGrid>(p => true, p => ExportPDF(p, employee.NAME));
+
+            //Chức năng export to excel
+            ExportExcelCommand = new RelayCommand<DataGrid>(p => true, p => ExportExcel(p));
         }
         //Binding tới datagrid của Salary List
-        private ObservableCollection<TIMEKEEPING> _TimekeepingList;
-        public ObservableCollection<TIMEKEEPING> TimekeepingList { get => _TimekeepingList; set { _TimekeepingList = value; OnPropertyChanged(); } }
+        private ObservableCollection<TimekeepingData> _TimekeepingList;
+        public ObservableCollection<TimekeepingData> TimekeepingList { get => _TimekeepingList; set { _TimekeepingList = value; OnPropertyChanged(); } }
 
         //Để lưu trữ bản sao để có thể sao chép khi cần thiết
-        private ObservableCollection<TIMEKEEPING> _TimekeepingTest;
-        public ObservableCollection<TIMEKEEPING> TimekeepingTest { get => _TimekeepingTest; set { _TimekeepingTest = value; OnPropertyChanged(); } }
+        private ObservableCollection<TimekeepingData> _TimekeepingTest;
+        public ObservableCollection<TimekeepingData> TimekeepingTest { get => _TimekeepingTest; set { _TimekeepingTest = value; OnPropertyChanged(); } }
 
         //Binding dữ liệu vào combobox của chọn loại để lọc
         private ObservableCollection<ComboboxModel> _ListType;
@@ -54,27 +84,27 @@ namespace HRMS.HR.ViewModel
                         {
                             //Lọc theo ID
                             case "ID":
-                                TimekeepingList = new ObservableCollection<TIMEKEEPING>(TimekeepingList.Where(x => x.EMPLOYEE_ID.ToString().Contains(SEARCH_TEXT)));
+                                TimekeepingList = new ObservableCollection<TimekeepingData>(TimekeepingList.Where(x => x.EMPLOYEE_ID.ToString().Contains(SEARCH_TEXT)));
                                 break;
 
                             //Lọc theo MONTH
                             case "NAME":
-                                TimekeepingList = new ObservableCollection<TIMEKEEPING>(TimekeepingList.Where(x => x.EMPLOYEE.NAME.Contains(SEARCH_TEXT) ||
-                                                                                                        x.EMPLOYEE.NAME.ToLower().Contains(SEARCH_TEXT) ||
-                                                                                                        x.EMPLOYEE.NAME.ToUpper().Contains(SEARCH_TEXT)));
+                                TimekeepingList = new ObservableCollection<TimekeepingData>(TimekeepingList.Where(x => x.NAME.Contains(SEARCH_TEXT) ||
+                                                                                                        x.NAME.ToLower().Contains(SEARCH_TEXT) ||
+                                                                                                        x.NAME.ToUpper().Contains(SEARCH_TEXT)));
                                 break;
                             //Lọc theo Department
                             case "DEPARTMENT":
-                                TimekeepingList = new ObservableCollection<TIMEKEEPING>(TimekeepingList.Where(x => x.EMPLOYEE.DEPARTMENT.DEPT_NAME.Contains(SEARCH_TEXT) ||
-                                                                                                        x.EMPLOYEE.DEPARTMENT.DEPT_NAME.ToLower().Contains(SEARCH_TEXT) ||
-                                                                                                        x.EMPLOYEE.DEPARTMENT.DEPT_NAME.ToUpper().Contains(SEARCH_TEXT)));
+                                TimekeepingList = new ObservableCollection<TimekeepingData>(TimekeepingList.Where(x => x.DEPT_NAME.Contains(SEARCH_TEXT) ||
+                                                                                                        x.DEPT_NAME.ToLower().Contains(SEARCH_TEXT) ||
+                                                                                                        x.DEPT_NAME.ToUpper().Contains(SEARCH_TEXT)));
                                 break;
 
                             //Lọc theo role
                             case "ROLE":
-                                TimekeepingList = new ObservableCollection<TIMEKEEPING>(TimekeepingList.Where(x => x.EMPLOYEE.ROLE.ROLE_NAME.Contains(SEARCH_TEXT) ||
-                                                                                                        x.EMPLOYEE.ROLE.ROLE_NAME.ToLower().Contains(SEARCH_TEXT) ||
-                                                                                                        x.EMPLOYEE.ROLE.ROLE_NAME.ToUpper().Contains(SEARCH_TEXT)));
+                                TimekeepingList = new ObservableCollection<TimekeepingData>(TimekeepingList.Where(x => x.ROLE_NAME.Contains(SEARCH_TEXT) ||
+                                                                                                        x.ROLE_NAME.ToLower().Contains(SEARCH_TEXT) ||
+                                                                                                        x.ROLE_NAME.ToUpper().Contains(SEARCH_TEXT)));
                                 break;
 
                             default:
@@ -255,6 +285,26 @@ namespace HRMS.HR.ViewModel
             }
             return countAverage / 2;
         }
+
+        private ObservableCollection<ComboboxModel> _DEPTLIST;
+        public ObservableCollection<ComboboxModel> DEPTLIST { get => _DEPTLIST; set { _DEPTLIST = value; OnPropertyChanged(); } }
+
+        //Binding tới selected của ComboxBox chọn tháng
+        private ComboboxModel _SELECTDEPTTYPE;
+        public ComboboxModel SELECTDEPTTYPE
+        {
+            get => _SELECTDEPTTYPE; set
+            {
+                _SELECTDEPTTYPE = value;
+                OnPropertyChanged();
+
+                //Nếu selected khác null, nghĩa là tháng đã chọn thì show data theo select dó
+                if (SELECTDEPTTYPE != null)
+                {
+                    LoadTimekeepingData();
+                }
+            }
+        }
         //Binding tới ComboBox chọn Tháng
         private ObservableCollection<ComboboxModel> _MONTHLIST;
         public ObservableCollection<ComboboxModel> MONTHLIST { get => _MONTHLIST; set { _MONTHLIST = value; OnPropertyChanged(); } }
@@ -269,7 +319,7 @@ namespace HRMS.HR.ViewModel
                 OnPropertyChanged();
 
                 //Nếu selected khác null, nghĩa là tháng đã chọn thì show data theo select dó
-                if (SELECTMONTHTYPE != null)
+                if (SELECTMONTHTYPE != null && SELECTDEPTTYPE != null)
                 {
                     LoadTimekeepingData();
                 }
@@ -302,6 +352,20 @@ namespace HRMS.HR.ViewModel
             }
         }
 
+        private void LoadDeptList()
+        {
+            DEPTLIST = new ObservableCollection<ComboboxModel>();
+            DEPTLIST.Add(new ComboboxModel("ALL", 0, true));
+            DEPTLIST.Add(new ComboboxModel("HUMAN RESOURCE DEPT", 1, false));
+            DEPTLIST.Add(new ComboboxModel("ACOUNTING DEPT", 2, false));
+            DEPTLIST.Add(new ComboboxModel("DIRECTOR DEPT", 3, false));
+            DEPTLIST.Add(new ComboboxModel("SOFTWARE DEPT", 4, false));
+            DEPTLIST.Add(new ComboboxModel("QUALITY MANAGEMENT DEPT", 5, false));
+            DEPTLIST.Add(new ComboboxModel("BUSSINESS DEPT", 6, false));
+            DEPTLIST.Add(new ComboboxModel("SUPPORT DEPT", 7, false));
+            SELECTDEPTTYPE = DEPTLIST.Where(x => x.ISSELECTED == true).FirstOrDefault();
+        }
+
         private void LoadComboboxTypeList()
         {
             ListType = new ObservableCollection<ComboboxModel>();
@@ -315,21 +379,177 @@ namespace HRMS.HR.ViewModel
         //Load data vaof grid
         private void LoadTimekeepingData()
         {
+            if (SELECTDEPTTYPE == null || SELECTMONTHTYPE == null)
+            {
+                return;
+            }
             hrmsEntities db = new hrmsEntities();
-            var list = (from tk in db.TIMEKEEPINGs
-                       where tk.MONTH.Value.Month == SELECTMONTHTYPE.MONTH && tk.MONTH.Value.Year == SELECTMONTHTYPE.YEAR
-                       select tk).Distinct();
-
-            TimekeepingList = new ObservableCollection<TIMEKEEPING>();
-            TimekeepingTest = new ObservableCollection<TIMEKEEPING>();
+            var list_filter_dept = from emp in db.EMPLOYEEs where SELECTDEPTTYPE.DEPT_ID > 0 ? emp.DEPT_ID == SELECTDEPTTYPE.DEPT_ID : true select emp;
+            var list = (from emp in list_filter_dept
+                        join tk in db.TIMEKEEPINGs on emp.EMPLOYEE_ID equals tk.EMPLOYEE_ID
+                        where tk.MONTH.Value.Month == SELECTMONTHTYPE.MONTH && tk.MONTH.Value.Year == SELECTMONTHTYPE.YEAR
+                        select tk).Distinct(); ;
+            MessageBox.Show("DEPT_NAME = " + SELECTDEPTTYPE.DEPT_NAME);
+            TimekeepingList = new ObservableCollection<TimekeepingData>();
+            TimekeepingTest = new ObservableCollection<TimekeepingData>();
             foreach (var item in list)
             {
                 item.NUMBER_OF_STANDARD_DAY = CalculateAverageDay(item.MONTH.Value.Month, item.MONTH.Value.Year);
                 item.NUMBER_OF_ABSENT_DAY = item.NUMBER_OF_STANDARD_DAY - item.NUMBER_OF_WORK_DAY;
-                TimekeepingList.Add(item);
-                TimekeepingTest.Add(item);
+                TimekeepingData data = new TimekeepingData();
+                data.EMPLOYEE_ID = (int)item.EMPLOYEE_ID;
+                data.NAME = item.EMPLOYEE.NAME;
+                data.DEPT_NAME = item.EMPLOYEE.DEPARTMENT.DEPT_NAME;
+                data.ROLE_NAME = item.EMPLOYEE.ROLE.ROLE_NAME;
+                data.WORK_DAY = (double)item.NUMBER_OF_WORK_DAY;
+                data.ABSENT_DAY = (double)item.NUMBER_OF_ABSENT_DAY;
+                data.STANDARD_DAY = (double)item.NUMBER_OF_STANDARD_DAY;
+                TimekeepingList.Add(data);
+                TimekeepingTest.Add(data);
             }
 
+        }
+        //Chuyển từ datagrid sang datatable
+        public static DataTable ToDataTable<T>(List<T> items)
+        {
+            var dataTable = new DataTable(typeof(T).Name);
+
+            //Get all the properties
+            var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (var prop in properties)
+            {
+                //Defining type of data column gives proper data table 
+                var type = (prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>) ? Nullable.GetUnderlyingType(prop.PropertyType) : prop.PropertyType);
+                //Setting column names as Property names
+                dataTable.Columns.Add(prop.Name, type);
+            }
+            foreach (var item in items)
+            {
+                var values = new object[properties.Length];
+                for (var i = 0; i < properties.Length; i++)
+                {
+                    //inserting property values to data table rows
+                    values[i] = properties[i].GetValue(item, null);
+                }
+                dataTable.Rows.Add(values);
+            }
+            //put a breakpoint here and check data table
+            return dataTable;
+        }
+        //Lưu datagrid thàng pdf (name: UserName)
+        private void ExportPDF(DataGrid dtgrid, string name)
+        {
+            var d = dtgrid.ItemsSource.Cast<TimekeepingData>();
+            var data = ToDataTable(d.ToList());
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Pdf Files|*.pdf";
+            saveFileDialog.Title = "Save Pdf file";
+            saveFileDialog.ShowDialog();
+
+            if (saveFileDialog.FileName != "")
+            {
+                System.IO.FileStream fs = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
+                Document document = new Document(iTextSharp.text.PageSize.A4);
+
+                PdfWriter writer = PdfWriter.GetInstance(document, fs);
+                document.Open();
+
+                //Report Header
+                BaseFont bfntHead = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                Font fntHead = new Font(bfntHead, 30, 1, BaseColor.GRAY);
+                Paragraph prgHeading = new Paragraph();
+                prgHeading.Alignment = Element.ALIGN_CENTER;
+                prgHeading.Add(new Chunk(String.Format("TIMEKEEPING REPORT {0}/{1}", SELECTMONTHTYPE.MONTH, SELECTMONTHTYPE.YEAR), fntHead));
+                document.Add(prgHeading);
+
+                //Author
+                Paragraph prgAuthor = new Paragraph();
+                BaseFont btnAuthor = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                Font fntAuthor = new Font(btnAuthor, 8, 2, BaseColor.BLACK);
+                prgAuthor.Alignment = Element.ALIGN_RIGHT;
+                prgAuthor.Add(new Chunk(String.Format("Author : {0}", name), fntAuthor));
+                prgAuthor.Add(new Chunk("\nRun Date : " + DateTime.Now.ToShortDateString(), fntAuthor));
+                document.Add(prgAuthor);
+
+                //Add a line seperation
+                Paragraph p = new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLACK, Element.ALIGN_LEFT, 1)));
+                document.Add(p);
+
+                //Add line break
+                document.Add(new Chunk("\n", fntHead));
+
+                //Write the table
+                PdfPTable table = new PdfPTable(data.Columns.Count);
+                //Table header
+                BaseFont btnColumnHeader = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                Font fntColumnHeader = new Font(btnColumnHeader, 6, 1, BaseColor.WHITE);
+                Font fntColumnData = new Font(btnColumnHeader, 5, 1, BaseColor.BLACK);
+                for (int i = 0; i < data.Columns.Count; i++)
+                {
+                    PdfPCell cell = new PdfPCell();
+                    cell.BackgroundColor = BaseColor.GRAY;
+                    String header = data.Columns[i].ColumnName.ToUpper();
+                    string[] split_string = header.Split('_');
+                    String name_temp = "";
+                    foreach (var item in split_string)
+                        name_temp = item + " ";
+
+                    cell.AddElement(new Chunk(String.Format("{0}", name_temp), fntColumnHeader));
+                    table.AddCell(cell);
+                }
+                //table Data
+                for (int i = 0; i < data.Rows.Count; i++)
+                {
+                    for (int j = 0; j < data.Columns.Count; j++)
+                    {
+                        DateTime date = DateTime.Now;
+                        if (data.Rows[i][j].GetType() == date.GetType())
+                        {
+                            date = (DateTime)data.Rows[i][j];
+                            PdfPCell cell_data = new PdfPCell();
+                            string data_table = date.Day + "/" + date.Month + "/" + date.Year;
+                            cell_data.AddElement(new Chunk(data_table, fntColumnData));
+                            table.AddCell(cell_data);
+                        }
+                        else
+                        {
+                            PdfPCell cell_data = new PdfPCell();
+                            string data_table = data.Rows[i][j].ToString();
+                            cell_data.AddElement(new Chunk(data_table, fntColumnData));
+                            table.AddCell(cell_data);
+                        }
+                    }
+                }
+
+                document.Add(table);
+                document.Close();
+                writer.Close();
+                fs.Close();
+            }
+            String message = "Export data to " + saveFileDialog.FileName + " successful";
+            MessageBox.Show(message, "MESSAGE", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        //Lưu datagrid thành excel
+        private void ExportExcel(DataGrid dtgrid)
+        {
+            var d = dtgrid.ItemsSource.Cast<TimekeepingData>();
+            var data = ToDataTable(d.ToList());
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Excel Files(.xlsx)| *.xlsx";
+            saveFileDialog.Title = "Save Excel file";
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                using (XLWorkbook workbook = new XLWorkbook())
+                {
+                    workbook.Worksheets.Add(data, "Month " + SELECTMONTHTYPE.MONTH + "-" + SELECTMONTHTYPE.YEAR);
+                    workbook.SaveAs(saveFileDialog.FileName);
+                }
+                String message = "Export data to " + saveFileDialog.FileName + " successful";
+                MessageBox.Show(message, "MESSAGE", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 }

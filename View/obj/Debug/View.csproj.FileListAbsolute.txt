@@ -234,3 +234,14 @@ D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConTimekeepingIn
 D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\Augustine.VietnameseCalendar.Core.dll
 D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\Augustine.VietnameseCalendar.Core.pdb
 D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\Augustine.VietnameseCalendar.Core.dll.config
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\BouncyCastle.Crypto.dll
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\ClosedXML.dll
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\DocumentFormat.OpenXml.dll
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\ExcelNumberFormat.dll
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\itextsharp.dll
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\System.IO.Packaging.dll
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\ClosedXML.pdb
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\ClosedXML.xml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\DocumentFormat.OpenXml.xml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\ExcelNumberFormat.xml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\itextsharp.xml

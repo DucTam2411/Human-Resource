@@ -6,9 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:HRMS.HR.uCon"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodel="clr-namespace:HRMS.HR.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ReportViewModel}"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodel="clr-namespace:HRMS.HR.ViewModel"
     Width="880"
     Height="620"
+    d:DataContext="{d:DesignInstance Type=viewmodel:ReportViewModel}"
     mc:Ignorable="d">
 
     <UserControl.Resources>
@@ -23,6 +25,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
             <StackPanel Margin="40,10,0,10" Orientation="Horizontal">
@@ -35,14 +38,14 @@
                     Kind="Search" />
                 <TextBox
                     x:Name="tbSearch"
-                    Width="370"
+                    Width="250"
                     Margin="5,0,0,0"
                     materialDesign:HintAssist.Hint="Search "
                     FontSize="18"
                     Text="{Binding SEARCH_TEXT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
 
                 <ComboBox
-                    Width="170"
+                    Width="100"
                     Margin="8,0,0,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -69,11 +72,6 @@
                         VerticalAlignment="Center"
                         Foreground="DimGray"
                         Kind="Calendar" />
-                    <TextBlock
-                        Margin="5,0,0,0"
-                        VerticalAlignment="Center"
-                        FontSize="18"
-                        Text="Month" />
 
                     <ComboBox
                         Margin="8,0,0,0"
@@ -99,7 +97,7 @@
                         </ComboBox.ItemContainerStyle>
                     </ComboBox>
                 </StackPanel>
-                <!--<StackPanel
+                <StackPanel
                     Grid.Column="1"
                     Margin="30,0,0,-0.4"
                     HorizontalAlignment="Right"
@@ -110,11 +108,6 @@
                         VerticalAlignment="Center"
                         Foreground="DimGray"
                         Kind="Home" />
-                    <TextBlock
-                        Margin="5,0,0,0"
-                        VerticalAlignment="Center"
-                        FontSize="18"
-                        Text="Department" />
 
                     <ComboBox
                         Margin="8,0,0,0"
@@ -122,14 +115,12 @@
                         VerticalAlignment="Center"
                         FontSize="18"
                         Foreground="DimGray"
-                        ItemsSource="{Binding MONTHLIST, Mode=TwoWay}"
-                        SelectedValue="{Binding SELECTMONTHTYPE}">
+                        ItemsSource="{Binding DEPTLIST, Mode=TwoWay}"
+                        SelectedValue="{Binding SELECTDEPTTYPE}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding MONTH}" />
-                                    <TextBlock Text=" / " />
-                                    <TextBlock Text="{Binding YEAR}" />
+                                    <TextBlock Text="{Binding DEPT_NAME}" />
                                 </StackPanel>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
@@ -139,13 +130,13 @@
                             </Style>
                         </ComboBox.ItemContainerStyle>
                     </ComboBox>
-                </StackPanel>-->
+                </StackPanel>
             </StackPanel>
 
             <DataGrid
-                x:Name="dgDashboard"
+                x:Name="dgTimekeeping"
                 Grid.Row="1"
-                Height="500"
+                Height="450"
                 Margin="0,20.4,0,0"
                 VerticalAlignment="Top"
                 AllowDrop="True"
@@ -160,51 +151,74 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Width="70"
-                        Binding="{Binding EMPLOYEE.EMPLOYEE_ID, UpdateSourceTrigger=PropertyChanged}"
+                        Binding="{Binding EMPLOYEE_ID, UpdateSourceTrigger=PropertyChanged}"
                         Foreground="DarkSlateGray"
                         Header="ID" />
                     <DataGridTextColumn
                         Width="auto"
-                        Binding="{Binding EMPLOYEE.NAME, UpdateSourceTrigger=PropertyChanged}"
+                        Binding="{Binding NAME, UpdateSourceTrigger=PropertyChanged}"
                         ElementStyle="{StaticResource WrapText}"
                         Foreground="DarkSlateGray"
                         Header="Name" />
                     <DataGridTextColumn
                         Width="auto"
-                        Binding="{Binding EMPLOYEE.DEPARTMENT.DEPT_NAME, UpdateSourceTrigger=PropertyChanged}"
+                        Binding="{Binding DEPT_NAME, UpdateSourceTrigger=PropertyChanged}"
                         Foreground="DarkSlateGray"
                         Header="Department" />
                     <DataGridTextColumn
                         Width="auto"
-                        Binding="{Binding EMPLOYEE.ROLE.ROLE_NAME, UpdateSourceTrigger=PropertyChanged}"
+                        Binding="{Binding ROLE_NAME, UpdateSourceTrigger=PropertyChanged}"
                         Foreground="DarkSlateGray"
                         Header="Role" />
                     <DataGridTextColumn
                         Width="auto"
-                        Binding="{Binding NUMBER_OF_WORK_DAY, UpdateSourceTrigger=PropertyChanged}"
+                        Binding="{Binding WORK_DAY, UpdateSourceTrigger=PropertyChanged}"
                         ElementStyle="{StaticResource WrapText}"
                         Foreground="DarkSlateGray"
                         Header="Work days" />
                     <DataGridTextColumn
                         Width="auto"
-                        Binding="{Binding NUMBER_OF_ABSENT_DAY, UpdateSourceTrigger=PropertyChanged}"
+                        Binding="{Binding ABSENT_DAY, UpdateSourceTrigger=PropertyChanged}"
                         ElementStyle="{StaticResource WrapText}"
                         Foreground="DarkSlateGray"
                         Header="Absent days" />
                     <DataGridTextColumn
                         Width="auto"
-                        Binding="{Binding NUMBER_OF_OVERTIME_DAY, UpdateSourceTrigger=PropertyChanged}"
+                        Binding="{Binding OVERTIME_DAY, UpdateSourceTrigger=PropertyChanged}"
                         ElementStyle="{StaticResource WrapText}"
                         Foreground="DarkSlateGray"
                         Header="Overtime days" />
                     <DataGridTextColumn
                         Width="auto"
-                        Binding="{Binding NUMBER_OF_STANDARD_DAY, UpdateSourceTrigger=PropertyChanged}"
+                        Binding="{Binding STANDARD_DAY, UpdateSourceTrigger=PropertyChanged}"
                         ElementStyle="{StaticResource WrapText}"
                         Foreground="DarkSlateGray"
                         Header="Standard working days" />
                 </DataGrid.Columns>
             </DataGrid>
+            <StackPanel
+                Grid.Row="2"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal">
+                <Button
+                    Width="150"
+                    Height="50"
+                    Margin="10,10,50,0"
+                    Command="{Binding ExportPDFCommand}"
+                    CommandParameter="{Binding ElementName=dgTimekeeping}"
+                    Content="Export PDF"
+                    FontSize="18"
+                    FontWeight="Light" />
+                <Button
+                    Width="150"
+                    Height="50"
+                    Margin="10,10,50,0"
+                    Command="{Binding ExportExcelCommand}"
+                    CommandParameter="{Binding ElementName=dgTimekeeping}"
+                    Content="Export Excel"
+                    FontSize="18"
+                    FontWeight="Light" />
+            </StackPanel>
 
         </Grid>
     </Grid>
