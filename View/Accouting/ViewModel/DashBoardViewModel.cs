@@ -51,7 +51,7 @@ namespace HRMS.Accouting.ViewModel
 
         //Binding dữ liệu với select trong comboox chọn loại lọc
         private ComboboxModel _SELECTEDTYPE;
-        public ComboboxModel SELECTEDTYPE { get => _SELECTEDTYPE; set { _SELECTEDTYPE = value; OnPropertyChanged(); } }
+        public ComboboxModel SELECTEDTYPE { get => _SELECTEDTYPE; set { _SELECTEDTYPE = value; OnPropertyChanged(); SEARCH_TEXT = ""; } }
 
         //Binding dữ liệu với Search Text
         private string _SEARCH_TEXT;

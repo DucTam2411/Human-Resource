@@ -116,7 +116,7 @@ namespace HRMS.Accouting.ViewModel
 
         //Binding dữ liệu với select trong comboox chọn loại lọc
         private ComboboxModel _SELECTEDTYPE;
-        public ComboboxModel SELECTEDTYPE { get => _SELECTEDTYPE; set { _SELECTEDTYPE = value; OnPropertyChanged(); } }
+        public ComboboxModel SELECTEDTYPE { get => _SELECTEDTYPE; set { _SELECTEDTYPE = value; OnPropertyChanged(); SEARCH_TEXT = ""; } }
 
         //Binding dữ liệu vào combobox department của chọn loại để lọc
         private ObservableCollection<ComboboxModel> _ListDeptType;
@@ -130,8 +130,12 @@ namespace HRMS.Accouting.ViewModel
             set 
             { 
                 _SELECTEDDEPTTYPE = value; 
-                OnPropertyChanged(); 
-                if(SELECTEDDEPTTYPE != null)
+                OnPropertyChanged();
+
+                //Trả search text về mặc định
+                SEARCH_TEXT = "";
+
+                if (SELECTEDDEPTTYPE != null)
                     LoadSalaryData();
             } 
         }
@@ -202,7 +206,8 @@ namespace HRMS.Accouting.ViewModel
             {
                 _SELECTMONTHTYPE = value;
                 OnPropertyChanged();
-
+                //Trả search text về mặc định
+                SEARCH_TEXT = "";
                 //Nếu selected khác null, nghĩa là tháng đã chọn thì show data theo select dó
                 if (SELECTMONTHTYPE != null)
                 {
