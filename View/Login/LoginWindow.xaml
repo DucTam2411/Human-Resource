@@ -80,6 +80,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         materialDesign:HintAssist.Hint="User"
+                        materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
                         Background="Transparent"
                         BorderThickness="0"
                         FontFamily="Helvetica"
@@ -115,6 +116,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         materialDesign:HintAssist.Hint="Password"
+                        materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
                         Background="Transparent"
                         BorderThickness="0"
                         FontFamily="Helvetica"
@@ -152,6 +154,7 @@
                         Command="{Binding LoginCommand}"
                         CommandParameter="{Binding ElementName=LoginWindow}"
                         Content="LOGIN"
+                        IsDefault="True"
                         Style="{StaticResource NormalButton}" />
 
                     <Button
