@@ -92,6 +92,7 @@ namespace HRMS.Accouting.ViewModel
                     COEFFICIENT = SelectedItem.COEFFICIENT;
                     TOTAL_SALARY = SelectedItem.TOTALSALARY;
                     NOTE = SelectedItem.NOTE;
+                    COFFEICENT_STRING = COEFFICIENT.ToString();
                     EMPLOYEE emp = HRMSEntities.Ins.DB.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == SelectedItem.EMPLOYEE_ID).FirstOrDefault();
                     IMAGESOURCE = emp.IMAGE;
                     if (IMAGESOURCE == null)
@@ -261,6 +262,21 @@ namespace HRMS.Accouting.ViewModel
 
         private long _TOTAL_SALARY;
         public long TOTAL_SALARY { get => _TOTAL_SALARY; set { _TOTAL_SALARY = value; OnPropertyChanged(); } }
+
+        private string _COFFEICENT_STRING;
+        public string COFFEICENT_STRING { get => _COFFEICENT_STRING; 
+            set 
+            { 
+                _COFFEICENT_STRING = value; 
+                OnPropertyChanged();
+                double number;
+                bool success = double.TryParse(COFFEICENT_STRING, out number);
+                if (success)
+                {
+                    COEFFICIENT = number;
+                }
+            } 
+        }
 
         private byte[] _IMAGESOURCE;
         public byte[] IMAGESOURCE { get => _IMAGESOURCE; set { _IMAGESOURCE = value; OnPropertyChanged(); } }
@@ -643,8 +659,20 @@ namespace HRMS.Accouting.ViewModel
         private void EditSalaryData()
         {
             hrmsEntities DB = new hrmsEntities();
-            
+
             //Lưu những thay đổi vào database 
+            double number;
+            bool success = double.TryParse(COFFEICENT_STRING, out number);
+            if (success)
+            {
+                COEFFICIENT = number;
+            }
+            else
+            {
+                MessageBox.Show("Wrong coffecient", "MESSAGE", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
             var Employee = DB.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == SelectedItem.EMPLOYEE_ID).SingleOrDefault();
             var Salary = DB.SALARies.Where(x => x.EMPLOYEE_ID == SelectedItem.EMPLOYEE_ID && x.MONTH.Value.Month == SelectedItem.DATESTART.Month).SingleOrDefault();
             var Timekeeping = DB.TIMEKEEPINGs.Where(x => x.EMPLOYEE_ID == SelectedItem.EMPLOYEE_ID && x.DATE_START.Value.Month == SelectedItem.DATESTART.Month).SingleOrDefault();

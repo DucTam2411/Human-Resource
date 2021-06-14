@@ -199,7 +199,7 @@
                                         materialDesign:HintAssist.HelperText="Employee Coefficient"
                                         materialDesign:HintAssist.Hint="Coefficient"
                                         FontSize="18"
-                                        Text="{Binding COEFFICIENT, UpdateSourceTrigger=PropertyChanged}" />
+                                        Text="{Binding COFFEICENT_STRING, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                             </StackPanel>
                         </DockPanel>
