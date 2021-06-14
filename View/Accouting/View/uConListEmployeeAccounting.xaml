@@ -206,42 +206,42 @@
 
                         <DataGridTextColumn
                             Width="120"
-                            Binding="{Binding WORK_DAY}"
+                            Binding="{Binding WORKDAY}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Work Day" />
 
                         <DataGridTextColumn
                             Width="120"
-                            Binding="{Binding OVERTIME_DAY}"
+                            Binding="{Binding OVERTIMEDAY}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Overtime Day" />
 
                         <DataGridTextColumn
                             Width="120"
-                            Binding="{Binding BASIC_WAGE}"
+                            Binding="{Binding BASICWAGE}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Baisc Wage" />
 
                         <DataGridTextColumn
                             Width="150"
-                            Binding="{Binding OVERTIME_SALARY}"
+                            Binding="{Binding OVERTIMESALARY}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Overtime Salary" />
 
                         <DataGridTextColumn
                             Width="150"
-                            Binding="{Binding SOCIAL_INSURANCE}"
+                            Binding="{Binding SOCIALINSURANCE}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Social Insurance" />
 
                         <DataGridTextColumn
                             Width="150"
-                            Binding="{Binding HEALTH_INSURANCE}"
+                            Binding="{Binding HEALTHINSURANCE}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Health Insurance" />
@@ -269,7 +269,7 @@
 
                         <DataGridTextColumn
                             Width="100"
-                            Binding="{Binding TOTAL_SALARY}"
+                            Binding="{Binding TOTALSALARY}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Salary" />

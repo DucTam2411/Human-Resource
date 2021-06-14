@@ -40,7 +40,8 @@
                 Height="180"
                 Margin="-22,150,0,150"
                 HorizontalAlignment="Left"
-                DockPanel.Dock="Left" />
+                DockPanel.Dock="Left" 
+                RoutedUserControlClicked="uConSideBar_RoutedUserControlClicked"/>
 
             <Grid>
                 <ContentControl x:Name="uConMain">

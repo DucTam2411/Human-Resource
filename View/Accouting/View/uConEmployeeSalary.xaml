@@ -130,7 +130,8 @@
                 TabStripPlacement="Right">
                 <TabItem
                     Background="Transparent"
-                    Header="{materialDesign:PackIcon Kind=Money,Size=24}"
+                    Header="{materialDesign:PackIcon Kind=Money,
+                                                     Size=24}"
                     Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                     <DockPanel>
                         <DockPanel Margin="20" HorizontalAlignment="Left">
@@ -198,7 +199,6 @@
                                         materialDesign:HintAssist.HelperText="Employee Coefficient"
                                         materialDesign:HintAssist.Hint="Coefficient"
                                         FontSize="18"
-                                        IsReadOnly="True"
                                         Text="{Binding COEFFICIENT, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                             </StackPanel>
@@ -219,7 +219,6 @@
                                         materialDesign:HintAssist.HelperText="Employee basic wage"
                                         materialDesign:HintAssist.Hint="Basic Wage"
                                         FontSize="18"
-                                        IsReadOnly="True"
                                         Text="{Binding BASIC_WAGE, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
 
@@ -236,7 +235,6 @@
                                         materialDesign:HintAssist.HelperText="Employee overtime salary"
                                         materialDesign:HintAssist.Hint="Overtime salary"
                                         FontSize="18"
-                                        IsReadOnly="True"
                                         Text="{Binding OVERTIME_SALARY, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
 
@@ -278,7 +276,8 @@
 
                 <TabItem
                     Background="Transparent"
-                    Header="{materialDesign:PackIcon Kind=NoteAddOutline, Size=24}"
+                    Header="{materialDesign:PackIcon Kind=NoteAddOutline,
+                                                     Size=24}"
                     Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                     <DockPanel>
                         <DockPanel DockPanel.Dock="Top">
@@ -322,15 +321,15 @@
                             </StackPanel>
                         </DockPanel>
                         <TextBox
-                            AcceptsReturn="True"
-                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
                             Margin="20"
                             materialDesign:HintAssist.HelperText="Note"
                             materialDesign:HintAssist.Hint="Note"
-                            FontSize="18"         
-                            TextWrapping="Wrap"
+                            AcceptsReturn="True"
+                            FontSize="18"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            Text="{Binding NOTE, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                             TextAlignment="Left"
-                            Text="{Binding NOTE, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                            TextWrapping="Wrap" />
                     </DockPanel>
                 </TabItem>
             </TabControl>
