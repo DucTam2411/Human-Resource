@@ -1,5 +1,8 @@
-﻿using System;
+﻿using HRMS.Director.Model;
+using HRMS.Director.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +23,14 @@ namespace HRMS.Director
     /// </summary>
     public partial class uConListEmployee : UserControl
     {
+       
         public uConListEmployee()
         {
             InitializeComponent();
+            DataContext = new ListEmployeeViewModel();
         }
+       
+
+      
     }
 }

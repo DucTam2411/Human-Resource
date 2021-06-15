@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HRMS.Director"
-    Title="HR_EmployeeWindow"
+    Title="DirectorWindow"
     Width="1124"
     Height="620"
     AllowsTransparency="True"
@@ -15,6 +15,7 @@
     mc:Ignorable="d">
 
     <Grid MouseDown="Grid_MouseDown">
+   
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />
@@ -36,14 +37,15 @@
         <DockPanel Grid.ColumnSpan="2" Margin="0,-6,26,6">
             <local:uConSideBarDirector
                 Width="240"
-                Height="180"
+                Height="220"
                 Margin="-22,150,0,150"
                 HorizontalAlignment="Left"
-                DockPanel.Dock="Left" />
+                DockPanel.Dock="Left"
+                RoutedUserControlClicked="uConSideBarAccouting_RoutedUserControlClicked"/>
 
             <Grid>
                 <ContentControl x:Name="uConMain">
-                    <local:uConListEmployee />
+                    <local:uConInfo />
                 </ContentControl>
 
             </Grid>

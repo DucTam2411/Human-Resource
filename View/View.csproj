@@ -61,6 +61,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -82,39 +84,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Accouting\uCon\Accouting_EmployeeWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Accouting\uCon\uConChangeInSalary.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Accouting\uCon\uConDashboardAccouting.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Accouting\uCon\uConEmployeeSalary.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Accouting\uCon\uConListEmployeeAccounting.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Accouting\uCon\uConMainDashboard.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Accouting\uCon\uConRequestBoard.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Accouting\uCon\uConSideBarAccouting.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Director\uConDirector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Director\uConInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -122,106 +96,95 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Director\uConReportTimeKeeping.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Director\uConSideBarDirector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="HR\uCon\HR_EmployeeWindow.xaml">
+    <Page Include="Director\uConTimeKeeping.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="HR\uCon\uConAddEmployee.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="HR\uCon\uConDashboard.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="HR\uCon\uConDetailTimeKeeping.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="HR\uCon\uConListEmployee.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="HR\uCon\uConModifyEmployee.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="HR\uCon\uConReport.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="HR\uCon\uConSideBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Compile Include="Accouting\Class1.cs" />
-    <Compile Include="Accouting\uCon\Accouting_EmployeeWindow.xaml.cs">
-      <DependentUpon>Accouting_EmployeeWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Accouting\uCon\uConChangeInSalary.xaml.cs">
-      <DependentUpon>uConChangeInSalary.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Accouting\uCon\uConDashboardAccouting.xaml.cs">
-      <DependentUpon>uConDashboardAccouting.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Accouting\uCon\uConEmployeeSalary.xaml.cs">
-      <DependentUpon>uConEmployeeSalary.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Accouting\uCon\uConListEmployeeAccounting.xaml.cs">
-      <DependentUpon>uConListEmployeeAccounting.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Accouting\uCon\uConMainDashboard.xaml.cs">
-      <DependentUpon>uConMainDashboard.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Accouting\uCon\uConRequestBoard.xaml.cs">
-      <DependentUpon>uConRequestBoard.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Accouting\uCon\uConSideBarAccouting.xaml.cs">
-      <DependentUpon>uConSideBarAccouting.xaml</DependentUpon>
-    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Director\Model\BaseViewModel.cs" />
+    <Compile Include="Director\Model\ComboboxModel.cs" />
+    <Compile Include="Director\Model\DELETE.cs">
+      <DependentUpon>HRMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Director\Model\DEPARTMENT.cs">
+      <DependentUpon>HRMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Director\Model\EMPLOYEE.cs">
+      <DependentUpon>HRMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Director\Model\EmployeeInformationData.cs" />
+    <Compile Include="Director\Model\HRMSEntity.cs" />
+    <Compile Include="Director\Model\HRMSModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HRMSModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Director\Model\HRMSModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HRMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Director\Model\HRMSModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HRMSModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Director\Model\RECORD.cs">
+      <DependentUpon>HRMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Director\Model\ROLE.cs">
+      <DependentUpon>HRMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Director\Model\ROOM.cs">
+      <DependentUpon>HRMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Director\Model\SALARY.cs">
+      <DependentUpon>HRMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Director\Model\TIMEKEEPING.cs">
+      <DependentUpon>HRMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Director\Model\TimekeepingData.cs" />
+    <Compile Include="Director\Model\TIMEKEEPING_DETAIL.cs">
+      <DependentUpon>HRMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Director\Model\USER.cs">
+      <DependentUpon>HRMSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Director\uConDirector.xaml.cs">
       <DependentUpon>uConDirector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Director\uConInfo.xaml.cs">
+      <DependentUpon>uConInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Director\uConListEmployee.xaml.cs">
       <DependentUpon>uConListEmployee.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Director\uConReportTimeKeeping.xaml.cs">
+      <DependentUpon>uConReportTimeKeeping.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Director\uConSideBarDirector.xaml.cs">
       <DependentUpon>uConSideBarDirector.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HR\uCon\HR_EmployeeWindow.xaml.cs">
-      <DependentUpon>HR_EmployeeWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="HR\uCon\uConAddEmployee.xaml.cs">
-      <DependentUpon>uConAddEmployee.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="HR\uCon\uConDashboard.xaml.cs">
-      <DependentUpon>uConDashboard.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="HR\uCon\uConDetailTimeKeeping.xaml.cs">
-      <DependentUpon>uConDetailTimeKeeping.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="HR\uCon\uConListEmployee.xaml.cs">
-      <DependentUpon>uConListEmployee.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="HR\uCon\uConModifyEmployee.xaml.cs">
-      <DependentUpon>uConModifyEmployee.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="HR\uCon\uConReport.xaml.cs">
-      <DependentUpon>uConReport.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="HR\uCon\uConSideBar.xaml.cs">
-      <DependentUpon>uConSideBar.xaml</DependentUpon>
+    <Compile Include="Director\uConTimeKeeping.xaml.cs">
+      <DependentUpon>uConTimeKeeping.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Director\ViewModel\InformationViewModel.cs" />
+    <Compile Include="Director\ViewModel\ListEmployeeViewModel.cs" />
+    <Compile Include="Director\ViewModel\TimekeepingViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -239,6 +202,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Director\Model\HRMSModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HRMSModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Director\Model\HRMSModel.edmx.diagram">
+      <DependentUpon>HRMSModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -248,13 +218,22 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Model\Model.csproj">
-      <Project>{d5153713-e858-4957-a52e-27d9fa23fa97}</Project>
-      <Name>Model</Name>
-    </ProjectReference>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Director\Model\HRMSModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HRMSModel.edmx</DependentUpon>
+      <LastGenOutput>HRMSModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Director\Model\HRMSModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HRMSModel.edmx</DependentUpon>
+      <LastGenOutput>HRMSModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -188,6 +188,51 @@ D:\cnpm\Human-Resource\View\obj\Debug\Director\Page2.g.cs
 D:\cnpm\Human-Resource\View\obj\Debug\Director\uConDiretor.g.cs
 D:\cnpm\Human-Resource\View\obj\Debug\Director\Page2.baml
 D:\cnpm\Human-Resource\View\obj\Debug\Director\uConDiretor.baml
-D:\Human Resource\View\obj\Debug\Director\uConDirector.g.cs
-D:\Human Resource\View\obj\Debug\Director\uConListEmployee.g.cs
-D:\Human Resource\View\obj\Debug\Director\uConSideBarDirector.g.cs
+D:\New folder (2)\View\obj\Debug\View.csprojAssemblyReference.cache
+D:\New folder (2)\View\obj\Debug\Director\uConDirector.g.cs
+D:\New folder (2)\View\obj\Debug\Director\uConListEmployee.g.cs
+D:\New folder (2)\View\obj\Debug\Director\uConSideBarDirector.g.cs
+D:\New folder (2)\View\obj\Debug\App.g.cs
+D:\New folder (2)\View\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\New folder (2)\View\obj\Debug\HRMS_MarkupCompile.cache
+D:\New folder (2)\View\obj\Debug\HRMS_MarkupCompile.lref
+D:\New folder (2)\View\obj\Debug\HRMS.exe
+D:\New folder (2)\View\obj\Debug\HRMS.pdb
+D:\New folder (2)\View\bin\Debug\HRMS.exe.config
+D:\New folder (2)\View\bin\Debug\HRMS.exe
+D:\New folder (2)\View\bin\Debug\HRMS.pdb
+D:\New folder (2)\View\bin\Debug\EntityFramework.dll
+D:\New folder (2)\View\bin\Debug\EntityFramework.SqlServer.dll
+D:\New folder (2)\View\bin\Debug\LiveCharts.dll
+D:\New folder (2)\View\bin\Debug\LiveCharts.Wpf.dll
+D:\New folder (2)\View\bin\Debug\MaterialDesignColors.dll
+D:\New folder (2)\View\bin\Debug\MaterialDesignThemes.Wpf.dll
+D:\New folder (2)\View\bin\Debug\Microsoft.Expression.Interactions.dll
+D:\New folder (2)\View\bin\Debug\System.Windows.Interactivity.dll
+D:\New folder (2)\View\bin\Debug\EntityFramework.xml
+D:\New folder (2)\View\bin\Debug\EntityFramework.SqlServer.xml
+D:\New folder (2)\View\bin\Debug\LiveCharts.pdb
+D:\New folder (2)\View\bin\Debug\LiveCharts.xml
+D:\New folder (2)\View\bin\Debug\LiveCharts.Wpf.pdb
+D:\New folder (2)\View\bin\Debug\LiveCharts.Wpf.xml
+D:\New folder (2)\View\bin\Debug\MaterialDesignColors.pdb
+D:\New folder (2)\View\bin\Debug\MaterialDesignThemes.Wpf.pdb
+D:\New folder (2)\View\bin\Debug\MaterialDesignThemes.Wpf.xml
+D:\New folder (2)\View\bin\Debug\Microsoft.Expression.Interactions.xml
+D:\New folder (2)\View\bin\Debug\System.Windows.Interactivity.xml
+D:\New folder (2)\View\obj\Debug\App.baml
+D:\New folder (2)\View\obj\Debug\Director\uConDirector.baml
+D:\New folder (2)\View\obj\Debug\Director\uConListEmployee.baml
+D:\New folder (2)\View\obj\Debug\Director\uConSideBarDirector.baml
+D:\New folder (2)\View\obj\Debug\HRMS.g.resources
+D:\New folder (2)\View\obj\Debug\HRMS.Properties.Resources.resources
+D:\New folder (2)\View\obj\Debug\View.csproj.GenerateResource.cache
+D:\New folder (2)\View\obj\Debug\View.csproj.CoreCompileInputs.cache
+D:\New folder (2)\View\obj\Debug\View.csproj.CopyComplete
+D:\New folder (2)\View\obj\Debug\Director\uConInfo.g.cs
+D:\New folder (2)\View\obj\Debug\Director\uConInfo.baml
+D:\New folder (2)\View\obj\Debug\Director\uConTimeKeeping.g.cs
+D:\New folder (2)\View\obj\Debug\Director\uConTimeKeeping.baml
+D:\New folder (2)\View\obj\Debug\Director\uConReportTimeKeeping.g.cs
+D:\New folder (2)\View\obj\Debug\Director\uConReportTimeKeeping.baml
+D:\New folder (2)\View\obj\Debug\HRMS_Content.g.cs

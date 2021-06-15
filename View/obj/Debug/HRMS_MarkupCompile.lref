@@ -1,22 +1,7 @@
-﻿D:\Human Resource\View\obj\Debug\GeneratedInternalTypeHelper.g.cs
-FD:\Human Resource\View\App.xaml;;
-FD:\Human Resource\View\Accouting\uCon\Accouting_EmployeeWindow.xaml;;
-FD:\Human Resource\View\Accouting\uCon\uConChangeInSalary.xaml;;
-FD:\Human Resource\View\Accouting\uCon\uConDashboardAccouting.xaml;;
-FD:\Human Resource\View\Accouting\uCon\uConEmployeeSalary.xaml;;
-FD:\Human Resource\View\Accouting\uCon\uConListEmployeeAccounting.xaml;;
-FD:\Human Resource\View\Accouting\uCon\uConMainDashboard.xaml;;
-FD:\Human Resource\View\Accouting\uCon\uConRequestBoard.xaml;;
-FD:\Human Resource\View\Accouting\uCon\uConSideBarAccouting.xaml;;
-FD:\Human Resource\View\Director\uConDirector.xaml;;
-FD:\Human Resource\View\Director\uConListEmployee.xaml;;
-FD:\Human Resource\View\Director\uConSideBarDirector.xaml;;
-FD:\Human Resource\View\HR\uCon\HR_EmployeeWindow.xaml;;
-FD:\Human Resource\View\HR\uCon\uConAddEmployee.xaml;;
-FD:\Human Resource\View\HR\uCon\uConDashboard.xaml;;
-FD:\Human Resource\View\HR\uCon\uConDetailTimeKeeping.xaml;;
-FD:\Human Resource\View\HR\uCon\uConListEmployee.xaml;;
-FD:\Human Resource\View\HR\uCon\uConModifyEmployee.xaml;;
-FD:\Human Resource\View\HR\uCon\uConReport.xaml;;
-FD:\Human Resource\View\HR\uCon\uConSideBar.xaml;;
+﻿
+FD:\New folder (2)\View\App.xaml;;
+FD:\New folder (2)\View\Director\uConDirector.xaml;;
+FD:\New folder (2)\View\Director\uConInfo.xaml;;
+FD:\New folder (2)\View\Director\uConSideBarDirector.xaml;;
+FD:\New folder (2)\View\Director\uConTimeKeeping.xaml;;
 
