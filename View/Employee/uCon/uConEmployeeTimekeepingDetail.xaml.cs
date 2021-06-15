@@ -21,10 +21,11 @@ namespace HRMS.Employee.uCon
     /// </summary>
     public partial class uConEmployeeTimekeepingDetail : UserControl
     {
-        public uConEmployeeTimekeepingDetail(int employee_id)
+        public uConEmployeeTimekeepingDetail(int employee_id, NavigationViewModel nav)
         {
             InitializeComponent();
-            DataContext = new EmployeeViewModel(employee_id);
+            DataContext = new EmployeeViewModel(employee_id, nav);
         }
+    
     }
 }

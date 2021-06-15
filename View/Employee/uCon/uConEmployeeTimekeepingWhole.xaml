@@ -84,14 +84,10 @@
                 HorizontalScrollBarVisibility="Visible"
                 IsReadOnly="True"
                 ItemsSource="{Binding TimekeepingList}"
-                SelectedItem="{Binding SelectedItem}"
                 VerticalScrollBarVisibility="Visible">
 
                 <DataGrid.InputBindings>
-                    <MouseBinding
-                        Command="{Binding DoubleClickCommand}"
-                        CommandParameter="{Binding ElementName=contentControlMain}"
-                        Gesture="LeftDoubleClick" />
+                    <MouseBinding Command="{Binding DoubleClickCommand}" Gesture="LeftDoubleClick" />
                 </DataGrid.InputBindings>
 
 

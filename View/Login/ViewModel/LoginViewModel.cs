@@ -1,4 +1,5 @@
 ﻿using HRMS.Employee.uCon;
+using HRMS.Employee.ViewModel;
 using HRMS.Model;
 using System;
 using System.Collections.Generic;
@@ -53,7 +54,6 @@ namespace HRMS.Login.ViewModel
         }
 
   
-        
         public void Login(Window w)
         {
 

@@ -1,22 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HRMS.Model;
 
-namespace HRMS.Model
+namespace HRMS.Employee.ViewModel
 {
     public class HRMSDatabase
     {
-        private  static hrmsEntities _ins;
+        public static hrmsEntities _Ins;
         public static hrmsEntities Ins
         {
             get
             {
-                _ins = new hrmsEntities();
-                return _ins;
+                _Ins = new hrmsEntities();
+                return _Ins;
+            }
+            set
+            {
+                _Ins = value;
             }
         }
-
     }
 }

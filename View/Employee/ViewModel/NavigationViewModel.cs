@@ -19,20 +19,20 @@ namespace HRMS.Employee.ViewModel
         {
             InformationCommand = new RelayCommand<object>(null, p =>
             {
-                CONTENT_MAIN = new uConEmployeeInformation(employee_id);
+                CONTENT_MAIN = new uConEmployeeInformation(employee_id, this);
             });
 
             TimekeepingCommand = new RelayCommand<object>(null, p =>
             {
-                CONTENT_MAIN = new uConEmployeeTimekeepingWhole(employee_id);
+                CONTENT_MAIN = new uConEmployeeTimekeepingWhole(employee_id, this);
             });
 
             SalaryCommand = new RelayCommand<object>(null, p =>
             {
-                CONTENT_MAIN = new uConEmployeeSalary(employee_id);
+                CONTENT_MAIN = new uConEmployeeSalary(employee_id, this);
             });
 
-            CONTENT_MAIN = new uConEmployeeInformation(employee_id);
+            CONTENT_MAIN = new uConEmployeeInformation(employee_id, this);
         }
 
 
@@ -47,6 +47,7 @@ namespace HRMS.Employee.ViewModel
             set
             {
                 _CONTENT_MAIN = value;
+
                 OnPropertyChanged();
             }
         }
@@ -72,8 +73,8 @@ namespace HRMS.Employee.ViewModel
         public ICommand InformationCommand { get; set; }
         public ICommand TimekeepingCommand { get; set; }
         public ICommand SalaryCommand { get; set; }
+
+
     }
-    
-  
 
 }

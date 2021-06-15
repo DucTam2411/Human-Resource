@@ -15,9 +15,8 @@ namespace HRMS.Employee.ViewModel
     class EmployeeViewModel : BaseViewModel
     {
 
-       
         #region Handle uConSalary
-        
+
         /// <summary>
         ///  PROPERTIES
         /// </summary>
@@ -71,7 +70,7 @@ namespace HRMS.Employee.ViewModel
         }
 
         private TIMEKEEPING _TimekeepingSelected;
-        public TIMEKEEPING TimekeepingSelected
+        public TIMEKEEPING TimekeepingSelected  
         {
             get
             {
@@ -81,6 +80,7 @@ namespace HRMS.Employee.ViewModel
             {
                 _TimekeepingSelected = value;
                 OnPropertyChanged();
+                
             }
         }
 
@@ -138,7 +138,7 @@ namespace HRMS.Employee.ViewModel
 
         }
 
-     
+
 
         private DateTime _monthSelectInTimkeepingDetail;
         private DateTime monthSelectInTimkeepingDetail
@@ -206,7 +206,7 @@ namespace HRMS.Employee.ViewModel
         /// <summary>
         ///  COMMAND
         /// </summary>
-      
+
         public ICommand SearchTextCommand { get; set; }
         public ICommand SearchTextChangedCommand { get; set; }
         public ICommand DoubleClickCommand { get; set; }
@@ -215,7 +215,7 @@ namespace HRMS.Employee.ViewModel
         /// <summary>
         ///  FUNCTION
         /// </summary>
-      
+
         public void SearchBarChange(string text)
         {
 
@@ -374,7 +374,7 @@ namespace HRMS.Employee.ViewModel
                 OnPropertyChanged();
             }
         }
-        
+
         public DateTime[] _overtimeList { get; set; }
         public DateTime[] overtimeList
         {
@@ -407,21 +407,23 @@ namespace HRMS.Employee.ViewModel
                             where t.TIMEKEEPING.MONTH.Value.Month == timekeeping_date.Month &&
                             t.TIMEKEEPING.MONTH.Value.Year == timekeeping_date.Year &&
                             t.TIMEKEEPING_DETAIL_TYPE == 1
-                            select t.CHECK_DATE.Value).ToArray());
+                            select t.CHECK_DATE.Value).Distinct().ToArray());
 
             absentdayList = ((from t in HRMSDatabase.Ins.TIMEKEEPING_DETAIL
                               where t.TIMEKEEPING.MONTH == timekeeping_date && t.TIMEKEEPING_DETAIL_TYPE == 2
-                              select t.CHECK_DATE.Value).ToArray());
+                              select t.CHECK_DATE.Value).Distinct().ToArray());
 
             overtimeList = ((from t in HRMSDatabase.Ins.TIMEKEEPING_DETAIL
                              where t.TIMEKEEPING.MONTH == timekeeping_date && t.TIMEKEEPING_DETAIL_TYPE == 3
-                             select t.CHECK_DATE.Value).ToArray());
+                             select t.CHECK_DATE.Value).Distinct().ToArray());
         }
         #endregion
 
-
-        public EmployeeViewModel(int employee_ID)
+        NavigationViewModel NavigationViewModel;
+        public EmployeeViewModel(int employee_ID, NavigationViewModel navigationViewModel)
         {
+
+            this.NavigationViewModel = navigationViewModel;
 
             Employee = ((from employee in HRMSDatabase.Ins.EMPLOYEEs
                          where employee.EMPLOYEE_ID == employee_ID
@@ -457,17 +459,20 @@ namespace HRMS.Employee.ViewModel
 
             // declare command 
             SearchTextChangedCommand = new RelayCommand<string>(null, p => { SearchBarChange(p); });
-            
+
             MonthSelectionChangedCommand = new RelayCommand<DateTime>(null, p => { MonthSelectionChange(p); });
 
-            
+
+
+
             // command for detail timekeeping
-            DoubleClickCommand = new RelayCommand<ContentControl>(null, p => p.Content = new uConEmployeeTimekeepingDetail(Employee.EMPLOYEE_ID));
-            BackToWholeCommand = new RelayCommand<UserControl>(null, p => p.Content  = new uConEmployeeTimekeepingWhole(Employee.EMPLOYEE_ID));
+            DoubleClickCommand = new RelayCommand<object>(null, p => NavigationViewModel.CONTENT_MAIN = new uConEmployeeTimekeepingDetail(Employee.EMPLOYEE_ID, NavigationViewModel));
+
+            BackToWholeCommand = new RelayCommand<object>(null, p => NavigationViewModel.CONTENT_MAIN = new uConEmployeeTimekeepingWhole(Employee.EMPLOYEE_ID, NavigationViewModel));
             MonthSelectionChangedDetailCommand = new RelayCommand<DateTime>(null, p => { getDayList(p); });
 
-        }
 
+        }
 
         public void CheckAttendance()
         {
@@ -501,13 +506,5 @@ namespace HRMS.Employee.ViewModel
 
 
         }
-
-
-
-
-
-
-
-
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace HRMS.Model
@@ -45,8 +46,18 @@ namespace HRMS.Model
 
         public void Execute(object parameter)
         {
-            _execute((T)parameter);
-        }
+
+            try
+            {
+                _execute((T)parameter);
+
+            }
+
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message, e.StackTrace);
+            }
+}
 
         public event EventHandler CanExecuteChanged
         {
