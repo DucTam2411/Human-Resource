@@ -43,7 +43,7 @@ namespace HRMS.Employee.uCon
 
 
             // this will handle check attendance
-            this.DataContext = new TimerViewModel(employee_id);
+            this.DataContext = new AttendanceViewModel(employee_id);
 
         }
 

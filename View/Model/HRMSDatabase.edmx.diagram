@@ -4,17 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e4fa902613a54afbb4ec7c172ab2eeeb" Name="Diagram1" ZoomLevel="85">
-        <EntityTypeShape EntityType="hrmsModel.DELETE" Width="1.5" PointX="9.75" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmsModel.DEPARTMENT" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmsModel.EMPLOYEE" Width="1.5" PointX="7.5" PointY="17.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmsModel.RECORD" Width="1.5" PointX="12.75" PointY="15.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmsModel.ROLE" Width="1.5" PointX="5.25" PointY="26.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmsModel.ROOM" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmsModel.SALARY" Width="1.5" PointX="9.75" PointY="20.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmsModel.TIMEKEEPING" Width="1.5" PointX="9.75" PointY="25.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmsModel.TIMEKEEPING_DETAIL" Width="1.5" PointX="12" PointY="21.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmsModel.USER" Width="1.5" PointX="9.75" PointY="29.25" IsExpanded="true" />
+      <Diagram DiagramId="e8ac6775630745a9a6bc5c135920ee4b" Name="Diagram1">
+        <EntityTypeShape EntityType="hrmsModel.DELETE" Width="1.5" PointX="9.75" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmsModel.DEPARTMENT" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmsModel.EMPLOYEE" Width="1.5" PointX="7.5" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmsModel.RECORD" Width="1.5" PointX="12.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmsModel.ROLE" Width="1.5" PointX="5.25" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmsModel.ROOM" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmsModel.SALARY" Width="1.5" PointX="9.75" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmsModel.TIMEKEEPING" Width="1.5" PointX="9.75" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmsModel.TIMEKEEPING_DETAIL" Width="1.5" PointX="12" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmsModel.USER" Width="1.5" PointX="9.75" PointY="27.75" IsExpanded="true" />
         <AssociationConnector Association="hrmsModel.FK__DELETE__EMPLOYEE__36B12243" ManuallyRouted="false" />
         <AssociationConnector Association="hrmsModel.FK__DEPARTMEN__ROOM___37A5467C" ManuallyRouted="false" />
         <AssociationConnector Association="hrmsModel.FK__EMPLOYEE__DEPT_I__38996AB5" ManuallyRouted="false" />

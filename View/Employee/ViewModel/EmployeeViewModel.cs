@@ -473,38 +473,5 @@ namespace HRMS.Employee.ViewModel
 
 
         }
-
-        public void CheckAttendance()
-        {
-
-            // insert absent day
-            DateTime today = new DateTime();
-            DateTime dateBefore = (from t in HRMSDatabase.Ins.TIMEKEEPINGs
-                                   orderby t.MONTH descending
-                                   where t.MONTH.HasValue == true
-                                   select t.MONTH.Value).Take(1).Single();
-
-            int idTimekeeping = (from t in HRMSDatabase.Ins.TIMEKEEPINGs
-                                 orderby t.MONTH descending
-                                 where t.MONTH.HasValue == true
-                                 select t.TIMEKEEPING_ID).Take(1).Single();
-            for (DateTime tem = dateBefore.AddDays(1); DateTime.Compare(tem, today) > 0; tem.AddDays(1))
-            {
-                TIMEKEEPING_DETAIL tem_detail = new TIMEKEEPING_DETAIL();
-                tem_detail.EMPLOYEE_ID = Employee.EMPLOYEE_ID;
-                tem_detail.CHECK_DATE = tem;
-                tem_detail.TIMEKEEPING_ID = idTimekeeping;
-                tem_detail.TIMEKEEPING_DETAIL_TYPE = 3;
-            }
-
-
-            // first day of the month 
-            if (today.Day == 1)
-            {
-
-            }
-
-
-        }
     }
 }

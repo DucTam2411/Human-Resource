@@ -37,6 +37,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Augustine.VietnameseCalendar.Core">
+      <HintPath>C:\Users\hoang\Downloads\VCalendar\VCalendar\bin\Debug\Augustine.VietnameseCalendar.Core.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -132,6 +135,7 @@
     <Compile Include="Employee\uCon\uConSideBarEmployee.xaml.cs">
       <DependentUpon>uConSideBarEmployee.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Employee\ViewModel\AttendanceViewModel.cs" />
     <Compile Include="Employee\ViewModel\EmployeeViewModel.cs" />
     <Page Include="Login\LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -143,58 +147,57 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\DELETE.cs">
+      <DependentUpon>HRMSDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DEPARTMENT.cs">
+      <DependentUpon>HRMSDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EMPLOYEE.cs">
+      <DependentUpon>HRMSDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\HRMSDatabase.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HRMSDatabase.Context.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\HRMSDatabase.cs" />
     <Compile Include="Employee\ViewModel\NavigationViewModel.cs" />
-    <Compile Include="Employee\ViewModel\TimerViewModel.cs" />
     <Compile Include="Login\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Login\ViewModel\LoginViewModel.cs" />
     <Compile Include="Model\BaseViewModel.cs" />
-    <Compile Include="Model\DELETE.cs">
-      <DependentUpon>HRMSEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\DEPARTMENT.cs">
-      <DependentUpon>HRMSEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\EMPLOYEE.cs">
-      <DependentUpon>HRMSEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\HRMSEntity.Context.cs">
+    <Compile Include="Model\HRMSDatabase.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HRMSEntity.Context.tt</DependentUpon>
+      <DependentUpon>HRMSDatabase.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\HRMSEntity.cs">
+    <Compile Include="Model\HRMSDatabase1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HRMSEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\HRMSEntity.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HRMSEntity.edmx</DependentUpon>
+      <DependentUpon>HRMSDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\RECORD.cs">
-      <DependentUpon>HRMSEntity.tt</DependentUpon>
+      <DependentUpon>HRMSDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ROLE.cs">
-      <DependentUpon>HRMSEntity.tt</DependentUpon>
+      <DependentUpon>HRMSDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ROOM.cs">
-      <DependentUpon>HRMSEntity.tt</DependentUpon>
+      <DependentUpon>HRMSDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\SALARY.cs">
-      <DependentUpon>HRMSEntity.tt</DependentUpon>
+      <DependentUpon>HRMSDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\TIMEKEEPING.cs">
-      <DependentUpon>HRMSEntity.tt</DependentUpon>
+      <DependentUpon>HRMSDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\TIMEKEEPING_DETAIL.cs">
-      <DependentUpon>HRMSEntity.tt</DependentUpon>
+      <DependentUpon>HRMSDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\USER.cs">
-      <DependentUpon>HRMSEntity.tt</DependentUpon>
+      <DependentUpon>HRMSDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -213,12 +216,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model\HRMSEntity.edmx">
+    <EntityDeploy Include="Model\HRMSDatabase.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>HRMSEntity.Designer.cs</LastGenOutput>
+      <LastGenOutput>HRMSDatabase.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\HRMSEntity.edmx.diagram">
-      <DependentUpon>HRMSEntity.edmx</DependentUpon>
+    <None Include="Model\HRMSDatabase.edmx.diagram">
+      <DependentUpon>HRMSDatabase.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -236,15 +239,15 @@
     <Resource Include="Login\champagn.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\HRMSEntity.Context.tt">
+    <Content Include="Model\HRMSDatabase.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HRMSEntity.edmx</DependentUpon>
-      <LastGenOutput>HRMSEntity.Context.cs</LastGenOutput>
+      <DependentUpon>HRMSDatabase.edmx</DependentUpon>
+      <LastGenOutput>HRMSDatabase.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\HRMSEntity.tt">
+    <Content Include="Model\HRMSDatabase.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HRMSEntity.edmx</DependentUpon>
-      <LastGenOutput>HRMSEntity.cs</LastGenOutput>
+      <DependentUpon>HRMSDatabase.edmx</DependentUpon>
+      <LastGenOutput>HRMSDatabase1.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

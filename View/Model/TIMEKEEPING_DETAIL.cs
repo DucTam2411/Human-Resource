@@ -17,7 +17,7 @@ namespace HRMS.Model
         public int TIMEKEEPING_DETAIL_ID { get; set; }
         public Nullable<int> TIMEKEEPING_ID { get; set; }
         public Nullable<System.DateTime> CHECK_DATE { get; set; }
-        public Nullable<System.TimeSpan> CHECK_TIME { get; set; }
+        public Nullable<int> SESSION { get; set; }
         public Nullable<int> EMPLOYEE_ID { get; set; }
         public Nullable<int> TIMEKEEPING_DETAIL_TYPE { get; set; }
     

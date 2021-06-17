@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="hrmsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="hrmsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="DELETE">
           <Key>
             <PropertyRef Name="ID_DELETE" />
@@ -99,9 +99,10 @@
           </Key>
           <Property Name="TIMEKEEPING_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EMPLOYEE_ID" Type="int" />
-          <Property Name="NUMBER_OF_WORK_DAY" Type="int" />
-          <Property Name="NUMBER_OF_ABSENT_DAY" Type="int" />
-          <Property Name="NUMBER_OF_OVERTIME_DAY" Type="int" />
+          <Property Name="NUMBER_OF_WORK_DAY" Type="real" />
+          <Property Name="NUMBER_OF_ABSENT_DAY" Type="real" />
+          <Property Name="NUMBER_OF_OVERTIME_DAY" Type="real" />
+          <Property Name="NUMBER_OF_STANDARD_DAY" Type="real" />
           <Property Name="DATE_START" Type="date" />
           <Property Name="DATE_END" Type="date" />
           <Property Name="MONTH" Type="date" />
@@ -113,7 +114,7 @@
           <Property Name="TIMEKEEPING_DETAIL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TIMEKEEPING_ID" Type="int" />
           <Property Name="CHECK_DATE" Type="date" />
-          <Property Name="CHECK_TIME" Type="time" Precision="7" />
+          <Property Name="SESSION" Type="int" />
           <Property Name="EMPLOYEE_ID" Type="int" />
           <Property Name="TIMEKEEPING_DETAIL_TYPE" Type="int" />
         </EntityType>
@@ -330,7 +331,8 @@
             <End Role="USER" EntitySet="USER" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="hrmsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -447,9 +449,10 @@
           </Key>
           <Property Name="TIMEKEEPING_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EMPLOYEE_ID" Type="Int32" />
-          <Property Name="NUMBER_OF_WORK_DAY" Type="Int32" />
-          <Property Name="NUMBER_OF_ABSENT_DAY" Type="Int32" />
-          <Property Name="NUMBER_OF_OVERTIME_DAY" Type="Int32" />
+          <Property Name="NUMBER_OF_WORK_DAY" Type="Single" />
+          <Property Name="NUMBER_OF_ABSENT_DAY" Type="Single" />
+          <Property Name="NUMBER_OF_OVERTIME_DAY" Type="Single" />
+          <Property Name="NUMBER_OF_STANDARD_DAY" Type="Single" />
           <Property Name="DATE_START" Type="DateTime" Precision="0" />
           <Property Name="DATE_END" Type="DateTime" Precision="0" />
           <Property Name="MONTH" Type="DateTime" Precision="0" />
@@ -463,11 +466,11 @@
           <Property Name="TIMEKEEPING_DETAIL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TIMEKEEPING_ID" Type="Int32" />
           <Property Name="CHECK_DATE" Type="DateTime" Precision="0" />
-          <Property Name="CHECK_TIME" Type="Time" Precision="7" />
+          <Property Name="SESSION" Type="Int32" />
           <Property Name="EMPLOYEE_ID" Type="Int32" />
+          <Property Name="TIMEKEEPING_DETAIL_TYPE" Type="Int32" />
           <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__TIMEKEEPI__EMPLO__3F466844" FromRole="TIMEKEEPING_DETAIL" ToRole="EMPLOYEE" />
           <NavigationProperty Name="TIMEKEEPING" Relationship="Self.FK__TIMEKEEPI__TIMEK__403A8C7D" FromRole="TIMEKEEPING_DETAIL" ToRole="TIMEKEEPING" />
-          <Property Name="TIMEKEEPING_DETAIL_TYPE" Type="Int32" />
         </EntityType>
         <EntityType Name="USER">
           <Key>
@@ -792,6 +795,7 @@
                 <ScalarProperty Name="NUMBER_OF_WORK_DAY" ColumnName="NUMBER_OF_WORK_DAY" />
                 <ScalarProperty Name="NUMBER_OF_ABSENT_DAY" ColumnName="NUMBER_OF_ABSENT_DAY" />
                 <ScalarProperty Name="NUMBER_OF_OVERTIME_DAY" ColumnName="NUMBER_OF_OVERTIME_DAY" />
+                <ScalarProperty Name="NUMBER_OF_STANDARD_DAY" ColumnName="NUMBER_OF_STANDARD_DAY" />
                 <ScalarProperty Name="DATE_START" ColumnName="DATE_START" />
                 <ScalarProperty Name="DATE_END" ColumnName="DATE_END" />
                 <ScalarProperty Name="MONTH" ColumnName="MONTH" />
@@ -801,12 +805,12 @@
           <EntitySetMapping Name="TIMEKEEPING_DETAIL">
             <EntityTypeMapping TypeName="hrmsModel.TIMEKEEPING_DETAIL">
               <MappingFragment StoreEntitySet="TIMEKEEPING_DETAIL">
-                <ScalarProperty Name="TIMEKEEPING_DETAIL_TYPE" ColumnName="TIMEKEEPING_DETAIL_TYPE" />
                 <ScalarProperty Name="TIMEKEEPING_DETAIL_ID" ColumnName="TIMEKEEPING_DETAIL_ID" />
                 <ScalarProperty Name="TIMEKEEPING_ID" ColumnName="TIMEKEEPING_ID" />
                 <ScalarProperty Name="CHECK_DATE" ColumnName="CHECK_DATE" />
-                <ScalarProperty Name="CHECK_TIME" ColumnName="CHECK_TIME" />
+                <ScalarProperty Name="SESSION" ColumnName="SESSION" />
                 <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
+                <ScalarProperty Name="TIMEKEEPING_DETAIL_TYPE" ColumnName="TIMEKEEPING_DETAIL_TYPE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

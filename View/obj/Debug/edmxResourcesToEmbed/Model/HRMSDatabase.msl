@@ -117,7 +117,7 @@
           <ScalarProperty Name="TIMEKEEPING_DETAIL_ID" ColumnName="TIMEKEEPING_DETAIL_ID" />
           <ScalarProperty Name="TIMEKEEPING_ID" ColumnName="TIMEKEEPING_ID" />
           <ScalarProperty Name="CHECK_DATE" ColumnName="CHECK_DATE" />
-          <ScalarProperty Name="CHECK_TIME" ColumnName="CHECK_TIME" />
+          <ScalarProperty Name="SESSION" ColumnName="SESSION" />
           <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
           <ScalarProperty Name="TIMEKEEPING_DETAIL_TYPE" ColumnName="TIMEKEEPING_DETAIL_TYPE" />
         </MappingFragment>

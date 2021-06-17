@@ -76,7 +76,7 @@ namespace HRMS.Login.ViewModel
                         e.ShowDialog();
                         break;
 
-                    case 1:  // HR
+                    case 1: // HR
                     case 2: // ACCOUTING
                     case 3: // DIRECTOR
                         break;
@@ -114,5 +114,7 @@ namespace HRMS.Login.ViewModel
                 return sb.ToString();
             }
         }
+
+        
     }
 }

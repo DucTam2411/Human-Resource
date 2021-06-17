@@ -22,9 +22,10 @@ namespace HRMS.Model
     
         public int TIMEKEEPING_ID { get; set; }
         public Nullable<int> EMPLOYEE_ID { get; set; }
-        public Nullable<int> NUMBER_OF_WORK_DAY { get; set; }
-        public Nullable<int> NUMBER_OF_ABSENT_DAY { get; set; }
-        public Nullable<int> NUMBER_OF_OVERTIME_DAY { get; set; }
+        public Nullable<float> NUMBER_OF_WORK_DAY { get; set; }
+        public Nullable<float> NUMBER_OF_ABSENT_DAY { get; set; }
+        public Nullable<float> NUMBER_OF_OVERTIME_DAY { get; set; }
+        public Nullable<float> NUMBER_OF_STANDARD_DAY { get; set; }
         public Nullable<System.DateTime> DATE_START { get; set; }
         public Nullable<System.DateTime> DATE_END { get; set; }
         public Nullable<System.DateTime> MONTH { get; set; }
