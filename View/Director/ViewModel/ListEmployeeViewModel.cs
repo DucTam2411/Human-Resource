@@ -260,7 +260,11 @@ namespace HRMS.Director.ViewModel
             }
             if (isMonthNow == false)
             {
-                MONTHLIST.Add(new ComboboxModel(DateTime.Now.Month, DateTime.Now.Year, true));
+                if (DateTime.Now.Month == DateTime.Now.Month)
+                { }
+                else { 
+                    MONTHLIST.Add(new ComboboxModel(DateTime.Now.Month, DateTime.Now.Year, true));
+                }             
             }
             SELECTMONTHTYPE = MONTHLIST.Where(x => x.ISSELECTED == true).FirstOrDefault();
             if (SELECTMONTHTYPE == null)

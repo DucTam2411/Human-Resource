@@ -23,7 +23,7 @@ namespace HRMS.Director
     public partial class uConSideBarDirector : UserControl
     {
 
-        public const string HOME = "Home";
+        public const string HOME = "Info";
         public const string TIMEKEEPING = "TimeKeeping";
         public const string REPORTEMPLOYEE = "Report Employee";
         public const string REPORTTIMEKEEPING = "Report TimeKeeping";

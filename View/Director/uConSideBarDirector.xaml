@@ -63,7 +63,7 @@
                         FontSize="22"
                         FontWeight="SemiBold"
                         Foreground="Black"
-                        Text="Home" />
+                        Text="Info" />
                 </StackPanel>
 
             </Button>
