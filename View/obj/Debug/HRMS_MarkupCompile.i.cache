@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Human Resource\View\obj\Debug\
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\
 HRMS
 none
 false
 DEBUG;TRACE
-D:\Human Resource\View\App.xaml
-12-1936909386
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\App.xaml
+25-426814056
+2-1556844510
+72213168772
+35-1595698368
+Accounting\View\Accouting_EmployeeWindow.xaml;Accounting\View\uConAccountingEmployeeInformation.xaml;Accounting\View\uConAccountingSalaryInformation.xaml;Accounting\View\uConAccountingTimekeepingDetailInformation.xaml;Accounting\View\uConAccountingTimekeepingInformation.xaml;Accounting\View\uConDashBoard.xaml;Accounting\View\uConEmployeeSalary.xaml;Accounting\View\uConListEmployeeAccounting.xaml;Employee\uCon\EmployeeWindow.xaml;Employee\uCon\uConEmployeeInformation.xaml;Employee\uCon\uConEmployeeSalary.xaml;Employee\uCon\uConEmployeeTimekeepingDetail.xaml;Employee\uCon\uConEmployeeTimekeepingWhole.xaml;Employee\uCon\uConSideBarEmployee.xaml;HR\View\HR_EmployeeWindow.xaml;HR\View\uConAddEmployee.xaml;HR\View\uConDashboard.xaml;HR\View\uConHRInformation.xaml;HR\View\uConListEmployee.xaml;HR\View\uConModifyEmployee.xaml;HR\View\uConReport.xaml;HR\View\uConSideBar.xaml;HR\View\uConTimekeepingInformation.xaml;Login\ModernButton.xaml;Login\LoginWindow.xaml;
 
-171067176330
-231629852989
-Accouting\uCon\Accouting_EmployeeWindow.xaml;Accouting\uCon\uConDashboardAccouting.xaml;Accouting\uCon\uConEmployeeSalary.xaml;Accouting\uCon\uConListEmployeeAccounting.xaml;Accouting\uCon\uConSideBarAccouting.xaml;HR\uCon\HR_EmployeeWindow.xaml;HR\uCon\uConAddEmployee.xaml;HR\uCon\uConDashboard.xaml;HR\uCon\uConListEmployee.xaml;HR\uCon\uConModifyEmployee.xaml;HR\uCon\uConReport.xaml;HR\uCon\uConSideBar.xaml;
-
-True
+False
 

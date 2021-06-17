@@ -1,0 +1,169 @@
+﻿<UserControl
+    x:Class="HRMS.HR.uCon.uConListEmployee"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:HRMS.HR.uCon"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodel="clr-namespace:HRMS.HR.ViewModel"
+    Width="880"
+    Height="620"
+    d:DataContext="{d:DesignInstance Type=viewmodel:ListEmployeeViewModel}"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Style x:Key="WrapText" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="TextBlock.TextAlignment" Value="Left" />
+        </Style>
+    </UserControl.Resources>
+
+
+    <ContentControl x:Name="contentControlMain" Height="auto">
+        <Grid Margin="0,20,0,0" Background="Transparent">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="350" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+
+
+
+            <Grid Grid.Row="0" Margin="20">
+
+                <StackPanel Margin="-20,0,0,0" Orientation="Horizontal">
+
+                    <materialDesign:PackIcon
+                        Width="30"
+                        Height="30"
+                        VerticalAlignment="Center"
+                        Foreground="DimGray"
+                        Kind="Search" />
+                    <TextBox
+                        Width="370"
+                        Margin="5,0,0,0"
+                        materialDesign:HintAssist.Hint="Search "
+                        FontSize="18">
+                        <TextBox.Text>
+                            <Binding Path="SEARCH_TEXT" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules />
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <ComboBox
+                        Margin="8,0,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        DisplayMemberPath="NAME"
+                        FontSize="18"
+                        Foreground="DimGray"
+                        ItemsSource="{Binding ListType}"
+                        SelectedValue="{Binding SELECTEDTYPE}">
+                        <ComboBox.ItemContainerStyle>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="IsSelected" Value="{Binding ISSELECTED}" />
+                            </Style>
+                        </ComboBox.ItemContainerStyle>
+                    </ComboBox>
+
+
+
+
+                </StackPanel>
+            </Grid>
+
+
+
+            <Grid Grid.Row="1">
+                <DataGrid
+                    x:Name="dtgvEmployees"
+                    Margin="0,0,-0.4,0"
+                    VerticalAlignment="Top"
+                    AllowDrop="True"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False"
+                    CanUserReorderColumns="False"
+                    CanUserResizeColumns="True"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding employees, Mode=TwoWay}"
+                    SelectedItem="{Binding SELECTED_ITEM}">
+                    <DataGrid.InputBindings>
+                        <MouseBinding
+                            Command="{Binding DoubleClickCommand}"
+                            CommandParameter="{Binding ElementName=contentControlMain}"
+                            Gesture="LeftDoubleClick" />
+                    </DataGrid.InputBindings>
+
+
+                    <DataGrid.Columns>
+
+
+                        <DataGridTextColumn
+                            Width="90"
+                            Binding="{Binding ID_CARD}"
+                            ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                            Foreground="DarkSlateGray"
+                            Header="ID" />
+
+
+                        <DataGridTextColumn
+                            Width="220"
+                            Binding="{Binding NAME}"
+                            ElementStyle="{StaticResource WrapText}"
+                            Foreground="DarkSlateGray"
+                            Header="Name" />
+
+
+                        <materialDesign:DataGridTextColumn
+                            Width="120"
+                            Binding="{Binding DEPT_NAME}"
+                            ElementStyle="{StaticResource WrapText}"
+                            Foreground="DarkSlateGray"
+                            Header="Department" />
+
+
+
+                        <DataGridTextColumn
+                            Width="200"
+                            Binding="{Binding ROLE_NAME}"
+                            ElementStyle="{StaticResource WrapText}"
+                            Foreground="DarkSlateGray"
+                            Header="Role" />
+
+
+                    </DataGrid.Columns>
+
+
+                </DataGrid>
+            </Grid>
+
+
+
+            <Button
+                x:Name="btnNewEmployee"
+                Grid.Row="2"
+                Width="160"
+                Height="50"
+                Margin="10,30,0,0"
+                HorizontalAlignment="Left"
+                Command="{Binding AddCommand}"
+                CommandParameter="{Binding ElementName=contentControlMain}">
+
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="AccountsAdd" />
+                    <TextBlock Margin="5,0,0,0" Text="New Employee" />
+
+                </StackPanel>
+
+
+            </Button>
+
+        </Grid>
+    </ContentControl>
+</UserControl>
+
