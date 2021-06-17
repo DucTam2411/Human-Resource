@@ -85,6 +85,8 @@ namespace HRMS.Accouting.ViewModel
         public ICommand InformationCommand { get; set; }
         public ICommand TimekeepingCommand { get; set; }
         public ICommand SalaryCommand { get; set; }
+        public ICommand MorningCommand { get; set; }
+        public ICommand AfternoonCommand { get; set; }
 
         #endregion
 
@@ -95,6 +97,7 @@ namespace HRMS.Accouting.ViewModel
                 EMPLOYEE_ID = 2;
             else { EMPLOYEE_ID = employee_id; }
             LoadCommand();
+            LoadAttentdance(employee_id);
         }
 
         //Constructor mặc định của InterfaceViewModel
@@ -102,6 +105,7 @@ namespace HRMS.Accouting.ViewModel
         {
             EMPLOYEE_ID = 2;
             LoadCommand();
+            LoadAttentdance(EMPLOYEE_ID);
         }
 
         //Load những command để đưa vào constructor
@@ -249,6 +253,92 @@ namespace HRMS.Accouting.ViewModel
             CONTENTCONTROL = new uConAccountingSalaryInformation(EMPLOYEE_ID);
         }
         #endregion
+
+
+        private void LoadAttentdance(int id)
+        {
+            hrmsEntities db = new hrmsEntities();
+            var timekeepingdetail1 = db.TIMEKEEPING_DETAIL.Where(x => x.EMPLOYEE_ID == id && x.CHECK_DATE.Value.Day == DateTime.Now.Day && x.CHECK_DATE.Value.Month == DateTime.Now.Month && x.CHECK_DATE.Value.Year == DateTime.Now.Year && x.SESSION == 1).SingleOrDefault();
+            var timekeepingdetail2 = db.TIMEKEEPING_DETAIL.Where(x => x.EMPLOYEE_ID == id && x.CHECK_DATE.Value.Day == DateTime.Now.Day && x.CHECK_DATE.Value.Month == DateTime.Now.Month && x.CHECK_DATE.Value.Year == DateTime.Now.Year && x.SESSION == 2).SingleOrDefault();
+            var timekeeping = db.TIMEKEEPINGs.Where(x => x.EMPLOYEE_ID == id && x.MONTH.Value.Month == DateTime.Now.Month && x.MONTH.Value.Year == DateTime.Now.Year).SingleOrDefault();
+
+            MorningCommand = new RelayCommand<object>(p =>
+            {
+                if (DateTime.Now.Hour >= 7 && DateTime.Now.Hour < 11)
+                {
+                    if (timekeepingdetail1 == null || timekeepingdetail1.TIMEKEEPING_DETAIL_TYPE == 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                { return false; }
+            },
+            p =>
+            {
+                if (AccountingClass.IsHoliday(DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year))
+                {
+                    var timekeepingdetail = new TIMEKEEPING_DETAIL();
+                    timekeepingdetail.TIMEKEEPING_ID = timekeeping.TIMEKEEPING_ID;
+                    timekeepingdetail.CHECK_DATE = DateTime.Now;
+                    timekeepingdetail.SESSION = 1;
+                    timekeepingdetail.EMPLOYEE_ID = id;
+                    timekeepingdetail.TIMEKEEPING_DETAIL_TYPE = 3;
+                    timekeepingdetail1 = timekeepingdetail;
+                    db.TIMEKEEPING_DETAIL.Add(timekeepingdetail);
+                }
+                else
+                {
+                    timekeepingdetail1.TIMEKEEPING_DETAIL_TYPE = 1;
+                    timekeeping.NUMBER_OF_ABSENT_DAY = (float?)(timekeeping.NUMBER_OF_ABSENT_DAY - 0.5);
+                    timekeeping.NUMBER_OF_WORK_DAY = (float)(timekeeping.NUMBER_OF_WORK_DAY + 0.5);
+                }
+                db.SaveChanges();
+            }
+            );
+            AfternoonCommand = new RelayCommand<object>(p =>
+            {
+                if (DateTime.Now.Hour >= 13 && DateTime.Now.Hour < 23)
+                {
+                    if (timekeepingdetail2 == null || timekeepingdetail2.TIMEKEEPING_DETAIL_TYPE == 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                { return false; }
+            },
+            p =>
+            {
+                if (AccountingClass.IsHoliday(DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year) || DateTime.Now.DayOfWeek == DayOfWeek.Saturday)
+                {
+                    var timekeepingdetail = new TIMEKEEPING_DETAIL();
+                    timekeepingdetail.TIMEKEEPING_ID = timekeeping.TIMEKEEPING_ID;
+                    timekeepingdetail.CHECK_DATE = DateTime.Now;
+                    timekeepingdetail.SESSION = 2;
+                    timekeepingdetail.EMPLOYEE_ID = id;
+                    timekeepingdetail.TIMEKEEPING_DETAIL_TYPE = 3;
+                    timekeepingdetail2 = timekeepingdetail;
+                    db.TIMEKEEPING_DETAIL.Add(timekeepingdetail);
+                }
+                else
+                {
+                    timekeepingdetail2.TIMEKEEPING_DETAIL_TYPE = 2;
+                    timekeeping.NUMBER_OF_ABSENT_DAY = (float?)(timekeeping.NUMBER_OF_ABSENT_DAY - 0.5);
+                    timekeeping.NUMBER_OF_WORK_DAY = (float)(timekeeping.NUMBER_OF_WORK_DAY + 0.5);
+                }
+                db.SaveChanges();
+            }
+            );
+        }
     }
 }
 

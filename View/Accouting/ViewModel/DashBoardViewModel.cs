@@ -192,7 +192,7 @@ namespace HRMS.Accouting.ViewModel
         {
             hrmsEntities db = new hrmsEntities();
             var list = from rc in db.RECORDs
-                       where rc.MONTH_CHANGE.Value.Month == SELECTMONTHTYPE.MONTH && rc.MONTH_CHANGE.Value.Year == SELECTMONTHTYPE.YEAR 
+                       where rc.MONTH_CHANGE.Value.Month == SELECTMONTHTYPE.MONTH && rc.MONTH_CHANGE.Value.Year == SELECTMONTHTYPE.YEAR  && rc.DEPT_ID == 2
                        orderby rc.DATE_CHANGE descending //hiển thị theo thứ tự giảm dần của ngày thay đổi
                        select rc;
 

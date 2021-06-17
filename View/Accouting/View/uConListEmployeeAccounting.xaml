@@ -104,7 +104,7 @@
                     </ComboBox>
                 </StackPanel>
             </Grid>
-            
+
             <Grid Grid.Row="1" Margin="20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
@@ -149,6 +149,7 @@
             <Grid Grid.Row="2" Height="380">
                 <DataGrid
                     x:Name="SalaryDataGrid"
+                    Height="350"
                     Margin="0,20.4,0,0"
                     VerticalAlignment="Top"
                     AllowDrop="True"
@@ -170,105 +171,105 @@
 
                     <DataGrid.Columns>
                         <DataGridTextColumn
-                            Width="70"
+                            Width="auto"
                             Binding="{Binding EMPLOYEE_ID}"
                             ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                             Foreground="DarkSlateGray"
                             Header="ID" />
 
                         <DataGridTextColumn
-                            Width="220"
+                            Width="auto"
                             Binding="{Binding NAME}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Name" />
 
                         <materialDesign:DataGridTextColumn
-                            Width="200"
+                            Width="auto"
                             Binding="{Binding DEPARTMENT}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Department" />
 
                         <DataGridTextColumn
-                            Width="200"
+                            Width="auto"
                             Binding="{Binding ROLE}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Role" />
 
                         <DataGridTextColumn
-                            Width="120"
+                            Width="auto"
                             Binding="{Binding COEFFICIENT}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Coefficient" />
 
                         <DataGridTextColumn
-                            Width="120"
+                            Width="auto"
                             Binding="{Binding WORKDAY}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Work Day" />
 
                         <DataGridTextColumn
-                            Width="120"
+                            Width="auto"
                             Binding="{Binding OVERTIMEDAY}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Overtime Day" />
 
                         <DataGridTextColumn
-                            Width="120"
+                            Width="auto"
                             Binding="{Binding BASICWAGE}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Baisc Wage" />
 
                         <DataGridTextColumn
-                            Width="150"
+                            Width="auto"
                             Binding="{Binding OVERTIMESALARY}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Overtime Salary" />
 
                         <DataGridTextColumn
-                            Width="150"
+                            Width="auto"
                             Binding="{Binding SOCIALINSURANCE}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Social Insurance" />
 
                         <DataGridTextColumn
-                            Width="150"
+                            Width="auto"
                             Binding="{Binding HEALTHINSURANCE}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Health Insurance" />
 
                         <DataGridTextColumn
-                            Width="120"
+                            Width="auto"
                             Binding="{Binding WELFARE}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Welfare" />
 
                         <DataGridTextColumn
-                            Width="120"
+                            Width="auto"
                             Binding="{Binding BONUS}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Bonus" />
 
                         <DataGridTextColumn
-                            Width="120"
+                            Width="auto"
                             Binding="{Binding TAX}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"
                             Header="Tax" />
 
                         <DataGridTextColumn
-                            Width="100"
+                            Width="auto"
                             Binding="{Binding TOTALSALARY}"
                             ElementStyle="{StaticResource WrapText}"
                             Foreground="DarkSlateGray"

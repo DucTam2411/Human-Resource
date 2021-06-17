@@ -106,6 +106,7 @@
             <DataGrid
                 x:Name="dgDashboard"
                 Grid.Row="1"
+                Height="450"
                 Margin="0,20.4,0,0"
                 VerticalAlignment="Top"
                 AllowDrop="True"
@@ -126,7 +127,7 @@
                 </DataGrid.InputBindings>
                 <DataGrid.Columns>
                     <DataGridTextColumn
-                        Width="70"
+                        Width="auto"
                         Binding="{Binding EMPLOYEE_ID, UpdateSourceTrigger=PropertyChanged}"
                         Foreground="DarkSlateGray"
                         Header="ID" />

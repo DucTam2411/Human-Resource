@@ -58,6 +58,8 @@
             <DataGrid
                 x:Name="dgTimekeeping"
                 Grid.Row="1"
+                Width="800"
+                Height="400"
                 Margin="0,20.4,0,0"
                 VerticalAlignment="Top"
                 AllowDrop="True"
@@ -68,7 +70,7 @@
                 CanUserResizeColumns="True"
                 IsReadOnly="True"
                 ItemsSource="{Binding TimekeepingList}"
-                SelectedItem="{Binding SelectedItem}">
+                SelectedItem="{Binding SELECTEDITEM}">
                 <DataGrid.InputBindings>
                     <MouseBinding
                         Command="{Binding showDetailCommand}"
@@ -77,53 +79,41 @@
                 </DataGrid.InputBindings>
                 <DataGrid.Columns>
                     <DataGridTextColumn
-                        Width="100"
-                        Binding="{Binding ID}"
-                        ElementStyle="{StaticResource WrapText}"
-                        Foreground="DarkSlateGray"
-                        Header="ID" />
-                    <DataGridTextColumn
-                        Width="150"
+                        Width="auto"
                         Binding="{Binding MONTH, StringFormat='{}{0: MM/yyyy}'}"
                         ElementStyle="{StaticResource WrapText}"
                         Foreground="DarkSlateGray"
                         Header="Month" />
                     <DataGridTextColumn
-                        Width="120"
-                        Binding="{Binding DAY_START}"
+                        Width="auto"
+                        Binding="{Binding DAY_START, StringFormat='{}{0: dd/MM/yyyy}'}"
                         ElementStyle="{StaticResource WrapText}"
                         Foreground="DarkSlateGray"
                         Header="Day Start" />
                     <DataGridTextColumn
-                        Width="120"
-                        Binding="{Binding DAY_END}"
+                        Width="auto"
+                        Binding="{Binding DAY_END, StringFormat='{}{0: dd/MM/yyyy}'}"
                         ElementStyle="{StaticResource WrapText}"
                         Foreground="DarkSlateGray"
                         Header="Day End" />
                     <DataGridTextColumn
-                        Width="180"
+                        Width="auto"
                         Binding="{Binding TOTAL_WORK_DAY}"
                         ElementStyle="{StaticResource WrapText}"
                         Foreground="DarkSlateGray"
                         Header="Total Work Day" />
                     <DataGridTextColumn
-                        Width="180"
+                        Width="auto"
                         Binding="{Binding TOTAL_OVERTIME_DAY}"
                         ElementStyle="{StaticResource WrapText}"
                         Foreground="DarkSlateGray"
                         Header="Total Overtime Day" />
                     <DataGridTextColumn
-                        Width="180"
+                        Width="auto"
                         Binding="{Binding TOTAL_ABSENT_DAY}"
                         ElementStyle="{StaticResource WrapText}"
                         Foreground="DarkSlateGray"
                         Header="Total Absent Day" />
-                    <DataGridTextColumn
-                        Width="200"
-                        Binding="{Binding NOTE}"
-                        ElementStyle="{StaticResource WrapText}"
-                        Foreground="DarkSlateGray"
-                        Header="Note" />
                 </DataGrid.Columns>
             </DataGrid>
 

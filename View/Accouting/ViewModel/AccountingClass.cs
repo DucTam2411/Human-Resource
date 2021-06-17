@@ -48,7 +48,7 @@ namespace HRMS.Accouting.ViewModel
         public static float AVERAGE_DAY { get => _AVERAGE_DAY; set { _AVERAGE_DAY = value; } }
 
         //Kiểm tra ngày nghỉ
-        private static bool IsHoliday(int day, int month, int year)
+        public static bool IsHoliday(int day, int month, int year)
         {
             //Kiểm tra ngày hôm đó có phải ngày nghỉ không nếu ngày nghỉ rơi vào thứ 7 hoặc chủ nhật thì được nghỉ bù vào thứ 2
 

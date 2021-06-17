@@ -127,6 +127,73 @@ namespace HRMS.Accouting.ViewModel
             }
         }
 
+        private TimekeepingData _SELECTEDITEM;
+        public TimekeepingData SELECTEDITEM { get => _SELECTEDITEM; set {
+                _SELECTEDITEM = value;
+                OnPropertyChanged();
+            } }
+
+        private String _EMPLOYEENAME;
+        public String EMPLOYEENAME { get => _EMPLOYEENAME; set { _EMPLOYEENAME = value; OnPropertyChanged(); } }
+
+        private DateTime[] _workdayList { get; set; }
+        public DateTime[] workdayList
+        {
+            get { return _workdayList; }
+            set
+            {
+                _workdayList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public DateTime[] _absentdayList { get; set; }
+        public DateTime[] absentdayList
+        {
+            get
+            {
+                return _absentdayList;
+            }
+            set
+            {
+                _absentdayList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public DateTime[] _overtimeList { get; set; }
+        public DateTime[] overtimeList
+        {
+            get
+            {
+                return _overtimeList;
+            }
+            set
+            {
+                _overtimeList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<ComboboxModel> _MONTHLIST;
+        public ObservableCollection<ComboboxModel> MONTHLIST { get => _MONTHLIST; set { _MONTHLIST = value; OnPropertyChanged(); } }
+
+        //Binding tới selected của ComboxBox chọn tháng
+        private ComboboxModel _SELECTMONTHTYPE;
+        public ComboboxModel SELECTMONTHTYPE
+        {
+            get => _SELECTMONTHTYPE; set
+            {
+                _SELECTMONTHTYPE = value;
+                OnPropertyChanged();
+
+                //Nếu selected khác null, nghĩa là tháng đã chọn thì show data theo select dó
+                if (SELECTMONTHTYPE != null)
+                {
+                    LoadDetail(EMPLOYEE_ID, SELECTMONTHTYPE.MONTH, SELECTMONTHTYPE.YEAR);
+                }
+            }
+        }
         public ICommand showDetailCommand { get; set; }
 
         public ICommand BackCommand { get; set; }
@@ -136,8 +203,14 @@ namespace HRMS.Accouting.ViewModel
             LoadComboboxTypeList();
             LoadTimekeepingData(EMPLOYEE_ID);
 
-            showDetailCommand = new RelayCommand<ContentControl>(p => { return true; }, p => { p.Content = new View.uConAccountingTimekeepingDetailInformation(EMPLOYEE_ID); });
+            showDetailCommand = new RelayCommand<ContentControl>(p => { return true; }, p => { p.Content = new View.uConAccountingTimekeepingDetailInformation(EMPLOYEE_ID, SELECTEDITEM); });
+            
+        }
 
+        public TimekeepingInformationViewModel(int ID, TimekeepingData item)
+        {
+            EMPLOYEE_ID = ID;
+            LoadMonth(item);
             //Chức năng của BackCommand
             BackCommand = new RelayCommand<ContentControl>(p => { return true; },
                 p => { p.Content = new View.uConAccountingTimekeepingInformation(EMPLOYEE_ID); });
@@ -145,14 +218,12 @@ namespace HRMS.Accouting.ViewModel
         private void LoadComboboxTypeList()
         {
             ListType = new ObservableCollection<ComboboxModel>();
-            ListType.Add(new ComboboxModel("ID", true));
-            ListType.Add(new ComboboxModel("MONTH", false));
+            ListType.Add(new ComboboxModel("MONTH", true));
             ListType.Add(new ComboboxModel("DAY START", false));
             ListType.Add(new ComboboxModel("DAY END", false));
             ListType.Add(new ComboboxModel("TOTAL WORK DAY", false));
             ListType.Add(new ComboboxModel("TOTAL ABSENT DAY", false));
             ListType.Add(new ComboboxModel("TOTAL OVERTIME DAY", false));
-            ListType.Add(new ComboboxModel("NOTE", false));
             SELECTEDTYPE = ListType.Where(x => x.ISSELECTED == true).FirstOrDefault();
         }
 
@@ -161,7 +232,7 @@ namespace HRMS.Accouting.ViewModel
             hrmsEntities DB = new hrmsEntities();
             var list = from emp in DB.EMPLOYEEs
                        join tk in DB.TIMEKEEPINGs on emp.EMPLOYEE_ID equals tk.EMPLOYEE_ID
-                       where emp.EMPLOYEE_ID == id && !(tk.DATE_START.Value.Month == DateTime.Now.Month && tk.DATE_START.Value.Year == DateTime.Now.Year)
+                       where emp.EMPLOYEE_ID == id orderby tk.MONTH descending
                        select new { TIMEKEEPING = tk };
 
             //Khởi tạo 2 biến lưu dữ liệu từ list ở trên (1 cái binding tới datagrid và 1 cái bản sao)
@@ -173,8 +244,8 @@ namespace HRMS.Accouting.ViewModel
                 TimekeepingData tkdata = new TimekeepingData();
                 tkdata.ID = item.TIMEKEEPING.TIMEKEEPING_ID;
                 tkdata.MONTH = new DateTime(item.TIMEKEEPING.DATE_START.Value.Year, item.TIMEKEEPING.DATE_START.Value.Month, 1);
-                tkdata.DAY_START = item.TIMEKEEPING.DATE_START.Value.Day;
-                tkdata.DAY_END = item.TIMEKEEPING.DATE_END.Value.Day;
+                tkdata.DAY_START = item.TIMEKEEPING.DATE_START.Value;
+                tkdata.DAY_END = item.TIMEKEEPING.DATE_END.Value;
                 tkdata.TOTAL_WORK_DAY = (int)item.TIMEKEEPING.NUMBER_OF_WORK_DAY;
                 tkdata.TOTAL_OVERTIME_DAY = (int)item.TIMEKEEPING.NUMBER_OF_OVERTIME_DAY;
                 tkdata.TOTAL_ABSENT_DAY = (int)item.TIMEKEEPING.NUMBER_OF_ABSENT_DAY;
@@ -182,6 +253,50 @@ namespace HRMS.Accouting.ViewModel
                 TimekeepingList.Add(tkdata);
                 TimekeepingTest.Add(tkdata);
             }
+        }
+
+        private void LoadDetail(int id, int month, int year)
+        {
+            hrmsEntities db = new hrmsEntities();
+            var employee = (from emp in db.EMPLOYEEs where emp.EMPLOYEE_ID == id select emp).Take(1).Single();
+
+            EMPLOYEENAME = employee.NAME;
+
+            workdayList = ((from t in db.TIMEKEEPING_DETAIL
+                            where t.TIMEKEEPING.MONTH.Value.Month == month &&
+                            t.TIMEKEEPING.MONTH.Value.Year == year &&
+                            t.TIMEKEEPING_DETAIL_TYPE == 1
+                            select t.CHECK_DATE.Value).Distinct().ToArray());
+
+            absentdayList = ((from t in db.TIMEKEEPING_DETAIL
+                              where t.TIMEKEEPING.MONTH.Value.Month == month &&
+                            t.TIMEKEEPING.MONTH.Value.Year == year && t.TIMEKEEPING_DETAIL_TYPE == 2
+                              select t.CHECK_DATE.Value).Distinct().ToArray());
+
+            overtimeList = ((from t in db.TIMEKEEPING_DETAIL
+                             where t.TIMEKEEPING.MONTH.Value.Month == month &&
+                            t.TIMEKEEPING.MONTH.Value.Year == year && t.TIMEKEEPING_DETAIL_TYPE == 3
+                             select t.CHECK_DATE.Value).Distinct().ToArray());
+        }
+
+        //Load dữ liệu tháng vào comboBox Month
+        private void LoadMonth(TimekeepingData data)
+        {
+            hrmsEntities db = new hrmsEntities();
+
+            //Chọn tháng từ database KHÔNG TRÙNG LẶP (chọn DATE_START và DATE_END để kiểm tra tháng bắt đầu và tháng kết thúc có hợp lệ không (nếu cách nhau không quá 31 ngày hợp lệ)
+            var listmonth = (from month in db.TIMEKEEPINGs
+                             select new {   Month =  month.MONTH }).Distinct();
+
+            //Khởi tạo biến MONTHLIST để chứa tháng
+            MONTHLIST = new ObservableCollection<ComboboxModel>();
+
+            //Đưa dữ liệu từ listmonth vào MONTHLIST
+            foreach (var item in listmonth)
+            {
+                MONTHLIST.Add(new ComboboxModel(item.Month.Value.Month, item.Month.Value.Year, false));
+            }
+            SELECTMONTHTYPE = MONTHLIST.Where(x => x.MONTH == data.MONTH.Month && x.YEAR == data.MONTH.Year).First();
         }
     }
 }

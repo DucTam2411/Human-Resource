@@ -1,4 +1,5 @@
-﻿using HRMS.Accouting.ViewModel;
+﻿using HRMS.Accouting.Model;
+using HRMS.Accouting.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,9 @@ namespace HRMS.Accouting.View
     /// </summary>
     public partial class uConAccountingTimekeepingDetailInformation : UserControl
     {
-        public uConAccountingTimekeepingDetailInformation(int ID)
+        public uConAccountingTimekeepingDetailInformation(int ID, TimekeepingData item)
         {
-            DataContext = new TimekeepingInformationViewModel(ID);
+            DataContext = new TimekeepingInformationViewModel(ID,item);
             InitializeComponent();
         }
     }

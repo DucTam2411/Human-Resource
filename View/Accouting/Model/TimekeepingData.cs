@@ -15,11 +15,11 @@ namespace HRMS.Accouting.Model
         private DateTime _MONTH;
         public DateTime MONTH { get => _MONTH; set { _MONTH = value; OnPropertyChanged(); } }
 
-        private int _DAY_START;
-        public int DAY_START { get => _DAY_START; set { _DAY_START = value; OnPropertyChanged(); } }
+        private DateTime _DAY_START;
+        public DateTime DAY_START { get => _DAY_START; set { _DAY_START = value; OnPropertyChanged(); } }
 
-        private int _DAY_END;
-        public int DAY_END { get => _DAY_END; set { _DAY_END = value; OnPropertyChanged(); } }
+        private DateTime _DAY_END;
+        public DateTime DAY_END { get => _DAY_END; set { _DAY_END = value; OnPropertyChanged(); } }
 
         private int _TOTAL_WORK_DAY;
         public int TOTAL_WORK_DAY { get => _TOTAL_WORK_DAY; set { _TOTAL_WORK_DAY = value; OnPropertyChanged(); } }
