@@ -242,3 +242,11 @@ D:\Study\CNPM\HRSM-Trong\View\obj\Debug\HRMS.csproj.CoreCompileInputs.cache
 D:\Study\CNPM\HRSM-Trong\View\obj\Debug\HRMS.csproj.CopyComplete
 D:\Study\CNPM\HRSM-Trong\View\obj\Debug\HRMS.exe
 D:\Study\CNPM\HRSM-Trong\View\obj\Debug\HRMS.pdb
+D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Director\View\Director_Window.g.cs
+D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Director\View\uConAccountingReport.g.cs
+D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Director\View\uConHRReport.g.cs
+D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Director\View\Director_Window.baml
+D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Director\View\uConAccountingReport.baml
+D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Director\View\uConHRReport.baml
+D:\Study\CNPM\HRSM-Trong\View\obj\Debug\HR\View\uConTimekeepingDetail.g.cs
+D:\Study\CNPM\HRSM-Trong\View\obj\Debug\HR\View\uConTimekeepingDetail.baml

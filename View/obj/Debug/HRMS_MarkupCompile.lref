@@ -8,6 +8,9 @@ FD:\Study\CNPM\HRSM-Trong\View\Accounting\View\uConAccountingTimekeepingInformat
 FD:\Study\CNPM\HRSM-Trong\View\Accounting\View\uConDashBoard.xaml;;
 FD:\Study\CNPM\HRSM-Trong\View\Accounting\View\uConEmployeeSalary.xaml;;
 FD:\Study\CNPM\HRSM-Trong\View\Accounting\View\uConListEmployeeAccounting.xaml;;
+FD:\Study\CNPM\HRSM-Trong\View\Director\View\Director_Window.xaml;;
+FD:\Study\CNPM\HRSM-Trong\View\Director\View\uConAccountingReport.xaml;;
+FD:\Study\CNPM\HRSM-Trong\View\Director\View\uConHRReport.xaml;;
 FD:\Study\CNPM\HRSM-Trong\View\Employee\uCon\EmployeeWindow.xaml;;
 FD:\Study\CNPM\HRSM-Trong\View\Employee\uCon\uConEmployeeInformation.xaml;;
 FD:\Study\CNPM\HRSM-Trong\View\Employee\uCon\uConEmployeeSalary.xaml;;
@@ -24,4 +27,5 @@ FD:\Study\CNPM\HRSM-Trong\View\HR\View\uConReport.xaml;;
 FD:\Study\CNPM\HRSM-Trong\View\HR\View\uConSideBar.xaml;;
 FD:\Study\CNPM\HRSM-Trong\View\HR\View\uConTimekeepingInformation.xaml;;
 FD:\Study\CNPM\HRSM-Trong\View\Login\LoginWindow.xaml;;
+FD:\Study\CNPM\HRSM-Trong\View\HR\View\uConTimekeepingDetail.xaml;;
 

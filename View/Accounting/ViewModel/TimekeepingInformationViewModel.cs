@@ -144,8 +144,8 @@ namespace HRMS.Accouting.ViewModel
         private String _EMPLOYEENAME;
         public String EMPLOYEENAME { get => _EMPLOYEENAME; set { _EMPLOYEENAME = value; OnPropertyChanged(); } }
 
-        private DateTime[] _workdayList { get; set; }
-        public DateTime[] workdayList
+        private ObservableCollection<string> _workdayList { get; set; }
+        public ObservableCollection<string> workdayList
         {
             get { return _workdayList; }
             set
@@ -155,8 +155,8 @@ namespace HRMS.Accouting.ViewModel
             }
         }
 
-        public DateTime[] _absentdayList { get; set; }
-        public DateTime[] absentdayList
+        public ObservableCollection<string> _absentdayList { get; set; }
+        public ObservableCollection<string> absentdayList
         {
             get
             {
@@ -169,8 +169,8 @@ namespace HRMS.Accouting.ViewModel
             }
         }
 
-        public DateTime[] _overtimeList { get; set; }
-        public DateTime[] overtimeList
+        public ObservableCollection<string> _overtimeList { get; set; }
+        public ObservableCollection<string> overtimeList
         {
             get
             {
@@ -267,25 +267,80 @@ namespace HRMS.Accouting.ViewModel
         private void LoadDetail(int id, int month, int year)
         {
             hrmsEntities db = new hrmsEntities();
-            var employee = (from emp in db.EMPLOYEEs where emp.EMPLOYEE_ID == id select emp).Take(1).Single();
+            var GetWorkdayList = ((from t in db.TIMEKEEPING_DETAIL
+                                   where t.TIMEKEEPING.MONTH.Value.Month == month &&
+                                   t.TIMEKEEPING.MONTH.Value.Year == year &&
+                                   (t.TIMEKEEPING_DETAIL_TYPE == 1 || t.TIMEKEEPING_DETAIL_TYPE == 2) &&
+                                   t.EMPLOYEE_ID == id
+                                   orderby t.CHECK_DATE.Value.Day ascending
+                                   select t).Distinct());
+            workdayList = new ObservableCollection<string>();
+            absentdayList = new ObservableCollection<string>();
+            overtimeList = new ObservableCollection<string>();
+            foreach (var item in GetWorkdayList)
+            {
+                string Session = "";
+                if (item != null)
+                {
+                    if (item.SESSION == 1)
+                    {
+                        Session = "Morning";
+                        workdayList.Add(item.CHECK_DATE.Value.Day + "/" + item.CHECK_DATE.Value.Month + "/" + item.CHECK_DATE.Value.Year + "(" + Session + ")");
+                    }
+                    else
+                    {
+                        Session = "Afternoon";
+                        workdayList.Add(item.CHECK_DATE.Value.Day + "/" + item.CHECK_DATE.Value.Month + "/" + item.CHECK_DATE.Value.Year + "(" + Session + ")");
+                    }
+                }
+            }
 
-            EMPLOYEENAME = employee.NAME;
+            var GetAbsentdayList = ((from t in db.TIMEKEEPING_DETAIL
+                                     where t.TIMEKEEPING.MONTH.Value.Month == month &&
+                                   t.TIMEKEEPING.MONTH.Value.Year == year && t.TIMEKEEPING_DETAIL_TYPE == 0 && t.CHECK_DATE.Value.Day <= DateTime.Now.Day
+                                     && t.EMPLOYEE_ID == id
+                                     select t).Distinct());
+            foreach (var item in GetAbsentdayList)
+            {
+                string Session = "";
+                if (item != null)
+                {
+                    if (item.SESSION == 1)
+                    {
+                        Session = "Morning";
+                        absentdayList.Add(item.CHECK_DATE.Value.Day + "/" + item.CHECK_DATE.Value.Month + "/" + item.CHECK_DATE.Value.Year + "(" + Session + ")");
+                    }
+                    else
+                    {
+                        Session = "Afternoon";
+                        absentdayList.Add(item.CHECK_DATE.Value.Day + "/" + item.CHECK_DATE.Value.Month + "/" + item.CHECK_DATE.Value.Year + "(" + Session + ")");
+                    }
+                }
 
-            workdayList = ((from t in db.TIMEKEEPING_DETAIL
-                            where t.TIMEKEEPING.MONTH.Value.Month == month &&
-                            t.TIMEKEEPING.MONTH.Value.Year == year &&
-                            t.TIMEKEEPING_DETAIL_TYPE == 1
-                            select t.CHECK_DATE.Value).Distinct().ToArray());
+            }
 
-            absentdayList = ((from t in db.TIMEKEEPING_DETAIL
-                              where t.TIMEKEEPING.MONTH.Value.Month == month &&
-                            t.TIMEKEEPING.MONTH.Value.Year == year && t.TIMEKEEPING_DETAIL_TYPE == 2
-                              select t.CHECK_DATE.Value).Distinct().ToArray());
-
-            overtimeList = ((from t in db.TIMEKEEPING_DETAIL
-                             where t.TIMEKEEPING.MONTH.Value.Month == month &&
-                            t.TIMEKEEPING.MONTH.Value.Year == year && t.TIMEKEEPING_DETAIL_TYPE == 3
-                             select t.CHECK_DATE.Value).Distinct().ToArray());
+            var GetOvertimeList = ((from t in db.TIMEKEEPING_DETAIL
+                                    where t.TIMEKEEPING.MONTH.Value.Month == month &&
+                                   t.TIMEKEEPING.MONTH.Value.Year == year && t.TIMEKEEPING_DETAIL_TYPE == 3
+                                    && t.EMPLOYEE_ID == id
+                                    select t).Distinct());
+            foreach (var item in GetOvertimeList)
+            {
+                if (item != null)
+                {
+                    string Session = "";
+                    if (item.SESSION == 1)
+                    {
+                        Session = "Morning";
+                        overtimeList.Add(item.CHECK_DATE.Value.Day + "/" + item.CHECK_DATE.Value.Month + "/" + item.CHECK_DATE.Value.Year + "(" + Session + ")");
+                    }
+                    else
+                    {
+                        Session = "Afternoon";
+                        overtimeList.Add(item.CHECK_DATE.Value.Day + "/" + item.CHECK_DATE.Value.Month + "/" + item.CHECK_DATE.Value.Year + "(" + Session + ")");
+                    }
+                }
+            }
         }
 
         //Load dữ liệu tháng vào comboBox Month

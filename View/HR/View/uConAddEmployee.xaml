@@ -41,7 +41,7 @@
                     <Grid>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="80" />
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
 
@@ -60,7 +60,7 @@
                         <Button
                             Grid.Row="2"
                             Height="Auto"
-                            Margin="0,-50,49.6,217.8"
+                            Margin="0,-50,0,217.8"
                             Background="Transparent"
                             BorderThickness="0"
                             Command="{Binding BackCommand}"
@@ -92,7 +92,7 @@
                                         Foreground="DimGray"
                                         Kind="User" />
                                     <TextBox
-                                        Width="200"
+                                        Width="260"
                                         Margin="8,0,0,0"
                                         materialDesign:HintAssist.HelperText="Employee full name."
                                         materialDesign:HintAssist.Hint="Name"
@@ -120,7 +120,7 @@
                                         Foreground="DimGray"
                                         Kind="IdCard" />
                                     <TextBox
-                                        Width="200"
+                                        Width="260"
                                         Margin="8,0,0,0"
                                         materialDesign:HintAssist.HelperText="ID Card number"
                                         materialDesign:HintAssist.Hint="ID"
@@ -142,7 +142,7 @@
 
                                     <DatePicker
                                         x:Name="BirthdayDP"
-                                        Width="240"
+                                        Width="300"
                                         Height="60"
                                         materialDesign:HintAssist.Hint="Birthday"
                                         FontSize="22"
@@ -215,8 +215,8 @@
                                             Foreground="DimGray"
                                             Kind="Place" />
                                         <TextBox
-                                            Width="200"
-                                            Margin="8,0,0,0"
+                                            Width="260"
+                                            Margin="10,0,0,0"
                                             materialDesign:HintAssist.Hint="Birthplace"
                                             FontSize="18">
                                             <TextBox.Text>
@@ -245,8 +245,8 @@
                                             Foreground="DimGray"
                                             Kind="Globe" />
                                         <TextBox
-                                            Width="200"
-                                            Margin="8,0,0,0"
+                                            Width="260"
+                                            Margin="10,0,0,0"
                                             materialDesign:HintAssist.Hint="Citizenship"
                                             FontSize="18">
                                             <TextBox.Text>
@@ -273,7 +273,7 @@
                                             Kind="GenderMaleFemaleVariant" />
 
                                         <ComboBox
-                                            Width="200"
+                                            Width="260"
                                             Margin="10,0,0,0"
                                             HorizontalAlignment="Left"
                                             materialDesign:HintAssist.Hint="Gender"
@@ -309,8 +309,8 @@
                                             Kind="Phone" />
 
                                         <TextBox
-                                            Width="200"
-                                            Margin="8,0,0,0"
+                                            Width="260"
+                                            Margin="10,0,0,0"
                                             materialDesign:HintAssist.Hint="Phone Number"
                                             FontSize="18"
                                             PreviewTextInput="NumberValidationTextBox">
@@ -349,7 +349,7 @@
                                             Foreground="DimGray"
                                             Kind="CardAccountDetailsStar" />
                                         <ComboBox
-                                            Width="200"
+                                            Width="260"
                                             Margin="10,0,0,0"
                                             HorizontalAlignment="Left"
                                             materialDesign:HintAssist.Hint="ROLE"
@@ -382,7 +382,7 @@
                                             Foreground="DimGray"
                                             Kind="House" />
                                         <ComboBox
-                                            Width="200"
+                                            Width="260"
                                             Margin="10,0,0,0"
                                             HorizontalAlignment="Left"
                                             materialDesign:HintAssist.Hint="Department"
@@ -419,7 +419,7 @@
                                             Kind="Equalizer" />
 
                                         <ComboBox
-                                            Width="200"
+                                            Width="260"
                                             Margin="10,0,0,0"
                                             materialDesign:HintAssist.Hint="Academic level"
                                             materialDesign:HintAssist.HintOpacity=".3"
@@ -456,7 +456,7 @@
                                             Kind="Email" />
 
                                         <TextBox
-                                            Width="200"
+                                            Width="260"
                                             Margin="8,0,0,0"
                                             materialDesign:HintAssist.Hint="Email"
                                             FontSize="18">
@@ -524,29 +524,28 @@
 
                 <TabItem
                     Background="Transparent"
-                    Header="{materialDesign:PackIcon Kind=User,Size=24}"
+                    Header="{materialDesign:PackIcon Kind=User,
+                                                     Size=24}"
                     Style="{StaticResource MaterialDesignNavigationRailTabItem}"
-                    TabIndex="1" >
-                    <Grid
-                        Width="600"
-                        Height="500">
+                    TabIndex="1">
+                    <Grid Width="600" Height="500">
 
                         <Grid.RowDefinitions>
                             <RowDefinition Height="53*" />
                             <RowDefinition Height="135*" />
-                            <RowDefinition Height="62*"/>
+                            <RowDefinition Height="62*" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="15*"/>
-                            <ColumnDefinition Width="85*"/>
+                            <ColumnDefinition Width="15*" />
+                            <ColumnDefinition Width="85*" />
                         </Grid.ColumnDefinitions>
 
                         <Border
-                Grid.RowSpan="3"
-                BorderBrush="White"
-                BorderThickness="3"
-                CornerRadius="8" RenderTransformOrigin="0.5,0.422">
-                        </Border>
+                            Grid.RowSpan="3"
+                            BorderBrush="White"
+                            BorderThickness="3"
+                            CornerRadius="8"
+                            RenderTransformOrigin="0.5,0.422" />
 
 
 
@@ -562,9 +561,9 @@
 
             </Button>-->
                         <Button
-                            Grid.Row="1" Grid.Column="0"
+                            Grid.Row="1"
+                            Grid.Column="0"
                             Height="Auto"
-                            
                             Background="Transparent"
                             BorderThickness="0"
                             Command="{Binding BackCommand}"
@@ -580,44 +579,51 @@
                         </Button>
 
 
-                        <StackPanel VerticalAlignment="Center" Margin="0,53" Height="0" Grid.Column="1">
+                        <StackPanel
+                            Grid.Column="1"
+                            Height="0"
+                            Margin="0,53"
+                            VerticalAlignment="Center">
                             <TextBlock
-                    Margin="0,-20"
-                    HorizontalAlignment="Center"
-                    FontFamily="helvetica"
-                    FontSize="22"
-                    FontWeight="Light"
-                    Foreground="Black"
-                    Text="Register new user" />
+                                Margin="0,-20"
+                                HorizontalAlignment="Center"
+                                FontFamily="helvetica"
+                                FontSize="22"
+                                FontWeight="Light"
+                                Foreground="Black"
+                                Text="Register new user" />
                         </StackPanel>
 
 
-                        <StackPanel Grid.Row="1" Grid.RowSpan="2" Grid.Column="1">
+                        <StackPanel
+                            Grid.Row="1"
+                            Grid.RowSpan="2"
+                            Grid.Column="1">
 
                             <StackPanel Grid.Row="1" Orientation="Horizontal">
 
 
-                                <StackPanel Margin="150,20,0,0" DockPanel.Dock="Left" >
+                                <StackPanel Margin="150,20,0,0" DockPanel.Dock="Left">
 
                                     <StackPanel Orientation="Horizontal">
 
                                         <materialDesign:PackIcon
-                                        Width="30"
-                                        Height="30"
-                                        VerticalAlignment="Center"
-                                        Foreground="DimGray"
-                                        Kind="User" />
+                                            Width="30"
+                                            Height="30"
+                                            VerticalAlignment="Center"
+                                            Foreground="DimGray"
+                                            Kind="User" />
                                         <TextBox
-                                        Width="200"
-                                        Margin="8,0,0,0"
-                                        materialDesign:HintAssist.HelperText="Insert user"
-                                        materialDesign:HintAssist.Hint="USERNAME"
-                                        FontSize="18">
+                                            Width="200"
+                                            Margin="8,0,0,0"
+                                            materialDesign:HintAssist.HelperText="Insert user"
+                                            materialDesign:HintAssist.Hint="USERNAME"
+                                            FontSize="18">
                                             <TextBox.Text>
                                                 <Binding
-                                                Mode="TwoWay"
-                                                Path="USERNAME"
-                                                UpdateSourceTrigger="PropertyChanged">
+                                                    Mode="TwoWay"
+                                                    Path="USERNAME"
+                                                    UpdateSourceTrigger="PropertyChanged">
                                                     <Binding.ValidationRules />
                                                 </Binding>
                                             </TextBox.Text>
@@ -630,38 +636,38 @@
                             </StackPanel>
 
                             <Border
-                    Width="250"
-                    Height="2"
-                    Background="White"
-                    Opacity="0.5" />
+                                Width="250"
+                                Height="2"
+                                Background="White"
+                                Opacity="0.5" />
 
 
                             <StackPanel
-                    Grid.Row="1"
-                    Margin="0,20,0,0"
-                    Orientation="Horizontal">
+                                Grid.Row="1"
+                                Margin="0,20,0,0"
+                                Orientation="Horizontal">
 
-                                <StackPanel Margin="150,20,0,0" DockPanel.Dock="Left" >
+                                <StackPanel Margin="150,20,0,0" DockPanel.Dock="Left">
 
                                     <StackPanel Orientation="Horizontal">
 
                                         <materialDesign:PackIcon
-                                        Width="30"
-                                        Height="30"
-                                        VerticalAlignment="Center"
-                                        Foreground="DimGray"
-                                        Kind="Password" />
+                                            Width="30"
+                                            Height="30"
+                                            VerticalAlignment="Center"
+                                            Foreground="DimGray"
+                                            Kind="Password" />
                                         <TextBox
-                                        Width="200"
-                                        Margin="8,0,0,0"
-                                        materialDesign:HintAssist.HelperText="Insert password"
-                                        materialDesign:HintAssist.Hint="PASSWORD"
-                                        FontSize="18">
+                                            Width="200"
+                                            Margin="8,0,0,0"
+                                            materialDesign:HintAssist.HelperText="Insert password"
+                                            materialDesign:HintAssist.Hint="PASSWORD"
+                                            FontSize="18">
                                             <TextBox.Text>
                                                 <Binding
-                                                Mode="TwoWay"
-                                                Path="PASSWORD"
-                                                UpdateSourceTrigger="PropertyChanged">
+                                                    Mode="TwoWay"
+                                                    Path="PASSWORD"
+                                                    UpdateSourceTrigger="PropertyChanged">
                                                     <Binding.ValidationRules />
                                                 </Binding>
                                             </TextBox.Text>
@@ -674,10 +680,10 @@
                             </StackPanel>
 
                             <Border
-                    Width="250"
-                    Height="2"
-                    Background="White"
-                    Opacity="0.5" />
+                                Width="250"
+                                Height="2"
+                                Background="White"
+                                Opacity="0.5" />
                         </StackPanel>
 
                     </Grid>

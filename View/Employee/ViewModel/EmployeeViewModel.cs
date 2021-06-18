@@ -351,8 +351,8 @@ namespace HRMS.Employee.ViewModel
         /// <summary>
         /// PROPERTIES
         /// </summary>
-        private DateTime[] _workdayList { get; set; }
-        public DateTime[] workdayList
+        private ObservableCollection<string> _workdayList { get; set; }
+        public ObservableCollection<string> workdayList
         {
 
             get { return _workdayList; }
@@ -364,8 +364,8 @@ namespace HRMS.Employee.ViewModel
 
         }
 
-        public DateTime[] _absentdayList { get; set; }
-        public DateTime[] absentdayList
+        public ObservableCollection<string> _absentdayList { get; set; }
+        public ObservableCollection<string> absentdayList
         {
             get
             {
@@ -378,8 +378,8 @@ namespace HRMS.Employee.ViewModel
             }
         }
 
-        public DateTime[] _overtimeList { get; set; }
-        public DateTime[] overtimeList
+        public ObservableCollection<string> _overtimeList { get; set; }
+        public ObservableCollection<string> overtimeList
         {
             get
             {
@@ -404,22 +404,81 @@ namespace HRMS.Employee.ViewModel
         /// <summary>
         /// FUNCTIONS
         /// </summary>
-        public void getDayList(DateTime timekeeping_date)
+        public void getDayList(DateTime timekeeping_date, int id)
         {
             hrmsEntities db = new hrmsEntities();
-            workdayList = ((from t in db.TIMEKEEPING_DETAIL
+            var GetWorkdayList = ((from t in db.TIMEKEEPING_DETAIL
                             where t.TIMEKEEPING.MONTH.Value.Month == timekeeping_date.Month &&
                             t.TIMEKEEPING.MONTH.Value.Year == timekeeping_date.Year &&
-                            t.TIMEKEEPING_DETAIL_TYPE == 1
-                            select t.CHECK_DATE.Value).Distinct().ToArray());
+                            (t.TIMEKEEPING_DETAIL_TYPE == 1 || t.TIMEKEEPING_DETAIL_TYPE == 2) &&
+                            t.EMPLOYEE_ID == id
+                            orderby t.CHECK_DATE.Value.Day ascending
+                            select t).Distinct());
+            workdayList = new ObservableCollection<string>();
+            absentdayList = new ObservableCollection<string>();
+            overtimeList = new ObservableCollection<string>();
+            foreach (var item in GetWorkdayList)
+            {
+                string Session = "";
+                if (item != null)
+                {
+                    if (item.SESSION == 1)
+                    {
+                        Session = "Morning";
+                        workdayList.Add(item.CHECK_DATE.Value.Day + "/" + item.CHECK_DATE.Value.Month + "/" + item.CHECK_DATE.Value.Year + "(" + Session + ")");
+                    }
+                    else
+                    {
+                        Session = "Afternoon";
+                        workdayList.Add(item.CHECK_DATE.Value.Day + "/" + item.CHECK_DATE.Value.Month + "/" + item.CHECK_DATE.Value.Year + "(" + Session + ")");
+                    }
+                }
+            }
 
-            absentdayList = ((from t in db.TIMEKEEPING_DETAIL
-                              where t.TIMEKEEPING.MONTH == timekeeping_date && t.TIMEKEEPING_DETAIL_TYPE == 2
-                              select t.CHECK_DATE.Value).Distinct().ToArray());
+            var GetAbsentdayList = ((from t in db.TIMEKEEPING_DETAIL
+                                     where t.TIMEKEEPING.MONTH == timekeeping_date && t.TIMEKEEPING_DETAIL_TYPE == 0 && t.CHECK_DATE.Value.Day <= DateTime.Now.Day
+                                     && t.EMPLOYEE_ID == id
+                                     select t).Distinct()) ;
+            foreach (var item in GetAbsentdayList)
+            {
+                string Session = "";
+                if (item != null)
+                {
+                    if (item.SESSION == 1)
+                    {
+                        Session = "Morning";
+                        absentdayList.Add(item.CHECK_DATE.Value.Day + "/" + item.CHECK_DATE.Value.Month + "/" + item.CHECK_DATE.Value.Year + "(" + Session + ")");
+                    }
+                    else
+                    {
+                        Session = "Afternoon";
+                        absentdayList.Add(item.CHECK_DATE.Value.Day + "/" + item.CHECK_DATE.Value.Month + "/" + item.CHECK_DATE.Value.Year + "(" + Session + ")");
+                    }
+                }
+                
+            }
 
-            overtimeList = ((from t in db.TIMEKEEPING_DETAIL
+            var GetOvertimeList = ((from t in db.TIMEKEEPING_DETAIL
                              where t.TIMEKEEPING.MONTH == timekeeping_date && t.TIMEKEEPING_DETAIL_TYPE == 3
-                             select t.CHECK_DATE.Value).Distinct().ToArray());
+                             && t.EMPLOYEE_ID == id
+                             select t).Distinct());
+            foreach (var item in GetOvertimeList)
+            {
+                if (item != null)
+                {
+                    string Session = "";
+                    if (item.SESSION == 1)
+                    {
+                        Session = "Morning";
+                        overtimeList.Add(item.CHECK_DATE.Value.Day + "/" + item.CHECK_DATE.Value.Month + "/" + item.CHECK_DATE.Value.Year + "(" + Session + ")");
+                    }
+                    else
+                    {
+                        Session = "Afternoon";
+                        overtimeList.Add(item.CHECK_DATE.Value.Day + "/" + item.CHECK_DATE.Value.Month + "/" + item.CHECK_DATE.Value.Year + "(" + Session + ")");
+                    }
+                }
+            }
         }
         #endregion
 
@@ -473,7 +532,7 @@ namespace HRMS.Employee.ViewModel
             DoubleClickCommand = new RelayCommand<object>(null, p => NavigationViewModel.CONTENT_MAIN = new uConEmployeeTimekeepingDetail(Employee.EMPLOYEE_ID, NavigationViewModel));
 
             BackToWholeCommand = new RelayCommand<object>(null, p => NavigationViewModel.CONTENT_MAIN = new uConEmployeeTimekeepingWhole(Employee.EMPLOYEE_ID, NavigationViewModel));
-            MonthSelectionChangedDetailCommand = new RelayCommand<DateTime>(null, p => { getDayList(p); });
+            MonthSelectionChangedDetailCommand = new RelayCommand<DateTime>(null, p => { getDayList(p,employee_ID); });
 
 
         }

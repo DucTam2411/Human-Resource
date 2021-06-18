@@ -1,0 +1,177 @@
+﻿<UserControl x:Class="HRMS.HR.View.uConTimekeepingDetail"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HRMS.HR.View"
+            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:HRMS.HR.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ReportViewModel}"
+             d:DesignHeight="600"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="WrapText" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+    <ContentControl x:Name="contentControlDetail">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="580" />
+                <ColumnDefinition Width="131"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+
+            <Button
+                x:Name="btnTest"
+                Height="95"
+                Margin="0,0,10,218"
+                VerticalAlignment="Bottom"
+                Background="Transparent"
+                BorderThickness="0"
+                Command="{Binding BackCommand}"
+                CommandParameter="{Binding ElementName=contentControlDetail}" Grid.Row="2">
+
+                <materialDesign:PackIcon
+                    Width="40"
+                    Height="40"
+                    Foreground="DimGray"
+                    Kind="ArrowBack" />
+            </Button>
+
+
+
+
+
+
+
+            <StackPanel
+                Grid.Column="1"
+                Margin="20"
+                Orientation="Horizontal" Grid.ColumnSpan="2">
+
+                <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+
+                    <materialDesign:PackIcon
+                        Width="30"
+                        Height="30"
+                        VerticalAlignment="Center"
+                        Foreground="DimGray"
+                        Kind="User" />
+                    <TextBox
+                        x:Name="tbName"
+                        Width="200"
+                        Margin="8,0,0,0"
+                        materialDesign:HintAssist.HelperText="Employee full name."
+                        materialDesign:HintAssist.Hint="Name"
+                        FontSize="15"
+                        IsReadOnly="True">
+                        <TextBox.Text>
+                            <Binding Path="EMPLOYEENAME" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules />
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                </StackPanel>
+
+
+
+                <StackPanel Margin="30,30,0,0" Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                        Width="30"
+                        Height="30"
+                        VerticalAlignment="Center"
+                        Foreground="DimGray"
+                        Kind="IdCard" />
+                    <ComboBox
+                        x:Name="cbMonth"
+                        Width="200"
+                        Margin="8,0,0,0"
+                        materialDesign:HintAssist.HelperText="Choose your month"
+                        materialDesign:HintAssist.Hint="Month"
+                        FontSize="15"
+                        IsEditable="False"
+                        ItemsSource="{Binding MONTHDETAILLIST, Mode=TwoWay}"
+                        SelectedValue="{Binding SELECTDETAILMONTHTYPE}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding MONTH}" />
+                                    <TextBlock Text=" / " />
+                                    <TextBlock Text="{Binding YEAR}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                        <ComboBox.ItemContainerStyle>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="IsSelected" Value="{Binding ISSELECTED}" />
+                            </Style>
+                        </ComboBox.ItemContainerStyle>
+                    </ComboBox>
+
+                </StackPanel>
+
+
+            </StackPanel>
+
+            <Separator
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="10" Grid.ColumnSpan="2" />
+
+            <StackPanel
+                Grid.Row="2"
+                Grid.Column="1"
+                Orientation="Vertical" Grid.ColumnSpan="2">
+                <TextBlock
+                    Foreground="DimGray"
+                    Style="{StaticResource MaterialDesignButtonTextBlock}"
+                    Text="Workdays" />
+                <ListBox
+                    Width="700"
+                    Height="120"
+                    Margin="10,0,0,0"
+                    BorderBrush="DimGray"
+                    BorderThickness="1"
+                    ItemStringFormat="{}{0:dd/MM/yyy}"
+                    ItemsSource="{Binding workdayList}" />
+
+
+                <TextBlock
+                    Margin="0,10,0,0"
+                    Foreground="DimGray"
+                    Style="{StaticResource MaterialDesignButtonTextBlock}"
+                    Text="Absent days" />
+                <ListBox
+                    Height="120"
+                    Margin="10,0,0,0"
+                    BorderBrush="DimGray"
+                    BorderThickness="1"
+                    ItemStringFormat="{}{0:dd/MM/yyy}"
+                    ItemsSource="{Binding absentdayList}" />
+
+
+                <TextBlock
+                    Margin="0,10,0,0"
+                    Foreground="DimGray"
+                    Style="{StaticResource MaterialDesignButtonTextBlock}"
+                    Text="Overtime days" />
+                <ListBox
+                    Height="120"
+                    Margin="10,0,0,0"
+                    BorderBrush="DimGray"
+                    BorderThickness="1"
+                    ItemStringFormat="{}{0:dd/MM/yyy}"
+                    ItemsSource="{Binding overtimeList}" />
+            </StackPanel>
+        </Grid>
+    </ContentControl>
+</UserControl>

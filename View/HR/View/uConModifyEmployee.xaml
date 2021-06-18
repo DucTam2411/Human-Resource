@@ -96,7 +96,7 @@
                                         Kind="User" />
                                     <TextBox
                                         x:Name="tbName"
-                                        Width="200"
+                                        Width="260"
                                         Margin="8,0,0,0"
                                         materialDesign:HintAssist.HelperText="Employee full name."
                                         materialDesign:HintAssist.Hint="Name"
@@ -125,7 +125,7 @@
                                         Kind="IdCard" />
                                     <TextBox
                                         x:Name="tbID"
-                                        Width="200"
+                                        Width="260"
                                         Margin="8,0,0,0"
                                         materialDesign:HintAssist.HelperText="ID Card number"
                                         materialDesign:HintAssist.Hint="ID"
@@ -150,7 +150,7 @@
 
                                     <DatePicker
                                         x:Name="dtpkBirthday"
-                                        Width="240"
+                                        Width="300"
                                         Height="60"
                                         materialDesign:HintAssist.Hint="Brithday"
                                         FontSize="22"
@@ -212,8 +212,8 @@
                                             Kind="Place" />
                                         <TextBox
                                             x:Name="tbBirthplace"
-                                            Width="200"
-                                            Margin="8,0,0,0"
+                                            Width="260"
+                                            Margin="10,0,0,0"
                                             materialDesign:HintAssist.HelperText="In ID Card"
                                             materialDesign:HintAssist.Hint="Birthplace"
                                             FontSize="18">
@@ -243,8 +243,8 @@
                                             Kind="Globe" />
                                         <TextBox
                                             x:Name="tbCitizenship"
-                                            Width="200"
-                                            Margin="8,0,0,0"
+                                            Width="260"
+                                            Margin="10,0,0,0"
                                             materialDesign:HintAssist.Hint="Citizenship"
                                             FontSize="18">
                                             <TextBox.Text>
@@ -271,7 +271,7 @@
                                             Kind="GenderMaleFemaleVariant" />
 
                                         <ComboBox
-                                            Width="200"
+                                            Width="260"
                                             Margin="10,0,0,0"
                                             HorizontalAlignment="Left"
                                             materialDesign:HintAssist.Hint="Gender"
@@ -306,7 +306,7 @@
 
                                         <TextBox
                                             x:Name="tbPhone"
-                                            Width="200"
+                                            Width="260"
                                             Margin="10,0,0,0"
                                             HorizontalAlignment="Left"
                                             materialDesign:HintAssist.Hint="Phone number"
@@ -349,7 +349,7 @@
                                             Foreground="DimGray"
                                             Kind="CardAccountDetailsStar" />
                                         <ComboBox
-                                            Width="200"
+                                            Width="260"
                                             Margin="10,0,0,0"
                                             HorizontalAlignment="Left"
                                             materialDesign:HintAssist.Hint="ROLE"
@@ -382,7 +382,7 @@
                                             Foreground="DimGray"
                                             Kind="House" />
                                         <ComboBox
-                                            Width="200"
+                                            Width="260"
                                             Margin="10,0,0,0"
                                             HorizontalAlignment="Left"
                                             materialDesign:HintAssist.Hint="DEPARTMENT"
@@ -419,7 +419,7 @@
                                             Kind="Equalizer" />
 
                                         <ComboBox
-                                            Width="200"
+                                            Width="260"
                                             Margin="10,0,0,0"
                                             materialDesign:HintAssist.Hint="Academic level"
                                             materialDesign:HintAssist.HintOpacity=".3"
@@ -457,7 +457,7 @@
 
                                         <TextBox
                                             x:Name="tbEmail"
-                                            Width="220"
+                                            Width="260"
                                             Margin="10,0,0,0"
                                             HorizontalAlignment="Left"
                                             materialDesign:HintAssist.Hint="Email"

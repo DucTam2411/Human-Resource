@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using HRMS.Employee.uCon;
 using HRMS.Accounting.View;
+using HRMS.Director.View;
 
 namespace HRMS.Login
 {
@@ -97,7 +98,15 @@ namespace HRMS.Login
                             e.ShowDialog();
                             break;
                         }// ACCOUTING
-                    case 3: // DIRECTOR
+                    case 3:
+                        {
+                            int id = user[0].EMPLOYEE_ID.Value;
+                            Director_Window e = new Director_Window(id);
+                            w.Close();
+                            e.ShowDialog();
+                            break;
+                        }// DIRECTOR
+                    default:
                         break;
                 }
             }

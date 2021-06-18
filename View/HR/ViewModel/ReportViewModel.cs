@@ -24,6 +24,8 @@ using ClosedXML.Excel;
 using System.Reflection;
 using HRMS.HR.Model;
 using HRMS.Model;
+using HRMS.HR.View;
+using HRMS.HR.uCon;
 
 namespace HRMS.HR.ViewModel
 {
@@ -33,6 +35,8 @@ namespace HRMS.HR.ViewModel
         public ICommand ExportPDFCommand { get; set; }
         //Export to Excel
         public ICommand ExportExcelCommand { get; set; }
+        public ICommand showDetailCommand { get; set; }
+        
         public ReportViewModel(int ID)
         {
             LoadComboboxTypeList();
@@ -41,11 +45,14 @@ namespace HRMS.HR.ViewModel
             hrmsEntities db = new hrmsEntities();
             var employee = db.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == ID).SingleOrDefault();
             //Chức năng export to pdf
-            ExportPDFCommand = new RelayCommand<DataGrid>(p => true, p => ExportPDF(p, employee.NAME));
+            ExportPDFCommand = new RelayCommand<DataGrid>(p => { if (SELECTMONTHTYPE.MONTH == DateTime.Now.Month && SELECTMONTHTYPE.YEAR == DateTime.Now.Year) { return false; } else { return true; } }, p => ExportPDF(p, employee.NAME));
 
             //Chức năng export to excel
-            ExportExcelCommand = new RelayCommand<DataGrid>(p => true, p => ExportExcel(p));
+            ExportExcelCommand = new RelayCommand<DataGrid>(p => { if (SELECTMONTHTYPE.MONTH == DateTime.Now.Month && SELECTMONTHTYPE.YEAR == DateTime.Now.Year) { return false; } else { return true; } }, p => ExportExcel(p));
+
+            showDetailCommand = new RelayCommand<ContentControl>(p => { return true; }, p => { p.Content = new uConTimekeepingDetail(ID, SELECTEDITEM); });
         }
+        
         //Binding tới datagrid của Salary List
         private ObservableCollection<TimekeepingData> _TimekeepingList;
         public ObservableCollection<TimekeepingData> TimekeepingList { get => _TimekeepingList; set { _TimekeepingList = value; OnPropertyChanged(); } }
@@ -334,16 +341,13 @@ namespace HRMS.HR.ViewModel
 
             //Khởi tạo biến MONTHLIST để chứa tháng
             MONTHLIST = new ObservableCollection<ComboboxModel>();
-            DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+
             //Đưa dữ liệu từ listmonth vào MONTHLIST
             foreach (var item in listmonth)
             {
-                if ((DateTime)item.Month != date)
-                {
-                    DateTime date1 = (DateTime)item.Month;
-                    //Nếu điều kiện hợp lệ thì lưu dữ liệu vào ComboBox Month thông qua MONTHLIST
-                    MONTHLIST.Add(new ComboboxModel(date1.Month, date1.Year, (date1.Month == DateTime.Now.Month && date1.Year == DateTime.Now.Year) ? true : false));
-                }
+                 DateTime date1 = (DateTime)item.Month;
+                //Nếu điều kiện hợp lệ thì lưu dữ liệu vào ComboBox Month thông qua MONTHLIST
+                 MONTHLIST.Add(new ComboboxModel(date1.Month, date1.Year, (date1.Month == DateTime.Now.Month && date1.Year == DateTime.Now.Year) ? true : false));
             }
             SELECTMONTHTYPE = MONTHLIST.Where(x => x.ISSELECTED == true).FirstOrDefault();
             if (SELECTMONTHTYPE == null)
@@ -389,7 +393,6 @@ namespace HRMS.HR.ViewModel
                         join tk in db.TIMEKEEPINGs on emp.EMPLOYEE_ID equals tk.EMPLOYEE_ID
                         where tk.MONTH.Value.Month == SELECTMONTHTYPE.MONTH && tk.MONTH.Value.Year == SELECTMONTHTYPE.YEAR
                         select tk).Distinct(); ;
-            MessageBox.Show("DEPT_NAME = " + SELECTDEPTTYPE.DEPT_NAME);
             TimekeepingList = new ObservableCollection<TimekeepingData>();
             TimekeepingTest = new ObservableCollection<TimekeepingData>();
             foreach (var item in list)
@@ -404,16 +407,13 @@ namespace HRMS.HR.ViewModel
                 data.WORK = (double)item.NUMBER_OF_WORK_DAY;
                 data.ABSENT = (double)item.NUMBER_OF_ABSENT_DAY;
                 data.STANDARD = (double)item.NUMBER_OF_STANDARD_DAY;
+                data.MONTH = (DateTime)item.MONTH;
                 TimekeepingList.Add(data);
                 TimekeepingTest.Add(data);
             }
 
         }
 
-        private void LoadTimekeepingDetailData()
-        {
-            
-        }
         //Chuyển từ datagrid sang datatable
         public static DataTable ToDataTable<T>(List<T> items)
         {
@@ -556,5 +556,183 @@ namespace HRMS.HR.ViewModel
                 MessageBox.Show(message, "MESSAGE", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
+
+        #region timekeepingDetail
+        public ReportViewModel(int id, TimekeepingData data)
+        {
+            EMPLOYEENAME = data.NAME;
+            EMPLOYEE_ID = data.EMPLOYEE_ID;
+            LoadMonth(data);
+            //Chức năng của BackCommand
+            BackCommand = new RelayCommand<ContentControl>(p => { return true; },
+            p => { p.Content = new uConReport(EMPLOYEE_ID); });
+            showDetailCommand = new RelayCommand<ContentControl>(p => { return true; }, p => { p.Content = new uConTimekeepingDetail(EMPLOYEE_ID, SELECTEDITEM); });
+        }
+        private string _EMPLOYEENAME;
+        public string EMPLOYEENAME { get => _EMPLOYEENAME; set { _EMPLOYEENAME = value; OnPropertyChanged(); } }
+
+        private int _EMPLOYEE_ID;
+        public int EMPLOYEE_ID { get => _EMPLOYEE_ID; set { _EMPLOYEE_ID = value; OnPropertyChanged(); } }
+        public ICommand BackCommand { get; set; }
+        private TimekeepingData _SELECTEDITEM;
+        public TimekeepingData SELECTEDITEM
+        {
+            get => _SELECTEDITEM; set
+            {
+                _SELECTEDITEM = value;
+                OnPropertyChanged();
+            }
+        }
+        private ObservableCollection<string> _workdayList { get; set; }
+        public ObservableCollection<string> workdayList
+        {
+            get { return _workdayList; }
+            set
+            {
+                _workdayList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<string> _absentdayList { get; set; }
+        public ObservableCollection<string> absentdayList
+        {
+            get
+            {
+                return _absentdayList;
+            }
+            set
+            {
+                _absentdayList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<string> _overtimeList { get; set; }
+        public ObservableCollection<string> overtimeList
+        {
+            get
+            {
+                return _overtimeList;
+            }
+            set
+            {
+                _overtimeList = value;
+                OnPropertyChanged();
+            }
+        }
+        private ObservableCollection<ComboboxModel> _MONTHDETAILLIST;
+        public ObservableCollection<ComboboxModel> MONTHDETAILLIST { get => _MONTHDETAILLIST; set { _MONTHDETAILLIST = value; OnPropertyChanged(); } }
+        private ComboboxModel _SELECTDETAILMONTHTYPE;
+        public ComboboxModel SELECTDETAILMONTHTYPE
+        {
+            get => _SELECTDETAILMONTHTYPE; set
+            {
+                _SELECTDETAILMONTHTYPE = value;
+                OnPropertyChanged();
+
+                //Nếu selected khác null, nghĩa là tháng đã chọn thì show data theo select dó
+                if (SELECTDETAILMONTHTYPE != null)
+                {
+                    LoadDetail(EMPLOYEE_ID, SELECTDETAILMONTHTYPE.MONTH, SELECTDETAILMONTHTYPE.YEAR);
+                }
+            }
+        }
+        private void LoadMonth(TimekeepingData data)
+        {
+            hrmsEntities db = new hrmsEntities();
+
+            //Chọn tháng từ database KHÔNG TRÙNG LẶP (chọn DATE_START và DATE_END để kiểm tra tháng bắt đầu và tháng kết thúc có hợp lệ không (nếu cách nhau không quá 31 ngày hợp lệ)
+            var listmonth = (from month in db.TIMEKEEPINGs
+                             select new { Month = month.MONTH }).Distinct();
+
+            //Khởi tạo biến MONTHLIST để chứa tháng
+            MONTHDETAILLIST = new ObservableCollection<ComboboxModel>();
+            //Đưa dữ liệu từ listmonth vào MONTHLIST
+            foreach (var item in listmonth)
+            {
+                MONTHDETAILLIST.Add(new ComboboxModel(item.Month.Value.Month, item.Month.Value.Year, false));
+            }
+            SELECTDETAILMONTHTYPE = MONTHDETAILLIST.Where(x => x.MONTH == data.MONTH.Month && x.YEAR == data.MONTH.Year).First();
+        }
+        private void LoadDetail(int id, int month, int year)
+        {
+            hrmsEntities db = new hrmsEntities();
+            var GetWorkdayList = ((from t in db.TIMEKEEPING_DETAIL
+                                   where t.TIMEKEEPING.MONTH.Value.Month == month &&
+                                   t.TIMEKEEPING.MONTH.Value.Year == year &&
+                                   (t.TIMEKEEPING_DETAIL_TYPE == 1 || t.TIMEKEEPING_DETAIL_TYPE == 2) &&
+                                   t.EMPLOYEE_ID == id
+                                   orderby t.CHECK_DATE.Value.Day ascending
+                                   select t).Distinct());
+            workdayList = new ObservableCollection<string>();
+            absentdayList = new ObservableCollection<string>();
+            overtimeList = new ObservableCollection<string>();
+            foreach (var item in GetWorkdayList)
+            {
+                string Session = "";
+                if (item != null)
+                {
+                    if (item.SESSION == 1)
+                    {
+                        Session = "Morning";
+                        workdayList.Add(item.CHECK_DATE.Value.Day + "/" + item.CHECK_DATE.Value.Month + "/" + item.CHECK_DATE.Value.Year + "(" + Session + ")");
+                    }
+                    else
+                    {
+                        Session = "Afternoon";
+                        workdayList.Add(item.CHECK_DATE.Value.Day + "/" + item.CHECK_DATE.Value.Month + "/" + item.CHECK_DATE.Value.Year + "(" + Session + ")");
+                    }
+                }
+            }
+
+            var GetAbsentdayList = ((from t in db.TIMEKEEPING_DETAIL
+                                     where t.TIMEKEEPING.MONTH.Value.Month == month &&
+                                   t.TIMEKEEPING.MONTH.Value.Year == year && t.TIMEKEEPING_DETAIL_TYPE == 0 && t.CHECK_DATE.Value.Day <= DateTime.Now.Day
+                                     && t.EMPLOYEE_ID == id
+                                     select t).Distinct());
+            foreach (var item in GetAbsentdayList)
+            {
+                string Session = "";
+                if (item != null)
+                {
+                    if (item.SESSION == 1)
+                    {
+                        Session = "Morning";
+                        absentdayList.Add(item.CHECK_DATE.Value.Day + "/" + item.CHECK_DATE.Value.Month + "/" + item.CHECK_DATE.Value.Year + "(" + Session + ")");
+                    }
+                    else
+                    {
+                        Session = "Afternoon";
+                        absentdayList.Add(item.CHECK_DATE.Value.Day + "/" + item.CHECK_DATE.Value.Month + "/" + item.CHECK_DATE.Value.Year + "(" + Session + ")");
+                    }
+                }
+
+            }
+
+            var GetOvertimeList = ((from t in db.TIMEKEEPING_DETAIL
+                                    where t.TIMEKEEPING.MONTH.Value.Month == month &&
+                                   t.TIMEKEEPING.MONTH.Value.Year == year && t.TIMEKEEPING_DETAIL_TYPE == 3
+                                    && t.EMPLOYEE_ID == id
+                                    select t).Distinct());
+            foreach (var item in GetOvertimeList)
+            {
+                if (item != null)
+                {
+                    string Session = "";
+                    if (item.SESSION == 1)
+                    {
+                        Session = "Morning";
+                        overtimeList.Add(item.CHECK_DATE.Value.Day + "/" + item.CHECK_DATE.Value.Month + "/" + item.CHECK_DATE.Value.Year + "(" + Session + ")");
+                    }
+                    else
+                    {
+                        Session = "Afternoon";
+                        overtimeList.Add(item.CHECK_DATE.Value.Day + "/" + item.CHECK_DATE.Value.Month + "/" + item.CHECK_DATE.Value.Year + "(" + Session + ")");
+                    }
+                }
+            }
+        }
+        #endregion
     }
 }

@@ -214,7 +214,6 @@ namespace HRMS.HR.ViewModel
 
         public ListEmployeeViewModel(int ID)
         {
-            CreateAttendanceDays();
             LoadComboboxTypeList();
             LoadData();
             USER_ID = ID;
@@ -237,7 +236,7 @@ namespace HRMS.HR.ViewModel
                 p.Content = new uConModifyEmployee(SELECTED_ITEM, ID);
             });
             ConfirmCommand = new RelayCommand<ContentControl>(p => {
-                if (string.IsNullOrEmpty(ID_CARD.ToString()) || string.IsNullOrEmpty(NAME) || string.IsNullOrEmpty(DEPT_NAME) || string.IsNullOrEmpty(ROLE_NAME) || BASIC_WAGE == 0 || OVERTIME_SALARY == 0 || COEFFICIENT == 0)
+                if (string.IsNullOrEmpty(ID_CARD.ToString()) || string.IsNullOrEmpty(NAME) || string.IsNullOrEmpty(DEPT_NAME) || string.IsNullOrEmpty(ROLE_NAME) || BASIC_WAGE == 0 || OVERTIME_SALARY == 0 || COEFFICIENT == 0 || string.IsNullOrEmpty(PASSWORD) || string.IsNullOrEmpty(USER_NAME))
                     return false;
                 var displayList = HRMSEntities.Ins.DB.EMPLOYEEs.Where(x => x.ID_CARD == ID_CARD);
                 if (displayList == null || displayList.Count() != 0)
@@ -292,6 +291,7 @@ namespace HRMS.HR.ViewModel
                     TAX = 0,
                     SOCIAL_INSURANCE = 0,
                     HEALTH_INSURANCE = 0,
+                    TOTAL_SALARY = 0,
                     MONTH = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1),
                     DATE_START = DateTime.Now,
                     DATE_END = new DateTime(DateTime.Now.Year,DateTime.Now.Month + 1,1),
@@ -409,7 +409,7 @@ namespace HRMS.HR.ViewModel
             });
             AddImageCommand = new RelayCommand<object>(p => IsAddImageData(), p => AddImageData());
             ViewUser = new RelayCommand<object>(p => { return true; }, p => { MessageBox.Show("Username: " + USERNAME + "\nPassword: " + PASSWORD + "\nDEPT_NAME: "+ DEPT_NAME); });
-            ChangePasswordCommand = new RelayCommand<ContentControl>(p => { return true; }, p =>
+            ChangePasswordCommand = new RelayCommand<ContentControl>(p => { if (PASSWORD != null) { return true; } else { return false; } }, p =>
             {
                 var User = db.USERs.Where(x => x.EMPLOYEE_ID == selected.EMPLOYEE_ID).SingleOrDefault();
                 User.PASSWORD = CreateMD5(Base64Encode(PASSWORD));
@@ -714,78 +714,8 @@ namespace HRMS.HR.ViewModel
             }
         }
 
-        // Tạo bảng timekeeping hằng ngày
 
-        public static void CreateAttendanceDays()
-        {
-            hrmsEntities db = new hrmsEntities();
-            var list = (from emp in db.EMPLOYEEs join
-                        del in db.DELETEs on emp.EMPLOYEE_ID equals del.EMPLOYEE_ID
-                        where del.ISDELETED == false
-                        select new { id = emp.EMPLOYEE_ID}).Distinct();
-            
-            foreach (var item in list)
-            {
-                TIMEKEEPING temp = db.TIMEKEEPINGs.Where(x => x.EMPLOYEE_ID == item.id && x.MONTH.Value.Month == DateTime.Now.Month && x.MONTH.Value.Year == DateTime.Now.Year).FirstOrDefault();
-                if (temp == null)
-                {
-                    DateTime date = DateTime.Now;
-
-                    var timekeeping = new TIMEKEEPING()
-                    {
-                        TIMEKEEPING_ID = DateTime.Now.Month + DateTime.Now.Year + item.id,
-                        DATE_START = DateTime.Now,
-                        MONTH = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1),
-                        DATE_END = new DateTime(DateTime.Now.Year, DateTime.Now.Month, GetDaybyMonth(DateTime.Now.Month, DateTime.Now.Year)),
-                        EMPLOYEE_ID = item.id,
-                        NUMBER_OF_ABSENT_DAY = ReportViewModel.CalculateAverageDay(DateTime.Now.Month, DateTime.Now.Year),
-                        NUMBER_OF_OVERTIME_DAY = 0,
-                        NUMBER_OF_WORK_DAY = 0,
-                        NUMBER_OF_STANDARD_DAY = ReportViewModel.CalculateAverageDay(DateTime.Now.Month, DateTime.Now.Year)
-                    };
-                    
-                    db.TIMEKEEPINGs.Add(timekeeping);
-                    for (int i = date.Day; i <= GetDaybyMonth(DateTime.Now.Month, DateTime.Now.Year); i++)
-                    {
-                        if (ReportViewModel.IsHoliday(date.Day, date.Month, date.Year) == false)
-                        {
-                            if (date.DayOfWeek == DayOfWeek.Saturday)
-                            {
-                                TIMEKEEPING_DETAIL timedetail = new TIMEKEEPING_DETAIL();
-                                timedetail.EMPLOYEE_ID = item.id;
-                                timedetail.TIMEKEEPING_ID = timekeeping.TIMEKEEPING_ID;
-                                timedetail.CHECK_DATE = date;
-                                timedetail.SESSION = 1;
-                                timedetail.TIMEKEEPING_DETAIL_TYPE = 0;
-                                db.TIMEKEEPING_DETAIL.Add(timedetail);
-                            }
-                            else
-                            {
-                                TIMEKEEPING_DETAIL timedetail1 = new TIMEKEEPING_DETAIL();
-                                timedetail1.EMPLOYEE_ID = item.id;
-                                timedetail1.TIMEKEEPING_ID = timekeeping.TIMEKEEPING_ID;
-                                timedetail1.CHECK_DATE = date;
-                                timedetail1.SESSION = 1;
-                                timedetail1.TIMEKEEPING_DETAIL_TYPE = 0;
-                                db.TIMEKEEPING_DETAIL.Add(timedetail1);
-
-                                TIMEKEEPING_DETAIL timedetail2 = new TIMEKEEPING_DETAIL();
-                                timedetail2.EMPLOYEE_ID = item.id;
-                                timedetail2.TIMEKEEPING_ID = timekeeping.TIMEKEEPING_ID;
-                                timedetail2.CHECK_DATE = date;
-                                timedetail2.SESSION = 2;
-                                timedetail2.TIMEKEEPING_DETAIL_TYPE = 0;
-                                db.TIMEKEEPING_DETAIL.Add(timedetail2);
-                            }
-                        }
-                        date = date.AddDays(1);
-                    }
-                    
-                }
-            }
-            db.SaveChanges();
-
-        }
+        
 
     }
 }

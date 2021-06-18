@@ -145,6 +145,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Director\View\Director_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Director\View\uConAccountingReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Director\View\uConHRReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Employee\uCon\EmployeeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -241,6 +253,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Director\ViewModel\AccountingViewModel.cs" />
+    <Compile Include="Director\ViewModel\HRViewModel.cs" />
+    <Compile Include="Director\ViewModel\InterfaceViewModel.cs" />
+    <Compile Include="Director\View\Director_Window.xaml.cs">
+      <DependentUpon>Director_Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Director\View\uConAccountingReport.xaml.cs">
+      <DependentUpon>uConAccountingReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Director\View\uConHRReport.xaml.cs">
+      <DependentUpon>uConHRReport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Employee\uCon\EmployeeWindow.xaml.cs">
       <DependentUpon>EmployeeWindow.xaml</DependentUpon>
     </Compile>
@@ -268,6 +292,9 @@
     <Compile Include="HR\Model\SideBarDatabase.cs" />
     <Compile Include="HR\Model\TimekeepingClass.cs" />
     <Compile Include="HR\Model\TimekeepingData.cs" />
+    <Compile Include="HR\View\uConTimekeepingDetail.xaml.cs">
+      <DependentUpon>uConTimekeepingDetail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\BaseViewModel.cs" />
     <Compile Include="HR\ViewModel\DashBoardViewModel.cs" />
     <Compile Include="HR\ViewModel\InformationViewModel.cs" />
@@ -299,6 +326,10 @@
     <Compile Include="HR\View\uConSideBar.xaml.cs">
       <DependentUpon>uConSideBar.xaml</DependentUpon>
     </Compile>
+    <Page Include="HR\View\uConTimekeepingDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="HR\View\uConTimekeepingInformation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
