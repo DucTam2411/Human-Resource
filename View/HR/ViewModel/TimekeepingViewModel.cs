@@ -56,16 +56,22 @@ namespace HRMS.HR.ViewModel
                     if (TIMEKEEPING_TYPE == 1 || TIMEKEEPING_TYPE == 2)
                     {
                         timekeeping.TIMEKEEPING_DETAIL_TYPE = 0;
+                        timekeeping.TIMEKEEPING.NUMBER_OF_ABSENT_DAY = (float?)(timekeeping.TIMEKEEPING.NUMBER_OF_ABSENT_DAY + 0.5);
+                        timekeeping.TIMEKEEPING.NUMBER_OF_WORK_DAY = (float?)(timekeeping.TIMEKEEPING.NUMBER_OF_WORK_DAY - 0.5);
                     }
                     else
                     {
                         if (SESSION == 1)
                         {
                             timekeeping.TIMEKEEPING_DETAIL_TYPE = 1;
+                            timekeeping.TIMEKEEPING.NUMBER_OF_ABSENT_DAY = (float?)(timekeeping.TIMEKEEPING.NUMBER_OF_ABSENT_DAY - 0.5);
+                            timekeeping.TIMEKEEPING.NUMBER_OF_WORK_DAY = (float?)(timekeeping.TIMEKEEPING.NUMBER_OF_WORK_DAY + 0.5);
                         }
                         else if (SESSION == 2)
                         {
                             timekeeping.TIMEKEEPING_DETAIL_TYPE = 2;
+                            timekeeping.TIMEKEEPING.NUMBER_OF_ABSENT_DAY = (float?)(timekeeping.TIMEKEEPING.NUMBER_OF_ABSENT_DAY - 0.5);
+                            timekeeping.TIMEKEEPING.NUMBER_OF_WORK_DAY = (float?)(timekeeping.TIMEKEEPING.NUMBER_OF_WORK_DAY + 0.5);
                         }
                         
                     }
