@@ -47,17 +47,25 @@ namespace HRMS.HR.ViewModel
                 p =>
                 {
                     hrmsEntities db = new hrmsEntities();
+                    RECORD record = new RECORD();
+                    var Employee = db.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == id).SingleOrDefault();
                     TIMEKEEPING_DETAIL timekeeping = db.TIMEKEEPING_DETAIL.Where(x => x.EMPLOYEE_ID == EMPLOYEE_ID 
                     && x.CHECK_DATE.Value.Day == SELECTED_DATE.Day
                     && x.CHECK_DATE.Value.Month == SELECTED_DATE.Month
                     && x.CHECK_DATE.Value.Year == SELECTED_DATE.Year
                     && x.SESSION == SESSION).SingleOrDefault();
-                    
+
+                    record.EMPLOYEE_ID = id;
+                    record.DEPT_ID = Employee.DEPT_ID;
+                    record.EMPLOYEE_CHANGE_ID = EMPLOYEE_ID;
+                    record.EMPLOYEE_CHANGE_NAME = timekeeping.EMPLOYEE.NAME;
+
                     if (TIMEKEEPING_TYPE == 1 || TIMEKEEPING_TYPE == 2)
                     {
                         timekeeping.TIMEKEEPING_DETAIL_TYPE = 0;
                         timekeeping.TIMEKEEPING.NUMBER_OF_ABSENT_DAY = (float?)(timekeeping.TIMEKEEPING.NUMBER_OF_ABSENT_DAY + 0.5);
                         timekeeping.TIMEKEEPING.NUMBER_OF_WORK_DAY = (float?)(timekeeping.TIMEKEEPING.NUMBER_OF_WORK_DAY - 0.5);
+                        record.CHANGE = Employee.NAME + " switched " + timekeeping.EMPLOYEE.NAME + " attendance type from work to absent";
                     }
                     else
                     {
@@ -73,8 +81,12 @@ namespace HRMS.HR.ViewModel
                             timekeeping.TIMEKEEPING.NUMBER_OF_ABSENT_DAY = (float?)(timekeeping.TIMEKEEPING.NUMBER_OF_ABSENT_DAY - 0.5);
                             timekeeping.TIMEKEEPING.NUMBER_OF_WORK_DAY = (float?)(timekeeping.TIMEKEEPING.NUMBER_OF_WORK_DAY + 0.5);
                         }
-                        
+                        record.CHANGE = Employee.NAME + " switched " + timekeeping.EMPLOYEE.NAME + " attendance type from absent to work";
+
                     }
+                    record.DATE_CHANGE = DateTime.Now;
+                    record.MONTH_CHANGE = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                    db.RECORDs.Add(record);
                     db.SaveChanges();
                     LoadTimeKeepingDetail();
                     MessageBox.Show("Changed successfully");
