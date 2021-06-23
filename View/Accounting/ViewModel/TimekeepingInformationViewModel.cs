@@ -218,6 +218,9 @@ namespace HRMS.Accouting.ViewModel
         public TimekeepingInformationViewModel(int ID, TimekeepingData item)
         {
             EMPLOYEE_ID = ID;
+            hrmsEntities db = new hrmsEntities();
+            EMPLOYEE employee = db.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == ID).FirstOrDefault();
+            EMPLOYEENAME = employee.NAME;
             LoadMonth(item);
             //Chức năng của BackCommand
             BackCommand = new RelayCommand<ContentControl>(p => { return true; },

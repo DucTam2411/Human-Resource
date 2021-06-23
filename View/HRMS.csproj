@@ -161,26 +161,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Employee\uCon\uConEmployeeInformation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Employee\uCon\uConEmployeeSalary.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Employee\uCon\uConEmployeeTimekeepingDetail.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Employee\uCon\uConEmployeeTimekeepingWhole.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Employee\uCon\uConSideBarEmployee.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="HR\View\HR_EmployeeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -268,24 +248,7 @@
     <Compile Include="Employee\uCon\EmployeeWindow.xaml.cs">
       <DependentUpon>EmployeeWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Employee\uCon\uConEmployeeInformation.cs">
-      <DependentUpon>uConEmployeeInformation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Employee\uCon\uConEmployeeSalary.xaml.cs">
-      <DependentUpon>uConEmployeeSalary.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Employee\uCon\uConEmployeeTimekeepingDetail.xaml.cs">
-      <DependentUpon>uConEmployeeTimekeepingDetail.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Employee\uCon\uConEmployeeTimekeepingWhole.xaml.cs">
-      <DependentUpon>uConEmployeeTimekeepingWhole.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Employee\uCon\uConSideBarEmployee.xaml.cs">
-      <DependentUpon>uConSideBarEmployee.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Employee\ViewModel\AttendanceViewModel.cs" />
-    <Compile Include="Employee\ViewModel\EmployeeViewModel.cs" />
-    <Compile Include="Employee\ViewModel\NavigationViewModel.cs" />
+    <Compile Include="Employee\ViewModel\InterfaceViewModel.cs" />
     <Compile Include="HR\Model\ComboboxModel.cs" />
     <Compile Include="HR\Model\EmployeeInformation.cs" />
     <Compile Include="HR\Model\RandomGenerator.cs" />

@@ -190,11 +190,6 @@ D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Accounting\View\uConDashBoard.g.cs
 D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Accounting\View\uConEmployeeSalary.g.cs
 D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Accounting\View\uConListEmployeeAccounting.g.cs
 D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Employee\uCon\EmployeeWindow.g.cs
-D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Employee\uCon\uConEmployeeInformation.g.cs
-D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Employee\uCon\uConEmployeeSalary.g.cs
-D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Employee\uCon\uConEmployeeTimekeepingDetail.g.cs
-D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Employee\uCon\uConEmployeeTimekeepingWhole.g.cs
-D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Employee\uCon\uConSideBarEmployee.g.cs
 D:\Study\CNPM\HRSM-Trong\View\obj\Debug\HR\View\HR_EmployeeWindow.g.cs
 D:\Study\CNPM\HRSM-Trong\View\obj\Debug\HR\View\uConAddEmployee.g.cs
 D:\Study\CNPM\HRSM-Trong\View\obj\Debug\HR\View\uConDashboard.g.cs
@@ -207,7 +202,6 @@ D:\Study\CNPM\HRSM-Trong\View\obj\Debug\HR\View\uConTimekeepingInformation.g.cs
 D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Login\LoginWindow.g.cs
 D:\Study\CNPM\HRSM-Trong\View\obj\Debug\App.g.cs
 D:\Study\CNPM\HRSM-Trong\View\obj\Debug\HRMS_Content.g.cs
-D:\Study\CNPM\HRSM-Trong\View\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\Study\CNPM\HRSM-Trong\View\obj\Debug\HRMS_MarkupCompile.cache
 D:\Study\CNPM\HRSM-Trong\View\obj\Debug\HRMS_MarkupCompile.lref
 D:\Study\CNPM\HRSM-Trong\View\obj\Debug\App.baml
@@ -220,11 +214,6 @@ D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Accounting\View\uConDashBoard.baml
 D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Accounting\View\uConEmployeeSalary.baml
 D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Accounting\View\uConListEmployeeAccounting.baml
 D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Employee\uCon\EmployeeWindow.baml
-D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Employee\uCon\uConEmployeeInformation.baml
-D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Employee\uCon\uConEmployeeSalary.baml
-D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Employee\uCon\uConEmployeeTimekeepingDetail.baml
-D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Employee\uCon\uConEmployeeTimekeepingWhole.baml
-D:\Study\CNPM\HRSM-Trong\View\obj\Debug\Employee\uCon\uConSideBarEmployee.baml
 D:\Study\CNPM\HRSM-Trong\View\obj\Debug\HR\View\HR_EmployeeWindow.baml
 D:\Study\CNPM\HRSM-Trong\View\obj\Debug\HR\View\uConAddEmployee.baml
 D:\Study\CNPM\HRSM-Trong\View\obj\Debug\HR\View\uConDashboard.baml

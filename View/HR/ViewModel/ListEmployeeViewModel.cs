@@ -397,6 +397,7 @@ namespace HRMS.HR.ViewModel
             SaveCommand = new RelayCommand<ContentControl>(p => { return true; }, p =>
             {
                 EditData(selected,ID);
+                MessageBox.Show("Saved successfully");
                 p.Content = new uConListEmployee(ID);
             });
             BackCommand = new RelayCommand<ContentControl>(p => { return true; }, p => { p.Content = new uConListEmployee(ID); });
@@ -412,16 +413,6 @@ namespace HRMS.HR.ViewModel
             {
                 var User = db.USERs.Where(x => x.EMPLOYEE_ID == selected.EMPLOYEE_ID).SingleOrDefault();
                 User.PASSWORD = CreateMD5(Base64Encode(PASSWORD));
-                RECORD record = new RECORD();
-                var employee = db.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == ID).SingleOrDefault();
-                record.EMPLOYEE_ID = ID;
-                record.DEPT_ID = employee.DEPT_ID;
-                record.EMPLOYEE_CHANGE_ID = selected.EMPLOYEE_ID;
-                record.EMPLOYEE_CHANGE_NAME = User.EMPLOYEE.NAME;
-                record.CHANGE = employee.NAME + " changed " + record.EMPLOYEE_CHANGE_NAME + " password";
-                record.DATE_CHANGE = DateTime.Now;
-                record.MONTH_CHANGE = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-                db.RECORDs.Add(record);
                 db.SaveChanges();
                 p.Content = new uConListEmployee(ID);
             });
@@ -492,12 +483,12 @@ namespace HRMS.HR.ViewModel
                 change = change + string.Format("CITIZENSHIP ({0} -> {1})   ", e.CITIZENSHIP, CITIZENSHIP);
                 countchange++;
             }
-            if (ROLE_NAME != e.ROLE_NAME)
+            if (ROLE_ID != e.ROLE_ID)
             {
                 change = change + string.Format("ROLE ({0} -> {1})   ", e.ROLE_NAME, ROLE_NAME);
                 countchange++;
             }
-            if (DEPT_NAME != e.DEPT_NAME)
+            if (DEPT_ID != e.DEPT_ID)
             {
                 change = change + string.Format("DEPARTMENT ({0} -> {1})   ", e.DEPT_NAME, DEPT_NAME);
                 countchange++;
@@ -514,11 +505,6 @@ namespace HRMS.HR.ViewModel
                 record.CHANGE = change;
                 record.MONTH_CHANGE = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
                 db.RECORDs.Add(record);
-                MessageBox.Show("Saved successfully");
-            }
-            else
-            {
-                MessageBox.Show("There is nothing to save");
             }
             
             db.SaveChanges();

@@ -21,7 +21,6 @@ namespace HRMS.Employee.uCon
     public partial class EmployeeWindow : Window
     {
         //int employee_id;
-        NavigationViewModel a { get; set; }
         public EmployeeWindow()
         {
             InitializeComponent();
@@ -31,14 +30,8 @@ namespace HRMS.Employee.uCon
         public EmployeeWindow(int employee_id)
         {
             InitializeComponent();
-
-            a = new NavigationViewModel(employee_id);
-            Sidebar.DataContext = a;
-            sss.DataContext = a;
-
-
-            // this will handle check attendance
-            this.DataContext = new AttendanceViewModel(employee_id);
+            DataContext = new InterfaceViewModel(employee_id);
+            
 
         }
 

@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:userCon="clr-namespace:HRMS.Employee.uCon"
-    Title="EmployeeWindow"
+    xmlns:viewmodel1="clr-namespace:HRMS.Director.ViewModel"
+    Title="HR_EmployeeWindow"
     Width="1124"
-    Height="600"
+    Height="620"
+    d:DataContext="{d:DesignInstance Type=viewmodel1:InterfaceViewModel}"
     AllowsTransparency="True"
     Background="Transparent"
-    MouseDown="Grid_MouseDown"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
@@ -24,6 +25,7 @@
 
         <Border
             Grid.ColumnSpan="2"
+            Margin="0,2,0,-2"
             BorderBrush="Black"
             BorderThickness="8"
             CornerRadius="30">
@@ -32,50 +34,134 @@
                 <SolidColorBrush Color="White" />
             </Border.Background>
         </Border>
-
-        <userCon:uConSideBarEmployee
-            x:Name="Sidebar"
-            Width="240"
-            Height="200"
-            Margin="-10,150,0,150"
-            HorizontalAlignment="Left"
-            DockPanel.Dock="Left" />
-            
-        <DockPanel Grid.Column="2" Margin="0,-6,26,6" />
-
-
         <StackPanel
-           Width="230"
-           Height="50"
-           Margin="0,0,0,50"
-           VerticalAlignment="Bottom"
-           Orientation="Horizontal">
-            <Button
-            Width="100"
-            Height="50"
-            Margin="12,0,0,0"
-            Content="Morning"
-                Command="{Binding MorningCommand}">
+            Width="220"
+            Height="170"
+            Margin="15,0,15,0">
 
-            </Button>
-            <Button
-            Width="100"
-            Height="50"
-            Margin="15,0,0,0"
-            Content="Afternoon"
-                Command="{Binding AfternoonCommand}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
-            </Button>
+
+
+                <Grid
+                    x:Name="GridCursor"
+                    Width="230"
+                    Height="50"
+                    Margin="0,0,0,0"
+                    HorizontalAlignment="Left"
+                    Background="Transparent" />
+
+                <Button
+                    Grid.Row="0"
+                    Width="220"
+                    Height="50"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Left"
+                    HorizontalContentAlignment="Left"
+                    Background="{Binding BACKGROUNDINFORMATION}"
+                    BorderThickness="0"
+                    Command="{Binding InformationCommand}">
+
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Foreground="{Binding FOREGROUNDINFORMATION}" Kind="{Binding INFORMATIONTAB.ICONKIND}" />
+                        <TextBlock
+                            Margin="8,-4,0,0"
+                            FontFamily="Tw Cen MT"
+                            FontSize="22"
+                            FontWeight="SemiBold"
+                            Foreground="{Binding FOREGROUNDINFORMATION}"
+                            Text="{Binding INFORMATIONTAB.TEXTBLOCKNAME}" />
+                    </StackPanel>
+
+                </Button>
+
+                <Button
+                    Grid.Row="1"
+                    Width="220"
+                    Height="50"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Left"
+                    HorizontalContentAlignment="Left"
+                    Background="{Binding BACKGROUNDSALARYINFO}"
+                    BorderThickness="0"
+                    Command="{Binding SalaryInfoCommand}">
+
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Foreground="{Binding FOREGROUNDSALARYINFO}" Kind="{Binding SALARYINFOTAB.ICONKIND}" />
+                        <TextBlock
+                            Margin="8,-4,0,0"
+                            FontFamily="Tw Cen MT"
+                            FontSize="22"
+                            FontWeight="SemiBold"
+                            Foreground="{Binding FOREGROUNDSALARYINFO}"
+                            Text="{Binding SALARYINFOTAB.TEXTBLOCKNAME}" />
+                    </StackPanel>
+                </Button>
+                <Button
+                    Grid.Row="2"
+                    Width="220"
+                    Height="50"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Left"
+                    HorizontalContentAlignment="Left"
+                    Background="{Binding BACKGROUNDTIMEKEEPING}"
+                    BorderThickness="0"
+                    Command="{Binding TimekeepingCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Foreground="{Binding FOREGROUNDTIMEKEEPING}" Kind="{Binding TIMEKEEPINGTAB.ICONKIND}" />
+                        <TextBlock
+                            Margin="8,-4,0,0"
+                            FontFamily="Tw Cen MT"
+                            FontSize="22"
+                            FontWeight="SemiBold"
+                            Foreground="{Binding FOREGROUNDTIMEKEEPING}"
+                            Text="{Binding TIMEKEEPINGTAB.TEXTBLOCKNAME}" />
+                    </StackPanel>
+                </Button>
+               
+            </Grid>
+
+
 
         </StackPanel>
 
+        <DockPanel Grid.Column="1">
+            <!--<local:uConSideBar
+                Width="240"
+                Height="auto"
+                Margin="-22,150,0,150"
+                HorizontalAlignment="Left"
+                DockPanel.Dock="Left" />-->
+            <ContentControl Content="{Binding CONTENTCONTROL}" DockPanel.Dock="Left" />
 
-        <ContentControl
-            x:Name="sss"
-            Grid.Column="1"
-            Content="{Binding CONTENT_MAIN}" />
 
+        </DockPanel>
 
+        <StackPanel
+            Width="230"
+            Height="50"
+            Margin="0,0,0,50"
+            VerticalAlignment="Bottom"
+            Orientation="Horizontal">
+            <Button
+                Width="100"
+                Height="50"
+                Margin="12,0,0,0"
+                Command="{Binding MorningCommand}"
+                Content="Morning" />
+            <Button
+                Width="100"
+                Height="50"
+                Margin="15,0,0,0"
+                Command="{Binding AfternoonCommand}"
+                Content="Afternoon" />
 
+        </StackPanel>
     </Grid>
 </Window>
+

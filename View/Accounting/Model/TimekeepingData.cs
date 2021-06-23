@@ -11,6 +11,8 @@ namespace HRMS.Accouting.Model
     {
         private int _ID;
         public int ID { get => _ID; set { _ID = value; OnPropertyChanged(); } }
+        private string _NAME;
+        public string NAME { get => _NAME; set { _NAME = value;OnPropertyChanged(); } }
 
         private DateTime _MONTH;
         public DateTime MONTH { get => _MONTH; set { _MONTH = value; OnPropertyChanged(); } }
