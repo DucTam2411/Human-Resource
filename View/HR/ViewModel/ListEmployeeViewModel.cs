@@ -493,6 +493,11 @@ namespace HRMS.HR.ViewModel
                 change = change + string.Format("DEPARTMENT ({0} -> {1})   ", e.DEPT_NAME, DEPT_NAME);
                 countchange++;
             }
+            //if (IMAGESOURCE != e.IMAGE)
+            //{
+            //    change = change + string.Format("DEPARTMENT ({0} -> {1})   ", e.DEPT_NAME, DEPT_NAME);
+            //    countchange++;
+            //}
             if (countchange != 0)
             {
                 var employee = db.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == ID).SingleOrDefault();
@@ -506,6 +511,7 @@ namespace HRMS.HR.ViewModel
                 record.MONTH_CHANGE = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
                 db.RECORDs.Add(record);
             }
+            
             
             db.SaveChanges();
         }

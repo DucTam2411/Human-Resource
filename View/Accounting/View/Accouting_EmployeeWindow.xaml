@@ -15,7 +15,8 @@
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    x:Name="AccountingWindow">
 
     <Grid MouseDown="Grid_MouseDown">
         <Grid.ColumnDefinitions>
@@ -171,7 +172,7 @@
         <StackPanel
             Width="230"
             Height="50"
-            Margin="10,50"
+            Margin="10,100"
             VerticalAlignment="Bottom"
             Orientation="Horizontal">
             <Button
@@ -188,5 +189,16 @@
                 Content="Afternoon" />
 
         </StackPanel>
+        <Button
+            Width="200"
+            Height="50"
+            Margin="10,20"
+            VerticalAlignment="Bottom"
+            Command="{Binding ExitCommand}"
+            CommandParameter="{Binding ElementName=AccountingWindow}">
+            <materialDesign:PackIcon Foreground="White" Kind="ExitToApp" 
+                                     Height="30"
+                                     Width="40" RenderTransformOrigin="0.46,-0.343"/>
+        </Button>
     </Grid>
 </Window>

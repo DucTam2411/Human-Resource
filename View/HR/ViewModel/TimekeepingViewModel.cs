@@ -52,10 +52,19 @@ namespace HRMS.HR.ViewModel
                     && x.CHECK_DATE.Value.Month == SELECTED_DATE.Month
                     && x.CHECK_DATE.Value.Year == SELECTED_DATE.Year
                     && x.SESSION == SESSION).SingleOrDefault();
+                    EMPLOYEE employee = db.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == id).SingleOrDefault();
+                    RECORD record = new RECORD();
+                    record.EMPLOYEE_ID = employee.EMPLOYEE_ID;
+                    record.DEPT_ID = employee.DEPT_ID;
+                    record.EMPLOYEE_CHANGE_ID = EMPLOYEE_ID;
+                    record.EMPLOYEE_CHANGE_NAME = timekeeping.EMPLOYEE.NAME;
+                    record.DATE_CHANGE = DateTime.Now;
+                    record.MONTH_CHANGE = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
                     
                     if (TIMEKEEPING_TYPE == 1 || TIMEKEEPING_TYPE == 2)
                     {
                         timekeeping.TIMEKEEPING_DETAIL_TYPE = 0;
+                        record.CHANGE = timekeeping.EMPLOYEE.NAME + "(id: " + timekeeping.EMPLOYEE_ID + ") timekeeping in date: " + timekeeping.CHECK_DATE.Value.Day.ToString() + "/" + timekeeping.CHECK_DATE.Value.Month.ToString() + "/" + timekeeping.CHECK_DATE.Value.Year.ToString() + " changed from work to absent";
                     }
                     else
                     {
@@ -67,8 +76,9 @@ namespace HRMS.HR.ViewModel
                         {
                             timekeeping.TIMEKEEPING_DETAIL_TYPE = 2;
                         }
-                        
+                        record.CHANGE = timekeeping.EMPLOYEE.NAME + "(id: " + timekeeping.EMPLOYEE_ID + ") timekeeping in date: " + timekeeping.CHECK_DATE.Value.Day.ToString() + "/" + timekeeping.CHECK_DATE.Value.Month.ToString() + "/" + timekeeping.CHECK_DATE.Value.Year.ToString() + " changed from absent to work";
                     }
+                    db.RECORDs.Add(record);
                     db.SaveChanges();
                     LoadTimeKeepingDetail();
                     MessageBox.Show("Changed successfully");

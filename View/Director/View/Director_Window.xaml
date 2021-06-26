@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodel="clr-namespace:HRMS.HR.ViewModel"
     xmlns:viewmodel1="clr-namespace:HRMS.Director.ViewModel"
+    x:Name="DirectorWindow"
     Title="HR_EmployeeWindow"
     Width="1124"
     Height="620"
@@ -192,23 +193,37 @@
         <StackPanel
             Width="230"
             Height="50"
-            Margin="0,0,0,50"
+            Margin="10,90"
             VerticalAlignment="Bottom"
             Orientation="Horizontal">
             <Button
                 Width="100"
                 Height="50"
-                Margin="12,0,0,0"
+                Margin="10,0,0,0"
                 Command="{Binding MorningCommand}"
                 Content="Morning" />
             <Button
                 Width="100"
                 Height="50"
-                Margin="15,0,0,0"
+                Margin="10,0,0,0"
                 Command="{Binding AfternoonCommand}"
                 Content="Afternoon" />
 
         </StackPanel>
+        <Button
+            Width="200"
+            Height="50"
+            Margin="10,20"
+            VerticalAlignment="Bottom"
+            Command="{Binding ExitCommand}"
+            CommandParameter="{Binding ElementName=DirectorWindow}">
+            <materialDesign:PackIcon
+                Width="40"
+                Height="30"
+                Foreground="White"
+                Kind="ExitToApp"
+                RenderTransformOrigin="0.46,-0.343" />
+        </Button>
     </Grid>
 </Window>
 

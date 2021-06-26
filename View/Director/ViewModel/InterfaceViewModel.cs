@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -86,6 +87,7 @@ namespace HRMS.Director.ViewModel
         public ICommand MorningCommand { get; set; }
         public ICommand AfternoonCommand { get; set; }
         public ICommand SalaryInfoCommand { get; set; }
+        public ICommand ExitCommand { get; set; }
 
         #endregion
         public InformationViewModel INFORMATIONVM { get; set; }
@@ -112,6 +114,15 @@ namespace HRMS.Director.ViewModel
             InformationCommand = new RelayCommand<object>(p => { return true; }, p => InformationClick());
             TimekeepingCommand = new RelayCommand<object>(p => { return true; }, p => TimekeepingClick());
             SalaryInfoCommand = new RelayCommand<object>(p => { return true; }, p => SalaryClick());
+            ExitCommand = new RelayCommand<Window>(p => { return true; }, p => { this.CloseWindow(p); });
+        }
+
+        private void CloseWindow(Window window)
+        {
+            if (window != null)
+            {
+                window.Close();
+            }
         }
         //Load data vào side bar
         private void LoadNameSideBar()

@@ -89,6 +89,7 @@ namespace HRMS.Accouting.ViewModel
         public ICommand SalaryCommand { get; set; }
         public ICommand MorningCommand { get; set; }
         public ICommand AfternoonCommand { get; set; }
+        public ICommand ExitCommand { get; set; }
 
         #endregion
 
@@ -119,6 +120,14 @@ namespace HRMS.Accouting.ViewModel
             InformationCommand = new RelayCommand<object>(p => { return true; }, p => InformationClick());
             TimekeepingCommand = new RelayCommand<object>(p => { return true; }, p => TimekeepingClick());
             SalaryCommand = new RelayCommand<object>(p => { return true; }, p => SalaryClick());
+            ExitCommand = new RelayCommand<Window>(p => { return true; }, p => { this.CloseWindow(p); });
+        }
+        private void CloseWindow(Window window)
+        {
+            if (window != null)
+            {
+                window.Close();
+            }
         }
 
         //Load data vào side bar

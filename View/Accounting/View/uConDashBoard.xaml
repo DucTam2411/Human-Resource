@@ -75,7 +75,7 @@
                         Margin="5,0,0,0"
                         VerticalAlignment="Center"
                         FontSize="18"
-                        Text="Tháng" />
+                        Text="Month" />
 
                     <ComboBox
                         Margin="8,0,0,0"

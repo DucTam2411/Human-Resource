@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace HRMS.HR.Model
 {
@@ -48,7 +49,11 @@ namespace HRMS.HR.Model
 
         private long _OVERTIME_SALARY;
         public long OVERTIME_SALARY { get => _OVERTIME_SALARY; set { _OVERTIME_SALARY = value; OnPropertyChanged(); } }
-        
+        private byte[] _IMAGESOURCE;
+        public byte[] IMAGESOURCE { get => _IMAGESOURCE; set { _IMAGESOURCE = value; OnPropertyChanged(); } }
+
+        private BitmapImage _IMAGE_SOURCE;
+        public BitmapImage IMAGE_SOURCE { get => _IMAGE_SOURCE; set { _IMAGE_SOURCE = value; OnPropertyChanged(); } }
 
     }
 }

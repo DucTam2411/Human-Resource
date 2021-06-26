@@ -1,11 +1,13 @@
-﻿<Window x:Class="HRMS.Employee.uCon.EmployeeWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+﻿<Window
+    x:Class="HRMS.Employee.uCon.EmployeeWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:userCon="clr-namespace:HRMS.Employee.uCon"
     xmlns:viewmodel1="clr-namespace:HRMS.Director.ViewModel"
+    x:Name="Employee_Window"
     Title="HR_EmployeeWindow"
     Width="1124"
     Height="620"
@@ -123,7 +125,7 @@
                             Text="{Binding TIMEKEEPINGTAB.TEXTBLOCKNAME}" />
                     </StackPanel>
                 </Button>
-               
+
             </Grid>
 
 
@@ -145,23 +147,37 @@
         <StackPanel
             Width="230"
             Height="50"
-            Margin="0,0,0,50"
+            Margin="10,100"
             VerticalAlignment="Bottom"
             Orientation="Horizontal">
             <Button
                 Width="100"
                 Height="50"
-                Margin="12,0,0,0"
+                Margin="10,0,0,0"
                 Command="{Binding MorningCommand}"
                 Content="Morning" />
             <Button
                 Width="100"
                 Height="50"
-                Margin="15,0,0,0"
+                Margin="10,0,0,0"
                 Command="{Binding AfternoonCommand}"
                 Content="Afternoon" />
 
         </StackPanel>
+        <Button
+            Width="200"
+            Height="50"
+            Margin="10,20"
+            VerticalAlignment="Bottom"
+            Command="{Binding ExitCommand}"
+            CommandParameter="{Binding ElementName=Employee_Window}">
+            <materialDesign:PackIcon
+                Width="40"
+                Height="30"
+                Foreground="White"
+                Kind="ExitToApp"
+                RenderTransformOrigin="0.46,-0.343" />
+        </Button>
     </Grid>
 </Window>
 
