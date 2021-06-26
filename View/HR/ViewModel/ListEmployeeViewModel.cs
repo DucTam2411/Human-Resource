@@ -156,6 +156,38 @@ namespace HRMS.HR.ViewModel
 
         private int _USER_ROLE;
         public int USER_ROLE { get => _USER_ROLE; set { _USER_ROLE = value; OnPropertyChanged(); } }
+        private ObservableCollection<ComboboxModel> _DEPTLIST;
+        public ObservableCollection<ComboboxModel> DEPTLIST { get => _DEPTLIST; set { _DEPTLIST = value; OnPropertyChanged(); } }
+
+        //Binding tới selected của ComboxBox chọn tháng
+        private ComboboxModel _SELECTDEPTTYPE;
+        public ComboboxModel SELECTDEPTTYPE
+        {
+            get => _SELECTDEPTTYPE; set
+            {
+                _SELECTDEPTTYPE = value;
+                OnPropertyChanged();
+
+                //Nếu selected khác null, nghĩa là tháng đã chọn thì show data theo select dó
+                if (SELECTDEPTTYPE != null)
+                {
+                    LoadData();
+                }
+            }
+        }
+        private void LoadDeptList()
+        {
+            DEPTLIST = new ObservableCollection<ComboboxModel>();
+            DEPTLIST.Add(new ComboboxModel("ALL", 0, true));
+            DEPTLIST.Add(new ComboboxModel("HUMAN RESOURCE DEPT", 1, false));
+            DEPTLIST.Add(new ComboboxModel("ACOUNTING DEPT", 2, false));
+            DEPTLIST.Add(new ComboboxModel("DIRECTOR DEPT", 3, false));
+            DEPTLIST.Add(new ComboboxModel("SOFTWARE DEPT", 4, false));
+            DEPTLIST.Add(new ComboboxModel("QUALITY MANAGEMENT DEPT", 5, false));
+            DEPTLIST.Add(new ComboboxModel("BUSSINESS DEPT", 6, false));
+            DEPTLIST.Add(new ComboboxModel("SUPPORT DEPT", 7, false));
+            SELECTDEPTTYPE = DEPTLIST.Where(x => x.ISSELECTED == true).FirstOrDefault();
+        }
 
         private string _SEARCH_TEXT;
         public string SEARCH_TEXT
@@ -215,7 +247,7 @@ namespace HRMS.HR.ViewModel
         public ListEmployeeViewModel(int ID)
         {
             LoadComboboxTypeList();
-            LoadData();
+            LoadDeptList();
             USER_ID = ID;
             BUTTONTHICKNESS = 1;
             IMAGE_SOURCE = null;
@@ -235,17 +267,18 @@ namespace HRMS.HR.ViewModel
             p => {
                 p.Content = new uConModifyEmployee(SELECTED_ITEM, ID);
             });
+            hrmsEntities db = new hrmsEntities();
+
             ConfirmCommand = new RelayCommand<ContentControl>(p => {
-                if (string.IsNullOrEmpty(ID_CARD.ToString()) || string.IsNullOrEmpty(NAME) || string.IsNullOrEmpty(DEPT_NAME) || string.IsNullOrEmpty(ROLE_NAME) || BASIC_WAGE == 0 || OVERTIME_SALARY == 0 || COEFFICIENT == 0 || string.IsNullOrEmpty(PASSWORD) || string.IsNullOrEmpty(USER_NAME))
+                if (string.IsNullOrEmpty(ID_CARD.ToString()) || string.IsNullOrEmpty(NAME) || string.IsNullOrEmpty(DEPT_NAME) || string.IsNullOrEmpty(ROLE_NAME) || BASIC_WAGE == 0 || OVERTIME_SALARY == 0 || COEFFICIENT == 0 || string.IsNullOrEmpty(PASSWORD) || string.IsNullOrEmpty(USERNAME))
                     return false;
-                var displayList = HRMSEntities.Ins.DB.EMPLOYEEs.Where(x => x.ID_CARD == ID_CARD);
-                if (displayList == null || displayList.Count() != 0)
+                
+                var user = db.USERs.Where(x => x.USERNAME == USERNAME);
+                if (user == null || user.Count() != 0)
                     return false;
                 return true;
             }, p => {
                 setID();
-
-                hrmsEntities db = new hrmsEntities();
                 var employee = new EMPLOYEE()
                 {
                     ID_CARD = ID_CARD,
@@ -295,8 +328,15 @@ namespace HRMS.HR.ViewModel
                     MONTH = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1),
                     DATE_START = DateTime.Now,
                     DATE_END = new DateTime(DateTime.Now.Year,DateTime.Now.Month + 1,1),
-                    NOTE = NOTE
                 };
+                if (NOTE == null)
+                {
+                    salary.NOTE = "";
+                }
+                else
+                {
+                    salary.NOTE = NOTE;
+                }
                 var Employee = db.EMPLOYEEs.Where(x => x.EMPLOYEE_ID == ID).SingleOrDefault();
                 var record = new RECORD()
                 {
@@ -314,7 +354,7 @@ namespace HRMS.HR.ViewModel
                     DATE_START = DateTime.Now,
                     MONTH = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1),
                     DATE_END = new DateTime(DateTime.Now.Year, DateTime.Now.Month, GetDaybyMonth(DateTime.Now.Month, DateTime.Now.Year)),
-                    EMPLOYEE_ID = ID,
+                    EMPLOYEE_ID = employee.EMPLOYEE_ID,
                     NUMBER_OF_ABSENT_DAY = ReportViewModel.CalculateAverageDay(DateTime.Now.Month, DateTime.Now.Year),
                     NUMBER_OF_OVERTIME_DAY = 0,
                     NUMBER_OF_WORK_DAY = 0,
@@ -329,7 +369,7 @@ namespace HRMS.HR.ViewModel
                         if (date.DayOfWeek == DayOfWeek.Saturday)
                         {
                             TIMEKEEPING_DETAIL timedetail = new TIMEKEEPING_DETAIL();
-                            timedetail.EMPLOYEE_ID = ID;
+                            timedetail.EMPLOYEE_ID = employee.EMPLOYEE_ID;
                             timedetail.TIMEKEEPING_ID = timekeeping.TIMEKEEPING_ID;
                             timedetail.CHECK_DATE = date;
                             timedetail.SESSION = 1;
@@ -339,7 +379,7 @@ namespace HRMS.HR.ViewModel
                         else
                         {
                             TIMEKEEPING_DETAIL timedetail1 = new TIMEKEEPING_DETAIL();
-                            timedetail1.EMPLOYEE_ID = ID;
+                            timedetail1.EMPLOYEE_ID = employee.EMPLOYEE_ID;
                             timedetail1.TIMEKEEPING_ID = timekeeping.TIMEKEEPING_ID;
                             timedetail1.CHECK_DATE = date;
                             timedetail1.SESSION = 1;
@@ -347,7 +387,7 @@ namespace HRMS.HR.ViewModel
                             db.TIMEKEEPING_DETAIL.Add(timedetail1);
 
                             TIMEKEEPING_DETAIL timedetail2 = new TIMEKEEPING_DETAIL();
-                            timedetail2.EMPLOYEE_ID = ID;
+                            timedetail2.EMPLOYEE_ID = employee.EMPLOYEE_ID;
                             timedetail2.TIMEKEEPING_ID = timekeeping.TIMEKEEPING_ID;
                             timedetail2.CHECK_DATE = date;
                             timedetail2.SESSION = 2;
@@ -397,7 +437,6 @@ namespace HRMS.HR.ViewModel
             SaveCommand = new RelayCommand<ContentControl>(p => { return true; }, p =>
             {
                 EditData(selected,ID);
-                MessageBox.Show("Saved successfully");
                 p.Content = new uConListEmployee(ID);
             });
             BackCommand = new RelayCommand<ContentControl>(p => { return true; }, p => { p.Content = new uConListEmployee(ID); });
@@ -483,12 +522,12 @@ namespace HRMS.HR.ViewModel
                 change = change + string.Format("CITIZENSHIP ({0} -> {1})   ", e.CITIZENSHIP, CITIZENSHIP);
                 countchange++;
             }
-            if (ROLE_ID != e.ROLE_ID)
+            if (ROLE_NAME != e.ROLE_NAME)
             {
                 change = change + string.Format("ROLE ({0} -> {1})   ", e.ROLE_NAME, ROLE_NAME);
                 countchange++;
             }
-            if (DEPT_ID != e.DEPT_ID)
+            if (DEPT_NAME != e.DEPT_NAME)
             {
                 change = change + string.Format("DEPARTMENT ({0} -> {1})   ", e.DEPT_NAME, DEPT_NAME);
                 countchange++;
@@ -510,6 +549,11 @@ namespace HRMS.HR.ViewModel
                 record.CHANGE = change;
                 record.MONTH_CHANGE = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
                 db.RECORDs.Add(record);
+                MessageBox.Show("Changed successfully");
+            }
+            else
+            {
+                MessageBox.Show("There is nothing to change!");
             }
             
             
@@ -585,10 +629,15 @@ namespace HRMS.HR.ViewModel
         private void LoadData()
         {
 
-            hrmsEntities DB = new hrmsEntities();
-            var list = (from emp in DB.EMPLOYEEs
-                        join sl in DB.SALARies on emp.EMPLOYEE_ID equals sl.EMPLOYEE_ID
-                        join del in DB.DELETEs on sl.EMPLOYEE_ID equals del.EMPLOYEE_ID
+            if (SELECTDEPTTYPE == null)
+            {
+                return;
+            }
+            hrmsEntities db = new hrmsEntities();
+            var list_filter_dept = from emp in db.EMPLOYEEs where SELECTDEPTTYPE.DEPT_ID > 0 ? emp.DEPT_ID == SELECTDEPTTYPE.DEPT_ID : true select emp;
+            var list = (from emp in list_filter_dept
+                        join sl in db.SALARies on emp.EMPLOYEE_ID equals sl.EMPLOYEE_ID
+                        join del in db.DELETEs on sl.EMPLOYEE_ID equals del.EMPLOYEE_ID
                         where del.ISDELETED == false
                         && sl.MONTH.Value.Month == DateTime.Now.Month
                         && sl.MONTH.Value.Year == DateTime.Now.Year

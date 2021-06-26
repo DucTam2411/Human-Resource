@@ -542,22 +542,6 @@ namespace HRMS.Accouting.ViewModel
                     salary.TOTAL_SALARY = 0;
                     salary.NOTE = "";
                     DB.SALARies.Add(salary);
-
-                    //Tạo bảng timekeeping nếu bảng timekeeping của tháng hiện tại chưa có
-                    TIMEKEEPING temp = DB.TIMEKEEPINGs.Where(x => x.EMPLOYEE_ID == item.EMPLOYEE_ID && x.MONTH.Value.Month == SELECTMONTHTYPE.MONTH && x.MONTH.Value.Year == SELECTMONTHTYPE.YEAR).FirstOrDefault();
-                    if (temp == null)
-                    {
-                        TIMEKEEPING timekeeping = new TIMEKEEPING();
-                        timekeeping.DATE_START = new DateTime(SELECTMONTHTYPE.YEAR, SELECTMONTHTYPE.MONTH, 1);
-                        timekeeping.MONTH = new DateTime(SELECTMONTHTYPE.YEAR, SELECTMONTHTYPE.MONTH, 1);
-                        timekeeping.DATE_END = new DateTime(SELECTMONTHTYPE.YEAR, SELECTMONTHTYPE.MONTH, AccountingClass.GetDaybyMonth(SELECTMONTHTYPE.MONTH, SELECTMONTHTYPE.YEAR));
-                        timekeeping.EMPLOYEE_ID = item.EMPLOYEE_ID;
-                        timekeeping.NUMBER_OF_ABSENT_DAY = 0;
-                        timekeeping.NUMBER_OF_OVERTIME_DAY = 0;
-                        timekeeping.NUMBER_OF_WORK_DAY = 0;
-                        DB.TIMEKEEPINGs.Add(timekeeping);
-                        DB.SaveChanges();
-                    }
                 }
 
             }

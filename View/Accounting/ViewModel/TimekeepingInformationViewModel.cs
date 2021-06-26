@@ -353,6 +353,7 @@ namespace HRMS.Accouting.ViewModel
 
             //Chọn tháng từ database KHÔNG TRÙNG LẶP (chọn DATE_START và DATE_END để kiểm tra tháng bắt đầu và tháng kết thúc có hợp lệ không (nếu cách nhau không quá 31 ngày hợp lệ)
             var listmonth = (from month in db.TIMEKEEPINGs
+                             where month.EMPLOYEE_ID == EMPLOYEE_ID
                              select new { Month = month.MONTH }).Distinct();
 
             //Khởi tạo biến MONTHLIST để chứa tháng

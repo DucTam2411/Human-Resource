@@ -118,8 +118,9 @@ namespace HRMS.Accouting.ViewModel
         //Load dữ liệu tháng vào comboBox Month
         private void LoadMonth()
         {
+            hrmsEntities db = new hrmsEntities();
             //Chọn tháng từ database KHÔNG TRÙNG LẶP (chọn DATE_START và DATE_END để kiểm tra tháng bắt đầu và tháng kết thúc có hợp lệ không (nếu cách nhau không quá 31 ngày hợp lệ)
-            var listmonth = (from month in HRMSEntities.Ins.DB.SALARies
+            var listmonth = (from month in db.SALARies where month.EMPLOYEE_ID == EMPLOYEE_ID
                              select new { Date_Start = month.DATE_START, Date_End = month.DATE_END }).Distinct();
 
             //Khởi tạo biến MONTHLIST để chứa tháng
