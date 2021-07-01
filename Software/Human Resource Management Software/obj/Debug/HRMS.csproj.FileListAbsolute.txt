@@ -456,7 +456,6 @@ D:\SoftwareEngineer\Software\Human Resource Management Software\bin\Debug\Materi
 D:\SoftwareEngineer\Software\Human Resource Management Software\bin\Debug\MaterialDesignThemes.Wpf.xml
 D:\SoftwareEngineer\Software\Human Resource Management Software\bin\Debug\Microsoft.Expression.Interactions.xml
 D:\SoftwareEngineer\Software\Human Resource Management Software\bin\Debug\System.Windows.Interactivity.xml
-D:\SoftwareEngineer\Software\Human Resource Management Software\obj\Debug\HRMS.csprojAssemblyReference.cache
 D:\SoftwareEngineer\Software\Human Resource Management Software\obj\Debug\Login\ModernButton.baml
 D:\SoftwareEngineer\Software\Human Resource Management Software\obj\Debug\Accounting\View\Accouting_EmployeeWindow.g.cs
 D:\SoftwareEngineer\Software\Human Resource Management Software\obj\Debug\Accounting\View\uConAccountingEmployeeInformation.g.cs
