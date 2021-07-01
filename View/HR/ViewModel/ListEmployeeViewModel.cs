@@ -636,16 +636,12 @@ namespace HRMS.HR.ViewModel
             hrmsEntities db = new hrmsEntities();
             var list_filter_dept = from emp in db.EMPLOYEEs where SELECTDEPTTYPE.DEPT_ID > 0 ? emp.DEPT_ID == SELECTDEPTTYPE.DEPT_ID : true select emp;
             var list = (from emp in list_filter_dept
-                        join sl in db.SALARies on emp.EMPLOYEE_ID equals sl.EMPLOYEE_ID
-                        join del in db.DELETEs on sl.EMPLOYEE_ID equals del.EMPLOYEE_ID
+                        join del in db.DELETEs on emp.EMPLOYEE_ID equals del.EMPLOYEE_ID
                         where del.ISDELETED == false
-                        && sl.MONTH.Value.Month == DateTime.Now.Month
-                        && sl.MONTH.Value.Year == DateTime.Now.Year
                         select new
                         {
                             id = emp.EMPLOYEE_ID,
                             EMPLOYEE = emp,
-                            SALARY = sl,
                             DELETE = del
                         }).Distinct();
             employees = new ObservableCollection<EmployeeInformation>();
@@ -660,9 +656,6 @@ namespace HRMS.HR.ViewModel
                 employeeInformation.GENDER = item.EMPLOYEE.GENDER;
                 employeeInformation.CITIZENSHIP = item.EMPLOYEE.CITIZENSHIP;
                 employeeInformation.ROLE_NAME = item.EMPLOYEE.ROLE.ROLE_NAME;
-                employeeInformation.BASIC_WAGE = (long)item.SALARY.BASIC_WAGE;
-                employeeInformation.OVERTIME_SALARY = (long)item.SALARY.OVERTIME_SALARY;
-                employeeInformation.COEFFICIENT = (double)item.SALARY.COEFFICIENT;
                 employeeInformation.BIRTH_DATE = (DateTime)item.EMPLOYEE.BIRTH_DATE;
                 employeeInformation.PHONE = item.EMPLOYEE.PHONE;
                 employeeInformation.EMAIL = item.EMPLOYEE.EMAIL;
