@@ -1,5 +1,4 @@
 ﻿using HRMS.HR.Model.Database;
-using HRMS.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using Augustine.VietnameseCalendar.Core.LuniSolarCalendar;
 using HRMS.Accouting.Model;
 using HRMS.HR.ViewModel;
-using HRMS.Model;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 

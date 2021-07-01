@@ -1,7 +1,6 @@
 ﻿using HRMS.Accounting.View;
 using HRMS.Accouting.Model;
 using HRMS.HR.ViewModel;
-using HRMS.Model;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;

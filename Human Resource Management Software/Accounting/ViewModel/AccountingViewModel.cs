@@ -23,7 +23,6 @@ using ClosedXML.Excel;
 using System.Data;
 using HRMS.HR.ViewModel;
 using HRMS.HR.Model.Database;
-using HRMS.Model;
 using HRMS.Accounting.View;
 
 namespace HRMS.Accouting.ViewModel

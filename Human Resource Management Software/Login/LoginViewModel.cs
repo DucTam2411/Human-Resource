@@ -1,5 +1,4 @@
-﻿using HRMS.Model;
-using HRMS.HR.uCon;
+﻿using HRMS.HR.uCon;
 using HRMS.HR.ViewModel;
 using System;
 using System.Collections.Generic;
