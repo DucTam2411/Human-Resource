@@ -1,0 +1,236 @@
+C:\Users\DucTam\source\repos\HRMS\bin\Debug\HRMS.exe.config
+C:\Users\DucTam\source\repos\HRMS\bin\Debug\HRMS.exe
+C:\Users\DucTam\source\repos\HRMS\bin\Debug\HRMS.pdb
+C:\Users\DucTam\source\repos\HRMS\bin\Debug\MaterialDesignColors.dll
+C:\Users\DucTam\source\repos\HRMS\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\DucTam\source\repos\HRMS\bin\Debug\Model.exe
+C:\Users\DucTam\source\repos\HRMS\bin\Debug\Model.pdb
+C:\Users\DucTam\source\repos\HRMS\bin\Debug\Model.exe.config
+C:\Users\DucTam\source\repos\HRMS\bin\Debug\MaterialDesignColors.pdb
+C:\Users\DucTam\source\repos\HRMS\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\DucTam\source\repos\HRMS\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\View.csprojAssemblyReference.cache
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\Accouting\uCon\Accouting_EmployeeWindow.g.cs
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\Accouting\uCon\uConDashboardAccouting.g.cs
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\Accouting\uCon\uConEmployeeSalary.g.cs
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\Accouting\uCon\uConListEmployeeAccounting.g.cs
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\Accouting\uCon\uConSideBarAccouting.g.cs
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\HR\uCon\HR_EmployeeWindow.g.cs
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\HR\uCon\uConAddEmployee.g.cs
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\HR\uCon\uConDashboard.g.cs
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\HR\uCon\uConListEmployee.g.cs
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\HR\uCon\uConModifyEmployee.g.cs
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\HR\uCon\uConSideBar.g.cs
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\App.g.cs
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\HRMS_MarkupCompile.cache
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\HRMS_MarkupCompile.lref
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\App.baml
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\Accouting\uCon\Accouting_EmployeeWindow.baml
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\Accouting\uCon\uConDashboardAccouting.baml
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\Accouting\uCon\uConEmployeeSalary.baml
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\Accouting\uCon\uConListEmployeeAccounting.baml
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\Accouting\uCon\uConSideBarAccouting.baml
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\HR\uCon\HR_EmployeeWindow.baml
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\HR\uCon\uConAddEmployee.baml
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\HR\uCon\uConDashboard.baml
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\HR\uCon\uConListEmployee.baml
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\HR\uCon\uConModifyEmployee.baml
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\HR\uCon\uConSideBar.baml
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\HRMS.g.resources
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\HRMS.Properties.Resources.resources
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\View.csproj.GenerateResource.cache
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\View.csproj.CoreCompileInputs.cache
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\View.csproj.CopyComplete
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\HRMS.exe
+C:\Users\DucTam\source\repos\HRMS\obj\Debug\HRMS.pdb
+D:\Human Resource\View\bin\Debug\HRMS.exe.config
+D:\Human Resource\View\bin\Debug\HRMS.exe
+D:\Human Resource\View\bin\Debug\HRMS.pdb
+D:\Human Resource\View\bin\Debug\MaterialDesignColors.dll
+D:\Human Resource\View\bin\Debug\MaterialDesignThemes.Wpf.dll
+D:\Human Resource\View\bin\Debug\Model.exe
+D:\Human Resource\View\bin\Debug\Model.pdb
+D:\Human Resource\View\bin\Debug\Model.exe.config
+D:\Human Resource\View\bin\Debug\MaterialDesignColors.pdb
+D:\Human Resource\View\bin\Debug\MaterialDesignThemes.Wpf.pdb
+D:\Human Resource\View\bin\Debug\MaterialDesignThemes.Wpf.xml
+D:\Human Resource\View\obj\Debug\View.csprojAssemblyReference.cache
+D:\Human Resource\View\obj\Debug\Accouting\uCon\Accouting_EmployeeWindow.g.cs
+D:\Human Resource\View\obj\Debug\Accouting\uCon\uConDashboardAccouting.g.cs
+D:\Human Resource\View\obj\Debug\Accouting\uCon\uConEmployeeSalary.g.cs
+D:\Human Resource\View\obj\Debug\Accouting\uCon\uConListEmployeeAccounting.g.cs
+D:\Human Resource\View\obj\Debug\Accouting\uCon\uConSideBarAccouting.g.cs
+D:\Human Resource\View\obj\Debug\HR\uCon\HR_EmployeeWindow.g.cs
+D:\Human Resource\View\obj\Debug\HR\uCon\uConAddEmployee.g.cs
+D:\Human Resource\View\obj\Debug\HR\uCon\uConDashboard.g.cs
+D:\Human Resource\View\obj\Debug\HR\uCon\uConListEmployee.g.cs
+D:\Human Resource\View\obj\Debug\HR\uCon\uConModifyEmployee.g.cs
+D:\Human Resource\View\obj\Debug\HR\uCon\uConSideBar.g.cs
+D:\Human Resource\View\obj\Debug\App.g.cs
+D:\Human Resource\View\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Human Resource\View\obj\Debug\HRMS_MarkupCompile.cache
+D:\Human Resource\View\obj\Debug\HRMS_MarkupCompile.lref
+D:\Human Resource\View\obj\Debug\App.baml
+D:\Human Resource\View\obj\Debug\Accouting\uCon\Accouting_EmployeeWindow.baml
+D:\Human Resource\View\obj\Debug\Accouting\uCon\uConDashboardAccouting.baml
+D:\Human Resource\View\obj\Debug\Accouting\uCon\uConEmployeeSalary.baml
+D:\Human Resource\View\obj\Debug\Accouting\uCon\uConListEmployeeAccounting.baml
+D:\Human Resource\View\obj\Debug\Accouting\uCon\uConSideBarAccouting.baml
+D:\Human Resource\View\obj\Debug\HR\uCon\HR_EmployeeWindow.baml
+D:\Human Resource\View\obj\Debug\HR\uCon\uConAddEmployee.baml
+D:\Human Resource\View\obj\Debug\HR\uCon\uConDashboard.baml
+D:\Human Resource\View\obj\Debug\HR\uCon\uConListEmployee.baml
+D:\Human Resource\View\obj\Debug\HR\uCon\uConModifyEmployee.baml
+D:\Human Resource\View\obj\Debug\HR\uCon\uConSideBar.baml
+D:\Human Resource\View\obj\Debug\HRMS.g.resources
+D:\Human Resource\View\obj\Debug\HRMS.Properties.Resources.resources
+D:\Human Resource\View\obj\Debug\View.csproj.GenerateResource.cache
+D:\Human Resource\View\obj\Debug\View.csproj.CoreCompileInputs.cache
+D:\Human Resource\View\obj\Debug\View.csproj.CopyComplete
+D:\Human Resource\View\obj\Debug\HRMS.exe
+D:\Human Resource\View\obj\Debug\HRMS.pdb
+D:\Human Resource\View\bin\Debug\EntityFramework.dll
+D:\Human Resource\View\bin\Debug\EntityFramework.xml
+D:\Human Resource\View\bin\Debug\EntityFramework.SqlServer.dll
+D:\Human Resource\View\bin\Debug\EntityFramework.SqlServer.xml
+D:\Human Resource\View\bin\Debug\Microsoft.Expression.Interactions.dll
+D:\Human Resource\View\bin\Debug\System.Windows.Interactivity.dll
+D:\Human Resource\View\bin\Debug\Microsoft.Expression.Interactions.xml
+D:\Human Resource\View\bin\Debug\System.Windows.Interactivity.xml
+D:\Human Resource\View\bin\Debug\LiveCharts.dll
+D:\Human Resource\View\bin\Debug\LiveCharts.Wpf.dll
+D:\Human Resource\View\bin\Debug\LiveCharts.pdb
+D:\Human Resource\View\bin\Debug\LiveCharts.xml
+D:\Human Resource\View\bin\Debug\LiveCharts.Wpf.pdb
+D:\Human Resource\View\bin\Debug\LiveCharts.Wpf.xml
+D:\Human Resource\View\obj\Debug\HR\uCon\uConReport.g.cs
+D:\Human Resource\View\obj\Debug\HR\uCon\uConReport.baml
+D:\Study\CNPM\HRSM-main\Human-Resource\View\bin\Debug\HRMS.exe.config
+D:\Study\CNPM\HRSM-main\Human-Resource\View\bin\Debug\HRMS.exe
+D:\Study\CNPM\HRSM-main\Human-Resource\View\bin\Debug\HRMS.pdb
+D:\Study\CNPM\HRSM-main\Human-Resource\View\bin\Debug\EntityFramework.dll
+D:\Study\CNPM\HRSM-main\Human-Resource\View\bin\Debug\EntityFramework.SqlServer.dll
+D:\Study\CNPM\HRSM-main\Human-Resource\View\bin\Debug\LiveCharts.dll
+D:\Study\CNPM\HRSM-main\Human-Resource\View\bin\Debug\LiveCharts.Wpf.dll
+D:\Study\CNPM\HRSM-main\Human-Resource\View\bin\Debug\MaterialDesignColors.dll
+D:\Study\CNPM\HRSM-main\Human-Resource\View\bin\Debug\MaterialDesignThemes.Wpf.dll
+D:\Study\CNPM\HRSM-main\Human-Resource\View\bin\Debug\Microsoft.Expression.Interactions.dll
+D:\Study\CNPM\HRSM-main\Human-Resource\View\bin\Debug\System.Windows.Interactivity.dll
+D:\Study\CNPM\HRSM-main\Human-Resource\View\bin\Debug\EntityFramework.xml
+D:\Study\CNPM\HRSM-main\Human-Resource\View\bin\Debug\EntityFramework.SqlServer.xml
+D:\Study\CNPM\HRSM-main\Human-Resource\View\bin\Debug\LiveCharts.pdb
+D:\Study\CNPM\HRSM-main\Human-Resource\View\bin\Debug\LiveCharts.xml
+D:\Study\CNPM\HRSM-main\Human-Resource\View\bin\Debug\LiveCharts.Wpf.pdb
+D:\Study\CNPM\HRSM-main\Human-Resource\View\bin\Debug\LiveCharts.Wpf.xml
+D:\Study\CNPM\HRSM-main\Human-Resource\View\bin\Debug\MaterialDesignColors.pdb
+D:\Study\CNPM\HRSM-main\Human-Resource\View\bin\Debug\MaterialDesignThemes.Wpf.pdb
+D:\Study\CNPM\HRSM-main\Human-Resource\View\bin\Debug\MaterialDesignThemes.Wpf.xml
+D:\Study\CNPM\HRSM-main\Human-Resource\View\bin\Debug\Microsoft.Expression.Interactions.xml
+D:\Study\CNPM\HRSM-main\Human-Resource\View\bin\Debug\System.Windows.Interactivity.xml
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\View.csprojAssemblyReference.cache
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\Accouting\uCon\Accouting_EmployeeWindow.g.cs
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\Accouting\uCon\uConDashboardAccouting.g.cs
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\Accouting\uCon\uConEmployeeSalary.g.cs
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\Accouting\uCon\uConListEmployeeAccounting.g.cs
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\Accouting\uCon\uConSideBarAccouting.g.cs
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\HR\View\HR_EmployeeWindow.g.cs
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\HR\View\uConAddEmployee.g.cs
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\HR\View\uConDashboard.g.cs
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\HR\View\uConListEmployee.g.cs
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\HR\View\uConModifyEmployee.g.cs
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\HR\View\uConReport.g.cs
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\HR\View\uConSideBar.g.cs
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\App.g.cs
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\HRMS_Content.g.cs
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\HRMS_MarkupCompile.cache
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\HRMS_MarkupCompile.lref
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\App.baml
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\Accouting\uCon\Accouting_EmployeeWindow.baml
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\Accouting\uCon\uConDashboardAccouting.baml
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\Accouting\uCon\uConEmployeeSalary.baml
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\Accouting\uCon\uConListEmployeeAccounting.baml
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\Accouting\uCon\uConSideBarAccouting.baml
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\HR\View\HR_EmployeeWindow.baml
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\HR\View\uConAddEmployee.baml
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\HR\View\uConDashboard.baml
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\HR\View\uConListEmployee.baml
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\HR\View\uConModifyEmployee.baml
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\HR\View\uConReport.baml
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\HR\View\uConSideBar.baml
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\HRMS.g.resources
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\HRMS.Properties.Resources.resources
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\View.csproj.GenerateResource.cache
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\View.csproj.CoreCompileInputs.cache
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\View.csproj.CopyComplete
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\HRMS.exe
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\HRMS.pdb
+D:\Study\CNPM\HRSM-main\Human-Resource\View\obj\Debug\Resource\ResourceHR.baml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\HRMS.exe.config
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\HRMS.exe
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\HRMS.pdb
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\EntityFramework.dll
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\EntityFramework.SqlServer.dll
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\LiveCharts.dll
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\LiveCharts.Wpf.dll
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\MaterialDesignColors.dll
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\MaterialDesignThemes.Wpf.dll
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\Microsoft.Expression.Interactions.dll
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\System.Windows.Interactivity.dll
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\EntityFramework.xml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\EntityFramework.SqlServer.xml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\LiveCharts.pdb
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\LiveCharts.xml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\LiveCharts.Wpf.pdb
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\LiveCharts.Wpf.xml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\MaterialDesignColors.pdb
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\MaterialDesignThemes.Wpf.pdb
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\MaterialDesignThemes.Wpf.xml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\Microsoft.Expression.Interactions.xml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\System.Windows.Interactivity.xml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\View.csprojAssemblyReference.cache
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\HR_EmployeeWindow.g.cs
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConAddEmployee.g.cs
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConDashboard.g.cs
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConListEmployee.g.cs
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConModifyEmployee.g.cs
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConReport.g.cs
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConSideBar.g.cs
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\App.g.cs
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HRMS_Content.g.cs
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HRMS_MarkupCompile.cache
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HRMS_MarkupCompile.lref
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\App.baml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\HR_EmployeeWindow.baml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConAddEmployee.baml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConDashboard.baml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConListEmployee.baml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConModifyEmployee.baml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConReport.baml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConSideBar.baml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HRMS.g.resources
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HRMS.Properties.Resources.resources
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\View.csproj.GenerateResource.cache
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\View.csproj.CoreCompileInputs.cache
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\View.csproj.CopyComplete
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HRMS.exe
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HRMS.pdb
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConHRInformation.g.cs
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConTimekeepingInformation.g.cs
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConHRInformation.baml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\obj\Debug\HR\View\uConTimekeepingInformation.baml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\Augustine.VietnameseCalendar.Core.dll
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\Augustine.VietnameseCalendar.Core.pdb
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\Augustine.VietnameseCalendar.Core.dll.config
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\BouncyCastle.Crypto.dll
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\ClosedXML.dll
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\DocumentFormat.OpenXml.dll
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\ExcelNumberFormat.dll
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\itextsharp.dll
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\System.IO.Packaging.dll
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\ClosedXML.pdb
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\ClosedXML.xml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\DocumentFormat.OpenXml.xml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\ExcelNumberFormat.xml
+D:\Study\CNPM\HRSM-Trong\Human-Resource\View\bin\Debug\itextsharp.xml
