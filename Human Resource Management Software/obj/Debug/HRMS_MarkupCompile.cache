@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\Study\CNPM\HRMS-main\Human Resource Management Software\obj\Debug\
+D:\Human Resource Management Software\obj\Debug\
 HRMS
 none
 false
 DEBUG;TRACE
-D:\Study\CNPM\HRMS-main\Human Resource Management Software\App.xaml
+D:\Human Resource Management Software\App.xaml
 24-888771648
-2-1717565821
-72535968279
-35345211505
+
+581802467532
+351943528036
 Accounting\View\Accouting_EmployeeWindow.xaml;Accounting\View\uConAccountingEmployeeInformation.xaml;Accounting\View\uConAccountingSalaryInformation.xaml;Accounting\View\uConAccountingTimekeepingDetailInformation.xaml;Accounting\View\uConAccountingTimekeepingInformation.xaml;Accounting\View\uConDashBoard.xaml;Accounting\View\uConEmployeeSalary.xaml;Accounting\View\uConListEmployeeAccounting.xaml;Director\View\Director_Window.xaml;Director\View\uConAccountingReport.xaml;Director\View\uConHRReport.xaml;Employee\uCon\EmployeeWindow.xaml;HR\View\HR_EmployeeWindow.xaml;HR\View\uConAddEmployee.xaml;HR\View\uConDashboard.xaml;HR\View\uConHRInformation.xaml;HR\View\uConListEmployee.xaml;HR\View\uConModifyEmployee.xaml;HR\View\uConReport.xaml;HR\View\uConSideBar.xaml;HR\View\uConTimekeepingDetail.xaml;HR\View\uConTimekeepingInformation.xaml;Login\ModernButton.xaml;Login\LoginWindow.xaml;
 
 True
