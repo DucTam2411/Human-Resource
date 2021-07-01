@@ -25,6 +25,7 @@ using System.Reflection;
 using HRMS.HR.Model;
 using HRMS.HR.View;
 using HRMS.HR.uCon;
+using HRMS.Model;
 
 namespace HRMS.HR.ViewModel
 {

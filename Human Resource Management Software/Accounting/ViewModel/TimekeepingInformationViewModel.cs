@@ -1,6 +1,7 @@
 ﻿using HRMS.Accounting.View;
 using HRMS.Accouting.Model;
 using HRMS.HR.ViewModel;
+using HRMS.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

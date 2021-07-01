@@ -3,6 +3,7 @@ using HRMS.HR;
 using HRMS.HR.Model;
 using HRMS.HR.Model.Database;
 using HRMS.HR.ViewModel;
+using HRMS.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

@@ -2,6 +2,7 @@
 using HRMS.HR.Model;
 using HRMS.HR.uCon;
 using HRMS.HR.View;
+using HRMS.Model;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;

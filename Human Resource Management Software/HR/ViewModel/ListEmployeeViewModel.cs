@@ -15,6 +15,7 @@ using Microsoft.Win32;
 using System.Windows.Media.Imaging;
 using System.IO;
 using System.Windows.Media;
+using HRMS.Model;
 
 namespace HRMS.HR.ViewModel
 {

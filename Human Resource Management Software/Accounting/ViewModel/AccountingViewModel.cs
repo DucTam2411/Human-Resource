@@ -24,6 +24,7 @@ using System.Data;
 using HRMS.HR.ViewModel;
 using HRMS.HR.Model.Database;
 using HRMS.Accounting.View;
+using HRMS.Model;
 
 namespace HRMS.Accouting.ViewModel
 {

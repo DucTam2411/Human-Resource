@@ -2,6 +2,7 @@
 using HRMS.Director.View;
 using HRMS.HR.Model;
 using HRMS.HR.ViewModel;
+using HRMS.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

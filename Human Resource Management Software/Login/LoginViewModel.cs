@@ -11,6 +11,7 @@ using System.Windows.Input;
 using HRMS.Employee.uCon;
 using HRMS.Accounting.View;
 using HRMS.Director.View;
+using HRMS.Model;
 
 namespace HRMS.Login
 {
