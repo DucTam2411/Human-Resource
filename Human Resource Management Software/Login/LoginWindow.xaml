@@ -68,7 +68,7 @@
                     FontSize="22"
                     FontWeight="Light"
                     Foreground="White"
-                    Text="Human Resource Management" />
+                    Text="Human Resource" />
             </StackPanel>
 
 
