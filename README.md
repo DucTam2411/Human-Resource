@@ -1,9 +1,9 @@
 # *Human Resource Management Software*
 
 ## Suport: 
-**Human Resource Management**: Manage personal information of all employee and manage the Timekeeping of all employee in the company.
-**Salary Management**: Manage salary of all employee in the company.
-**Report**: Make report by Excel or PDF.
+- **Human Resource Management**: Manage personal information of all employee and manage the Timekeeping of all employee in the company.
+- **Salary Management**: Manage salary of all employee in the company.
+- **Report**: Make report by Excel or PDF.
 
 ## Technology:
 - We built software by using WPF Framework.
