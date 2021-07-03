@@ -7,7 +7,7 @@
 
 ## Technology:
 - We built software by using WPF Framework.
-- We manage database on Mircosoft SQL Server Management.
+- We manage database by Mircosoft SQL Server Management.
 
 ## Member:
 - Trần Đức Tâm: 19522131
