@@ -1,0 +1,17 @@
+*HR DEPT:
+account: quoctrong
+password: 1
+
+*Accounting Dept:
+account: minhquan
+password: 1
+
+*Director:
+account: hoangson
+password: 1
+
+*Employee:
+account: ductam
+password: 1
+
+Before use this sottware you must create Ado Enitity Class with connect to hrms.db in visual studio
