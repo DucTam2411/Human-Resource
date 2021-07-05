@@ -18,7 +18,7 @@
     mc:Ignorable="d"
     x:Name="AccountingWindow">
 
-    <Grid MouseDown="Grid_MouseDown">
+    <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />

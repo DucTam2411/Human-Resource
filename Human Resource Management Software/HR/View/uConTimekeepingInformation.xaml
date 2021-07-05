@@ -19,6 +19,10 @@
     </UserControl.Resources>
     <Grid>
         <Grid Margin="0,20,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="13*" />
+                <ColumnDefinition Width="787*" />
+            </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
@@ -26,7 +30,10 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <StackPanel Margin="40,10,0,10" Orientation="Horizontal">
+            <StackPanel
+                Grid.Column="1"
+                Margin="27.339,10,0,10"
+                Orientation="Horizontal">
 
                 <materialDesign:PackIcon
                     Width="30"
@@ -119,9 +126,10 @@
             <DataGrid
                 x:Name="dgTimekeeping"
                 Grid.Row="1"
-                Width="780"
+                Grid.ColumnSpan="2"
+                Width="auto"
                 Height="470"
-                Margin="0,20.4,1,0"
+                Margin="10,20,10,0"
                 VerticalAlignment="Top"
                 AllowDrop="True"
                 AutoGenerateColumns="False"

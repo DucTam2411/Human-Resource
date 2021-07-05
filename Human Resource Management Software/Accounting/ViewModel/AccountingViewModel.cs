@@ -586,6 +586,7 @@ namespace HRMS.Accouting.ViewModel
                     SalaryTest.Add(salaryData);
                 }
             }
+            DB.SaveChanges();
         }
 
         //Load dữ liệu chọn loại vào comboBox chọn loại để lọc (có thể thêm chọn loại mới vào đây)        

@@ -31,10 +31,5 @@ namespace HRMS.Accounting.View
             DataContext = new InterfaceViewModel(ID);
             InitializeComponent();
         }
-
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
     }
 }
