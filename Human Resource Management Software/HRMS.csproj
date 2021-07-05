@@ -113,41 +113,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DELETE.cs">
-      <DependentUpon>HRMSEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DEPARTMENT.cs">
-      <DependentUpon>HRMSEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EMPLOYEE.cs">
-      <DependentUpon>HRMSEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="HRMSEntity.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HRMSEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RECORD.cs">
-      <DependentUpon>HRMSEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ROLE.cs">
-      <DependentUpon>HRMSEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ROOM.cs">
-      <DependentUpon>HRMSEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SALARY.cs">
-      <DependentUpon>HRMSEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TIMEKEEPING.cs">
-      <DependentUpon>HRMSEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TIMEKEEPING_DETAIL.cs">
-      <DependentUpon>HRMSEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="USER.cs">
-      <DependentUpon>HRMSEntity.tt</DependentUpon>
-    </Compile>
     <Page Include="Accounting\View\Accouting_EmployeeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -284,16 +249,6 @@
       <DependentUpon>EmployeeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Employee\ViewModel\InterfaceViewModel.cs" />
-    <Compile Include="HRMSEntity.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HRMSEntity.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="HRMSEntity.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HRMSEntity.edmx</DependentUpon>
-    </Compile>
     <Compile Include="HR\Model\ComboboxModel.cs" />
     <Compile Include="HR\Model\EmployeeInformation.cs" />
     <Compile Include="HR\Model\RandomGenerator.cs" />
@@ -377,13 +332,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="HRMSEntity.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>HRMSEntity.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="HRMSEntity.edmx.diagram">
-      <DependentUpon>HRMSEntity.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -398,18 +346,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Login\champagn.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="HRMSEntity.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HRMSEntity.edmx</DependentUpon>
-      <LastGenOutput>HRMSEntity.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="HRMSEntity.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HRMSEntity.edmx</DependentUpon>
-      <LastGenOutput>HRMSEntity.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />

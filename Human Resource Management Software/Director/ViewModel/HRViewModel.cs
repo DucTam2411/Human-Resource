@@ -317,13 +317,12 @@ namespace HRMS.Director.ViewModel
                 {
                     DateTime date1 = (DateTime)item.Month;
                     //Nếu điều kiện hợp lệ thì lưu dữ liệu vào ComboBox Month thông qua MONTHLIST
-                    MONTHLIST.Add(new ComboboxModel(date1.Month, date1.Year, (date1.Month == DateTime.Now.Month && date1.Year == DateTime.Now.Year) ? true : false));
+                    MONTHLIST.Add(new ComboboxModel(date1.Month, date1.Year, false));
                 }
             }
-            SELECTMONTHTYPE = MONTHLIST.Where(x => x.ISSELECTED == true).FirstOrDefault();
             if (SELECTMONTHTYPE == null)
             {
-                SELECTMONTHTYPE = MONTHLIST.FirstOrDefault();
+                SELECTMONTHTYPE = MONTHLIST.LastOrDefault();
             }
         }
 
