@@ -23,14 +23,14 @@ namespace HRMS.Accouting.Model
         private DateTime _DAY_END;
         public DateTime DAY_END { get => _DAY_END; set { _DAY_END = value; OnPropertyChanged(); } }
 
-        private int _TOTAL_WORK_DAY;
-        public int TOTAL_WORK_DAY { get => _TOTAL_WORK_DAY; set { _TOTAL_WORK_DAY = value; OnPropertyChanged(); } }
+        private double _TOTAL_WORK_DAY;
+        public double TOTAL_WORK_DAY { get => _TOTAL_WORK_DAY; set { _TOTAL_WORK_DAY = value; OnPropertyChanged(); } }
 
-        private int _TOTAL_OVERTIME_DAY;
-        public int TOTAL_OVERTIME_DAY { get => _TOTAL_OVERTIME_DAY; set { _TOTAL_OVERTIME_DAY = value; OnPropertyChanged(); } }
+        private double _TOTAL_OVERTIME_DAY;
+        public double TOTAL_OVERTIME_DAY { get => _TOTAL_OVERTIME_DAY; set { _TOTAL_OVERTIME_DAY = value; OnPropertyChanged(); } }
 
-        private int _TOTAL_ABSENT_DAY;
-        public int TOTAL_ABSENT_DAY { get => _TOTAL_ABSENT_DAY; set { _TOTAL_ABSENT_DAY = value; OnPropertyChanged(); } }
+        private double _TOTAL_ABSENT_DAY;
+        public double TOTAL_ABSENT_DAY { get => _TOTAL_ABSENT_DAY; set { _TOTAL_ABSENT_DAY = value; OnPropertyChanged(); } }
 
         private string _NOTE;
         public string NOTE { get => _NOTE; set { _NOTE = value; OnPropertyChanged(); } }

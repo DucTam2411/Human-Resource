@@ -31,14 +31,14 @@ namespace HRMS.Accouting.ViewModel
         private int _DATE_END;
         public int DATE_END { get => _DATE_END; set { _DATE_END = value; OnPropertyChanged(); } }
 
-        private int _NUMBER_OF_WORK_DAY;
-        public int NUMBER_OF_WORK_DAY { get => _NUMBER_OF_WORK_DAY; set { _NUMBER_OF_WORK_DAY = value; OnPropertyChanged(); } }
+        private double _NUMBER_OF_WORK_DAY;
+        public double NUMBER_OF_WORK_DAY { get => _NUMBER_OF_WORK_DAY; set { _NUMBER_OF_WORK_DAY = value; OnPropertyChanged(); } }
 
-        private int _NUMBER_OF_OVERTIME_DAY;
-        public int NUMBER_OF_OVERTIME_DAY { get => _NUMBER_OF_OVERTIME_DAY; set { _NUMBER_OF_OVERTIME_DAY = value; OnPropertyChanged(); } }
+        private double _NUMBER_OF_OVERTIME_DAY;
+        public double NUMBER_OF_OVERTIME_DAY { get => _NUMBER_OF_OVERTIME_DAY; set { _NUMBER_OF_OVERTIME_DAY = value; OnPropertyChanged(); } }
 
-        private int _NUMBER_OF_ABSENT_DAY;
-        public int NUMBER_OF_ABSENT_DAY { get => _NUMBER_OF_ABSENT_DAY; set { _NUMBER_OF_ABSENT_DAY = value; OnPropertyChanged(); } }
+        private double _NUMBER_OF_ABSENT_DAY;
+        public double NUMBER_OF_ABSENT_DAY { get => _NUMBER_OF_ABSENT_DAY; set { _NUMBER_OF_ABSENT_DAY = value; OnPropertyChanged(); } }
 
         private string _IS_NOTE;
         public string IS_NOTE { get => _IS_NOTE; set { _IS_NOTE = value; OnPropertyChanged(); } }
@@ -257,9 +257,9 @@ namespace HRMS.Accouting.ViewModel
                 tkdata.MONTH = new DateTime(item.TIMEKEEPING.DATE_START.Value.Year, item.TIMEKEEPING.DATE_START.Value.Month, 1);
                 tkdata.DAY_START = item.TIMEKEEPING.DATE_START.Value;
                 tkdata.DAY_END = item.TIMEKEEPING.DATE_END.Value;
-                tkdata.TOTAL_WORK_DAY = (int)item.TIMEKEEPING.NUMBER_OF_WORK_DAY;
-                tkdata.TOTAL_OVERTIME_DAY = (int)item.TIMEKEEPING.NUMBER_OF_OVERTIME_DAY;
-                tkdata.TOTAL_ABSENT_DAY = (int)item.TIMEKEEPING.NUMBER_OF_ABSENT_DAY;
+                tkdata.TOTAL_WORK_DAY = (double)item.TIMEKEEPING.NUMBER_OF_WORK_DAY;
+                tkdata.TOTAL_OVERTIME_DAY = (double)item.TIMEKEEPING.NUMBER_OF_OVERTIME_DAY;
+                tkdata.TOTAL_ABSENT_DAY = (double)item.TIMEKEEPING.NUMBER_OF_ABSENT_DAY;
 
                 TimekeepingList.Add(tkdata);
                 TimekeepingTest.Add(tkdata);
