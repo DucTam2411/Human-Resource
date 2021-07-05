@@ -63,6 +63,8 @@ namespace HRMS.HR.ViewModel
                     if (TIMEKEEPING_TYPE == 1 || TIMEKEEPING_TYPE == 2)
                     {
                         timekeeping.TIMEKEEPING_DETAIL_TYPE = 0;
+                        timekeeping.TIMEKEEPING.NUMBER_OF_WORK_DAY = (float?)(timekeeping.TIMEKEEPING.NUMBER_OF_WORK_DAY - 0.5);
+                        timekeeping.TIMEKEEPING.NUMBER_OF_ABSENT_DAY = (float?)(timekeeping.TIMEKEEPING.NUMBER_OF_ABSENT_DAY + 0.5);
                         record.CHANGE = timekeeping.EMPLOYEE.NAME + "(id: " + timekeeping.EMPLOYEE_ID + ") timekeeping in date: " + timekeeping.CHECK_DATE.Value.Day.ToString() + "/" + timekeeping.CHECK_DATE.Value.Month.ToString() + "/" + timekeeping.CHECK_DATE.Value.Year.ToString() + " changed from work to absent";
                     }
                     else
@@ -75,6 +77,8 @@ namespace HRMS.HR.ViewModel
                         {
                             timekeeping.TIMEKEEPING_DETAIL_TYPE = 2;
                         }
+                        timekeeping.TIMEKEEPING.NUMBER_OF_WORK_DAY = (float?)(timekeeping.TIMEKEEPING.NUMBER_OF_WORK_DAY + 0.5);
+                        timekeeping.TIMEKEEPING.NUMBER_OF_ABSENT_DAY = (float?)(timekeeping.TIMEKEEPING.NUMBER_OF_ABSENT_DAY - 0.5);
                         record.CHANGE = timekeeping.EMPLOYEE.NAME + "(id: " + timekeeping.EMPLOYEE_ID + ") timekeeping in date: " + timekeeping.CHECK_DATE.Value.Day.ToString() + "/" + timekeeping.CHECK_DATE.Value.Month.ToString() + "/" + timekeeping.CHECK_DATE.Value.Year.ToString() + " changed from absent to work";
                     }
                     db.RECORDs.Add(record);

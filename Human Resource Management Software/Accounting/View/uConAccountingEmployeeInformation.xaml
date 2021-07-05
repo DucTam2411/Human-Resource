@@ -1,12 +1,15 @@
-﻿<UserControl x:Class="HRMS.Accounting.View.uConAccountingEmployeeInformation"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-                xmlns:local="clr-namespace:HRMS.Accounting.View"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:HRMS.HR.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:InformationViewModel}"
-             Width="700"
+﻿<UserControl
+    x:Class="HRMS.Accounting.View.uConAccountingEmployeeInformation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:HRMS.Accounting.View"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodel="clr-namespace:HRMS.HR.ViewModel"
+    Width="700"
     Height="auto"
+    d:DataContext="{d:DesignInstance Type=viewmodel:InformationViewModel}"
     Background="Transparent"
     mc:Ignorable="d">
     <Grid Margin="0,20,0,0">

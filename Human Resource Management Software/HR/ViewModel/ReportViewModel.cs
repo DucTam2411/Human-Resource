@@ -397,7 +397,6 @@ namespace HRMS.HR.ViewModel
             foreach (var item in list)
             {
                 item.NUMBER_OF_STANDARD_DAY = CalculateAverageDay(item.MONTH.Value.Month, item.MONTH.Value.Year);
-                item.NUMBER_OF_ABSENT_DAY = item.NUMBER_OF_STANDARD_DAY - item.NUMBER_OF_WORK_DAY;
                 TimekeepingData data = new TimekeepingData();
                 data.EMPLOYEE_ID = (int)item.EMPLOYEE_ID;
                 data.NAME = item.EMPLOYEE.NAME;
@@ -687,7 +686,7 @@ namespace HRMS.HR.ViewModel
 
             var GetAbsentdayList = ((from t in db.TIMEKEEPING_DETAIL
                                      where t.TIMEKEEPING.MONTH.Value.Month == month &&
-                                   t.TIMEKEEPING.MONTH.Value.Year == year && t.TIMEKEEPING_DETAIL_TYPE == 0 && t.CHECK_DATE.Value.Day <= DateTime.Now.Day
+                                   t.TIMEKEEPING.MONTH.Value.Year == year && t.TIMEKEEPING_DETAIL_TYPE == 0
                                      && t.EMPLOYEE_ID == id
                                      select t).Distinct());
             foreach (var item in GetAbsentdayList)

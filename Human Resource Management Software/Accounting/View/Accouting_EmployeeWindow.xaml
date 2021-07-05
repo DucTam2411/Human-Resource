@@ -7,6 +7,7 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:userCon="clr-namespace:HRMS.Accounting.View"
+    x:Name="AccountingWindow"
     Title="Accouting_EmployeeWindow"
     Width="1150"
     Height="600"
@@ -15,10 +16,9 @@
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
-    mc:Ignorable="d"
-    x:Name="AccountingWindow">
+    mc:Ignorable="d">
 
-    <Grid >
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />
@@ -196,9 +196,12 @@
             VerticalAlignment="Bottom"
             Command="{Binding ExitCommand}"
             CommandParameter="{Binding ElementName=AccountingWindow}">
-            <materialDesign:PackIcon Foreground="White" Kind="ExitToApp" 
-                                     Height="30"
-                                     Width="40" RenderTransformOrigin="0.46,-0.343"/>
+            <materialDesign:PackIcon
+                Width="40"
+                Height="30"
+                Foreground="White"
+                Kind="ExitToApp"
+                RenderTransformOrigin="0.46,-0.343" />
         </Button>
     </Grid>
 </Window>
